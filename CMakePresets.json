@@ -1,0 +1,12 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {"name":"base","hidden":true,"generator":"Ninja","binaryDir":"${sourceDir}/build/${presetName}","cacheVariables":{"CMAKE_BUILD_TYPE":"Debug"}},
+    {"name":"headless","inherits":"base","cacheVariables":{"COCSIM_BUILD_VIEWER":"OFF","COCSIM_BUILD_PYTHON":"OFF","COCSIM_BUILD_TESTS":"ON"}},
+    {"name":"release","inherits":"base","cacheVariables":{"CMAKE_BUILD_TYPE":"Release","COCSIM_BUILD_VIEWER":"OFF","COCSIM_BUILD_PYTHON":"OFF","COCSIM_BUILD_TESTS":"ON"}},
+    {"name":"viewer","inherits":"base","cacheVariables":{"COCSIM_BUILD_VIEWER":"ON"}},
+    {"name":"vs-headless","generator":"Visual Studio 17 2022","architecture":"x64","binaryDir":"${sourceDir}/build/${presetName}","cacheVariables":{"COCSIM_BUILD_VIEWER":"OFF","COCSIM_BUILD_PYTHON":"OFF","COCSIM_BUILD_TESTS":"ON"}}
+  ],
+  "buildPresets": [{"name":"headless","configurePreset":"headless"},{"name":"release","configurePreset":"release"},{"name":"viewer","configurePreset":"viewer"},{"name":"vs-headless","configurePreset":"vs-headless","configuration":"Debug"}],
+  "testPresets": [{"name":"headless","configurePreset":"headless","output":{"outputOnFailure":true}}]
+}

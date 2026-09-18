@@ -1,0 +1,12 @@
+{
+  "width": 20,
+  "height": 20,
+  "seed": 2718281828,
+  "duration_ms": 6000,
+  "defenders": [
+    {"kind": "town_hall", "level": 18, "x": 5.5, "y": 10.5}
+  ],
+  "army": [
+    {"kind": "inferno_dragon", "level": 12, "count": 1}
+  ]
+}

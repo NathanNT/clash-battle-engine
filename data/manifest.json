@@ -1,0 +1,872 @@
+{
+  "schema_version": 3,
+  "source_commit": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+  "imported_at_utc": "2026-09-18T10:12:30.612615+00:00",
+  "files": [
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/barbarian.json",
+      "relative_path": "data/home/troops/barbarian.json",
+      "sha256": "883edac3d3bb2d61c344500f7f8ca9139bf0e00486964f2e259e069076beba4f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/archer.json",
+      "relative_path": "data/home/troops/archer.json",
+      "sha256": "6daa28003a9461b94c924ee5feb47a9ab0f19a8f8d55f89f4f3daae246d9289e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/giant.json",
+      "relative_path": "data/home/troops/giant.json",
+      "sha256": "04fba67c220f9b8f9000b823279d6b633d69b05ce27554c80e0e323e9f5bb985"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/cannon.json",
+      "relative_path": "data/home/defenses/cannon.json",
+      "sha256": "a2411a77327f18ad30018b5384e34ee6c03b7a8f0e3429381f69de1cd0919aa7"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/archer-tower.json",
+      "relative_path": "data/home/defenses/archer-tower.json",
+      "sha256": "1ad5f8e83cf9f7ed515bd79927ba0202359c79c5ce5e6cb72a8e5f18856eaaf8"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/mortar.json",
+      "relative_path": "data/home/defenses/mortar.json",
+      "sha256": "1762415250b78d345bd34d724ebc91754a1aa1b0b66ba6947f48d791e5ab1641"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/walls/wall.json",
+      "relative_path": "data/home/walls/wall.json",
+      "sha256": "7c1944d5b91d70921d47706b203db54e6ed36a008ddc8307a2fa77ea776c61bf"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/town-hall/town-hall.json",
+      "relative_path": "data/home/town-hall/town-hall.json",
+      "sha256": "0998c033c5a0fc3af204261bfb6f995ffc04a260ccbf2fd467122cff2ec6a2cf"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/resource-buildings/gold-mine.json",
+      "relative_path": "data/home/resource-buildings/gold-mine.json",
+      "sha256": "be477d3523ab7bef6611ea3ac5e875f4c3710168d955e75c55bacd7915185bc1"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/resource-buildings/elixir-collector.json",
+      "relative_path": "data/home/resource-buildings/elixir-collector.json",
+      "sha256": "311ec271d1fb0a32d81e204aa475ac3eb5942d51b01806893c882a94de459441"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/wizard.json",
+      "relative_path": "data/home/troops/wizard.json",
+      "sha256": "f320e440d3fe78a983a9c9b26a9c8e16138aaf0bdef79eb63416ffec597d8b20"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/wall-breaker.json",
+      "relative_path": "data/home/troops/wall-breaker.json",
+      "sha256": "f8bbbe2d5e0eb43ff5bbd9a3734bf490b52d09a1eddc92fd45b7de6bbbafbf81"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/golem.json",
+      "relative_path": "data/home/troops/golem.json",
+      "sha256": "92949cd52d57985c47023216c0468b5189675b8eea09bbd6add0dfadcb0348bf"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/pekka.json",
+      "relative_path": "data/home/troops/pekka.json",
+      "sha256": "f184cba0316ddaf547253f4599f661614d10fb57ca9ea8fb2ce97aa0f44dca7d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/balloon.json",
+      "relative_path": "data/home/troops/balloon.json",
+      "sha256": "5edbc4e07404d6fec04b5204eb036dbc429d6c803b586cb7bb79e2a8a2cdff85"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/dragon.json",
+      "relative_path": "data/home/troops/dragon.json",
+      "sha256": "9103e0efbda31faf974ff1010df32d4e0d373e627bb818a6b47717bc80138f16"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/healer.json",
+      "relative_path": "data/home/troops/healer.json",
+      "sha256": "7569b8596bb447397aa3898fc9c695557079bc734909397ac43111f8563aa8d5"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/eagle-artillery.json",
+      "relative_path": "data/home/defenses/eagle-artillery.json",
+      "sha256": "5951e44f6930573ca8397c2fc3a14dc04a33a0c19cc22848704ddd4b7ffb478a"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/inferno-tower.json",
+      "relative_path": "data/home/defenses/inferno-tower.json",
+      "sha256": "969b1934753fa935e4aebd2a37cbc3392038bff18f1930c7a1f76b0d43f7a8b1"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/goblin.json",
+      "relative_path": "data/home/troops/goblin.json",
+      "sha256": "c8967217518fb9ca67d64db310b4792adb29434e90eff98a35222e3dbab863ab"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/minion.json",
+      "relative_path": "data/home/troops/minion.json",
+      "sha256": "71a5f44e66226dc17d6157b33fef6367a997d771518a44a6a9a3fe6f201abf86"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/hog-rider.json",
+      "relative_path": "data/home/troops/hog-rider.json",
+      "sha256": "dc689b31770e31034a0ffa307babc3bf17b1a6f71cdfc86ff94436971c4aa7ec"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/air-defense.json",
+      "relative_path": "data/home/defenses/air-defense.json",
+      "sha256": "2a87daffc39426b1e63081c4a913c9f8e0c7bdc1d4fde72408ae5d5c43b358e2"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/wizard-tower.json",
+      "relative_path": "data/home/defenses/wizard-tower.json",
+      "sha256": "8874bce67baea02ee9a4c549abeda77a0a3e453d3e5ac69e2b646a4728175bfa"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/x-bow.json",
+      "relative_path": "data/home/defenses/x-bow.json",
+      "sha256": "2f5c2b38eb0959f26be3a8fac4340387caef2cad09412d73137310ab150d802a"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/valkyrie.json",
+      "relative_path": "data/home/troops/valkyrie.json",
+      "sha256": "a1dae795ecb56abcb628a9fafbae322e65eac0bb3507ba1f6f25845a1fb16243"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/dragon-rider.json",
+      "relative_path": "data/home/troops/dragon-rider.json",
+      "sha256": "af62f8ce68702b8a255350a2c2cf3282211a11a16f9f6a9b93ce487c8635bfcb"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/baby-dragon.json",
+      "relative_path": "data/home/troops/baby-dragon.json",
+      "sha256": "8ef38beeb97bdd7946085377999b35dbcc092a96b667a238c888928b2184853c"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/miner.json",
+      "relative_path": "data/home/troops/miner.json",
+      "sha256": "e9c59fbf30c385004c0eadbdbc11841a57f3b7d0a154e43ad2ab11f5b722d12f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/electro-dragon.json",
+      "relative_path": "data/home/troops/electro-dragon.json",
+      "sha256": "298fa0ac7edacaaa6992ec77a5e0cc0d47b4ad9a3c1316c5b31d2b4b07595d5d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/yeti.json",
+      "relative_path": "data/home/troops/yeti.json",
+      "sha256": "02d99cc24dee6941bfb88a58ee444b5d1e313cfa76f02f3e25021de40b2d8d7a"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/witch.json",
+      "relative_path": "data/home/troops/witch.json",
+      "sha256": "bc0e2a2c20381b5c4644354329779a1f45d3894a16e72423e57560039fb5a8ee"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/lava-hound.json",
+      "relative_path": "data/home/troops/lava-hound.json",
+      "sha256": "ce8b386b5d8468ee526189a0a6de2558369cbfc6164c04a724896b834be5591d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/bowler.json",
+      "relative_path": "data/home/troops/bowler.json",
+      "sha256": "424f95e58e7a0be18c21033a36cb6ada76f9d33e125fa8e833ec7bfa9c10110e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/ice-golem.json",
+      "relative_path": "data/home/troops/ice-golem.json",
+      "sha256": "77d2030f5dcfb3a5664dfa3003c48936418318fb6c2e13a355decd0bb8f5dfc7"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/headhunter.json",
+      "relative_path": "data/home/troops/headhunter.json",
+      "sha256": "26422e2b8e92cd8ffcc49383c6c96dfaba8c3a49d6db9b595318bb1a23a59908"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/electro-titan.json",
+      "relative_path": "data/home/troops/electro-titan.json",
+      "sha256": "5847159ef2711b796c8e2d0d607299b2a4a441c91080fc1661f00a022188c0aa"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/root-rider.json",
+      "relative_path": "data/home/troops/root-rider.json",
+      "sha256": "44e8fe637c80fabafdd7aee640ecfa141ebc9ffb1a78379a3efecd19a01b3c3f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/druid.json",
+      "relative_path": "data/home/troops/druid.json",
+      "sha256": "b16fd84111c89c4a8f03ebe18f84ca581c9346ea65188d5203db17bb414089e1"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/furnace.json",
+      "relative_path": "data/home/troops/furnace.json",
+      "sha256": "276f282b9c9e629ad80bb37960b61b6d38a61d48a22f0ae4ec6e54335fe9067e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/meteor-golem.json",
+      "relative_path": "data/home/troops/meteor-golem.json",
+      "sha256": "71d29a7e60dc875397799942770b4ebfb6f5dbc42ceaa4cb554e60f6f18774a5"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/thrower.json",
+      "relative_path": "data/home/troops/thrower.json",
+      "sha256": "c718f7488c795da39f1d00f26cec8a09e3881a2f7e8020ab9c1e3d6cf0a7bc06"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/apprentice-warden.json",
+      "relative_path": "data/home/troops/apprentice-warden.json",
+      "sha256": "bff551a271f94e86dfef0255e1390f64f2b4dbe77f7da23988d93a98e549e948"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/air-sweeper.json",
+      "relative_path": "data/home/defenses/air-sweeper.json",
+      "sha256": "02eb2b4a724df714df5b41f02a476d0444f6e16d6ab52cd0261c1e1fc8bbb5f6"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/scattershot.json",
+      "relative_path": "data/home/defenses/scattershot.json",
+      "sha256": "70683f2c230bacb5b971d4bb5d565f461a3f99d16d5baafa0ee673040f35cb49"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/spell-tower.json",
+      "relative_path": "data/home/defenses/spell-tower.json",
+      "sha256": "1ec8472f928494f4154a9090b72bbe29f5569bcd49cbb93e3135f33ae3582fb0"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/monolith.json",
+      "relative_path": "data/home/defenses/monolith.json",
+      "sha256": "fd5990947be15a4b2e7373db96d39786ff290f33352d2a8e0325376320e0baba"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/builders-hut.json",
+      "relative_path": "data/home/defenses/builders-hut.json",
+      "sha256": "35faba72f19d93d1b6efec4678719a4f3eb8fafff9a268c918e6a4ff467404c8"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/firespitter.json",
+      "relative_path": "data/home/defenses/firespitter.json",
+      "sha256": "ea2698a2e21c423f6610bc2748f2e08367c86687c4d41d9f8b7a618ec27b33d9"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/ricochet-cannon.json",
+      "relative_path": "data/home/defenses/ricochet-cannon.json",
+      "sha256": "0674be2149672d5bb8bcf8e7902136bf34769e5d88f55f77aaf81288e38d4dea"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/multi-archer-tower.json",
+      "relative_path": "data/home/defenses/multi-archer-tower.json",
+      "sha256": "e13f52ac4c1d2dfd9edb28e59671c2ab1aab450ac685cf999c1fe4b662280baa"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/multi-gear-tower.json",
+      "relative_path": "data/home/defenses/multi-gear-tower.json",
+      "sha256": "341f5ef628aad0c05b62931f9f4fbe8e5a462e7b05bbc2dcb2d229eeb16da0ce"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/super-wizard-tower.json",
+      "relative_path": "data/home/defenses/super-wizard-tower.json",
+      "sha256": "04974cac945eeaf41c19e337ce54fd3d7a08ba918caa25cb7561dc0baffb0c40"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/revenge-tower.json",
+      "relative_path": "data/home/defenses/revenge-tower.json",
+      "sha256": "b3fede63df95a8aca8494fed24737feafc3973c95a62edeee3d418387107376d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/crafting-station.json",
+      "relative_path": "data/home/defenses/crafting-station.json",
+      "sha256": "ebb4a9da4aa0b7544146abc893acf93baf364903548ecfce895749b34c13066d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/crafted-defenses/roaster.json",
+      "relative_path": "data/home/crafted-defenses/roaster.json",
+      "sha256": "d4815fb2615d5632a2ce9d041ab162c669d93e5a09a1fb491aacb3592bd1ab7f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/crafted-defenses/air-bombs.json",
+      "relative_path": "data/home/crafted-defenses/air-bombs.json",
+      "sha256": "38e05132120aacb28e50dd3427d79ca8ea8e3bca7592345af3d6edd77367cd2a"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/crafted-defenses/lava-launcher.json",
+      "relative_path": "data/home/crafted-defenses/lava-launcher.json",
+      "sha256": "60000f1002e34cba48be6170a3ca602b55007552c0b4bc50d3956339f655787b"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/crafted-defenses/bomb-hive.json",
+      "relative_path": "data/home/crafted-defenses/bomb-hive.json",
+      "sha256": "cfac1854191e19dc46f84c547d70b0df6b7f7a90975c5bac7c8c9d6c7ded495a"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/crafted-defenses/hero-bell.json",
+      "relative_path": "data/home/crafted-defenses/hero-bell.json",
+      "sha256": "6557fcf806c93eb10247268bc781c7529311bb7e9acc6088d90db5e5c7d90837"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/crafted-defenses/light-beam.json",
+      "relative_path": "data/home/crafted-defenses/light-beam.json",
+      "sha256": "11544fd6ee4e2e8db5416db39bb082539bce7f74ecf3bb1e085878e04e4affd7"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/other/bobs-hut.json",
+      "relative_path": "data/home/other/bobs-hut.json",
+      "sha256": "d394c6bcca0bb5e5630e6faf29dc2070df6cb522a0621c47f26c8bee189a18de"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/other/helper-hut.json",
+      "relative_path": "data/home/other/helper-hut.json",
+      "sha256": "f27ca46d46da29b71f88aaa187cc83738c20fe3c22c5b9b8413b357d366f632b"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/resource-buildings/clan-castle.json",
+      "relative_path": "data/home/resource-buildings/clan-castle.json",
+      "sha256": "e05957321bf263464f208e7a81dde7f07b9e7615742693d155de402917938165"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/siege-machines/wall-wrecker.json",
+      "relative_path": "data/home/siege-machines/wall-wrecker.json",
+      "sha256": "3a56dc5e93c05c12be724f93b88e8d79d63f3414821c4a1e8e084f572b44d871"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/siege-machines/battle-blimp.json",
+      "relative_path": "data/home/siege-machines/battle-blimp.json",
+      "sha256": "9ee27a960bdd9fcf90cf9feb13994aab276376032ddafc05107dd6b0e0748cbb"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/siege-machines/stone-slammer.json",
+      "relative_path": "data/home/siege-machines/stone-slammer.json",
+      "sha256": "816e79347835568ff16ab5c87dc40cd1a7515ed094ee38241e317e11b4beb314"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/siege-machines/siege-barracks.json",
+      "relative_path": "data/home/siege-machines/siege-barracks.json",
+      "sha256": "4d9c34f879d1fc813f565734888775c79886574874df8767af841dffeb956e44"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/siege-machines/log-launcher.json",
+      "relative_path": "data/home/siege-machines/log-launcher.json",
+      "sha256": "d2d9b5a0dd087d2e66a42ed404a6ebfc30692f0a4c4aa8f70fda174706163ae9"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/siege-machines/flame-flinger.json",
+      "relative_path": "data/home/siege-machines/flame-flinger.json",
+      "sha256": "f1f8cf2891127e78f8fd8903c9a6a3c3b95af274a780327534c398348aa3512f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/siege-machines/battle-drill.json",
+      "relative_path": "data/home/siege-machines/battle-drill.json",
+      "sha256": "4fa5ae5517de82275d28d5eea26ab3361d6f64e1ecec985902f95ad1f1a0ebaf"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/siege-machines/troop-launcher.json",
+      "relative_path": "data/home/siege-machines/troop-launcher.json",
+      "sha256": "817cba89de5f981ba56b07d6c257fb3d86f5fb93743dec74e1d04228019f9968"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/heroes/barbarian-king.json",
+      "relative_path": "data/home/heroes/barbarian-king.json",
+      "sha256": "dd4bd44e547e9eaca674bf2f78bff0af85d373b3ae76c5345286236888169260"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/heroes/archer-queen.json",
+      "relative_path": "data/home/heroes/archer-queen.json",
+      "sha256": "f9d27a1906448cb865f17195ce856474035b58aa67947c280798b2edc0086d05"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/heroes/grand-warden.json",
+      "relative_path": "data/home/heroes/grand-warden.json",
+      "sha256": "4699046a3ac534989699f3af944ba9934a390b41347ff58b9480d8898f9c046a"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/heroes/royal-champion.json",
+      "relative_path": "data/home/heroes/royal-champion.json",
+      "sha256": "eba5e535e1b3f8dbb0d154e2fd59b5f490d8ab47e80c59abc6849d48ffffbc8e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/heroes/minion-prince.json",
+      "relative_path": "data/home/heroes/minion-prince.json",
+      "sha256": "93d450fdd46fbb4c3f12a9eff0d41e31de7bba7e4afbab79ef6b7c59872fb051"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/heroes/dragon-duke.json",
+      "relative_path": "data/home/heroes/dragon-duke.json",
+      "sha256": "2542cd852a57230021e9120eb410be02e95317c709310036d79cbfce18ceec85"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/guardians/smasher.json",
+      "relative_path": "data/home/guardians/smasher.json",
+      "sha256": "a07996a3c1ca73cad94f81ecc3f437a9efe7001851c6b4e1753ca97ff2f0cae5"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/guardians/longshot.json",
+      "relative_path": "data/home/guardians/longshot.json",
+      "sha256": "3bb0b514876a43a8ed9c33c13506bace04515ecd4c4c56de6b1788dda76dd6ce"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/lassi.json",
+      "relative_path": "data/home/pets/lassi.json",
+      "sha256": "f39fce1c06ad8ae15ecb1b699c58d92f4daa45e2cde25408f558e19e3805eee5"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/electro-owl.json",
+      "relative_path": "data/home/pets/electro-owl.json",
+      "sha256": "8f4563df3ab4f0e8cd49103a1f1836c3b2df982b13ea03e0ce081a022f042fa3"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/mighty-yak.json",
+      "relative_path": "data/home/pets/mighty-yak.json",
+      "sha256": "e7f156e1da41015363e32730563bf349d9c9bfded0035bd5078e9c49071b10d1"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/unicorn.json",
+      "relative_path": "data/home/pets/unicorn.json",
+      "sha256": "606994539710b920ab825017080a0baeb062e638f8331344354cc47adb6f49a7"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/diggy.json",
+      "relative_path": "data/home/pets/diggy.json",
+      "sha256": "240d5649ff9a197e0f20b57ed03a8790648bb457e3cf554a686c45280346941f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/poison-lizard.json",
+      "relative_path": "data/home/pets/poison-lizard.json",
+      "sha256": "a13528e1d46729694890e7e114460785090571f2287f2e15463bbd807a9d4378"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/phoenix.json",
+      "relative_path": "data/home/pets/phoenix.json",
+      "sha256": "171792bfcde44671aa930c30d022c09f488c99b6cb6f7675cf33b5d3cc643f82"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/frosty.json",
+      "relative_path": "data/home/pets/frosty.json",
+      "sha256": "39a54f8ee2b8d7d45800beff1a7ece5c996bd925e3f7761039a903cb265d7bdb"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/spirit-fox.json",
+      "relative_path": "data/home/pets/spirit-fox.json",
+      "sha256": "498e774ff4534f08c38a6a343074819acc2dffc1eef6324c9e5d8430b5d8a625"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/angry-jelly.json",
+      "relative_path": "data/home/pets/angry-jelly.json",
+      "sha256": "7b8c80554a5565b415d4974c98ba38623d39f27667856802e328cfd3e97ee9cd"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/sneezy.json",
+      "relative_path": "data/home/pets/sneezy.json",
+      "sha256": "f9c009c22a7b8414a04abfb9cdfd44428c7b44bb8f1492a17da031765794c5a6"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/greedy-raven.json",
+      "relative_path": "data/home/pets/greedy-raven.json",
+      "sha256": "bb13ae4889103d9ded9c7b160487293d7c185aad9a711c6f8d50d8641839b00f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/bomb-tower.json",
+      "relative_path": "data/home/defenses/bomb-tower.json",
+      "sha256": "b2bccd98df3259bb845d0ed4515cbd3a6695a05e6ffa66c809b09ce7f2d8b6bd"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/hidden-tesla.json",
+      "relative_path": "data/home/defenses/hidden-tesla.json",
+      "sha256": "ea61c0074b7bdf953629f3a0154b067ebccbba27cfd235db38df6f617855e7a2"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/resource-buildings/gold-storage.json",
+      "relative_path": "data/home/resource-buildings/gold-storage.json",
+      "sha256": "9e96e8eb8ec5107600d203252d0e32eeca9900bc6d1efd437f30d5755eb0d7ea"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/resource-buildings/elixir-storage.json",
+      "relative_path": "data/home/resource-buildings/elixir-storage.json",
+      "sha256": "bc262a2ad146506783ad134585bec05ecd46183f53a8cb472a2da0a4fccffcb5"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/resource-buildings/dark-elixir-storage.json",
+      "relative_path": "data/home/resource-buildings/dark-elixir-storage.json",
+      "sha256": "12709da3cdffd56eef2ee6cf4e70e0d798c2fc918506b1be203a51b39e878012"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/resource-buildings/dark-elixir-drill.json",
+      "relative_path": "data/home/resource-buildings/dark-elixir-drill.json",
+      "sha256": "3a640f4d25982eadd7dac0564b1093a07784224131b9caa4dd0e50f4bb3f016d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/army-buildings/army-camp.json",
+      "relative_path": "data/home/army-buildings/army-camp.json",
+      "sha256": "2eb7fc8f0cf3c7b0f90333d51509289766b80ba4e5800a9153f3a385dedecab1"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/army-buildings/barracks.json",
+      "relative_path": "data/home/army-buildings/barracks.json",
+      "sha256": "fc7a983bbc428d2087ec91529f5348aa44f988b418596694fe693067327310bb"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/army-buildings/dark-barracks.json",
+      "relative_path": "data/home/army-buildings/dark-barracks.json",
+      "sha256": "af6799f0f123f351d49bb8e9c3007ca9456f8de26e1831fb63a1695b2c1486f0"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/army-buildings/spell-factory.json",
+      "relative_path": "data/home/army-buildings/spell-factory.json",
+      "sha256": "de8b36a0452f3f85bce45e6a6e23f39f47c86f21f212e1fb13ffd82aa713bbd1"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/army-buildings/dark-spell-factory.json",
+      "relative_path": "data/home/army-buildings/dark-spell-factory.json",
+      "sha256": "7ee502be723184872db2ae3477ca73d3230e9e03785b9d762b41219d5208df7d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/army-buildings/laboratory.json",
+      "relative_path": "data/home/army-buildings/laboratory.json",
+      "sha256": "309eba2cb128709830df6703a0c58893e1a5b059d0ffc327b78c4f0e786896a2"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/army-buildings/workshop.json",
+      "relative_path": "data/home/army-buildings/workshop.json",
+      "sha256": "03c8b0a4a67d22de7a2e65db49ae48d720f7e5a531339624a27245a0c8b87718"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/army-buildings/blacksmith.json",
+      "relative_path": "data/home/army-buildings/blacksmith.json",
+      "sha256": "21e3e008dda284945a52ce3aa43bc1973606071f81bb6ae45580502ae9e8fca3"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/army-buildings/hero-hall.json",
+      "relative_path": "data/home/army-buildings/hero-hall.json",
+      "sha256": "da17c13340c4529bd21d8a61a7df95f12261377a7451c9407c113199e9a2e382"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/army-buildings/pet-house.json",
+      "relative_path": "data/home/army-buildings/pet-house.json",
+      "sha256": "d350f65487997be5da6bc44552859d50b17ab5348b52fc85c2df859f066532b1"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/army-buildings/hero-banner.json",
+      "relative_path": "data/home/army-buildings/hero-banner.json",
+      "sha256": "d3f319cd00790e84beda4d37a18bc2ec6bb08df35de99f3df5c72ccb82d09150"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/traps/bomb.json",
+      "relative_path": "data/home/traps/bomb.json",
+      "sha256": "3ef366e8fe65fce695be06cf37e857b7fbc0d00d8048cff4a50a8f23df4a73fd"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/traps/giant-bomb.json",
+      "relative_path": "data/home/traps/giant-bomb.json",
+      "sha256": "47422de6f6d12790540f5a7c93c5364199aae52aa8f7bfa3dcd9451dc3440e4f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/traps/air-bomb.json",
+      "relative_path": "data/home/traps/air-bomb.json",
+      "sha256": "123b33facaa4bbe563db016b9aeac32f0c7ff85facbad51249f83123e4bbda8d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/traps/seeking-air-mine.json",
+      "relative_path": "data/home/traps/seeking-air-mine.json",
+      "sha256": "f31f94de86605a375586e71e76b3487b867bab7524e8440361ffc6dac5057781"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/traps/spring-trap.json",
+      "relative_path": "data/home/traps/spring-trap.json",
+      "sha256": "4b371c950e7f45dcb5c6f3496328965ffe8563e411733ef916734141f5166790"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/traps/skeleton-trap.json",
+      "relative_path": "data/home/traps/skeleton-trap.json",
+      "sha256": "31e67209f77e9f7ceb8a4136c9da1d12470eec1e82e6d755e975cbbdd0ede646"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/traps/tornado-trap.json",
+      "relative_path": "data/home/traps/tornado-trap.json",
+      "sha256": "f907ed6f1744af7641921ad0be7ef5da59e0c234318d09872fd33d80cd840ecb"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/traps/giga-bomb.json",
+      "relative_path": "data/home/traps/giga-bomb.json",
+      "sha256": "3801ac2f7bd78bac6ad6430fe56c0bc6dd64a56fa387d0031c3c1d5a0580d0d8"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/action-figure.json",
+      "relative_path": "data/home/hero-equipment/action-figure.json",
+      "sha256": "8c39805dd3987a4ca3a1cf06cda26d8fc382e4ccf039c0daae5e0449fe9fc5b3"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/archer-puppet.json",
+      "relative_path": "data/home/hero-equipment/archer-puppet.json",
+      "sha256": "2827cdf0dab735fb4e1d54fc38ef7e9b34b7eeab01e2afa5c4e293ee53d7e65b"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/barbarian-puppet.json",
+      "relative_path": "data/home/hero-equipment/barbarian-puppet.json",
+      "sha256": "2fea7c80c31e5e0d8b13e34e3f508d971143f3a7766a3cdfc4f412346c9b729d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/dark-crown.json",
+      "relative_path": "data/home/hero-equipment/dark-crown.json",
+      "sha256": "8fcae7400f815a824f3944464a116857037385297d1f893ef34924c903232152"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/dark-orb.json",
+      "relative_path": "data/home/hero-equipment/dark-orb.json",
+      "sha256": "ae45c15e4e8012c22e027a43b044886bf1b2c983a1cfe9dae0c6064e07769dab"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/earthquake-boots.json",
+      "relative_path": "data/home/hero-equipment/earthquake-boots.json",
+      "sha256": "1735c786de0d01487707b23ebd6aaa70fa4761100358d7093ad9ea41b6096c2e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/electro-boots.json",
+      "relative_path": "data/home/hero-equipment/electro-boots.json",
+      "sha256": "ebac2d6bb44a1c973b33937e2166d37c1c0ad1d9167596f7ff22f5d9a347a38c"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/eternal-tome.json",
+      "relative_path": "data/home/hero-equipment/eternal-tome.json",
+      "sha256": "e00a29ed4399106ed35f0f06d6967b7e3f8eefc6925d8add78bcb4985e2bb4d8"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/fire-heart.json",
+      "relative_path": "data/home/hero-equipment/fire-heart.json",
+      "sha256": "e469b6213d59071417246dde8e891fb4ce4ac94074108a55d29a65ea5e37a154"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/fireball.json",
+      "relative_path": "data/home/hero-equipment/fireball.json",
+      "sha256": "3c16f6a505753cd95c804c512dab1a2dce22f527a95f186df9bf9a41a7c53cfc"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/flame-blower.json",
+      "relative_path": "data/home/hero-equipment/flame-blower.json",
+      "sha256": "e6318eaad5c0e68b1635d957ec292c30525a1edc89ae7e05f4a2bc17489efc11"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/frost-flake.json",
+      "relative_path": "data/home/hero-equipment/frost-flake.json",
+      "sha256": "1b4fccd38ae17821d84df1dccccefda64434fbccaaf36ca0cbb851caeabadb56"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/frozen-arrow.json",
+      "relative_path": "data/home/hero-equipment/frozen-arrow.json",
+      "sha256": "4d4db7b46ee2c00850d2b87fc218b3ef3e7074f1d8cd4457083246a4a0b10d9d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/giant-arrow.json",
+      "relative_path": "data/home/hero-equipment/giant-arrow.json",
+      "sha256": "36f04955f63f20e95cdceacb42f9b36a977b07fd6b1fbeda32733938363a9bfb"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/giant-gauntlet.json",
+      "relative_path": "data/home/hero-equipment/giant-gauntlet.json",
+      "sha256": "c377f4567e02d1e056c52e29ba62ba3537a0f05211220e97cce800f3d35e47e5"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/haste-vial.json",
+      "relative_path": "data/home/hero-equipment/haste-vial.json",
+      "sha256": "60bd1dda74c486b6256612112654ad7ace7990fac4a4d9ec382d4ae7c5a29362"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/healer-puppet.json",
+      "relative_path": "data/home/hero-equipment/healer-puppet.json",
+      "sha256": "d70c28fd8b64df46d64bb94ca7dfdb98a99a5423d1a45414863055cbc6cf90ef"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/healing-tome.json",
+      "relative_path": "data/home/hero-equipment/healing-tome.json",
+      "sha256": "58a33cf5e9331874b2616566e05056d0f6131f0aab58f5a3bf987994d6265499"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/henchmen-puppet.json",
+      "relative_path": "data/home/hero-equipment/henchmen-puppet.json",
+      "sha256": "e9d6cce8e9924e386352e30a700a56fc2c6155fb129f6a69b8d4f282fe36d900"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/heroic-torch.json",
+      "relative_path": "data/home/hero-equipment/heroic-torch.json",
+      "sha256": "dba49960fea538bfbcfd8443ba4cd7786275bcdd2968c5574a02c3dfe8fd3655"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/hog-rider-puppet.json",
+      "relative_path": "data/home/hero-equipment/hog-rider-puppet.json",
+      "sha256": "7e38d0fac214ddd84f92c81884ff772e38916c3d5a3dede8e6eb09c15cd75309"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/invisibility-vial.json",
+      "relative_path": "data/home/hero-equipment/invisibility-vial.json",
+      "sha256": "fd8992f19f8d708ab98195a979b1c424a5ea1fb814e3221a1f565c2da785c182"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/lavaloon-puppet.json",
+      "relative_path": "data/home/hero-equipment/lavaloon-puppet.json",
+      "sha256": "f9ac85fe25899dc2edbb4ddca353c7ba5ee102dd7d5f49594a27e5ece27182f2"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/life-gem.json",
+      "relative_path": "data/home/hero-equipment/life-gem.json",
+      "sha256": "1b4a7eaa5a27190243bb8fec5014da1ef05c829b9354329007dc5b9594d21c66"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/magic-mirror.json",
+      "relative_path": "data/home/hero-equipment/magic-mirror.json",
+      "sha256": "72c4b384283b16c9752e45549823fd0b8b301612d94adcd40b736533ca414809"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/metal-pants.json",
+      "relative_path": "data/home/hero-equipment/metal-pants.json",
+      "sha256": "a1b2ecc9a507c86ceaa136c1234bf3412280bb849af6471fd3dbab9574a8af6e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/meteor-staff.json",
+      "relative_path": "data/home/hero-equipment/meteor-staff.json",
+      "sha256": "b8187cef6d5aa8d237c2fe4f074f296d829b9a960a44473751b0be17290b4a6d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/noble-iron.json",
+      "relative_path": "data/home/hero-equipment/noble-iron.json",
+      "sha256": "0b1a2e3329f37b6691034b5cb77dd2b7938b919258ceff147af7106fb736c5f2"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/rage-gem.json",
+      "relative_path": "data/home/hero-equipment/rage-gem.json",
+      "sha256": "85dd2f83699d07ad7e345e7b7c77091db1259b93b0bc69bae77dff583db59270"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/rage-vial.json",
+      "relative_path": "data/home/hero-equipment/rage-vial.json",
+      "sha256": "a30edaa3dac292f0e411aa58a2c8471b382b25dcbfd9f799a59eda5a5d19c868"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/rocket-backpack.json",
+      "relative_path": "data/home/hero-equipment/rocket-backpack.json",
+      "sha256": "e232a0f83df1814cee9b8c9fa740728e75e3fc5cdbb3167a4715739ccac6a7f4"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/rocket-spear.json",
+      "relative_path": "data/home/hero-equipment/rocket-spear.json",
+      "sha256": "0b654329d807cfb41de8827ce9cc4f2d26195b7c3aa512d30766f5e7fade7205"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/royal-gem.json",
+      "relative_path": "data/home/hero-equipment/royal-gem.json",
+      "sha256": "5978c181f166840e83e233d2b9de3e40bb60c8245c52492e97bf5aa89df2f607"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/seeking-shield.json",
+      "relative_path": "data/home/hero-equipment/seeking-shield.json",
+      "sha256": "6590f3c970bb7d4007607d3ff2fcd90a338d2cc256a65e15353622866288518d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/snake-bracelet.json",
+      "relative_path": "data/home/hero-equipment/snake-bracelet.json",
+      "sha256": "6f088cac379632929f1249f6293baf3c2ee01debf85e2acefb411f60f39135f3"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/spiky-ball.json",
+      "relative_path": "data/home/hero-equipment/spiky-ball.json",
+      "sha256": "5dc2e353d540e7c85d10c8cf79fdd58c7042b3ad7a54baad05c4c339b0c96528"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/stick-horse.json",
+      "relative_path": "data/home/hero-equipment/stick-horse.json",
+      "sha256": "8c4ed0edd6fa9f8a963f9ecf3c150dbe98df996fff9695af2e25c88d925953be"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/stun-blaster.json",
+      "relative_path": "data/home/hero-equipment/stun-blaster.json",
+      "sha256": "b0a8e37c5f6125928954b5df7329699fd720021d4d914c9690ebcdf340962cb4"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/vampstache.json",
+      "relative_path": "data/home/hero-equipment/vampstache.json",
+      "sha256": "d75927edeb22f434c6f8f44a016225eece4fef0470d8d0e7a944a596f63ee395"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/rage-spell.json",
+      "relative_path": "data/home/spells/rage-spell.json",
+      "sha256": "f0f8491a92549573a1f28ec8a3868cf90389dde13d88a9fd230089ced463ce6c"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/healing-spell.json",
+      "relative_path": "data/home/spells/healing-spell.json",
+      "sha256": "57fd80dfcd025f2ba5606250d078323ea5d4eed8caa0794e9165ba16f2782d47"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/lightning-spell.json",
+      "relative_path": "data/home/spells/lightning-spell.json",
+      "sha256": "0198a8e18dcbdc1db205f4f380ef5fa202c0e1a49252fa15e57b7b606c55026e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/freeze-spell.json",
+      "relative_path": "data/home/spells/freeze-spell.json",
+      "sha256": "8f5975f96562827d7db0fa1821460ba663b5b6a9fe35f8cccd2babb4e535e6c4"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/haste-spell.json",
+      "relative_path": "data/home/spells/haste-spell.json",
+      "sha256": "0f5bbfcecd1a8a67c37acd9522e6dc12ead49a81cb29048a0677d33288ac32d2"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/jump-spell.json",
+      "relative_path": "data/home/spells/jump-spell.json",
+      "sha256": "063f56ce3da13dfe20f094e4d0494b4cab6ff062989d8dc07b0c368c5a5e9b5d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/earthquake-spell.json",
+      "relative_path": "data/home/spells/earthquake-spell.json",
+      "sha256": "280f5e4e22c8b9b23e7ac7fcc75662fc29fde2e178808ce90231161515d610d4"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/poison-spell.json",
+      "relative_path": "data/home/spells/poison-spell.json",
+      "sha256": "f15cedebb1ece70950669e996db832ce9e781207b583e01b7ad7dbe7cc24ed32"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/invisibility-spell.json",
+      "relative_path": "data/home/spells/invisibility-spell.json",
+      "sha256": "6e5800747e75caebaaf16a988644ad32c4055521df6fa8c79bb4d55bdd363fa4"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/clone-spell.json",
+      "relative_path": "data/home/spells/clone-spell.json",
+      "sha256": "cf069104fb917ef264b288cc87c06e090466fec5f6949a712cbe0005b3aebd82"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/skeleton-spell.json",
+      "relative_path": "data/home/spells/skeleton-spell.json",
+      "sha256": "7c549bcf40748217f2f85a97bbfffc2200ca2f794d5ff78f7d8665f6aef4aae5"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/bat-spell.json",
+      "relative_path": "data/home/spells/bat-spell.json",
+      "sha256": "e64f80f8b974b889beb3e8e1a2e24da39ca0cf11b7f220ae635d82a4b26ec50c"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/recall-spell.json",
+      "relative_path": "data/home/spells/recall-spell.json",
+      "sha256": "eab480ccffda08f9ab5b146c893c0b194f98c13cd83f30437ad469c87ffc2e17"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/overgrowth-spell.json",
+      "relative_path": "data/home/spells/overgrowth-spell.json",
+      "sha256": "4a5ef2c1020a92f30ed1569de28f002ad9c2187fadeed9dcd3bc9f6e73ee715d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/revive-spell.json",
+      "relative_path": "data/home/spells/revive-spell.json",
+      "sha256": "78e11d098d04fc23c84617c42c71850dd3f6ba1b450ebb1a91984e312638d132"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/totem-spell.json",
+      "relative_path": "data/home/spells/totem-spell.json",
+      "sha256": "4fec05102962f99b882beed07b6baf18e9cf3b40783c5dbae4e1bc043c39224d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/spells/ice-block-spell.json",
+      "relative_path": "data/home/spells/ice-block-spell.json",
+      "sha256": "e1d3dee5d4ee386f76b001af54cff86beb974a6205c136588be70e9494efc184"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "format_version": 3,
+  "note": "Headless fixture for Monolith's additive maximum-hitpoint damage.",
+  "width": 24,
+  "height": 20,
+  "seed": 1,
+  "duration_ms": 5000,
+  "defenders": [
+    {"kind": "monolith", "level": 1, "x": 12.5, "y": 10.5}
+  ],
+  "army": [
+    {"kind": "dragon", "level": 1, "count": 1}
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "width": 20,
+  "height": 20,
+  "seed": 2718281828,
+  "duration_ms": 2000,
+  "defenders": [{"kind":"cannon","level":1,"x":11.5,"y":10.5}],
+  "army": [{"kind":"super_minion","level":14,"count":1}]
+}

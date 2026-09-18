@@ -1,0 +1,12 @@
+{
+  "width": 20,
+  "height": 20,
+  "seed": 1618033988,
+  "duration_ms": 4000,
+  "defenders": [
+    {"kind":"cannon","level":1,"x":4.5,"y":10.5},
+    {"kind":"cannon","level":1,"x":7.5,"y":10.5},
+    {"kind":"cannon","level":1,"x":10.5,"y":10.5}
+  ],
+  "army": [{"kind":"super_bowler","level":10,"count":1}]
+}

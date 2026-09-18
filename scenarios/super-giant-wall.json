@@ -1,0 +1,12 @@
+{
+  "format": 3,
+  "seed": 1,
+  "width": 20,
+  "height": 20,
+  "duration_ms": 8000,
+  "defenders": [
+    {"kind": "wall", "level": 1, "x": 5.5, "y": 10.5}
+  ],
+  "army": [{"kind": "super_giant", "level": 14, "count": 1}],
+  "spells": []
+}

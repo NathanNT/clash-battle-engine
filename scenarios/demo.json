@@ -1,0 +1,10 @@
+{
+  "format_version": 3,
+  "note": "Runnable with: cocsim simulate scenarios/demo.json --deploy barbarian 1 10 10",
+  "width": 30,
+  "height": 20,
+  "seed": 1,
+  "duration_ms": 60000,
+  "defenders": [{"kind":"cannon","level":1,"x":15,"y":10}],
+  "army": [{"kind":"barbarian","level":1,"count":10}]
+}

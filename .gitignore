@@ -1,0 +1,33 @@
+# Build products and IDE state
+/build/
+/out/
+/cmake-build-*/
+/.vs/
+*.user
+*.suo
+*.vcxproj.user
+
+# Python and local runtime output
+__pycache__/
+*.py[cod]
+*.pyd
+.venv/
+/replays/
+/imgui.ini
+
+# Downloaded or regenerable external material
+/assets/
+/data/raw/
+
+# Private research, progress tracking, and source-audit checkout
+/data/reference/
+/.source-audit/
+/docs/
+/state/
+/bindings/
+/python/
+/pyproject.toml
+
+# Local AI operating instructions and private roadmap
+/AGENTS.md
+/GOAL.md

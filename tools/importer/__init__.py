@@ -1,0 +1,1 @@
+"""Pinned catalogue importer internals."""
