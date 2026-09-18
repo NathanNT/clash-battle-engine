@@ -525,6 +525,20 @@ def main() -> None:
     assert any(entity["kind"] == "hidden_tesla"
                for entity in tesla_threshold.observation()["entities"])
 
+    # The result is a Core-derived army value rather than only a unit count.
+    # Housing space distinguishes two living troops of materially different
+    # combat weight and excludes spawned-only catalogue rows.
+    army_value = _cocsim.NativeBattle()
+    army_value.reset_scenario({
+        "width": 20, "height": 20, "duration_ms": 3000,
+        "defenders": [{"kind": "gold_mine", "level": 1, "x": 15.5, "y": 10.5}],
+        "army": [{"kind": "barbarian", "level": 13, "count": 1},
+                 {"kind": "dragon", "level": 13, "count": 1}], "spells": [],
+    }, 1)
+    army_value_result = army_value.result()
+    assert army_value_result["troops_remaining"] == 2
+    assert army_value_result["remaining_housing_space"] > army_value_result["troops_remaining"], army_value_result
+
     # A catalogue level is part of a Core command.  The action space chooses a
     # troop kind, so the binding must select the first non-empty Core reserve
     # for that kind instead of fabricating Level 1.  This is deliberately

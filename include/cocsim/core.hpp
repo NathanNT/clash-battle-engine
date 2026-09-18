@@ -88,7 +88,7 @@ struct Command { CommandType type{CommandType::Wait}; Milliseconds requested_ms{
 struct Event { EventType type{}; Milliseconds time_ms{}; EntityId actor{}; EntityId target{}; double value{}; std::string detail; Vec2 origin{}; Vec2 target_position{}; bool has_origin{}; bool has_target_position{}; ProjectileId projectile_id{}; };
 struct EntityView { EntityId id{}; Kind kind{}; Side side{}; int level{}; Vec2 position{}; double hp{}; double max_hp{}; double attack_range{}; std::optional<EntityId> target; Milliseconds next_action_ms{}; EntityCategory category{EntityCategory::Other}; TargetFocus target_focus{TargetFocus::Any}; bool flying{}; bool heals{}; int footprint_width{1}; int footprint_height{1}; bool supercharged{}; bool underground{}; bool invisible_to_defenses{}; bool deployment_rage_active{}; };
 struct Snapshot { std::string canonical; }; // versioned portable canonical representation; no pointers/STL dumps.
-struct BattleResult { bool finished{}; bool attackers_win{}; bool timed_out{}; Milliseconds time_ms{}; double destruction{}; int stars{}; int troops_remaining{}; Milliseconds remaining_time_ms{}; std::string reason; };
+struct BattleResult { bool finished{}; bool attackers_win{}; bool timed_out{}; Milliseconds time_ms{}; double destruction{}; int stars{}; int troops_remaining{}; int remaining_housing_space{}; Milliseconds remaining_time_ms{}; std::string reason; };
 
 class GameData {
 public:

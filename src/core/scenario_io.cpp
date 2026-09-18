@@ -130,6 +130,7 @@ std::string to_json(const BattleResult& result) {
          << ",\"timed_out\":" << (result.timed_out ? "true" : "false")
          << ",\"time_ms\":" << result.time_ms << ",\"destruction\":" << result.destruction
          << ",\"stars\":" << result.stars << ",\"troops_remaining\":" << result.troops_remaining
+         << ",\"remaining_housing_space\":" << result.remaining_housing_space
          << ",\"remaining_time_ms\":" << result.remaining_time_ms
          << ",\"reason\":\"" << detail::escape_json(result.reason) << "\"}";
   return output.str();

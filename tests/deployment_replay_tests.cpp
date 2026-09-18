@@ -86,14 +86,19 @@ int main() {
   Scenario metrics_scenario;
   metrics_scenario.width = 20; metrics_scenario.height = 20; metrics_scenario.duration_ms = 1'000;
   metrics_scenario.defenders = {{Kind::TownHall, 18, {10.0, 10.0}}};
-  metrics_scenario.army = {{Kind::Barbarian, 13, 1}};
+  metrics_scenario.army = {{Kind::Barbarian, 13, 1}, {Kind::Dragon, 13, 1}};
   BattleState metrics(data, metrics_scenario);
   COCSIM_REQUIRE(metrics.submit({CommandType::Deploy, kTickMs, 0, 0, Kind::Barbarian, 13, {1.5, 10.5}}));
   COCSIM_REQUIRE(metrics.submit({CommandType::EndBattle, 2 * kTickMs}));
   metrics.advance_ticks(3);
   const auto result = metrics.result();
   COCSIM_REQUIRE(result.finished && result.reason == "player ended battle");
-  COCSIM_REQUIRE(result.stars == 0 && result.troops_remaining == 1 && result.remaining_time_ms == 980);
+  const auto* barbarian = data.find(Kind::Barbarian, 13);
+  const auto* dragon = data.find(Kind::Dragon, 13);
+  COCSIM_REQUIRE(barbarian && dragon);
+  COCSIM_REQUIRE(result.stars == 0 && result.troops_remaining == 2
+                 && result.remaining_housing_space == barbarian->housing_space + dragon->housing_space
+                 && result.remaining_time_ms == 980);
   const auto terminal_snapshot = metrics.snapshot();
   BattleState restored_metrics(data, metrics_scenario);
   COCSIM_REQUIRE(restored_metrics.restore(terminal_snapshot));

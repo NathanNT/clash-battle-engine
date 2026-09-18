@@ -137,6 +137,22 @@ int main() {
           "concurrent presentation does not change deterministic Core state");
   bridge.stop();
 
+  // Maximum playback removes only presentation pacing. It must still produce
+  // the same fixed-tick terminal state as a direct Core run.
+  viewer::SimulationBridge maximum_bridge(data, scenario);
+  maximum_bridge.set_maximum_playback(true);
+  const auto maximum_frame = wait_for([&] {
+    const auto frame = maximum_bridge.latest();
+    return frame && frame->result.finished ? frame : std::shared_ptr<const viewer::PresentationSnapshot>{};
+  });
+  require(bool(maximum_frame) && maximum_frame->result.timed_out,
+          "maximum playback reaches the fixed time limit");
+  BattleState direct_maximum(data, scenario);
+  direct_maximum.advance_to(scenario.duration_ms);
+  require(maximum_frame->state_hash == direct_maximum.state_hash(),
+          "maximum playback preserves the direct fixed-tick state");
+  maximum_bridge.stop();
+
   // A reset creates a command-queue cut: already queued input is discarded,
   // while input submitted after that cut belongs to the replacement battle.
   viewer::SimulationBridge reset_bridge(data, scenario);

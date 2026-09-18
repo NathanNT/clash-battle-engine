@@ -110,8 +110,8 @@ void draw_projectile_orb(SDL_Renderer* renderer, float center_x, float center_y,
   SDL_RenderFillRect(renderer, &bottom);
 }
 
-void draw_scene(SDL_Renderer* renderer, const Scenario& scenario, const GameData& data, Images& images, const std::vector<EntityView>& entities, const std::vector<SpellEffectView>& spell_effects, const std::vector<DeathExplosionView>& death_explosions, const std::vector<ProjectileView>& projectiles, const std::vector<ProjectileTrace>& traces, std::uint64_t wall_now_ms, const HeatmapCache& heatmap_cache, float zoom, bool ranges, bool heatmap, bool show_projectiles, EntityId selected_defender) {
-  constexpr float ox = 300.0f, oy = 70.0f;
+void draw_scene(SDL_Renderer* renderer, const Scenario& scenario, const GameData& data, Images& images, const std::vector<EntityView>& entities, const std::vector<SpellEffectView>& spell_effects, const std::vector<DeathExplosionView>& death_explosions, const std::vector<ProjectileView>& projectiles, const std::vector<ProjectileTrace>& traces, std::uint64_t wall_now_ms, const HeatmapCache& heatmap_cache, float origin_x, float origin_y, float zoom, bool ranges, bool heatmap, bool show_projectiles, EntityId selected_defender) {
+  const float ox = origin_x, oy = origin_y;
   SDL_SetRenderDrawColor(renderer, 24, 29, 37, 255);
   SDL_RenderClear(renderer);
   SDL_SetRenderDrawColor(renderer, 45, 91, 54, 255);

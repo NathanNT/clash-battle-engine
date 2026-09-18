@@ -122,6 +122,13 @@ class SimulationBridge {
   [[nodiscard]] std::uint32_t playback_speed() const {
     return playback_speed_.load(std::memory_order_acquire);
   }
+  void set_maximum_playback(bool value) {
+    maximum_playback_.store(value, std::memory_order_release);
+    wake_.notify_one();
+  }
+  [[nodiscard]] bool maximum_playback() const {
+    return maximum_playback_.load(std::memory_order_acquire);
+  }
 
  private:
   void publish(const BattleState& battle) {
@@ -213,6 +220,12 @@ class SimulationBridge {
       if (paused_.load(std::memory_order_acquire)) {
         ticks = step_requests_.exchange(0, std::memory_order_acq_rel);
         force_publish = ticks != 0;
+      } else if (!battle.result().finished && maximum_playback_.load(std::memory_order_acquire)) {
+        // This mode removes presentation pacing only. Each operation remains a
+        // normal fixed Core tick and commands are still consumed at a future
+        // tick-aligned boundary on the following loop iteration.
+        constexpr std::uint32_t kMaximumTicksPerSlice = 1'000;
+        ticks = kMaximumTicksPerSlice;
       } else if (!battle.result().finished) {
         presentation_debt_ms += static_cast<std::uint64_t>(std::max<std::int64_t>(0, elapsed))
           * playback_speed_.load(std::memory_order_acquire);
@@ -252,6 +265,7 @@ class SimulationBridge {
   std::atomic<std::uint64_t> reset_through_sequence_{};
   std::atomic<std::uint32_t> step_requests_{0};
   std::atomic<std::uint32_t> playback_speed_{1};
+  std::atomic<bool> maximum_playback_{false};
   std::mutex command_mutex_;
   std::vector<QueuedCommand> commands_;
   std::uint64_t next_command_sequence_{1}; // guarded by command_mutex_

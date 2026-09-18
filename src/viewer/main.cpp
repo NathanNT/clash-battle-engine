@@ -151,6 +151,8 @@ int main(int argc, char** argv) {
   bool selecting_spell = false;
   EntityId selected_defender{};
   float zoom = 16.0f;
+  float map_origin_x = 460.0f, map_origin_y = 70.0f;
+  std::uint64_t camera_previous_ms = SDL_GetTicks();
   // Troop swarms are the normal case where the viewer becomes draw-call
   // bound.  The read model is capped strictly below a full army; all omitted
   // entities still advance in BattleState and appear again as the swarm
@@ -158,8 +160,9 @@ int main(int argc, char** argv) {
   constexpr std::size_t kMinRenderedAttackers = 24;
   constexpr std::size_t kMaxRenderedAttackers = 120;
   std::size_t rendered_attacker_budget = kMaxRenderedAttackers;
-  constexpr std::array<std::uint32_t, 4> kPlaybackSpeeds{1, 2, 4, 10};
-  std::size_t playback_speed_index{};
+  constexpr std::array<int, 4> kPlaybackSpeeds{1, 2, 4, 10};
+  int custom_playback_speed = 1;
+  bool maximum_playback = false;
   // Texture decoding remains a GUI-only budgeted task. It cannot block the
   // simulation thread or change its command/tick sequence.
   constexpr std::uint64_t kPreloadWorkBudgetMs = 16;
@@ -195,8 +198,7 @@ int main(int argc, char** argv) {
         switch (event.key.key) { case SDLK_SPACE: simulation.set_paused(!simulation.paused()); break; case SDLK_N: simulation.request_step(); break; case SDLK_1: selected = 0; break; case SDLK_2: selected = 1; break; case SDLK_3: selected = 2; break; case SDLK_R: simulation.request_reset(); viewed_event_count = 0; projectile_traces.clear(); sourced_projectile_ids.clear(); selected_defender = 0; terminal_replay_saved = false; terminal_replay_path.clear(); terminal_replay_error.clear(); break; case SDLK_V: ranges = !ranges; break; case SDLK_H: heatmap = !heatmap; break; case SDLK_P: draw_board = !draw_board; break; default: break; }
       }
       if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN && event.button.button == SDL_BUTTON_LEFT && !io.WantCaptureMouse) {
-        constexpr float ox = 300.0f, oy = 70.0f;
-        const float raw_x = (event.button.x - ox) / zoom, raw_y = (event.button.y - oy) / zoom;
+        const float raw_x = (event.button.x - map_origin_x) / zoom, raw_y = (event.button.y - map_origin_y) / zoom;
         const bool in_map = raw_x >= 0 && raw_x < kHomeVillageTotalTiles && raw_y >= 0 && raw_y < kHomeVillageTotalTiles;
         const Vec2 position{std::floor(raw_x) + 0.5, std::floor(raw_y) + 0.5};
         // Shift-click is a read-only inspector.  It uses the actual Core
@@ -220,8 +222,19 @@ int main(int argc, char** argv) {
       }
     }
     const auto now = SDL_GetTicks();
-    const auto playback_speed = kPlaybackSpeeds[playback_speed_index];
-    simulation.set_playback_speed(playback_speed);
+    const auto camera_elapsed_ms = now - camera_previous_ms;
+    camera_previous_ms = now;
+    if (!ImGui::GetIO().WantCaptureKeyboard) {
+      const bool* keys = SDL_GetKeyboardState(nullptr);
+      const float pan = static_cast<float>(camera_elapsed_ms) * 0.75f;
+      if (keys[SDL_SCANCODE_Z] || keys[SDL_SCANCODE_UP]) map_origin_y += pan;
+      if (keys[SDL_SCANCODE_S] || keys[SDL_SCANCODE_DOWN]) map_origin_y -= pan;
+      if (keys[SDL_SCANCODE_Q] || keys[SDL_SCANCODE_LEFT]) map_origin_x += pan;
+      if (keys[SDL_SCANCODE_D] || keys[SDL_SCANCODE_RIGHT]) map_origin_x -= pan;
+    }
+    const auto playback_speed = static_cast<std::uint32_t>(custom_playback_speed);
+    simulation.set_maximum_playback(maximum_playback);
+    if (!maximum_playback) simulation.set_playback_speed(playback_speed);
     // At most one image is decoded per presentation cycle.  The simulation is
     // never gated on asset I/O: absent/unloaded art simply uses the existing
     // fallback until its source texture becomes available.
@@ -297,7 +310,7 @@ int main(int argc, char** argv) {
     }
 
     ImGui_ImplSDLRenderer3_NewFrame(); ImGui_ImplSDL3_NewFrame(); ImGui::NewFrame();
-    ImGui::SetNextWindowPos({12, 12}, ImGuiCond_Always); ImGui::SetNextWindowSize({270, 0}, ImGuiCond_Always);
+    ImGui::SetNextWindowPos({12, 12}, ImGuiCond_Always); ImGui::SetNextWindowSize({440, 0}, ImGuiCond_Always);
     ImGui::Begin("Army & controls", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
     ImGui::Text("Deploiement : clic hors des cadres rouges"); ImGui::Separator();
     for (std::size_t i = 0; i < troops.size(); ++i) {
@@ -308,7 +321,7 @@ int main(int argc, char** argv) {
       ImGui::SameLine();
       ImGui::BeginDisabled(count == 0);
       char label[64]; std::snprintf(label, sizeof(label), "%s L%d  x%d", to_string(kind).c_str(), slot ? slot->level : 0, count);
-      if (ImGui::Selectable(label, !selecting_spell && selected == static_cast<int>(i), 0, {count ? 175.0f : 0.0f, 42.0f})) { selected = static_cast<int>(i); selecting_spell = false; }
+      if (ImGui::Selectable(label, !selecting_spell && selected == static_cast<int>(i), 0, {count ? 350.0f : 0.0f, 42.0f})) { selected = static_cast<int>(i); selecting_spell = false; }
       ImGui::EndDisabled(); ImGui::PopID();
     }
     ImGui::Separator(); ImGui::Text("Sorts : selectionner puis cliquer sur le village");
@@ -316,7 +329,7 @@ int main(int argc, char** argv) {
       const auto kind = spells[i]; const auto* slot = spell_slot(frame->spells, kind); const int count = slot ? slot->count : 0;
       ImGui::PushID(100 + static_cast<int>(i)); ImGui::BeginDisabled(count == 0);
       char label[64]; std::snprintf(label, sizeof(label), "%s L%d  x%d", to_string(kind).c_str(), slot ? slot->level : 0, count);
-      if (ImGui::Selectable(label, selecting_spell && selected_spell == static_cast<int>(i), 0, {230.0f, 26.0f})) { selected_spell = static_cast<int>(i); selecting_spell = true; }
+      if (ImGui::Selectable(label, selecting_spell && selected_spell == static_cast<int>(i), 0, {400.0f, 26.0f})) { selected_spell = static_cast<int>(i); selecting_spell = true; }
       ImGui::EndDisabled(); ImGui::PopID();
     }
     ImGui::Separator();
@@ -341,17 +354,28 @@ int main(int argc, char** argv) {
     if (omitted_attackers > 0)
       ImGui::TextColored({1.0f, 0.72f, 0.25f, 1.0f}, "Troupes affichees : %llu / %llu (simulation complete)", static_cast<unsigned long long>(rendered_attackers), static_cast<unsigned long long>(rendered_attackers + omitted_attackers));
     ImGui::Text("Temps GUI precedent : %llu ms", static_cast<unsigned long long>(last_frame_work_ms));
-    ImGui::Text("Vitesse : x%u (%u ticks/s, %u ms simules / ms reel)", playback_speed,
+    if (maximum_playback) ImGui::Text("Vitesse : instantanee (maximum CPU disponible)");
+    else ImGui::Text("Vitesse : x%u (%u ticks/s, %u ms simules / ms reel)", playback_speed,
       100u * playback_speed, playback_speed);
     for (std::size_t i = 0; i < kPlaybackSpeeds.size(); ++i) {
       if (i != 0) ImGui::SameLine();
-      char speed_label[8]; std::snprintf(speed_label, sizeof(speed_label), "x%u", kPlaybackSpeeds[i]);
-      if (ImGui::RadioButton(speed_label, playback_speed_index == i)) playback_speed_index = i;
+      char speed_label[8]; std::snprintf(speed_label, sizeof(speed_label), "x%d", kPlaybackSpeeds[i]);
+      if (ImGui::Button(speed_label)) { custom_playback_speed = kPlaybackSpeeds[i]; maximum_playback = false; }
     }
+    ImGui::SetNextItemWidth(115.0f);
+    if (ImGui::InputInt("Vitesse personnalisee (x)", &custom_playback_speed, 1, 10)) {
+      custom_playback_speed = std::clamp(custom_playback_speed, 1, 10'000);
+      maximum_playback = false;
+    }
+    ImGui::SameLine();
+    if (ImGui::Button(maximum_playback ? "Instantane actif" : "Instantane")) maximum_playback = !maximum_playback;
+    ImGui::TextDisabled("ZQSD ou fleches : deplacer la camera");
     ImGui::Text("Catalogue charge en %llu ms", static_cast<unsigned long long>(catalogue_load_ms));
     ImGui::Separator();
     ImGui::Text("Destruction : %.1f%% | Etoiles : %d/3", frame->result.destruction, frame->result.stars);
-    ImGui::Text("Troupes restantes : %d | Temps restant : %lld s", frame->result.troops_remaining,
+    ImGui::Text("Valeur armee restante : %d logements | Unites : %d", frame->result.remaining_housing_space,
+                frame->result.troops_remaining);
+    ImGui::Text("Temps restant : %lld s",
                 static_cast<long long>(frame->result.remaining_time_ms / 1000));
     if (frame->result.finished) ImGui::Text("Resultat : %s", frame->result.reason.c_str());
     if (frame->result.finished && !terminal_replay_path.empty())
@@ -409,7 +433,7 @@ int main(int argc, char** argv) {
     ImGui::Text("Sprites: %d charges, %d manquants", images.loaded, images.failures);
     ImGui::End();
 
-    ImGui::SetNextWindowPos({300, 12}, ImGuiCond_Always); ImGui::SetNextWindowSize({760, 0}, ImGuiCond_Always);
+    ImGui::SetNextWindowPos({460, 12}, ImGuiCond_Always); ImGui::SetNextWindowSize({800, 0}, ImGuiCond_Always);
     ImGui::Begin("Assets", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
     ImGui::Text("Root must contain images/home/... (not the images folder itself).");
     ImGui::SetNextItemWidth(540); ImGui::InputText("##asset_root", asset_root.data(), asset_root.size()); ImGui::SameLine();
@@ -419,7 +443,7 @@ int main(int argc, char** argv) {
     else ImGui::TextColored({0.35f, 0.9f, 0.45f, 1.0f}, "Loaded %d textures from: %s", images.loaded, images.root.c_str());
     ImGui::End();
 
-    if (render_scene) draw_scene(renderer, initial, data, images, render_views, spell_effects, death_explosions, projectile_views, projectile_traces, now, heatmap_cache, zoom, ranges, heatmap, show_projectiles, selected_defender);
+    if (render_scene) draw_scene(renderer, initial, data, images, render_views, spell_effects, death_explosions, projectile_views, projectile_traces, now, heatmap_cache, map_origin_x, map_origin_y, zoom, ranges, heatmap, show_projectiles, selected_defender);
     else { SDL_SetRenderDrawColor(renderer, 24, 29, 37, 255); SDL_RenderClear(renderer); }
     char title[512];
     if (images.failures) std::snprintf(title, sizeof(title), "CoCSim | sprites: %d charges, %d manquants | %s", images.loaded, images.failures, images.last_error.c_str());
