@@ -63,8 +63,9 @@ def main() -> None:
         if source.get("category") == "hero-equipment":
             assert content["levels"], (content_id, "equipment has no levels")
             recorded_source = content["levels"][0]["provenance"]["source"]
-            expected = importer.normalized_hero_equipment(content_id, source_id, source,
-                                                          recorded_source)
+            expected = importer.apply_content_overrides(
+                importer.normalized_hero_equipment(content_id, source_id, source,
+                                                   recorded_source), content_id)
             assert content == expected, (content_id, "hero equipment drift")
             assert all(level["provenance"]["source"]["raw_sha256"] == hashlib.sha256(payload).hexdigest()
                        for level in content["levels"]), (content_id, "provenance")
@@ -98,7 +99,19 @@ def main() -> None:
                 "counts_toward_destruction": {"source": "fandom-2026-09-17-hero-banner", "tier": "secondary"},
                 "deployment_margin_tiles": {"source": "fandom-2026-09-17-hero-banner", "tier": "secondary"},
                 "image": {"source": "chiefpansancolt-62b019df", "tier": "secondary"},
+                "source_images": {"source": "chiefpansancolt-62b019df-hero-banner-variants", "note": "Scenario variant is visual assignment data only. It cannot instantiate or modify a defending Hero."},
+                "max_placements": {"source": "supercell-support-2026-09-20-hero-banner-quantity", "note": "TH18 Home Village constraint, corroborated by the pinned availability table."},
             }, (content_id, "non-combat field provenance drift")
+            assert content["source_images"] == {
+                "normal": "images/home/army-buildings/hero-banner/empty.png",
+                "barbarian_king": "images/home/army-buildings/hero-banner/barbarian-king.png",
+                "archer_queen": "images/home/army-buildings/hero-banner/archer-queen.png",
+                "grand_warden": "images/home/army-buildings/hero-banner/grand-warden.png",
+                "royal_champion": "images/home/army-buildings/hero-banner/royal-champion.png",
+                "minion_prince": "images/home/army-buildings/hero-banner/minion-prince.png",
+                "dragon_duke": "images/home/army-buildings/hero-banner/dragon-duke.png",
+            }, (content_id, "source visual variants drift")
+            assert content["max_placements"] == 4, (content_id, "TH18 placement limit drift")
         else:
             assert content.get("field_provenance", {}) == {
                 name: {"source": evidence["source"], "note": evidence.get("note", "")}
@@ -112,8 +125,10 @@ def main() -> None:
         digest = hashlib.sha256(payload).hexdigest()
         actual_levels = {(item["level"], item.get("variant", "normal")): item
                          for item in content.get("levels", [])}
+        hero_icon = source.get("images", {}).get("icon") if source.get("category") == "hero" else None
         for raw_level in source.get("levels", []):
-            expected = importer.normalized_level(raw_level)
+            expected = importer.normalized_level(raw_level, hero_icon,
+                                                 pet=source.get("category") == "pet")
             key = (expected["level"], expected["variant"])
             actual = actual_levels[key]
             provenance = actual["provenance"]

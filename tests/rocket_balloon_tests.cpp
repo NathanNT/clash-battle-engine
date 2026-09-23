@@ -21,14 +21,14 @@ int main() {
   const auto data = GameData::v0();
   const auto* rocket = data.find(Kind::RocketBalloon, 12);
   COCSIM_REQUIRE(rocket && rocket->hp == 1240 && rocket->damage == 912
-                 && rocket->cooldown == 3000 && rocket->flying);
+                 && rocket->cooldown == 3008 && rocket->flying);
   COCSIM_REQUIRE(rocket->target_focus == TargetFocus::DefensesOnly);
   COCSIM_REQUIRE(rocket->deployment_rage_duration == 4000);
   COCSIM_REQUIRE(std::abs(rocket->deployment_rage_damage_multiplier - 1.0) < 1e-9);
   COCSIM_REQUIRE(std::abs(rocket->deployment_rage_movement_speed_multiplier - (64.0 / 12.0)) < 1e-9);
 
   // The defender is deliberately beyond the four-second boosted travel path.
-  // The first 10-ms movement step is (12 + 52) / 8 * 10 / 1000 tiles, derived
+  // The first 16-ms movement step is (12 + 52) / 8 * 16 / 1000 tiles, derived
   // from the secondary level-5-Haste equivalence; no Viewer clock participates.
   Scenario scenario;
   scenario.width = 80;
@@ -48,11 +48,11 @@ int main() {
     return entity.kind == Kind::RocketBalloon && entity.side == Side::Attacker;
   });
   COCSIM_REQUIRE(first != early.end() && first->deployment_rage_active);
-  COCSIM_REQUIRE(std::abs(first->position.x - 1.58) < 1e-9);
+  COCSIM_REQUIRE(std::abs(first->position.x - 1.628) < 1e-9);
 
-  battle.advance_ticks(198); // T+2000 ms, still within the serialized window.
+  battle.advance_ticks(123); // T+2000 ms, still within the serialized window.
   const auto snapshot = battle.snapshot();
-  COCSIM_REQUIRE(snapshot.canonical.starts_with("COCSIM-SNAPSHOT-18\n"));
+  COCSIM_REQUIRE(snapshot.canonical.starts_with("COCSIM-SNAPSHOT-22\n"));
   BattleState restored(data, scenario);
   COCSIM_REQUIRE(restored.restore(snapshot));
   COCSIM_REQUIRE(restored.state_hash() == battle.state_hash());
@@ -65,12 +65,12 @@ int main() {
   COCSIM_REQUIRE(load_replay(replay_path, replay_scenario, replay_commands, error));
   BattleState replay(data, replay_scenario);
   submit_all(replay, replay_commands);
-  replay.advance_ticks(200);
+  replay.advance_ticks(125);
   COCSIM_REQUIRE(replay.state_hash() == battle.state_hash());
 
-  battle.advance_ticks(201); // T+4010 ms: strict deadline has expired.
-  restored.advance_ticks(201);
-  replay.advance_ticks(201);
+  battle.advance_ticks(126); // T+4016 ms: strict deadline has expired.
+  restored.advance_ticks(126);
+  replay.advance_ticks(126);
   const auto late = battle.observe();
   const auto expired = std::find_if(late.begin(), late.end(), [](const EntityView& entity) {
     return entity.kind == Kind::RocketBalloon && entity.side == Side::Attacker;

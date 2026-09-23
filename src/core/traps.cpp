@@ -26,6 +26,7 @@ void BattleState::update_traps() {
            :((trap.kind==Kind::AirBomb||trap.kind==Kind::SeekingAirMine)?candidate.flying:!candidate.flying));
       if(!(alive(candidate)&&candidate.side==Side::Attacker&&!candidate.underground&&altitude_matches&&dist(trap.pos,candidate.pos)<=trap.trigger_range)) continue;
       const auto* current_stats=data_.find(candidate.kind,candidate.level);
+      if(trap.kind==Kind::SeekingAirMine&&current_stats&&current_stats->seeking_air_mine_immune) continue;
       const auto* trigger_stats=trigger?data_.find(trigger->kind,trigger->level):nullptr;
       const int capacity=current_stats?current_stats->housing_space:0, best_capacity=trigger_stats?trigger_stats->housing_space:0;
       const bool nearer=!trigger||dist(trap.pos,candidate.pos)<dist(trap.pos,trigger->pos)||(dist(trap.pos,candidate.pos)==dist(trap.pos,trigger->pos)&&candidate.id<trigger->id);

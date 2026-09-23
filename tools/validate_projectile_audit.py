@@ -23,6 +23,16 @@ SUPER_WIZARD_CONTRACT_DELTA = ROOT / "data" / "reference" / "projectile-contract
 SUPER_MINION_CONTRACT_DELTA = ROOT / "data" / "reference" / "projectile-contracts-2026-09-18-super-minion.json"
 SUPER_BOWLER_CONTRACT_DELTA = ROOT / "data" / "reference" / "projectile-contracts-2026-09-18-super-bowler.json"
 SUPER_DRAGON_CONTRACT_DELTA = ROOT / "data" / "reference" / "projectile-contracts-2026-09-18-super-dragon.json"
+ELECTRO_DRAGON_CONTRACT_DELTA = ROOT / "data" / "reference" / "projectile-contracts-2026-09-18-electro-dragon.json"
+BOWLER_CONTRACT_DELTA = ROOT / "data" / "reference" / "projectile-contracts-2026-09-18-bowler.json"
+APPRENTICE_WARDEN_CONTRACT_DELTA = ROOT / "data" / "reference" / "projectile-contracts-2026-09-18-apprentice-warden.json"
+SUPER_WITCH_CONTRACT_DELTA = ROOT / "data" / "reference" / "projectile-contracts-2026-09-18-super-witch.json"
+ICE_PUP_CONTRACT_DELTA = ROOT / "data" / "reference" / "projectile-contracts-2026-09-18-ice-pup.json"
+YETIMITE_CONTRACT_DELTA = ROOT / "data" / "reference" / "projectile-contracts-2026-09-18-yetimite.json"
+WITCH_CONTRACT_DELTA = ROOT / "data" / "reference" / "projectile-contracts-2026-09-18-witch.json"
+HEADHUNTER_DRUID_CONTRACT_DELTA = ROOT / "data" / "reference" / "projectile-contracts-2026-09-18-headhunter-druid.json"
+RICOCHET_SUPER_WIZARD_TOWER_CONTRACT_DELTA = ROOT / "data" / "reference" / "projectile-contracts-2026-09-19-ricochet-super-wizard-tower.json"
+HERO_CONTRACT_DELTA = ROOT / "data" / "reference" / "projectile-contracts-2026-09-20-heroes.json"
 DAMAGE_PATHS = ROOT / "data" / "reference" / "combat-damage-paths-2026-09-17.json"
 HISTORICAL_CALIBRATION = ROOT / "data" / "reference" / "historical-projectile-speed-calibration-v18.200.9.json"
 HEADER = ROOT / "include" / "cocsim" / "core.hpp"
@@ -59,6 +69,26 @@ def main() -> None:
     super_bowler_delta = json.loads(super_bowler_delta_bytes)
     super_dragon_delta_bytes = SUPER_DRAGON_CONTRACT_DELTA.read_bytes()
     super_dragon_delta = json.loads(super_dragon_delta_bytes)
+    electro_dragon_delta_bytes = ELECTRO_DRAGON_CONTRACT_DELTA.read_bytes()
+    electro_dragon_delta = json.loads(electro_dragon_delta_bytes)
+    bowler_delta_bytes = BOWLER_CONTRACT_DELTA.read_bytes()
+    bowler_delta = json.loads(bowler_delta_bytes)
+    apprentice_warden_delta_bytes = APPRENTICE_WARDEN_CONTRACT_DELTA.read_bytes()
+    apprentice_warden_delta = json.loads(apprentice_warden_delta_bytes)
+    super_witch_delta_bytes = SUPER_WITCH_CONTRACT_DELTA.read_bytes()
+    super_witch_delta = json.loads(super_witch_delta_bytes)
+    ice_pup_delta_bytes = ICE_PUP_CONTRACT_DELTA.read_bytes()
+    ice_pup_delta = json.loads(ice_pup_delta_bytes)
+    yetimite_delta_bytes = YETIMITE_CONTRACT_DELTA.read_bytes()
+    yetimite_delta = json.loads(yetimite_delta_bytes)
+    witch_delta_bytes = WITCH_CONTRACT_DELTA.read_bytes()
+    witch_delta = json.loads(witch_delta_bytes)
+    headhunter_druid_delta_bytes = HEADHUNTER_DRUID_CONTRACT_DELTA.read_bytes()
+    headhunter_druid_delta = json.loads(headhunter_druid_delta_bytes)
+    ricochet_super_wizard_tower_delta_bytes = RICOCHET_SUPER_WIZARD_TOWER_CONTRACT_DELTA.read_bytes()
+    ricochet_super_wizard_tower_delta = json.loads(ricochet_super_wizard_tower_delta_bytes)
+    hero_delta_bytes = HERO_CONTRACT_DELTA.read_bytes()
+    hero_delta = json.loads(hero_delta_bytes)
     assert contract_delta["schema_version"] == 1
     assert contract_delta["parent_contract"] == {
         "file": CONTRACTS.name,
@@ -81,6 +111,16 @@ def main() -> None:
     assert super_minion_delta["parent_contract"] == {"file": SUPER_WIZARD_CONTRACT_DELTA.name, "sha256": hashlib.sha256(super_wizard_delta_bytes).hexdigest()}
     assert super_bowler_delta["parent_contract"] == {"file": SUPER_MINION_CONTRACT_DELTA.name, "sha256": hashlib.sha256(super_minion_delta_bytes).hexdigest()}
     assert super_dragon_delta["parent_contract"] == {"file": SUPER_BOWLER_CONTRACT_DELTA.name, "sha256": hashlib.sha256(super_bowler_delta_bytes).hexdigest()}
+    assert electro_dragon_delta["parent_contract"] == {"file": SUPER_DRAGON_CONTRACT_DELTA.name, "sha256": hashlib.sha256(super_dragon_delta_bytes).hexdigest()}
+    assert bowler_delta["parent_contract"] == {"file": ELECTRO_DRAGON_CONTRACT_DELTA.name, "sha256": hashlib.sha256(electro_dragon_delta_bytes).hexdigest()}
+    assert apprentice_warden_delta["parent_contract"] == {"file": BOWLER_CONTRACT_DELTA.name, "sha256": hashlib.sha256(bowler_delta_bytes).hexdigest()}
+    assert super_witch_delta["parent_contract"] == {"file": APPRENTICE_WARDEN_CONTRACT_DELTA.name, "sha256": hashlib.sha256(apprentice_warden_delta_bytes).hexdigest()}
+    assert ice_pup_delta["parent_contract"] == {"file": SUPER_WITCH_CONTRACT_DELTA.name, "sha256": hashlib.sha256(super_witch_delta_bytes).hexdigest()}
+    assert yetimite_delta["parent_contract"] == {"file": ICE_PUP_CONTRACT_DELTA.name, "sha256": hashlib.sha256(ice_pup_delta_bytes).hexdigest()}
+    assert witch_delta["parent_contract"] == {"file": YETIMITE_CONTRACT_DELTA.name, "sha256": hashlib.sha256(yetimite_delta_bytes).hexdigest()}
+    assert headhunter_druid_delta["parent_contract"] == {"file": WITCH_CONTRACT_DELTA.name, "sha256": hashlib.sha256(witch_delta_bytes).hexdigest()}
+    assert ricochet_super_wizard_tower_delta["parent_contract"] == {"file": HEADHUNTER_DRUID_CONTRACT_DELTA.name, "sha256": hashlib.sha256(headhunter_druid_delta_bytes).hexdigest()}
+    assert hero_delta["parent_contract"] == {"file": RICOCHET_SUPER_WIZARD_TOWER_CONTRACT_DELTA.name, "sha256": hashlib.sha256(ricochet_super_wizard_tower_delta_bytes).hexdigest()}
     contract_document["catalogue_audit"].update(contract_delta["catalogue_audit_override"])
     contract_document["contracts"].extend(contract_delta["contracts"])
     contract_document["test_evidence"].extend(contract_delta["test_evidence"])
@@ -102,6 +142,36 @@ def main() -> None:
     contract_document["catalogue_audit"].update(super_dragon_delta["catalogue_audit_override"])
     contract_document["contracts"].extend(super_dragon_delta["contracts"])
     contract_document["test_evidence"].extend(super_dragon_delta["test_evidence"])
+    contract_document["catalogue_audit"].update(electro_dragon_delta["catalogue_audit_override"])
+    contract_document["contracts"].extend(electro_dragon_delta["contracts"])
+    contract_document["test_evidence"].extend(electro_dragon_delta["test_evidence"])
+    contract_document["catalogue_audit"].update(bowler_delta["catalogue_audit_override"])
+    contract_document["contracts"].extend(bowler_delta["contracts"])
+    contract_document["test_evidence"].extend(bowler_delta["test_evidence"])
+    contract_document["catalogue_audit"].update(apprentice_warden_delta["catalogue_audit_override"])
+    contract_document["contracts"].extend(apprentice_warden_delta["contracts"])
+    contract_document["test_evidence"].extend(apprentice_warden_delta["test_evidence"])
+    contract_document["catalogue_audit"].update(super_witch_delta["catalogue_audit_override"])
+    contract_document["contracts"].extend(super_witch_delta["contracts"])
+    contract_document["test_evidence"].extend(super_witch_delta["test_evidence"])
+    contract_document["catalogue_audit"].update(ice_pup_delta["catalogue_audit_override"])
+    contract_document["contracts"].extend(ice_pup_delta["contracts"])
+    contract_document["test_evidence"].extend(ice_pup_delta["test_evidence"])
+    contract_document["catalogue_audit"].update(yetimite_delta["catalogue_audit_override"])
+    contract_document["contracts"].extend(yetimite_delta["contracts"])
+    contract_document["test_evidence"].extend(yetimite_delta["test_evidence"])
+    contract_document["catalogue_audit"].update(witch_delta["catalogue_audit_override"])
+    contract_document["contracts"].extend(witch_delta["contracts"])
+    contract_document["test_evidence"].extend(witch_delta["test_evidence"])
+    contract_document["catalogue_audit"].update(headhunter_druid_delta["catalogue_audit_override"])
+    contract_document["contracts"].extend(headhunter_druid_delta["contracts"])
+    contract_document["test_evidence"].extend(headhunter_druid_delta["test_evidence"])
+    contract_document["catalogue_audit"].update(ricochet_super_wizard_tower_delta["catalogue_audit_override"])
+    contract_document["contracts"].extend(ricochet_super_wizard_tower_delta["contracts"])
+    contract_document["test_evidence"].extend(ricochet_super_wizard_tower_delta["test_evidence"])
+    contract_document["catalogue_audit"].update(hero_delta["catalogue_audit_override"])
+    contract_document["contracts"].extend(hero_delta["contracts"])
+    contract_document["test_evidence"].extend(hero_delta["test_evidence"])
     damage_path_document = json.loads(DAMAGE_PATHS.read_text(encoding="utf-8"))
     historical_calibration = json.loads(calibration_bytes)
     historical_calibration["unavailable_runtime_profiles"].extend(
@@ -118,13 +188,43 @@ def main() -> None:
         super_bowler_delta["historical_unavailable_profiles"])
     historical_calibration["unavailable_runtime_profiles"].extend(
         super_dragon_delta["historical_unavailable_profiles"])
+    historical_calibration["unavailable_runtime_profiles"].extend(
+        electro_dragon_delta["historical_unavailable_profiles"])
+    historical_calibration["unavailable_runtime_profiles"].extend(
+        bowler_delta["historical_unavailable_profiles"])
+    historical_calibration["unavailable_runtime_profiles"].extend(
+        apprentice_warden_delta["historical_unavailable_profiles"])
+    historical_calibration["unavailable_runtime_profiles"].extend(
+        super_witch_delta["historical_unavailable_profiles"])
+    historical_calibration["unavailable_runtime_profiles"].extend(
+        ice_pup_delta["historical_unavailable_profiles"])
+    historical_calibration["unavailable_runtime_profiles"].extend(
+        yetimite_delta["historical_unavailable_profiles"])
+    historical_calibration["unavailable_runtime_profiles"].extend(
+        witch_delta["historical_unavailable_profiles"])
+    historical_calibration["unavailable_runtime_profiles"].extend(
+        headhunter_druid_delta["historical_unavailable_profiles"])
+    historical_calibration["unavailable_runtime_profiles"].extend(
+        ricochet_super_wizard_tower_delta["historical_unavailable_profiles"])
+    historical_calibration["unavailable_runtime_profiles"].extend(
+        hero_delta["historical_unavailable_profiles"])
     audit = (AUDIT.read_text(encoding="utf-8") + "\n" + AUDIT_DELTA.read_text(encoding="utf-8")
              + "\n" + SUPER_ARCHER_AUDIT_DELTA.read_text(encoding="utf-8")
              + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-18-inferno-dragon.md").read_text(encoding="utf-8")
              + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-18-super-wizard.md").read_text(encoding="utf-8")
              + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-18-super-minion.md").read_text(encoding="utf-8")
              + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-18-super-bowler.md").read_text(encoding="utf-8")
-             + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-18-super-dragon.md").read_text(encoding="utf-8"))
+             + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-18-super-dragon.md").read_text(encoding="utf-8")
+             + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-18-electro-dragon.md").read_text(encoding="utf-8")
+             + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-18-bowler.md").read_text(encoding="utf-8")
+             + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-18-apprentice-warden.md").read_text(encoding="utf-8")
+             + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-18-super-witch.md").read_text(encoding="utf-8")
+             + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-18-ice-pup.md").read_text(encoding="utf-8")
+             + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-18-yetimite.md").read_text(encoding="utf-8")
+             + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-18-witch.md").read_text(encoding="utf-8")
+             + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-18-headhunter-druid.md").read_text(encoding="utf-8")
+             + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-19-ricochet-super-wizard-tower.md").read_text(encoding="utf-8")
+             + "\n" + (ROOT / "docs" / "projectile-audit-2026-09-20-heroes.md").read_text(encoding="utf-8"))
     core = core_source_text()
     header = HEADER.read_text(encoding="utf-8")
     binding = BINDING.read_text(encoding="utf-8")
@@ -145,9 +245,9 @@ def main() -> None:
         "archer", "cannon", "archer_tower", "mortar", "wizard", "dragon",
         "eagle_artillery", "inferno_tower", "minion", "air_defense",
         "wizard_tower", "x_bow", "dragon_rider", "baby_dragon", "bomb_tower",
-        "hidden_tesla", "town_hall", "healer", "seeking_air_mine",
+        "hidden_tesla", "town_hall", "healer", "seeking_air_mine", "apprentice_warden",
         "multi_archer_tower", "multi_gear_tower", "scattershot", "thrower", "electro_titan", "monolith",
-        "super_archer", "inferno_dragon", "super_wizard", "super_minion", "super_bowler", "super_dragon",
+        "ricochet_cannon", "super_wizard_tower", "super_archer", "inferno_dragon", "super_wizard", "super_minion", "super_bowler", "super_dragon", "electro_dragon", "bowler", "super_witch", "ice_pup", "yetimite", "witch", "headhunter", "druid", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke", "lava_pup",
     }
     assert current == expected, (current - expected, expected - current)
     assert current <= contents.keys(), current - contents.keys()
@@ -163,13 +263,14 @@ def main() -> None:
         if identity != "healer" and has_long_range_weapon(content)
     }
     audit_boundary = contract_document["catalogue_audit"]
-    executable_weapon_paths = current - {"healer", "seeking_air_mine"}
+    special_paths = {"healer", "druid", "seeking_air_mine"}
+    executable_weapon_paths = current - special_paths
     assert audit_boundary["non_healer_long_range_candidates"] == len(catalogue_ranged)
     assert audit_boundary["currently_executable_weapon_paths"] == len(executable_weapon_paths)
-    assert audit_boundary["currently_executable_special_paths"] == ["healer", "seeking_air_mine"]
+    assert audit_boundary["currently_executable_special_paths"] == ["healer", "druid", "seeking_air_mine"]
     assert audit_boundary["non_executable_long_range_candidates"] == len(catalogue_ranged - executable_weapon_paths)
     assert audit_boundary["boundary"].startswith("Candidates outside cocsim_core")
-    generic = current - {"healer", "inferno_tower", "inferno_dragon", "super_wizard", "super_minion", "super_bowler", "super_dragon", "seeking_air_mine", "town_hall", "scattershot", "electro_titan", "monolith", "super_archer"}
+    generic = current - {"healer", "druid", "headhunter", "inferno_tower", "inferno_dragon", "super_wizard", "super_wizard_tower", "ricochet_cannon", "super_minion", "super_bowler", "super_dragon", "electro_dragon", "bowler", "seeking_air_mine", "town_hall", "scattershot", "electro_titan", "monolith", "super_archer", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke", "lava_pup"}
     for identity in generic:
         contract = contracts[identity]
         assert contract["model"] == "logical_next_tick_unmeasured", identity
@@ -178,6 +279,11 @@ def main() -> None:
         assert contract["rl"] == "projectiles", identity
         assert contract["fidelity"] == "open", identity
         assert contract["provenance"]["status"] == "missing", identity
+    for identity in ("archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke", "lava_pup"):
+        contract = contracts[identity]
+        assert contract["model"] == "logical_next_tick_unmeasured"
+        assert contract["fidelity"] == "open"
+        assert contract["provenance"]["status"] == "sourced_secondary"
     super_archer = contracts["super_archer"]
     assert super_archer["model"] == "logical_next_tick_piercing_partial"
     assert super_archer["provenance"]["status"] == "sourced_secondary_partial"
@@ -191,6 +297,14 @@ def main() -> None:
     assert contracts["healer"]["core"] == "BattleState::Projectile"
     assert contracts["healer"]["gui"] == "green_post_impact_trace"
     assert contracts["healer"]["rl"] == "projectiles"
+    druid_contract = contracts["druid"]
+    assert druid_contract["model"] == "logical_next_tick_heal_unmeasured"
+    assert druid_contract["core"] == "BattleState::Projectile"
+    assert druid_contract["provenance"]["source_id"] == "fandom-2026-09-18-druid"
+    headhunter_contract = contracts["headhunter"]
+    assert headhunter_contract["model"] == "logical_next_tick_unmeasured"
+    assert headhunter_contract["core"] == "BattleState::Projectile"
+    assert headhunter_contract["provenance"]["source_id"] == "fandom-2026-09-18-headhunter"
     monolith_contract = contracts["monolith"]
     assert monolith_contract["model"] == "logical_next_tick_unmeasured"
     assert monolith_contract["core"] == "BattleState::Projectile"
@@ -227,6 +341,10 @@ def main() -> None:
     super_wizard_contract = contracts["super_wizard"]
     assert super_wizard_contract["model"] == "logical_next_tick_primary_branching_partial"
     assert super_wizard_contract["provenance"]["source_id"] == "supercell-2021-01-20-super-wizard-balance"
+    assert contracts["ricochet_cannon"]["model"] == "logical_next_tick_primary_branching_partial"
+    assert contracts["ricochet_cannon"]["provenance"]["source_id"] == "supercell-2026-01-28-ricochet-cannon-balance-current-consultation"
+    assert contracts["super_wizard_tower"]["model"] == "logical_next_tick_primary_branching_partial"
+    assert contracts["super_wizard_tower"]["provenance"]["source_id"] == "supercell-2025-11-17-super-wizard-tower-launch-current-consultation"
     super_minion_contract = contracts["super_minion"]
     assert super_minion_contract["model"] == "logical_next_tick_opening_range_lower_bound_partial"
     assert super_minion_contract["provenance"]["source_id"] == "supercell-2026-01-28-super-minion-balance"
@@ -234,6 +352,14 @@ def main() -> None:
     assert super_bowler_contract["model"] == "logical_next_tick_fixed_bounces_partial"
     assert super_bowler_contract["provenance"]["source_id"] == "supercell-2021-09-25-super-bowler-launch"
     assert contracts["super_dragon"]["model"] == "logical_next_tick_aggregate_primary_lower_bound"
+    electro_dragon_contract = contracts["electro_dragon"]
+    assert electro_dragon_contract["model"] == "logical_next_tick_sequential_chain_partial"
+    assert electro_dragon_contract["core"] == "BattleState::Projectile"
+    assert electro_dragon_contract["provenance"]["source_id"] == "supercell-2018-06-08-electro-dragon-launch"
+    bowler_contract = contracts["bowler"]
+    assert bowler_contract["model"] == "logical_next_tick_two_fixed_impacts_lower_bound"
+    assert bowler_contract["core"] == "BattleState::Projectile"
+    assert bowler_contract["provenance"]["source_id"] == "supercell-2021-09-25-super-bowler-comparison"
     scattershot_contract = contracts["scattershot"]
     assert scattershot_contract["model"] == "logical_next_tick_unmeasured"
     assert scattershot_contract["core"] == "BattleState::Projectile"
@@ -274,7 +400,7 @@ def main() -> None:
     # not present in the v18.200.9 archive, so the archival document carries
     # an explicit unavailable record instead of a fabricated profile.
     unavailable_historical = {entry["content_id"]: entry for entry in historical_calibration["unavailable_runtime_profiles"]}
-    assert set(unavailable_historical) == {"multi_archer_tower", "multi_gear_tower", "scattershot", "thrower", "electro_titan", "monolith", "super_archer", "inferno_dragon", "super_wizard", "super_minion", "super_bowler", "super_dragon"}
+    assert set(unavailable_historical) == {"multi_archer_tower", "multi_gear_tower", "scattershot", "thrower", "electro_titan", "monolith", "ricochet_cannon", "super_wizard_tower", "super_archer", "inferno_dragon", "super_wizard", "super_minion", "super_bowler", "super_dragon", "electro_dragon", "bowler", "apprentice_warden", "super_witch", "ice_pup", "yetimite", "witch", "headhunter", "druid", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke", "lava_pup"}
     assert all(entry["reason"] for entry in unavailable_historical.values())
     assert "No reproducible historical" in unavailable_historical["monolith"]["reason"]
     expected_historical_profiles = current - {"inferno_tower", "seeking_air_mine", "town_hall", *unavailable_historical}
@@ -284,9 +410,9 @@ def main() -> None:
     assert all(not contents[identity].get("projectile_speed_tiles_per_second")
                for identity in historical_profiles)
     assert "struct ProjectileView" in header and "ProjectileId id" in header and "target_position" in header and "bool speed_sourced" in header and "observe_projectiles" in header and "projectile_speed_sourced" in header
-    assert "speed_tiles_per_second" in core and "next_projectile_id_" in core and "COCSIM-SNAPSHOT-18" in core and "projectiles_ = std::move(active)" in core
+    assert "speed_tiles_per_second" in core and "next_projectile_id_" in core and "COCSIM-SNAPSHOT-22" in core and "projectiles_ = std::move(active)" in core
     assert 'row["id"]=projectile.id' in binding and "projectile_views" in binding and 'row["target_x"]=projectile.target_position.x' in binding and 'row["scheduled_impact_ms"]=projectile.scheduled_impact_ms' in binding and 'row["speed_sourced"]=projectile.speed_sourced' in binding and 'row["projectile_speed_sourced"]=stat.projectile_speed_sourced' in binding
-    assert "seeking air mine launched" in core and "const bool inferno_beam=inferno_single || a.kind==Kind::InfernoTower" in core
+    assert "seeking air mine launched" in core and "const bool inferno_beam=a.kind==Kind::InfernoDragon || a.kind==Kind::InfernoTower" in core
     runtime_test = (ROOT / "tools" / "validate_rl_runtime.py").read_text(encoding="utf-8")
     assert "events_since" in binding and 'event["detail"] == "inferno beam"' in runtime_test
     assert 'row["has_origin"] = event.has_origin' in binding

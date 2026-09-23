@@ -27,7 +27,7 @@ constexpr std::array kSpellNames{
 static_assert(kSpellNames.size() == static_cast<std::size_t>(SpellKind::Count));
 
 constexpr std::array kCategoryNames{"troop", "defense", "resource", "wall", "other", "trap"};
-constexpr std::array kFocusNames{"any", "defenses", "resources", "walls", "friendly_troops", "defenses_only"};
+constexpr std::array kFocusNames{"any", "defenses", "resources", "walls", "friendly_troops", "defenses_only", "air_defenses", "heroes"};
 constexpr std::array kTargetTypeNames{"ground", "air", "both"};
 
 } // namespace

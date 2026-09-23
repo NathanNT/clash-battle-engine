@@ -49,7 +49,7 @@ void BattleState::update_projectiles() {
     } else if (target && alive(*target) && !target->underground) {
       const auto* owner=entity(p.owner);
       // The only current friendly projectile is the Healer's unmeasured
-      // logical T+10 ms effect. Side is immutable entity identity, including
+      // logical next-tick effect. Side is immutable entity identity, including
       // for an owner that died after launch, so this remains snapshot/replay
       // deterministic without adding mutable combat statistics to entities.
       if(owner&&owner->side==target->side) {

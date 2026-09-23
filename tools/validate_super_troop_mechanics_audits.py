@@ -13,9 +13,6 @@ DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 AUDITS = {
     "super-valkyrie-mechanics-audit-2026-09-18.json": "super_valkyrie",
     "super-hog-rider-mechanics-audit-2026-09-18.json": "super_hog_rider",
-    "super-yeti-mechanics-audit-2026-09-18.json": "super_yeti",
-    "super-witch-mechanics-audit-2026-09-18.json": "super_witch",
-    "super-miner-mechanics-audit-2026-09-18.json": "super_miner",
 }
 
 
@@ -36,7 +33,7 @@ def main() -> None:
             assert source["title"] and source["url"].startswith("https://")
             assert source["game_version"] and source["finding"]
             assert source["published_on"] is None or DATE.fullmatch(source["published_on"])
-    print(f"Super Troop mechanics audits passed ({len(AUDITS)} non-enabling records; Inferno Dragon is covered by the active-reference validator)")
+    print(f"Super Troop mechanics audits passed ({len(AUDITS)} non-enabling records; active partial baselines are covered by the active-reference validator)")
 
 
 if __name__ == "__main__":

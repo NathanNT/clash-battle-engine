@@ -51,6 +51,9 @@ int main() {
   COCSIM_REQUIRE(placement(scenario, Kind::AirDefense, 16));
   COCSIM_REQUIRE(army_slot(scenario, Kind::SuperDragon, 13)->count == 5);
   COCSIM_REQUIRE(army_slot(scenario, Kind::DragonRider, 6)->count == 2);
+  COCSIM_REQUIRE(army_slot(scenario, Kind::MinionPrince, 95)->count == 1);
+  COCSIM_REQUIRE(army_slot(scenario, Kind::GrandWarden, 85)->mode == "air");
+  COCSIM_REQUIRE(army_slot(scenario, Kind::DragonDuke, 25)->count == 1);
 
   // The default Viewer scenario must remain materializable and must never rely
   // on overlapping Core footprints hidden by rendering order.

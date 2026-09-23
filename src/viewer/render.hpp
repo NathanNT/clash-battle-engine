@@ -175,7 +175,7 @@ void draw_scene(SDL_Renderer* renderer, const Scenario& scenario, const GameData
     SDL_FRect blocked{destination.x - meta->deployment_margin * zoom, destination.y - meta->deployment_margin * zoom,
                       width + 2 * meta->deployment_margin * zoom, height + 2 * meta->deployment_margin * zoom};
     SDL_RenderRect(renderer, &blocked);
-    if (const auto* asset = images.find_asset(obstacle.kind, 1)) SDL_RenderTexture(renderer, asset->texture, &asset->source, &destination);
+    if (const auto* asset = images.find_asset(obstacle.kind, 1, obstacle.variant)) SDL_RenderTexture(renderer, asset->texture, &asset->source, &destination);
     else { SDL_SetRenderDrawColor(renderer, 125, 100, 170, 255); SDL_RenderFillRect(renderer, &destination); }
     SDL_SetRenderDrawColor(renderer, 236, 188, 62, 255);
     SDL_RenderRect(renderer, &destination);

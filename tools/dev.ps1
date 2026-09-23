@@ -35,15 +35,11 @@ function Ensure-HeadlessConfigured {
 
 function Build-Viewer {
     Ensure-ViewerConfigured
-    # SDL contient beaucoup d'unités MSVC. Une compilation séquentielle évite
-    # les collisions de PDB observées dans les builds Debug parallèles.
-    # CTest's CLI fixtures execute `cocsim` from this same build tree. Build it
-    # alongside the Viewer so an identifier/catalogue edit cannot leave those
-    # headless tests running a stale executable.
-    & cmake --build $ViewerBuild --config $Configuration --target cocsim cocsim_viewer cocsim_tests cocsim_content_registry_tests cocsim_scenario_io_tests cocsim_determinism_tests cocsim_deployment_replay_tests cocsim_targeting_tests cocsim_permanent_building_tests cocsim_air_defense_tests cocsim_monolith_tests cocsim_super_wall_breaker_tests cocsim_super_barbarian_tests cocsim_performance_smoke_tests cocsim_viewer_thread_tests cocsim_viewer_selection_tests cocsim_viewer_projectile_visual_tests cocsim_viewer_demo_scenario_tests --parallel 1
+    # Build every configured target before CTest. Focused tests that are not
+    # named explicitly by a convenience target must never run stale binaries.
+    # Sequential MSVC builds avoid the Debug PDB collisions seen with SDL.
+    & cmake --build $ViewerBuild --config $Configuration --parallel 1
     if ($LASTEXITCODE -ne 0) { throw "Viewer build failed." }
-    & cmake --build $ViewerBuild --config $Configuration --target cocsim_super_giant_tests cocsim_super_archer_tests cocsim_rocket_balloon_tests cocsim_inferno_dragon_tests cocsim_super_wizard_tests cocsim_super_minion_tests cocsim_super_bowler_tests cocsim_super_dragon_tests --parallel 1
-    if ($LASTEXITCODE -ne 0) { throw "Super Troop focused test build failed." }
 }
 
 switch ($Action) {

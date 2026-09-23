@@ -25,6 +25,11 @@ using detail::string_field;
 
 EntityCategory category_from_catalogue(const std::string& category) {
   if (category == "troop") return EntityCategory::Troop;
+  if (category == "spawned-unit") return EntityCategory::Troop;
+  // A base Hero attack uses the same mobile attacker route as a troop. Hero
+  // abilities and defensive-altar systems remain separate and are not implied
+  // by this category conversion.
+  if (category == "hero") return EntityCategory::Troop;
   if (category == "defense") return EntityCategory::Defense;
   if (category == "resource") return EntityCategory::Resource;
   if (category == "wall") return EntityCategory::Wall;
@@ -35,6 +40,8 @@ EntityCategory category_from_catalogue(const std::string& category) {
 TargetFocus focus_from_catalogue(const std::string& focus) {
   if (focus == "defenses") return TargetFocus::Defenses;
   if (focus == "defenses_only") return TargetFocus::DefensesOnly;
+  if (focus == "air_defenses") return TargetFocus::AirDefenses;
+  if (focus == "heroes") return TargetFocus::Heroes;
   if (focus == "resources") return TargetFocus::Resources;
   if (focus == "walls") return TargetFocus::Walls;
   if (focus == "friendly_troops") return TargetFocus::FriendlyTroops;
@@ -58,6 +65,34 @@ GameData GameData::v0() { // Runtime data are the pinned, normalized catalogueâ€
   GameData d;
   for(const auto& content:objects_in(*contents)) {
     const auto id=string_field(content,"id");
+    const auto family=string_field(content,"category").value_or("");
+    if(id && (family=="pet" || family=="hero-equipment")) {
+      const auto levels=array_body(content,"levels");
+      if(!levels) throw std::runtime_error("hero support catalogue entry has no levels: "+*id);
+      int max_level=0;
+      for(const auto& row:objects_in(*levels)) {
+        const auto value=number_field(row,"level");
+        if(!value || *value<1 || *value!=std::floor(*value))
+          throw std::runtime_error("invalid hero support level: "+*id);
+        const int level=static_cast<int>(*value);
+        if(d.find_hero_support_level(*id,level))
+          throw std::runtime_error("duplicate hero support level: "+*id);
+        max_level=std::max(max_level,level);
+        d.hero_support_levels_.push_back({*id,level,row});
+      }
+      if(max_level<1) throw std::runtime_error("hero support catalogue entry has no positive level: "+*id);
+      const auto source_fields=object_after_key(content,"source_fields");
+      auto hero=source_fields?string_field(*source_fields,"hero").value_or(""):"";
+      if(hero.empty()) hero=string_field(content,"hero").value_or("");
+      std::replace(hero.begin(),hero.end(),'-','_');
+      auto ability_type=family=="pet" ? std::string("not_applicable") :
+          string_field(content,"equipment_activation_type").value_or("unverified");
+      if(family=="hero-equipment" && ability_type=="unverified" && source_fields)
+        ability_type=string_field(*source_fields,"abilityType").value_or("unverified");
+      d.hero_support_catalogue_.push_back({*id,family,hero,max_level,
+                                           string_field(content,"support").value_or(""),ability_type,content});
+      continue;
+    }
     const auto kind=id?parse_kind(*id):std::nullopt;
     if(!kind) continue;
     const auto levels=array_body(content,"levels");
@@ -74,7 +109,7 @@ GameData GameData::v0() { // Runtime data are the pinned, normalized catalogueâ€
       if(!bool_field(content,"targetable").value_or(true)) {
         const auto margin=number_field(content,"deployment_margin_tiles");
         if(!margin||*margin<0) throw std::runtime_error("invalid non-combat obstacle metadata");
-        d.non_combat_.push_back({*kind,footprint_w,footprint_h,static_cast<int>(*margin),string_field(content,"image").value_or("")});
+        d.non_combat_.push_back({*kind,footprint_w,footprint_h,static_cast<int>(*margin),static_cast<int>(number_field(content,"max_placements").value_or(0)),string_field(content,"image").value_or("")});
       }
       continue;
     }
@@ -143,6 +178,7 @@ GameData GameData::v0() { // Runtime data are the pinned, normalized catalogueâ€
     const auto first_burst_delay=static_cast<Milliseconds>(std::llround(number_field(content,"first_burst_delay_seconds").value_or(0.0)*1000.0/kTickMs))*kTickMs;
     const bool death_damage_ground_only=bool_field(content,"death_damage_ground_only").value_or(false);
     const bool deployable=string_field(content,"support").value_or("")!="spawned_only";
+    const bool seeking_air_mine_immune=bool_field(content,"seeking_air_mine_immune").value_or(false);
     const auto wall_damage_multiplier=number_field(content,"wall_damage_multiplier").value_or(1.0);
     const bool self_destruct_on_attack=bool_field(content,"self_destruct_on_attack").value_or(false);
     // These immutable catalogue fields describe Baby Dragon's Tantrum.  They
@@ -151,6 +187,7 @@ GameData GameData::v0() { // Runtime data are the pinned, normalized catalogueâ€
     const auto isolation_radius=number_field(content,"isolation_radius_tiles").value_or(0.0);
     const auto rage_damage_multiplier=number_field(content,"rage_damage_multiplier").value_or(1.0);
     const auto rage_attack_speed_multiplier=number_field(content,"rage_attack_speed_multiplier").value_or(1.0);
+    const auto rage_trap_damage_multiplier=number_field(content,"rage_trap_damage_multiplier").value_or(1.0);
     // Super Barbarian's deployment Rage is a rule duration, not a presentation
     // effect.  Preserve the public source speed unit in the catalogue and
     // derive the same immutable multiplier used by every Core adapter.
@@ -162,8 +199,17 @@ GameData GameData::v0() { // Runtime data are the pinned, normalized catalogueâ€
     const bool troop=category==EntityCategory::Troop;
     const bool trap=category==EntityCategory::Trap;
     const double radius=troop?(*kind==Kind::Giant?.65:(*kind==Kind::Archer?.35:.45)):std::max(footprint_w,footprint_h)/2.0;
+    const auto core_minimum_level=static_cast<int>(number_field(content,"core_minimum_level").value_or(0.0));
     for(const auto& level:objects_in(*levels)) {
+      // A dated observation can be normalized while explicitly withheld from
+      // the supported Core roster. This preserves evidence without silently
+      // changing an immutable compatibility contract for battle adapters.
+      if(!bool_field(level,"core_materializable").value_or(true)) continue;
       const auto n=number_field(level,"level"),hp=number_field(level,"hitpoints");
+      if(n&&*n<core_minimum_level) continue;
+      // Levels 1-4 are temporary-event-only Ice Hounds. They remain visible
+      // in immutable data but cannot be materialized by the permanent roster.
+      if(*kind==Kind::IceHound && n && *n<5) continue;
       // Traps have no hit-point statistic in the source: they are armed state,
       // not attackable buildings.  A private positive sentinel only lets the
       // generic entity container retain the armed state; it is never exposed
@@ -222,6 +268,11 @@ GameData GameData::v0() { // Runtime data are the pinned, normalized catalogueâ€
       const bool level_ranged=level_range>1.0&&!heals;
       const double level_attack_seconds=weapon?number_field(*weapon,"attackSpeed").value_or(attack_seconds):attack_seconds;
       const auto level_cooldown=static_cast<Milliseconds>(std::llround(level_attack_seconds*1000.0/kTickMs))*kTickMs;
+      // A self-destructing spawned unit never needs a second attack cadence,
+      // but it must still receive one deterministic update after arrival.
+      // A missing public cadence therefore becomes the minimum logical tick,
+      // not a fabricated measured attack speed.
+      const auto effective_cooldown=level_cooldown==0&&self_destruct_on_attack?kTickMs:level_cooldown;
       const auto level_target_type=weapon?target_type_from_catalogue(string_field(*weapon,"targetType").value_or(string_field(content,"target_type").value_or("ground"))):target_type;
       const auto level_death_damage=weapon?number_field(*weapon,"deathDamage").value_or(number_field(level,"death_damage").value_or(0.0)):number_field(level,"death_damage").value_or(0.0);
       const auto level_death_splash_radius=weapon?number_field(*weapon,"deathDamageRadius").value_or(death_splash_radius):death_splash_radius;
@@ -255,9 +306,20 @@ GameData GameData::v0() { // Runtime data are the pinned, normalized catalogueâ€
       const auto bounce_impact_count=static_cast<int>(number_field(content,"bounce_impact_count").value_or(0.0));
       const auto bounce_step=number_field(content,"bounce_step_tiles").value_or(0.0);
       const auto bounce_splash_radius=number_field(content,"bounce_splash_radius_tiles").value_or(0.0);
+      const auto death_freeze_radius=number_field(content,"death_freeze_radius_tiles").value_or(0.0);
+      const auto death_freeze_duration=static_cast<Milliseconds>(std::llround(number_field(level,"death_freeze_duration_seconds").value_or(0.0)*1000.0/kTickMs))*kTickMs;
+      const auto life_aura_range=*kind==Kind::ApprenticeWarden?number_field(content,"aura_range_tiles").value_or(0.0):0.0;
+      const auto life_aura_hp_increase_percent=*kind==Kind::ApprenticeWarden?number_field(level,"life_aura_hp_increase_percent").value_or(0.0):0.0;
       if(*kind==Kind::Scattershot&&(scattershot_direct_min_damage<=0.0||scattershot_splash_max_damage<=0.0||scattershot_splash_min_damage<=0.0||scattershot_cone_angle<=0.0||scattershot_cone_range<=0.0||scattershot_inner_range<=0.0||!scattershot_same_altitude_only)) throw std::runtime_error("incomplete Scattershot cone contract");
       if(*kind==Kind::ElectroTitan&&(aura_damage<=0.0||aura_range<=0.0||aura_cooldown<=0||!aura_excludes_walls||!aura_ignores_freeze||!aura_ignores_rage)) throw std::runtime_error("incomplete Electro Titan aura contract");
-      d.stats_.push_back({*kind,static_cast<int>(*n),hp.value_or(1.0),level_damage,level_dps,number_field(level,"healing_per_second").value_or(0.0),level_death_damage,level_cooldown,level_range,speed,speed/kCatalogueMovementSpeedUnitsPerTilePerSecond,radius,level_ranged,splash,flying,heals,focus,level_target_type,category,footprint_w,footprint_h,housing_space,activation_housing_space,min_range,level_splash,shots_per_burst,time_between_bursts,alternate_range,alternate_target_type,level_death_splash_radius,death_damage_delay,trigger_range,reveal_destruction_percent,spring_capacity,std::move(attributes),multi_target_range,multi_damage,level_multi_target_count,burst_damage,burst_cooldown,burst_shots,burst_pause,burst_range,resource_damage_multiplier,max_hp_damage_percent,death_damage_ground_only,integer("parent_spawn_count"),integer("spawned_units"),integer("spawned_unit_level"),deployable,level_wall_damage_multiplier,self_destruct_on_attack,effect_duration,isolation_radius,rage_damage_multiplier,rage_attack_speed_multiplier,burrows,defense_invisibility_duration,wall_damage_per_hit,wall_attack_cooldown,smashes_walls,inferno_initial_damage,inferno_second_damage,inferno_max_damage,inferno_second_stage_at,inferno_max_stage_at,projectile_speed_tiles_per_second,projectile_speed_sourced,scattershot_direct_min_damage,scattershot_splash_max_damage,scattershot_splash_min_damage,scattershot_cone_angle,scattershot_cone_range,scattershot_inner_range,scattershot_same_altitude_only,aura_damage,aura_range,aura_cooldown,aura_excludes_walls,aura_ignores_freeze,aura_ignores_rage,deployment_rage_duration,deployment_rage_damage_multiplier,deployment_rage_movement_speed_multiplier,piercing_projectile_range,chain_damage_multiplier,chain_target_count,chain_radius,opening_long_shot_count,opening_long_shot_range,opening_long_shot_damage_multiplier,bounce_impact_count,bounce_step,bounce_splash_radius});
+      const auto damage_spawn_threshold=number_field(content,"damage_spawn_threshold").value_or(0.0);
+      const auto defense_damage_multiplier=number_field(content,"defense_damage_multiplier").value_or(1.0);
+    const bool jumps_walls=bool_field(content,"jumps_walls").value_or(false);
+    const bool defensive_ranged_or_air_only=bool_field(content,"defensive_ranged_or_air_only").value_or(false);
+    const bool defensive_air_targeting_only=bool_field(content,"defensive_air_targeting_only").value_or(false);
+      const auto druid_transform_after=static_cast<Milliseconds>(std::llround(number_field(content,"druid_transform_after_seconds").value_or(0.0)*1000.0/kTickMs))*kTickMs;
+      const bool druid_transforms_on_death=bool_field(content,"druid_transforms_on_death").value_or(false);
+      d.stats_.push_back({*kind,static_cast<int>(*n),hp.value_or(1.0),level_damage,level_dps,number_field(level,"healing_per_second").value_or(0.0),level_death_damage,effective_cooldown,level_range,speed,speed/kCatalogueMovementSpeedUnitsPerTilePerSecond,radius,level_ranged,splash,flying,heals,focus,level_target_type,category,footprint_w,footprint_h,housing_space,activation_housing_space,min_range,level_splash,shots_per_burst,time_between_bursts,alternate_range,alternate_target_type,level_death_splash_radius,death_damage_delay,trigger_range,reveal_destruction_percent,spring_capacity,std::move(attributes),multi_target_range,multi_damage,level_multi_target_count,burst_damage,burst_cooldown,burst_shots,burst_pause,burst_range,resource_damage_multiplier,max_hp_damage_percent,death_damage_ground_only,integer("parent_spawn_count"),integer("spawned_units"),integer("spawned_unit_level"),deployable,seeking_air_mine_immune,level_wall_damage_multiplier,self_destruct_on_attack,effect_duration,isolation_radius,rage_damage_multiplier,rage_attack_speed_multiplier,rage_trap_damage_multiplier,burrows,defense_invisibility_duration,wall_damage_per_hit,wall_attack_cooldown,smashes_walls,inferno_initial_damage,inferno_second_damage,inferno_max_damage,inferno_second_stage_at,inferno_max_stage_at,projectile_speed_tiles_per_second,projectile_speed_sourced,scattershot_direct_min_damage,scattershot_splash_max_damage,scattershot_splash_min_damage,scattershot_cone_angle,scattershot_cone_range,scattershot_inner_range,scattershot_same_altitude_only,aura_damage,aura_range,aura_cooldown,aura_excludes_walls,aura_ignores_freeze,aura_ignores_rage,deployment_rage_duration,deployment_rage_damage_multiplier,deployment_rage_movement_speed_multiplier,piercing_projectile_range,chain_damage_multiplier,chain_target_count,chain_radius,opening_long_shot_count,opening_long_shot_range,opening_long_shot_damage_multiplier,bounce_impact_count,bounce_step,bounce_splash_radius,death_freeze_radius,death_freeze_duration,life_aura_range,life_aura_hp_increase_percent,damage_spawn_threshold,defense_damage_multiplier,jumps_walls,defensive_ranged_or_air_only,defensive_air_targeting_only,druid_transform_after,druid_transforms_on_death});
     }
   }
   if(const auto spell_entries=array_body(document,"spells")) for(const auto& spell:objects_in(*spell_entries)) {
@@ -274,6 +336,8 @@ GameData GameData::v0() { // Runtime data are the pinned, normalized catalogueâ€
 const Stats* GameData::find(Kind kind,int level,const std::string& variant) const { const bool supercharged=variant=="supercharged"; for(const auto& s:stats_) if(s.kind==kind&&s.level==level&&s.attributes.supercharged==supercharged) return &s; return nullptr; }
 const NonCombatStats* GameData::find_non_combat(Kind kind) const { for(const auto& s:non_combat_) if(s.kind==kind) return &s; return nullptr; }
 const SpellStats* GameData::find_spell(SpellKind kind,int level) const { for(const auto& s:spells_) if(s.kind==kind&&s.level==level) return &s; return nullptr; }
+const HeroSupportCatalogEntry* GameData::find_hero_support(const std::string& id) const { for(const auto& entry:hero_support_catalogue_) if(entry.id==id) return &entry; return nullptr; }
+const HeroSupportLevelRecord* GameData::find_hero_support_level(const std::string& id,int level) const { for(const auto& row:hero_support_levels_) if(row.id==id&&row.level==level) return &row; return nullptr; }
 int GameData::max_level(Kind kind) const { int result=0; for(const auto& s:stats_) if(s.kind==kind) result=std::max(result,s.level); return result; }
 
 } // namespace cocsim

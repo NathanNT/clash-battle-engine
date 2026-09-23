@@ -1,0 +1,17 @@
+{
+  "format_version": 3,
+  "note": "Headless fixture for the sourced Super Hog Rider death split.",
+  "width": 28,
+  "height": 20,
+  "seed": 2718281828,
+  "duration_ms": 30000,
+  "defenders": [
+    {"kind": "wall", "level": 19, "x": 12.5, "y": 10.5},
+    {"kind": "cannon", "level": 21, "x": 17.5, "y": 8.5},
+    {"kind": "cannon", "level": 21, "x": 17.5, "y": 12.5}
+  ],
+  "army": [
+    {"kind": "super_hog_rider", "level": 10, "count": 1}
+  ],
+  "spells": []
+}

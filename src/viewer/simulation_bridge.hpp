@@ -11,6 +11,7 @@
 #include <cstdint>
 #include <memory>
 #include <mutex>
+#include <stdexcept>
 #include <thread>
 #include <utility>
 #include <vector>
@@ -29,7 +30,11 @@ struct PresentationSnapshot {
   std::uint64_t state_hash{};
   BattleResult result{};
   int deployed_housing{};
+  int monolith_arrow_housing{};
+  int monolith_arrow_tier{};
+  int monolith_arrow_damage_percent{};
   std::vector<ArmySlot> army;
+  std::vector<HeroLoadout> hero_loadouts;
   std::vector<SpellSlot> spells;
   // Exact Core-accepted player commands, including their rule-effective time
   // and stable sequence. This is copied by value with the frame so the GUI
@@ -63,9 +68,10 @@ struct QueuedCommand {
 // and wall-clock decisions.
 class SimulationBridge {
  public:
-  SimulationBridge(const GameData& data, Scenario scenario)
-      : data_(data), scenario_(std::move(scenario)) {
+  SimulationBridge(const GameData& data, Scenario scenario, std::vector<Command> replay_commands = {})
+      : data_(data), scenario_(std::move(scenario)), replay_commands_(std::move(replay_commands)) {
     BattleState initial(data_, scenario_);
+    submit_replay_commands(initial, replay_commands_);
     publish(initial);
     simulation_thread_ = std::thread([this] { run(); });
   }
@@ -138,7 +144,11 @@ class SimulationBridge {
     frame->state_hash = battle.state_hash();
     frame->result = battle.result();
     frame->deployed_housing = battle.deployed_housing();
+    frame->monolith_arrow_housing = battle.monolith_arrow_deployed_housing();
+    frame->monolith_arrow_tier = battle.monolith_arrow_housing_tier();
+    frame->monolith_arrow_damage_percent = battle.monolith_arrow_damage_percent();
     frame->army = battle.scenario().army;
+    frame->hero_loadouts = battle.scenario().hero_loadouts;
     frame->spells = battle.scenario().spells;
     frame->commands = battle.commands();
     frame->entities = battle.observe();
@@ -184,8 +194,17 @@ class SimulationBridge {
     }
   }
 
+  static void submit_replay_commands(BattleState& battle, const std::vector<Command>& commands) {
+    for (const auto& command : commands) {
+      std::string error;
+      if (!battle.submit(command, &error))
+        throw std::invalid_argument("replay command rejected: " + error);
+    }
+  }
+
   void run() {
     BattleState battle(data_, scenario_);
+    submit_replay_commands(battle, replay_commands_);
     auto previous = std::chrono::steady_clock::now();
     auto last_publish = previous;
     std::uint64_t presentation_debt_ms{};
@@ -195,6 +214,7 @@ class SimulationBridge {
       if (reset_requested_.exchange(false, std::memory_order_acq_rel)) {
         discarded_through = reset_through_sequence_.load(std::memory_order_acquire);
         battle = BattleState(data_, scenario_);
+        submit_replay_commands(battle, replay_commands_);
         presentation_debt_ms = 0;
         presentation_remainder = {};
         previous = std::chrono::steady_clock::now();
@@ -259,6 +279,7 @@ class SimulationBridge {
 
   const GameData& data_;
   Scenario scenario_;
+  std::vector<Command> replay_commands_;
   std::atomic<bool> running_{true};
   std::atomic<bool> paused_{false};
   std::atomic<bool> reset_requested_{false};
@@ -276,5 +297,23 @@ class SimulationBridge {
   std::atomic<std::size_t> published_slot_{0};
   std::uint64_t generation_{}; // simulation thread only after construction
 };
+
+// Build the replacement first, so an invalid selection or replay cannot stop
+// the current battle. Both instances call the same Core rules independently.
+inline bool replace_simulation_bridge(std::unique_ptr<SimulationBridge>& active,
+                                      const GameData& data, const Scenario& scenario,
+                                      const std::vector<Command>& replay_commands,
+                                      std::string& error) {
+  try {
+    auto replacement = std::make_unique<SimulationBridge>(data, scenario, replay_commands);
+    active->stop();
+    active = std::move(replacement);
+    error.clear();
+    return true;
+  } catch (const std::exception& exception) {
+    error = exception.what();
+    return false;
+  }
+}
 
 } // namespace cocsim::viewer

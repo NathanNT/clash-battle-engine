@@ -48,7 +48,9 @@ def main() -> None:
                 # use the core/Viewer entity path, but must be reported as a
                 # visual fidelity gap instead of failing the whole asset pack.
                 detail = f"{content['id']} {variant} L{level['level']}: no source image or prior visual tier"
-                if content.get("support") == "spawned_only" or content["id"] in {"baby_dragon", "miner"}:
+                if (content.get("support") == "spawned_only"
+                        or content["id"] in {"baby_dragon", "miner", "barbarian_king",
+                                             "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke", "inferno_tower"}):
                     source_visual_absent.append(detail)
                 else:
                     missing.append(detail)
@@ -57,12 +59,17 @@ def main() -> None:
                 fallback_count += 1
             if not (ASSETS / image).is_file():
                 detail = f"{content['id']} {variant} L{level['level']}: missing {image}"
-                if content["id"] in {"baby_dragon", "miner"}: source_visual_absent.append(detail)
+                if content["id"] in {"baby_dragon", "miner", "barbarian_king",
+                                     "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke", "inferno_tower"}:
+                    source_visual_absent.append(detail)
                 else: missing.append(detail)
         if content.get("image"):
             image = content["image"]
             if not (ASSETS / image).is_file():
                 missing.append(f"{content['id']}: missing metadata image {image}")
+        for variant, image in content.get("source_images", {}).items():
+            if not (ASSETS / image).is_file():
+                missing.append(f"{content['id']} {variant}: missing sourced variant image {image}")
     viewer = "\n".join(
         path.read_text(encoding="utf-8")
         for path in sorted(VIEWER_DIR.glob("*"))
@@ -79,6 +86,7 @@ def main() -> None:
     assert 'if (kind == Kind::RootRider) id = "root-rider";' in viewer
     assert "kind == Kind::SneakyGoblin || kind == Kind::RootRider" in viewer
     assert "scenario.non_combat_obstacles" in viewer
+    assert "obstacle.variant" in viewer
     assert "data.find_non_combat(obstacle.kind)" in viewer
     assert "data.find_non_combat(image_kind)" in viewer
     # Sprite canvases contain authored placement margins. Cropping their alpha

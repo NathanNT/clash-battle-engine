@@ -15,7 +15,7 @@
 
 namespace cocsim::viewer {
 
-std::string default_asset_relative_path(Kind kind, int level) {
+std::string default_asset_relative_path(Kind kind, int level, const std::string& variant = "normal") {
   std::string id = to_string(kind);
   if (kind == Kind::ArcherTower) id = "archer-tower";
   if (kind == Kind::WallBreaker) id = "wall-breaker";
@@ -51,7 +51,15 @@ std::string default_asset_relative_path(Kind kind, int level) {
   if (kind == Kind::Blacksmith) return "images/home/army-buildings/blacksmith/normal/level-" + std::to_string(level) + ".png";
   if (kind == Kind::HeroHall) return "images/home/army-buildings/hero-hall/normal/level-" + std::to_string(level) + ".png";
   if (kind == Kind::PetHouse) return "images/home/army-buildings/pet-house/normal/level-" + std::to_string(level) + ".png";
-  if (kind == Kind::HeroBanner) return "images/home/army-buildings/hero-banner/empty.png";
+  if (kind == Kind::HeroBanner) {
+    if (variant == "barbarian_king") return "images/home/army-buildings/hero-banner/barbarian-king.png";
+    if (variant == "archer_queen") return "images/home/army-buildings/hero-banner/archer-queen.png";
+    if (variant == "grand_warden") return "images/home/army-buildings/hero-banner/grand-warden.png";
+    if (variant == "royal_champion") return "images/home/army-buildings/hero-banner/royal-champion.png";
+    if (variant == "minion_prince") return "images/home/army-buildings/hero-banner/minion-prince.png";
+    if (variant == "dragon_duke") return "images/home/army-buildings/hero-banner/dragon-duke.png";
+    return "images/home/army-buildings/hero-banner/empty.png";
+  }
   if (kind == Kind::Wall) return "images/home/defenses/wall/normal/level-" + std::to_string(level) + ".png";
   // Traps live in a different asset family from defenses.  Keeping the list
   // here prevents a valid core trap from silently falling back to the
@@ -70,14 +78,15 @@ std::string asset_relative_path(const GameData& data, Kind kind, int level, cons
   // The catalogue owns the artwork association. Levels can reuse a preceding
   // visual tier, so deriving a `level-N.png` filename is not reliable.
   const Kind image_kind = kind == Kind::Golemite ? Kind::Golem : kind;
-  if (const auto* metadata = data.find_non_combat(image_kind); metadata && !metadata->image.empty()) return metadata->image;
+  if (const auto* metadata = data.find_non_combat(image_kind); metadata && !metadata->image.empty()
+      && !(image_kind == Kind::HeroBanner && variant != "normal")) return metadata->image;
   for (int candidate_level = level; candidate_level >= 1; --candidate_level) {
     if (const auto* stats = data.find(image_kind, candidate_level, variant);
         stats && !stats->attributes.image.empty()) return stats->attributes.image;
   }
   // A supplemental numerical level can postdate the pinned visual snapshot.
   // This fallback remains explicit and uses the most precise path available.
-  return default_asset_relative_path(image_kind, level);
+  return default_asset_relative_path(image_kind, level, variant);
 }
 
 std::string initial_asset_root(const GameData& data, int argc, char** argv) {
@@ -143,7 +152,7 @@ struct Images {
     };
     for (const auto& slot : scenario.army) enqueue(slot.kind, slot.level, "normal");
     for (const auto& placement : scenario.defenders) enqueue(placement.kind, placement.level, placement.variant);
-    for (const auto& obstacle : scenario.non_combat_obstacles) enqueue(obstacle.kind, 1, "normal");
+    for (const auto& obstacle : scenario.non_combat_obstacles) enqueue(obstacle.kind, 1, obstacle.variant);
   }
   void pump_preload(std::size_t count = 1) {
     while (count-- > 0 && pending_cursor < pending.size()) {

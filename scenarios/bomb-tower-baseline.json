@@ -1,0 +1,1 @@
+{"width":24,"height":20,"seed":2718281828,"duration_ms":3000,"defenders":[{"kind":"bomb_tower","level":1,"x":10.5,"y":10.5}],"army":[{"kind":"golem","level":1,"count":1},{"kind":"dragon","level":1,"count":1}],"spells":[{"kind":"lightning","level":1,"count":5}]}

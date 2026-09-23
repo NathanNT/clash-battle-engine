@@ -34,7 +34,7 @@ int main() {
   COCSIM_REQUIRE(std::abs(super->deployment_rage_movement_speed_multiplier - 1.8) < 1e-9);
 
   // The same target is deliberately durable enough to cross the deployment
-  // boundary. The first 10-ms movement step is 2.5 * 1.8 * 10 / 1000 tiles;
+  // boundary. The first 16-ms movement step is 2.5 * 1.8 * 16 / 1000 tiles;
   // no Viewer interpolation or wall clock can alter that logical result.
   Scenario scenario;
   scenario.width = 24;
@@ -55,11 +55,11 @@ int main() {
   });
   COCSIM_REQUIRE(super_view != first_observation.end());
   COCSIM_REQUIRE(super_view->deployment_rage_active);
-  COCSIM_REQUIRE(std::abs(super_view->position.x - 1.545) < 1e-9);
+  COCSIM_REQUIRE(std::abs(super_view->position.x - 1.572) < 1e-9);
 
-  battle.advance_ticks(398); // T+4000 ms: the deployment window is pending.
+  battle.advance_ticks(248); // T+4000 ms: the deployment window is pending.
   const auto snapshot = battle.snapshot();
-  COCSIM_REQUIRE(snapshot.canonical.starts_with("COCSIM-SNAPSHOT-18\n"));
+  COCSIM_REQUIRE(snapshot.canonical.starts_with("COCSIM-SNAPSHOT-22\n"));
   BattleState restored(data, scenario);
   COCSIM_REQUIRE(restored.restore(snapshot));
   COCSIM_REQUIRE(restored.state_hash() == battle.state_hash());
@@ -72,15 +72,15 @@ int main() {
   COCSIM_REQUIRE(load_replay(replay_path, replay_scenario, replay_commands, error));
   BattleState replay(data, replay_scenario);
   submit_all(replay, replay_commands);
-  replay.advance_ticks(400);
+  replay.advance_ticks(250);
   COCSIM_REQUIRE(replay.state_hash() == battle.state_hash());
 
-  battle.advance_ticks(600);
-  restored.advance_ticks(600);
-  replay.advance_ticks(600);
+  battle.advance_ticks(375);
+  restored.advance_ticks(375);
+  replay.advance_ticks(375);
   COCSIM_REQUIRE(battle.state_hash() == restored.state_hash());
   COCSIM_REQUIRE(battle.state_hash() == replay.state_hash());
-  // The strict deadline means T+8010 and later uses base damage. This test
+  // The strict deadline means T+8016 and later uses base damage. This test
   // guards both the source-derived 70% boost and the serialised future state.
   COCSIM_REQUIRE(has_damage(battle, 244.8));
   COCSIM_REQUIRE(has_damage(battle, 144.0, 8010));

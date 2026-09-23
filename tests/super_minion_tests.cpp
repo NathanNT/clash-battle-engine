@@ -24,7 +24,7 @@ bool damaged(const BattleState& battle, EntityId target, double amount) {
 int main() {
   const auto data=GameData::v0();
   const auto* minion=data.find(Kind::SuperMinion,14);
-  COCSIM_REQUIRE(minion && minion->hp==2300 && minion->damage==400 && minion->cooldown==1000);
+  COCSIM_REQUIRE(minion && minion->hp==2300 && minion->damage==400 && minion->cooldown==1008);
   COCSIM_REQUIRE(minion->opening_long_shot_count==8 && minion->opening_long_shot_range==10.25);
   // Supercell confirms extra Long Shot damage but publishes no multiplier.
   // The active reference makes the immutable 1.0 lower-bound fallback explicit.
@@ -35,7 +35,7 @@ int main() {
   scenario.army={{Kind::SuperMinion,14,1}};
   const std::vector<Command> commands={{CommandType::Deploy,kTickMs,0,0,Kind::SuperMinion,14,{1.5,10.5}}};
   BattleState battle(data,scenario); submit_all(battle,commands);
-  battle.advance_ticks(2); // The first 10.25-tile launch is captured at T+10.
+  battle.advance_ticks(2); // The first 10.25-tile launch is captured at T+16.
   COCSIM_REQUIRE(damaged(battle,1,400)==false);
   const auto first_projectiles=battle.observe_projectiles();
   COCSIM_REQUIRE(first_projectiles.size()==1 && first_projectiles.front().owner==10);
@@ -47,7 +47,7 @@ int main() {
   // switches from sourced Long Shot reach to normal movement deterministically.
   battle.advance_ticks(699);
   const auto snapshot=battle.snapshot();
-  COCSIM_REQUIRE(snapshot.canonical.starts_with("COCSIM-SNAPSHOT-18\n"));
+  COCSIM_REQUIRE(snapshot.canonical.starts_with("COCSIM-SNAPSHOT-22\n"));
   BattleState restored(data,scenario); COCSIM_REQUIRE(restored.restore(snapshot));
   COCSIM_REQUIRE(restored.state_hash()==battle.state_hash());
   const std::string replay_path="replay-super-minion-test.json"; std::string error;

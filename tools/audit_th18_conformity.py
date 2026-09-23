@@ -28,8 +28,15 @@ ENV = ROOT / "python" / "cocsim_rl" / "env.py"
 BINDINGS = ROOT / "bindings" / "module.cpp"
 CORE_TESTS = ROOT / "tests" / "core_tests.cpp"
 PERMANENT_BUILDING_TESTS = ROOT / "tests" / "permanent_building_tests.cpp"
+PERMANENT_VARIANT_TESTS = ROOT / "tests" / "permanent_variant_tests.cpp"
+BOMB_TOWER_TESTS = ROOT / "tests" / "bomb_tower_tests.cpp"
+X_BOW_TESTS = ROOT / "tests" / "x_bow_tests.cpp"
+INFERNO_TOWER_TESTS = ROOT / "tests" / "inferno_tower_tests.cpp"
 VIEWER_SELECTION_TESTS = ROOT / "tests" / "viewer_selection_tests.cpp"
 PERMANENT_BUILDING_HEADLESS_FIXTURE = ROOT / "scenarios" / "permanent-passive-buildings.json"
+BOMB_TOWER_HEADLESS_FIXTURE = ROOT / "scenarios" / "bomb-tower-baseline.json"
+X_BOW_HEADLESS_FIXTURE = ROOT / "scenarios" / "x-bow-baseline.json"
+INFERNO_TOWER_HEADLESS_FIXTURE = ROOT / "scenarios" / "inferno-tower-baseline.json"
 RL_RUNTIME_TEST = ROOT / "tools" / "validate_rl_runtime.py"
 
 # `audit_structure` below only proves that an item is wired through the
@@ -39,39 +46,39 @@ RL_RUNTIME_TEST = ROOT / "tools" / "validate_rl_runtime.py"
 # It is still not a claim that the whole in-game behaviour is fidelity-checked.
 CORE_BEHAVIOUR_TESTED_IDS = {
     "air_bomb", "air_defense", "archer", "archer_tower", "balloon", "barbarian", "bomb", "bomb_tower",
-    "cannon", "dragon", "dragon_rider", "eagle_artillery", "giant", "giant_bomb",
+    "apprentice_warden", "bowler", "cannon", "dragon", "dragon_rider", "electro_dragon", "eagle_artillery", "giant", "giant_bomb", "ice_golem",
     "giga_bomb", "goblin", "golem", "golemite", "gold_mine", "gold_storage", "healer", "hidden_tesla", "hog_rider", "minion",
     "inferno_tower", "mortar", "multi_archer_tower", "multi_gear_tower", "scattershot", "seeking_air_mine", "skeleton_trap", "sneaky_goblin",
     "pekka", "root_rider", "spring_trap", "thrower", "electro_titan", "tornado_trap", "town_hall", "trap_skeleton_air", "trap_skeleton_ground", "valkyrie", "wall", "wall_breaker", "wizard", "wizard_tower",
     "x_bow",
     "army_camp", "barracks", "blacksmith", "clan_castle", "dark_barracks", "dark_elixir_drill", "dark_elixir_storage", "dark_spell_factory", "elixir_collector", "elixir_storage", "hero_hall", "laboratory", "pet_house", "spell_factory", "workshop",
-    "hero_banner", "bobs_hut", "helper_hut", "monolith", "super_wall_breaker", "super_barbarian", "super_giant", "super_archer", "rocket_balloon", "super_minion", "super_bowler", "super_dragon",
+    "hero_banner", "bobs_hut", "helper_hut", "crafting_station", "monolith", "super_wall_breaker", "super_barbarian", "super_giant", "super_archer", "rocket_balloon", "super_minion", "super_bowler", "super_dragon", "super_hog_rider", "super_hog", "super_rider", "super_miner", "super_valkyrie", "super_yeti", "super_witch", "ice_hound", "ice_pup", "yeti", "yetimite", "witch", "lava_hound", "lava_pup", "headhunter", "druid", "druid_bear", "super_wizard", "baby_dragon", "inferno_dragon", "miner",
 }
 
 # Snapshot/replay evidence is intentionally narrower than the behavioural set.
 # A shared codec route is not proof that an individual placement survives a
 # save/restore boundary: each entry here is named by the focused test and that
 # test restores a snapshot and reloads a replay before comparing logical state.
-ITEM_SNAPSHOT_REPLAY_TESTED_IDS = {"air_defense", "bobs_hut", "helper_hut", "monolith", "super_wall_breaker", "super_barbarian", "super_giant", "super_archer", "rocket_balloon", "super_minion", "super_bowler", "super_dragon"}
+ITEM_SNAPSHOT_REPLAY_TESTED_IDS = {"air_defense", "apprentice_warden", "archer", "barbarian", "bobs_hut", "bomb_tower", "bowler", "crafting_station", "dark_elixir_drill", "electro_dragon", "electro_titan", "elixir_collector", "giant", "gold_mine", "golem", "golemite", "healer", "helper_hut", "ice_golem", "inferno_tower", "monolith", "multi_archer_tower", "multi_gear_tower", "ricochet_cannon", "scattershot", "super_wizard_tower", "super_wall_breaker", "super_barbarian", "super_giant", "super_archer", "rocket_balloon", "super_minion", "super_bowler", "super_dragon", "super_hog_rider", "super_hog", "super_rider", "super_miner", "super_valkyrie", "super_yeti", "super_witch", "ice_hound", "ice_pup", "yeti", "yetimite", "wall_breaker", "witch", "wizard", "lava_hound", "lava_pup", "headhunter", "druid", "druid_bear", "thrower", "root_rider", "sneaky_goblin", "x_bow"}
 
 # `validate_rl_runtime.py` materializes every Core-visible catalogue row through
 # the pybind scenario adapter.  Keep this opt-in too: it is an executed adapter
 # proof for these named permanent entities, not a claim that every registered
 # Kind has been exercised in an environment where the optional Python build is
 # absent.
-ITEM_RL_RUNTIME_TESTED_IDS = {"air_defense", "bobs_hut", "helper_hut", "monolith", "super_wall_breaker", "super_barbarian", "super_giant", "super_archer", "rocket_balloon", "super_minion", "super_bowler", "super_dragon"}
+ITEM_RL_RUNTIME_TESTED_IDS = {"air_defense", "apprentice_warden", "archer", "barbarian", "bobs_hut", "bomb_tower", "bowler", "crafting_station", "druid", "electro_dragon", "electro_titan", "giant", "golem", "healer", "helper_hut", "ice_golem", "inferno_tower", "monolith", "super_wall_breaker", "super_barbarian", "super_giant", "super_archer", "super_minion", "super_bowler", "super_dragon", "super_hog_rider", "super_hog", "super_rider", "super_miner", "super_valkyrie", "super_yeti", "super_witch", "ice_hound", "ice_pup", "lava_hound", "lava_pup", "yeti", "wall_breaker", "witch", "wizard", "headhunter", "thrower", "root_rider", "sneaky_goblin", "x_bow"}
 
 # The viewer selection regression checks the exact Core footprint, half-open
 # cell edges, attacker exclusion and entity-id tie breaking for these entries.
 # Its result is a GUI geometry proof only; it says nothing about combat
 # fidelity or undocumented behaviour.
-ITEM_VIEWER_SELECTION_TESTED_IDS = {"air_defense", "bobs_hut", "helper_hut"}
+ITEM_VIEWER_SELECTION_TESTED_IDS = {"air_defense", "bobs_hut", "helper_hut", "crafting_station"}
 
 # The public CLI fixture deploys five Barbarians through its argument parser
 # and must resolve both passive buildings.  This is deliberately separate from
 # a direct BattleState test: it proves the headless scenario codec and command
 # adapter are current too.
-ITEM_HEADLESS_CLI_TESTED_IDS = {"air_defense", "bobs_hut", "helper_hut", "monolith", "super_wall_breaker", "super_barbarian", "super_giant", "super_archer", "rocket_balloon", "super_minion", "super_bowler", "super_dragon"}
+ITEM_HEADLESS_CLI_TESTED_IDS = {"air_defense", "apprentice_warden", "archer", "barbarian", "bobs_hut", "bomb_tower", "bowler", "crafting_station", "druid", "electro_dragon", "electro_titan", "giant", "golem", "healer", "helper_hut", "ice_golem", "inferno_tower", "monolith", "super_wall_breaker", "super_barbarian", "super_giant", "super_archer", "rocket_balloon", "super_minion", "super_bowler", "super_dragon", "super_hog_rider", "super_miner", "super_valkyrie", "super_yeti", "super_witch", "wizard", "ice_hound", "yeti", "wall_breaker", "witch", "lava_hound", "headhunter", "thrower", "root_rider", "sneaky_goblin", "x_bow"}
 
 
 def cpp_kind(content_id: str) -> str:
@@ -157,6 +164,33 @@ def main() -> None:
     super_minion_tests = (ROOT / "tests" / "super_minion_tests.cpp").read_text(encoding="utf-8")
     super_bowler_tests = (ROOT / "tests" / "super_bowler_tests.cpp").read_text(encoding="utf-8")
     super_dragon_tests = (ROOT / "tests" / "super_dragon_tests.cpp").read_text(encoding="utf-8")
+    electro_dragon_tests = (ROOT / "tests" / "electro_dragon_tests.cpp").read_text(encoding="utf-8")
+    bowler_tests = (ROOT / "tests" / "bowler_tests.cpp").read_text(encoding="utf-8")
+    ice_golem_tests = (ROOT / "tests" / "ice_golem_tests.cpp").read_text(encoding="utf-8")
+    apprentice_warden_tests = (ROOT / "tests" / "apprentice_warden_tests.cpp").read_text(encoding="utf-8")
+    super_hog_rider_tests = (ROOT / "tests" / "super_hog_rider_tests.cpp").read_text(encoding="utf-8")
+    super_miner_tests = (ROOT / "tests" / "super_miner_tests.cpp").read_text(encoding="utf-8")
+    super_valkyrie_tests = (ROOT / "tests" / "super_valkyrie_tests.cpp").read_text(encoding="utf-8")
+    super_yeti_tests = (ROOT / "tests" / "super_yeti_tests.cpp").read_text(encoding="utf-8")
+    super_witch_tests = (ROOT / "tests" / "super_witch_tests.cpp").read_text(encoding="utf-8")
+    ice_hound_tests = (ROOT / "tests" / "ice_hound_tests.cpp").read_text(encoding="utf-8")
+    yeti_tests = (ROOT / "tests" / "yeti_tests.cpp").read_text(encoding="utf-8")
+    witch_tests = (ROOT / "tests" / "witch_tests.cpp").read_text(encoding="utf-8")
+    lava_hound_tests = (ROOT / "tests" / "lava_hound_tests.cpp").read_text(encoding="utf-8")
+    headhunter_tests = (ROOT / "tests" / "headhunter_tests.cpp").read_text(encoding="utf-8")
+    druid_tests = (ROOT / "tests" / "druid_tests.cpp").read_text(encoding="utf-8")
+    golem_tests = (ROOT / "tests" / "golem_tests.cpp").read_text(encoding="utf-8")
+    wizard_tests = (ROOT / "tests" / "wizard_tests.cpp").read_text(encoding="utf-8")
+    giant_tests = (ROOT / "tests" / "giant_tests.cpp").read_text(encoding="utf-8")
+    archer_tests = (ROOT / "tests" / "archer_tests.cpp").read_text(encoding="utf-8")
+    barbarian_tests = (ROOT / "tests" / "barbarian_tests.cpp").read_text(encoding="utf-8")
+    healer_tests = (ROOT / "tests" / "healer_tests.cpp").read_text(encoding="utf-8")
+    wall_breaker_tests = (ROOT / "tests" / "wall_breaker_tests.cpp").read_text(encoding="utf-8")
+    electro_titan_tests = (ROOT / "tests" / "electro_titan_tests.cpp").read_text(encoding="utf-8")
+    thrower_tests = (ROOT / "tests" / "thrower_tests.cpp").read_text(encoding="utf-8")
+    root_rider_tests = (ROOT / "tests" / "root_rider_tests.cpp").read_text(encoding="utf-8")
+    sneaky_goblin_tests = (ROOT / "tests" / "sneaky_goblin_tests.cpp").read_text(encoding="utf-8")
+    inferno_tower_tests = INFERNO_TOWER_TESTS.read_text(encoding="utf-8")
     viewer_selection_tests = VIEWER_SELECTION_TESTS.read_text(encoding="utf-8")
     permanent_building_headless_fixture = json.loads(PERMANENT_BUILDING_HEADLESS_FIXTURE.read_text(encoding="utf-8"))
     rl_runtime_test = RL_RUNTIME_TEST.read_text(encoding="utf-8")
@@ -250,10 +284,22 @@ def main() -> None:
             + ", ".join(declared_without_test_reference)
         )
     snapshot_replay_sources = {
+        "gold_mine": PERMANENT_VARIANT_TESTS.read_text(encoding="utf-8"),
+        "elixir_collector": PERMANENT_VARIANT_TESTS.read_text(encoding="utf-8"),
         "air_defense": air_defense_tests,
+        "bomb_tower": BOMB_TOWER_TESTS.read_text(encoding="utf-8"),
+        "dark_elixir_drill": PERMANENT_VARIANT_TESTS.read_text(encoding="utf-8"),
+        "x_bow": X_BOW_TESTS.read_text(encoding="utf-8"),
+        "inferno_tower": inferno_tower_tests,
         "bobs_hut": permanent_building_tests,
         "helper_hut": permanent_building_tests,
+        "crafting_station": permanent_building_tests,
         "monolith": monolith_tests,
+        "multi_archer_tower": PERMANENT_VARIANT_TESTS.read_text(encoding="utf-8"),
+        "multi_gear_tower": PERMANENT_VARIANT_TESTS.read_text(encoding="utf-8"),
+        "ricochet_cannon": PERMANENT_VARIANT_TESTS.read_text(encoding="utf-8"),
+        "scattershot": PERMANENT_VARIANT_TESTS.read_text(encoding="utf-8"),
+        "super_wizard_tower": PERMANENT_VARIANT_TESTS.read_text(encoding="utf-8"),
         "super_wall_breaker": super_wall_breaker_tests,
         "super_barbarian": super_barbarian_tests,
         "super_giant": super_giant_tests,
@@ -262,6 +308,39 @@ def main() -> None:
         "super_minion": super_minion_tests,
         "super_bowler": super_bowler_tests,
         "super_dragon": super_dragon_tests,
+        "electro_dragon": electro_dragon_tests,
+        "bowler": bowler_tests,
+        "ice_golem": ice_golem_tests,
+        "apprentice_warden": apprentice_warden_tests,
+        "super_hog_rider": super_hog_rider_tests,
+        "super_hog": super_hog_rider_tests,
+        "super_rider": super_hog_rider_tests,
+        "super_miner": super_miner_tests,
+        "super_valkyrie": super_valkyrie_tests,
+        "super_yeti": super_yeti_tests,
+        "super_witch": super_witch_tests,
+        "ice_hound": ice_hound_tests,
+        "ice_pup": ice_hound_tests,
+        "yeti": yeti_tests,
+        "yetimite": yeti_tests,
+        "witch": witch_tests,
+        "lava_hound": lava_hound_tests,
+        "lava_pup": lava_hound_tests,
+        "headhunter": headhunter_tests,
+        "druid": druid_tests,
+        "druid_bear": druid_tests,
+        "golem": golem_tests,
+        "golemite": golem_tests,
+        "wizard": wizard_tests,
+        "giant": giant_tests,
+        "archer": archer_tests,
+        "barbarian": barbarian_tests,
+        "healer": healer_tests,
+        "wall_breaker": wall_breaker_tests,
+        "electro_titan": electro_titan_tests,
+        "thrower": thrower_tests,
+        "root_rider": root_rider_tests,
+        "sneaky_goblin": sneaky_goblin_tests,
     }
     declared_without_snapshot_replay_proof = sorted(
         content_id for content_id in ITEM_SNAPSHOT_REPLAY_TESTED_IDS
@@ -335,6 +414,83 @@ def main() -> None:
     super_dragon_headless_fixture = json.loads(
         (ROOT / "scenarios" / "super-dragon-aggregate.json").read_text(encoding="utf-8"))
     fixture_defenders.update(entry["kind"] for entry in super_dragon_headless_fixture["army"])
+    electro_dragon_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "electro-dragon-chain.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in electro_dragon_headless_fixture["army"])
+    bowler_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "bowler-double-strike.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in bowler_headless_fixture["army"])
+    ice_golem_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "ice-golem-death-freeze.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in ice_golem_headless_fixture["army"])
+    apprentice_warden_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "apprentice-warden-life-aura.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in apprentice_warden_headless_fixture["army"])
+    super_hog_rider_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "super-hog-rider-split.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in super_hog_rider_headless_fixture["army"])
+    super_miner_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "super-miner-ramp.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in super_miner_headless_fixture["army"])
+    super_valkyrie_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "super-valkyrie-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in super_valkyrie_headless_fixture["army"])
+    super_yeti_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "super-yeti-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in super_yeti_headless_fixture["army"])
+    super_witch_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "super-witch-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in super_witch_headless_fixture["army"])
+    ice_hound_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "ice-hound-ice-pup-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in ice_hound_headless_fixture["army"])
+    yeti_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "yeti-yetimite-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in yeti_headless_fixture["army"])
+    witch_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "witch-skeleton-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in witch_headless_fixture["army"])
+    lava_hound_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "lava-hound-lava-pup-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in lava_hound_headless_fixture["army"])
+    headhunter_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "headhunter-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in headhunter_headless_fixture["army"])
+    druid_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "druid-bear-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in druid_headless_fixture["army"])
+    golem_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "golem-golemite-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in golem_headless_fixture["defenders"])
+    wizard_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "wizard-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in wizard_headless_fixture["defenders"])
+    giant_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "giant-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in giant_headless_fixture["defenders"])
+    archer_headless_fixture = json.loads(
+        (ROOT / "scenarios" / "archer-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in archer_headless_fixture["defenders"])
+    barbarian_headless_fixture = json.loads((ROOT / "scenarios" / "barbarian-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in barbarian_headless_fixture["defenders"])
+    healer_headless_fixture = json.loads((ROOT / "scenarios" / "healer-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in healer_headless_fixture["army"])
+    wall_breaker_headless_fixture = json.loads((ROOT / "scenarios" / "wall-breaker-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in wall_breaker_headless_fixture["army"])
+    electro_titan_headless_fixture = json.loads((ROOT / "scenarios" / "electro-titan-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in electro_titan_headless_fixture["army"])
+    thrower_headless_fixture = json.loads((ROOT / "scenarios" / "thrower-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in thrower_headless_fixture["army"])
+    root_rider_headless_fixture = json.loads((ROOT / "scenarios" / "root-rider-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in root_rider_headless_fixture["army"])
+    sneaky_goblin_headless_fixture = json.loads((ROOT / "scenarios" / "sneaky-goblin-baseline.json").read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in sneaky_goblin_headless_fixture["army"])
+    bomb_tower_headless_fixture = json.loads(BOMB_TOWER_HEADLESS_FIXTURE.read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in bomb_tower_headless_fixture["defenders"])
+    x_bow_headless_fixture = json.loads(X_BOW_HEADLESS_FIXTURE.read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in x_bow_headless_fixture["defenders"])
+    inferno_tower_headless_fixture = json.loads(INFERNO_TOWER_HEADLESS_FIXTURE.read_text(encoding="utf-8"))
+    fixture_defenders.update(entry["kind"] for entry in inferno_tower_headless_fixture["defenders"])
     cmake = (ROOT / "CMakeLists.txt").read_text(encoding="utf-8")
     declared_without_headless_cli_proof = sorted(
         content_id for content_id in ITEM_HEADLESS_CLI_TESTED_IDS
@@ -362,7 +518,61 @@ def main() -> None:
             or "super-bowler-triple-strike.json" not in cmake
             or "super_bowler_headless_cli_validation" not in cmake
             or "super-dragon-aggregate.json" not in cmake
-            or "super_dragon_headless_cli_validation" not in cmake):
+            or "super_dragon_headless_cli_validation" not in cmake
+            or "electro-dragon-chain.json" not in cmake
+            or "electro_dragon_headless_cli_validation" not in cmake
+            or "bowler-double-strike.json" not in cmake
+            or "bowler_headless_cli_validation" not in cmake
+            or "ice-golem-death-freeze.json" not in cmake
+            or "ice_golem_headless_cli_validation" not in cmake
+            or "apprentice-warden-life-aura.json" not in cmake
+            or "apprentice_warden_headless_cli_validation" not in cmake
+            or "super-hog-rider-split.json" not in cmake
+            or "super_hog_rider_headless_cli_validation" not in cmake
+            or "super-miner-ramp.json" not in cmake
+            or "super_miner_headless_cli_validation" not in cmake
+            or "super-valkyrie-baseline.json" not in cmake
+            or "super_valkyrie_headless_cli_validation" not in cmake
+            or "super-yeti-baseline.json" not in cmake
+            or "super_yeti_headless_cli_validation" not in cmake
+            or "super-witch-baseline.json" not in cmake
+            or "super_witch_headless_cli_validation" not in cmake
+            or "ice-hound-ice-pup-baseline.json" not in cmake
+            or "ice_hound_headless_cli_validation" not in cmake
+            or "yeti-yetimite-baseline.json" not in cmake
+            or "yeti_headless_cli_validation" not in cmake
+            or "witch-skeleton-baseline.json" not in cmake
+            or "witch_headless_cli_validation" not in cmake
+            or "lava-hound-lava-pup-baseline.json" not in cmake
+            or "lava_hound_headless_cli_validation" not in cmake
+            or "headhunter-baseline.json" not in cmake
+            or "headhunter_headless_cli_validation" not in cmake
+            or "druid-bear-baseline.json" not in cmake
+            or "druid_headless_cli_validation" not in cmake
+            or "golem-golemite-baseline.json" not in cmake
+            or "golem_headless_cli_validation" not in cmake
+            or "wizard-baseline.json" not in cmake
+            or "wizard_headless_cli_validation" not in cmake
+            or "giant-baseline.json" not in cmake
+            or "giant_headless_cli_validation" not in cmake
+            or "archer-baseline.json" not in cmake
+            or "archer_headless_cli_validation" not in cmake
+            or "barbarian-baseline.json" not in cmake
+            or "barbarian_headless_cli_validation" not in cmake
+            or "healer-baseline.json" not in cmake
+            or "healer_headless_cli_validation" not in cmake
+            or "wall-breaker-baseline.json" not in cmake
+            or "wall_breaker_headless_cli_validation" not in cmake
+            or "electro-titan-baseline.json" not in cmake
+            or "electro_titan_headless_cli_validation" not in cmake
+            or "thrower-baseline.json" not in cmake
+            or "thrower_headless_cli_validation" not in cmake
+            or "root-rider-baseline.json" not in cmake
+            or "root_rider_headless_cli_validation" not in cmake
+            or "sneaky-goblin-baseline.json" not in cmake
+            or "sneaky_goblin_headless_cli_validation" not in cmake
+            or "inferno-tower-baseline.json" not in cmake
+            or "inferno_tower_headless_cli_validation" not in cmake):
         raise RuntimeError(
             "headless CLI coverage declaration lacks fixture proof: "
             + ", ".join(declared_without_headless_cli_proof)
@@ -370,8 +580,9 @@ def main() -> None:
     for content in catalogue["contents"]:
         content_id = content["id"]
         levels = content.get("levels", [])
-        # The loader admits normal records only.  A supercharged record shares
-        # its level number, while Scenario/replay/RL have no variant selector.
+        # A supercharged record shares its numeric level with its normal record.
+        # The explicit variant selector is preserved by Core, scenarios/replays,
+        # Viewer and RL; it must never be silently reduced to normal data.
         ignored_variants = [
             level.get("variant", "normal") for level in levels
             if level.get("variant", "normal") != "normal"
@@ -478,8 +689,16 @@ def main() -> None:
     # Core plumbing is useful, but it is not an item-specific serialization or
     # fidelity proof.
     permanent_ids = set().union(*(set(group) for group in permanent_scope["included_groups"].values()))
-    unmaterializable_children = permanent_scope["unmaterializable_required_spawned_subunits"]
     content_by_id = {content["id"]: content for content in catalogue["contents"]}
+    # The dated scope is an inventory snapshot, not a claim that a required
+    # child must remain absent forever.  A later active delta may supply a
+    # source-backed spawned-only row (for example Lava Pup); retain only the
+    # still-missing children in the explicit absent-child table.
+    unmaterializable_children = {
+        content_id: entry
+        for content_id, entry in permanent_scope["unmaterializable_required_spawned_subunits"].items()
+        if content_id not in content_by_id
+    }
     delta_by_id: dict[str, list[dict[str, object]]] = collections.defaultdict(list)
     for entry in json.loads((ROOT / "data" / "reference" / "th18-documentation-delta-2026-09-17.json").read_text(encoding="utf-8"))["entries"]:
         for content_id in entry.get("scope", {}).get("ids", []):
@@ -621,6 +840,15 @@ def main() -> None:
         item = matrix.setdefault(content_id, {"families": set(), "sources": set()})
         item["families"].add(family)
         item["sources"].add(source)
+    # Supplemental entries are added by dated active deltas, so they can be
+    # required spawned children absent from the frozen inventory snapshot.
+    for supplemental in reference.get("catalogue_supplemental_contents", []):
+        content_id = supplemental["content_id"]
+        content = content_by_id.get(content_id, {})
+        family = "spawned_unit" if content.get("support") == "spawned_only" else "supplemental"
+        item = matrix.setdefault(content_id, {"families": set(), "sources": set()})
+        item["families"].add(family)
+        item["sources"].add(supplemental["source"])
     print("\n## Matrice de couverture — inventaire attendu")
     print("| Élément | Famille | Sources | Catalogue | Core | GUI | RL | Tests | Fidélité |")
     print("|---|---|---|---:|---|---|---|---|---|")

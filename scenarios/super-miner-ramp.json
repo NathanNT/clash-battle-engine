@@ -1,0 +1,12 @@
+{
+  "width": 20,
+  "height": 20,
+  "seed": 1618033988,
+  "duration_ms": 6000,
+  "defenders": [
+    {"kind": "town_hall", "level": 18, "x": 5.5, "y": 10.5}
+  ],
+  "army": [
+    {"kind": "super_miner", "level": 12, "count": 1}
+  ]
+}

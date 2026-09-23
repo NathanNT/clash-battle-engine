@@ -1,0 +1,10 @@
+{
+  "width": 20,
+  "height": 20,
+  "seed": 3141592653,
+  "duration_ms": 4000,
+  "defenders": [
+    {"kind": "super_wizard_tower", "level": 2, "x": 10.5, "y": 10.5}
+  ],
+  "army": [{"kind": "barbarian", "level": 1, "count": 1}]
+}

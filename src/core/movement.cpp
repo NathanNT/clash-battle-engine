@@ -14,7 +14,7 @@ namespace cocsim {
 
 using detail::dist;
 
-std::optional<Vec2> BattleState::next_path_waypoint(const Entity& attacker, const Entity& target, EntityId ignored_obstacle) const {
+std::optional<Vec2> BattleState::next_path_waypoint(const Entity& attacker, const Entity& target, EntityId ignored_obstacle, bool jumps_walls) const {
   const int width=scenario_.width,height=scenario_.height;
   if(width<=0||height<=0) return std::nullopt;
   const auto index=[width](int x,int y){return y*width+x;};
@@ -26,7 +26,7 @@ std::optional<Vec2> BattleState::next_path_waypoint(const Entity& attacker, cons
     // evade them before they can fire.
     if(stats&&stats->category==EntityCategory::Trap) continue;
     const bool jump_open=obstacle.kind==Kind::Wall&&std::any_of(spell_effects_.begin(),spell_effects_.end(),[&](const auto& effect){return effect.kind==SpellKind::Jump&&dist(obstacle.pos,effect.pos)<=effect.radius;});
-    if(jump_open) continue;
+    if(jump_open || (jumps_walls && obstacle.kind==Kind::Wall)) continue;
     const int footprint_w=stats?stats->footprint_width:1, footprint_h=stats?stats->footprint_height:1;
     const int first_x=static_cast<int>(std::llround(obstacle.pos.x-footprint_w/2.0));
     const int first_y=static_cast<int>(std::llround(obstacle.pos.y-footprint_h/2.0));

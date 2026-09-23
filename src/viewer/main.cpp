@@ -1,4 +1,7 @@
+#include "catalogue_panel.hpp"
+#include "loadout_editor.hpp"
 #include "demo_scenario.hpp"
+#include "replay_io.hpp"
 #include "render.hpp"
 #include "selection.hpp"
 #include "simulation_bridge.hpp"
@@ -15,9 +18,10 @@
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
-#include <filesystem>
 #include <future>
 #include <limits>
+#include <memory>
+#include <optional>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -25,44 +29,6 @@
 
 using namespace cocsim;
 using namespace cocsim::viewer;
-
-namespace {
-
-// File naming is presentation/I/O only. The contents are the exact
-// tick-aligned commands supplied by Core, so wall-clock time cannot affect a
-// replayed battle.
-bool save_finished_viewer_replay(const Scenario& scenario, const std::vector<Command>& commands,
-                                 std::string& saved_path, std::string& error) {
-  std::error_code filesystem_error;
-  const auto directory = std::filesystem::current_path() / "replays";
-  std::filesystem::create_directories(directory, filesystem_error);
-  if (filesystem_error) {
-    error = "cannot create replay directory: " + filesystem_error.message();
-    return false;
-  }
-  const auto stamp = std::chrono::duration_cast<std::chrono::milliseconds>(
-    std::chrono::system_clock::now().time_since_epoch()).count();
-  for (int suffix = 0; suffix != 1000; ++suffix) {
-    const auto filename = "viewer-replay-" + std::to_string(stamp)
-      + (suffix == 0 ? std::string{} : "-" + std::to_string(suffix)) + ".json";
-    const auto candidate = directory / filename;
-    if (std::filesystem::exists(candidate, filesystem_error)) {
-      if (filesystem_error) { error = "cannot inspect replay directory: " + filesystem_error.message(); return false; }
-      continue;
-    }
-    std::string save_error;
-    if (!save_replay(candidate.string(), scenario, commands, save_error)) {
-      error = save_error;
-      return false;
-    }
-    saved_path = candidate.string();
-    return true;
-  }
-  error = "could not allocate a unique replay filename";
-  return false;
-}
-
-} // namespace
 
 int main(int argc, char** argv) {
   if (!SDL_Init(SDL_INIT_VIDEO)) { std::fprintf(stderr, "SDL init: %s\n", SDL_GetError()); return 1; }
@@ -82,6 +48,9 @@ int main(int argc, char** argv) {
   ImGui_ImplSDL3_InitForSDLRenderer(window, renderer); ImGui_ImplSDLRenderer3_Init(renderer);
 
   Scenario initial = demo_scenario();
+  std::vector<Command> initial_replay_commands;
+  std::string initial_replay_path;
+  bool replay_mode = false;
   for (int i = 1; i < argc; ++i) {
     if (std::string(argv[i]) == "--scenario") {
       if (i + 1 == argc) { std::fprintf(stderr, "--scenario requires a JSON path\n"); return 2; }
@@ -90,6 +59,18 @@ int main(int argc, char** argv) {
         std::fprintf(stderr, "invalid scenario: %s\n", error.c_str());
         return 2;
       }
+      initial_replay_commands.clear();
+      initial_replay_path.clear();
+      replay_mode = false;
+    } else if (std::string(argv[i]) == "--replay") {
+      if (i + 1 == argc) { std::fprintf(stderr, "--replay requires a JSON path\n"); return 2; }
+      std::string error;
+      if (!load_replay(argv[++i], initial, initial_replay_commands, error)) {
+        std::fprintf(stderr, "invalid replay: %s\n", error.c_str());
+        return 2;
+      }
+      initial_replay_path = argv[i];
+      replay_mode = true;
     }
   }
   // The normalized catalogue is deliberately comprehensive (including
@@ -136,9 +117,11 @@ int main(int argc, char** argv) {
   images.queue_scene(initial);
   std::array<char, 1024> asset_root{};
   std::snprintf(asset_root.data(), asset_root.size(), "%s", images.root.c_str());
+  std::array<char, 1024> replay_path{};
+  std::snprintf(replay_path.data(), replay_path.size(), "%s", initial_replay_path.c_str());
   // The bridge starts the simulation thread after the immutable catalogue and
   // scenario have been fixed.  SDL/ImGui never receive a BattleState.
-  viewer::SimulationBridge simulation(data, initial);
+  auto simulation = std::make_unique<viewer::SimulationBridge>(data, initial, initial_replay_commands);
   // The GUI derives its selectable inventory from the core-validated Scenario.
   // This keeps its choices identical to headless and RL scenario inputs.
   std::vector<Kind> troops;
@@ -177,12 +160,30 @@ int main(int argc, char** argv) {
   bool terminal_replay_saved = false;
   std::string terminal_replay_path;
   std::string terminal_replay_error;
+  Scenario loadout_draft = initial; bool pending_replay_mode = true; std::optional<Scenario> pending_replay_scenario;
+  std::vector<Command> pending_replay_commands;
+  std::string replay_load_error;
+  std::string loaded_replay_path = initial_replay_path;
 
   while (running) {
     const auto frame_start = SDL_GetTicks();
-    auto frame = simulation.latest();
+    if (pending_replay_scenario) {
+      if (replace_simulation_bridge(simulation, data, *pending_replay_scenario, pending_replay_commands, replay_load_error)) {
+        initial = std::move(*pending_replay_scenario);
+        initial_replay_commands = std::move(pending_replay_commands);
+        replay_mode = pending_replay_mode; loadout_draft = initial;
+        troops.clear(); for (const auto& slot : initial.army) troops.push_back(slot.kind);
+        spells.clear(); for (const auto& slot : initial.spells) spells.push_back(slot.kind);
+        selected = 0; selected_spell = 0; selecting_spell = false; selected_defender = 0;
+        viewed_event_count = 0; projectile_traces.clear(); sourced_projectile_ids.clear();
+        terminal_replay_saved = false; terminal_replay_path.clear(); terminal_replay_error.clear();
+        images.queue_scene(initial);
+      }
+      pending_replay_scenario.reset(); pending_replay_commands.clear();
+    }
+    auto frame = simulation->latest();
     if (!frame) continue;
-    if (frame->result.finished && !terminal_replay_saved) {
+    if (!replay_mode && frame->result.finished && !terminal_replay_saved) {
       terminal_replay_saved = true;
       terminal_replay_error.clear();
       if (!save_finished_viewer_replay(initial, frame->commands, terminal_replay_path, terminal_replay_error))
@@ -195,7 +196,7 @@ int main(int argc, char** argv) {
       const ImGuiIO& io = ImGui::GetIO();
       if (event.type == SDL_EVENT_MOUSE_WHEEL && !io.WantCaptureMouse) zoom = std::clamp(zoom + float(event.wheel.y) * 2, 8.0f, 28.0f);
       if (event.type == SDL_EVENT_KEY_DOWN && !io.WantCaptureKeyboard) {
-        switch (event.key.key) { case SDLK_SPACE: simulation.set_paused(!simulation.paused()); break; case SDLK_N: simulation.request_step(); break; case SDLK_1: selected = 0; break; case SDLK_2: selected = 1; break; case SDLK_3: selected = 2; break; case SDLK_R: simulation.request_reset(); viewed_event_count = 0; projectile_traces.clear(); sourced_projectile_ids.clear(); selected_defender = 0; terminal_replay_saved = false; terminal_replay_path.clear(); terminal_replay_error.clear(); break; case SDLK_V: ranges = !ranges; break; case SDLK_H: heatmap = !heatmap; break; case SDLK_P: draw_board = !draw_board; break; default: break; }
+        switch (event.key.key) { case SDLK_SPACE: simulation->set_paused(!simulation->paused()); break; case SDLK_N: simulation->request_step(); break; case SDLK_1: selected = 0; break; case SDLK_2: selected = 1; break; case SDLK_3: selected = 2; break; case SDLK_R: simulation->request_reset(); viewed_event_count = 0; projectile_traces.clear(); sourced_projectile_ids.clear(); selected_defender = 0; terminal_replay_saved = false; terminal_replay_path.clear(); terminal_replay_error.clear(); break; case SDLK_V: ranges = !ranges; break; case SDLK_H: heatmap = !heatmap; break; case SDLK_P: draw_board = !draw_board; break; default: break; }
       }
       if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN && event.button.button == SDL_BUTTON_LEFT && !io.WantCaptureMouse) {
         const float raw_x = (event.button.x - map_origin_x) / zoom, raw_y = (event.button.y - map_origin_y) / zoom;
@@ -206,17 +207,17 @@ int main(int argc, char** argv) {
         // command, so it cannot interfere with deployment or rule timing.
         if (in_map && (SDL_GetModState() & SDL_KMOD_SHIFT)) {
           selected_defender = defender_at(frame->entities, {raw_x, raw_y}).value_or(EntityId{});
-        } else if (in_map && selecting_spell) {
+        } else if (!replay_mode && in_map && selecting_spell) {
           const auto kind = spells[static_cast<std::size_t>(selected_spell)];
           const auto* slot = spell_slot(frame->spells, kind);
-          if (slot && slot->count > 0) simulation.enqueue({CommandType::CastSpell, Kind::Barbarian, slot->level, position, kind});
-        } else if (!troops.empty()) {
+          if (slot && slot->count > 0) simulation->enqueue({CommandType::CastSpell, Kind::Barbarian, slot->level, position, kind});
+        } else if (!replay_mode && !troops.empty()) {
           const auto selected_kind = troops[static_cast<std::size_t>(selected)];
           const auto* selected_slot = army_slot(frame->army, selected_kind);
           // Placement validity belongs solely to cocsim_core. The viewer draws
           // the red margin as a hint, then submits the same command as RL/replay.
           if (in_map && selected_slot && selected_slot->count > 0) {
-            simulation.enqueue({CommandType::Deploy, selected_kind, selected_slot->level, position, SpellKind::Rage});
+            simulation->enqueue({CommandType::Deploy, selected_kind, selected_slot->level, position, SpellKind::Rage});
           }
         }
       }
@@ -233,8 +234,8 @@ int main(int argc, char** argv) {
       if (keys[SDL_SCANCODE_D] || keys[SDL_SCANCODE_RIGHT]) map_origin_x -= pan;
     }
     const auto playback_speed = static_cast<std::uint32_t>(custom_playback_speed);
-    simulation.set_maximum_playback(maximum_playback);
-    if (!maximum_playback) simulation.set_playback_speed(playback_speed);
+    simulation->set_maximum_playback(maximum_playback);
+    if (!maximum_playback) simulation->set_playback_speed(playback_speed);
     // At most one image is decoded per presentation cycle.  The simulation is
     // never gated on asset I/O: absent/unloaded art simply uses the existing
     // fallback until its source texture becomes available.
@@ -312,35 +313,36 @@ int main(int argc, char** argv) {
     ImGui_ImplSDLRenderer3_NewFrame(); ImGui_ImplSDL3_NewFrame(); ImGui::NewFrame();
     ImGui::SetNextWindowPos({12, 12}, ImGuiCond_Always); ImGui::SetNextWindowSize({440, 0}, ImGuiCond_Always);
     ImGui::Begin("Army & controls", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
-    ImGui::Text("Deploiement : clic hors des cadres rouges"); ImGui::Separator();
+    ImGui::Text(replay_mode ? "Replay : commandes en lecture seule" : "Deploiement : clic hors des cadres rouges"); ImGui::Separator();
     for (std::size_t i = 0; i < troops.size(); ++i) {
       const Kind kind = troops[i]; const auto* slot = army_slot(frame->army, kind); const int count = slot ? slot->count : 0;
       ImGui::PushID(static_cast<int>(i));
       if (auto* texture = images.find(kind, slot ? slot->level : 1)) ImGui::Image((ImTextureID)texture, {42, 42});
       else ImGui::Dummy({42, 42});
       ImGui::SameLine();
-      ImGui::BeginDisabled(count == 0);
-      char label[64]; std::snprintf(label, sizeof(label), "%s L%d  x%d", to_string(kind).c_str(), slot ? slot->level : 0, count);
+      ImGui::BeginDisabled(replay_mode || count == 0);
+      char label[80]; std::snprintf(label, sizeof(label), "%s L%d%s  x%d", to_string(kind).c_str(), slot ? slot->level : 0,
+                                    slot && slot->mode != "normal" ? (slot->mode == "air" ? " (air)" : " (ground)") : "", count);
       if (ImGui::Selectable(label, !selecting_spell && selected == static_cast<int>(i), 0, {count ? 350.0f : 0.0f, 42.0f})) { selected = static_cast<int>(i); selecting_spell = false; }
       ImGui::EndDisabled(); ImGui::PopID();
     }
     ImGui::Separator(); ImGui::Text("Sorts : selectionner puis cliquer sur le village");
     for (std::size_t i = 0; i < spells.size(); ++i) {
       const auto kind = spells[i]; const auto* slot = spell_slot(frame->spells, kind); const int count = slot ? slot->count : 0;
-      ImGui::PushID(100 + static_cast<int>(i)); ImGui::BeginDisabled(count == 0);
+      ImGui::PushID(100 + static_cast<int>(i)); ImGui::BeginDisabled(replay_mode || count == 0);
       char label[64]; std::snprintf(label, sizeof(label), "%s L%d  x%d", to_string(kind).c_str(), slot ? slot->level : 0, count);
       if (ImGui::Selectable(label, selecting_spell && selected_spell == static_cast<int>(i), 0, {400.0f, 26.0f})) { selected_spell = static_cast<int>(i); selecting_spell = true; }
       ImGui::EndDisabled(); ImGui::PopID();
     }
     ImGui::Separator();
-    const bool paused = simulation.paused();
-    if (ImGui::Button(paused ? "Resume (Space)" : "Pause (Space)")) simulation.set_paused(!paused);
-    ImGui::SameLine(); if (ImGui::Button("One tick (N)")) simulation.request_step();
+    const bool paused = simulation->paused();
+    if (ImGui::Button(paused ? "Resume (Space)" : "Pause (Space)")) simulation->set_paused(!paused);
+    ImGui::SameLine(); if (ImGui::Button("One tick (N)")) simulation->request_step();
     ImGui::SameLine();
-    ImGui::BeginDisabled(frame->result.finished);
-    if (ImGui::Button("Finir le combat")) simulation.enqueue({CommandType::EndBattle});
+    ImGui::BeginDisabled(frame->result.finished || replay_mode);
+    if (ImGui::Button("Finir le combat")) simulation->enqueue({CommandType::EndBattle});
     ImGui::EndDisabled();
-    if (ImGui::Button("Reset (R)")) { simulation.request_reset(); viewed_event_count = 0; projectile_traces.clear(); sourced_projectile_ids.clear(); selected_defender = 0; terminal_replay_saved = false; terminal_replay_path.clear(); terminal_replay_error.clear(); }
+    if (ImGui::Button(replay_mode ? "Rejouer depuis T+0 (R)" : "Reset (R)")) { simulation->request_reset(); viewed_event_count = 0; projectile_traces.clear(); sourced_projectile_ids.clear(); selected_defender = 0; terminal_replay_saved = false; terminal_replay_path.clear(); terminal_replay_error.clear(); }
     ImGui::SameLine(); ImGui::Checkbox("Ranges (V)", &ranges);
     ImGui::Checkbox("Heatmap degats (H)", &heatmap);
     if (heatmap) { ImGui::SameLine(); ImGui::Checkbox("Cible air", &heatmap_air); }
@@ -370,7 +372,25 @@ int main(int argc, char** argv) {
     ImGui::SameLine();
     if (ImGui::Button(maximum_playback ? "Instantane actif" : "Instantane")) maximum_playback = !maximum_playback;
     ImGui::TextDisabled("ZQSD ou fleches : deplacer la camera");
+    ImGui::Separator();
+    ImGui::Text("Replay JSON");
+    ImGui::SetNextItemWidth(300.0f); ImGui::InputText("##replay_path", replay_path.data(), replay_path.size()); ImGui::SameLine();
+    if (ImGui::Button("Charger replay")) {
+      ViewerReplay loaded;
+      if (load_viewer_replay(replay_path.data(), loaded, replay_load_error)) {
+        pending_replay_scenario = std::move(loaded.scenario);
+        pending_replay_mode = true;
+        pending_replay_commands = std::move(loaded.commands);
+        loaded_replay_path = std::move(loaded.path);
+        replay_load_error.clear();
+      }
+    }
+    if (replay_mode) ImGui::TextColored({0.35f, 0.9f, 0.45f, 1.0f}, "Replay actif : %s", loaded_replay_path.c_str());
+    else if (!replay_load_error.empty()) ImGui::TextColored({1.0f, 0.55f, 0.25f, 1.0f}, "Erreur replay : %s", replay_load_error.c_str());
     ImGui::Text("Catalogue charge en %llu ms", static_cast<unsigned long long>(catalogue_load_ms));
+    draw_hero_support_catalogue(data, frame->hero_loadouts, frame->monolith_arrow_housing,
+                                frame->monolith_arrow_tier, frame->monolith_arrow_damage_percent);
+    if (!replay_mode && draw_hero_loadout_editor(data, loadout_draft)) { pending_replay_scenario = loadout_draft; pending_replay_commands.clear(); pending_replay_mode = false; replay_load_error.clear(); }
     ImGui::Separator();
     ImGui::Text("Destruction : %.1f%% | Etoiles : %d/3", frame->result.destruction, frame->result.stars);
     ImGui::Text("Valeur armee restante : %d logements | Unites : %d", frame->result.remaining_housing_space,
@@ -394,9 +414,9 @@ int main(int argc, char** argv) {
     if (!selecting_spell && !troops.empty()) {
       const auto selected_kind = troops[static_cast<std::size_t>(selected)];
       const auto* selected_slot = army_slot(frame->army, selected_kind);
-      ImGui::BeginDisabled(!selected_slot || selected_slot->count == 0);
+      ImGui::BeginDisabled(replay_mode || !selected_slot || selected_slot->count == 0);
       if (ImGui::Button("Deployer a gauche")) {
-        simulation.enqueue({CommandType::Deploy, selected_kind, selected_slot->level, {0.5, 25.5}, SpellKind::Rage});
+        simulation->enqueue({CommandType::Deploy, selected_kind, selected_slot->level, {0.5, 25.5}, SpellKind::Rage});
       }
       ImGui::EndDisabled();
       if (selected_slot) if (const auto* stats = data.find(selected_kind, selected_slot->level)) {
@@ -451,7 +471,7 @@ int main(int argc, char** argv) {
     SDL_SetWindowTitle(window, title);
     ImGui::Render(); ImGui_ImplSDLRenderer3_RenderDrawData(ImGui::GetDrawData(), renderer); SDL_RenderPresent(renderer);
     first_frame_presented = true;
-    // Present at 30 FPS. Fixed 10 ms core ticks continue between presentations
+    // Present at 30 FPS. Fixed 16 ms core ticks continue between presentations
     // in order; a visual hitch can slow playback but can never skip a combat
     // event. Press P to retain controls while omitting all board rendering.
     const auto frame_ms = SDL_GetTicks() - frame_start;
@@ -468,7 +488,7 @@ int main(int argc, char** argv) {
     }
     if (frame_ms < 33) SDL_Delay(33 - frame_ms);
   }
-  simulation.stop();
+  simulation->stop();
   ImGui_ImplSDLRenderer3_Shutdown(); ImGui_ImplSDL3_Shutdown(); ImGui::DestroyContext();
   SDL_DestroyRenderer(renderer); SDL_DestroyWindow(window); SDL_Quit();
   return 0;

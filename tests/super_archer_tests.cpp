@@ -24,7 +24,7 @@ int main() {
   const auto data = GameData::v0();
   const auto* super = data.find(Kind::SuperArcher, 14);
   COCSIM_REQUIRE(super && super->hp == 725 && super->damage == 255 && super->dps == 170);
-  COCSIM_REQUIRE(super->range == 6 && super->cooldown == 1500 && super->piercing_projectile_range == 12);
+  COCSIM_REQUIRE(super->range == 6 && super->cooldown == 1504 && super->piercing_projectile_range == 12);
 
   // Acquisition stays at six tiles, while the immutable Sharp Shot ray passes
   // through every intersected defender out to its separately sourced 12-tile
@@ -42,13 +42,13 @@ int main() {
   };
   BattleState battle(data, scenario);
   submit_all(battle, commands);
-  battle.advance_ticks(2); // launch at T+10; its fixed endpoint is snapshot state.
+  battle.advance_ticks(2); // launch at T+16; its fixed endpoint is snapshot state.
   COCSIM_REQUIRE(std::any_of(battle.events().begin(), battle.events().end(), [](const Event& event) {
     return event.type == EventType::Projectile && event.actor == 4
         && event.detail == "super archer sharp shot";
   }));
   const auto snapshot = battle.snapshot();
-  COCSIM_REQUIRE(snapshot.canonical.starts_with("COCSIM-SNAPSHOT-18\n"));
+  COCSIM_REQUIRE(snapshot.canonical.starts_with("COCSIM-SNAPSHOT-22\n"));
   BattleState restored(data, scenario);
   COCSIM_REQUIRE(restored.restore(snapshot));
   COCSIM_REQUIRE(restored.state_hash() == battle.state_hash());

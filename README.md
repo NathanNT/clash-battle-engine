@@ -7,11 +7,20 @@ is not an exact reproduction of the original game.
 
 ## Highlights
 
-- A fixed 10 ms logical tick and deterministic command ordering.
+- A fixed 16 ms logical tick and deterministic command ordering.
 - One shared `cocsim_core` for the command-line simulator and SDL3/ImGui Viewer.
 - Versioned scenarios, snapshots, state hashes, and battle replays.
 - A playable TH18 practice scene with buildings, troops, walls, traps, and
   documented source provenance.
+
+## Fixed-step timing
+
+The simulator uses a fixed 16 ms step. Existing catalogue durations and combat
+formulas are retained; durations are rounded to the nearest representable tick
+(for example, 1000 ms becomes 1008 ms). Commands require future aligned times,
+and replay V5 records the tick duration so older 10 ms schedules cannot be
+silently reinterpreted. This does not assert the original game's internal tick
+duration or change the logical projectile algorithm.
 
 ## Quick start
 

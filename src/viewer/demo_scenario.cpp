@@ -59,6 +59,7 @@ Scenario demo_scenario() {
     {Kind::ArmyCamp, 12, {8.0, 45.0}}, {Kind::Barracks, 15, {15.5, 44.5}},
     {Kind::DarkBarracks, 10, {34.5, 44.5}}, {Kind::SpellFactory, 7, {21.5, 44.5}},
     {Kind::DarkSpellFactory, 6, {28.5, 44.5}},
+    {Kind::CraftingStation, 1, {4.5, 44.5}},
 
     // A closed core compartment; wall cells are values in Core, not Viewer art.
     {Kind::Wall, 19, {18.5, 18.5}}, {Kind::Wall, 19, {19.5, 18.5}},
@@ -95,7 +96,8 @@ Scenario demo_scenario() {
   s.army = {
     {Kind::SuperDragon, 13, 5}, {Kind::Balloon, 13, 6},
     {Kind::RocketBalloon, 12, 2}, {Kind::DragonRider, 6, 2},
-    {Kind::Minion, 14, 4},
+    {Kind::Minion, 14, 4}, {Kind::MinionPrince, 95, 1},
+    {Kind::GrandWarden, 85, 1, "air"}, {Kind::DragonDuke, 25, 1},
   };
   s.spells = {
     {SpellKind::Rage, 6, 3}, {SpellKind::Freeze, 7, 3}, {SpellKind::Haste, 7, 1},

@@ -24,7 +24,7 @@ int main() {
   const auto data=GameData::v0();
   const auto* dragon=data.find(Kind::SuperDragon,13);
   COCSIM_REQUIRE(dragon&&dragon->hp==8400&&dragon->dps==537&&dragon->damage==966.6);
-  COCSIM_REQUIRE(dragon->cooldown==1800&&dragon->range==3&&dragon->flying&&dragon->target_type==TargetType::Both);
+  COCSIM_REQUIRE(dragon->cooldown==1808&&dragon->range==3&&dragon->flying&&dragon->target_type==TargetType::Both);
 
   Scenario scenario; scenario.width=20; scenario.height=20; scenario.duration_ms=4000;
   scenario.defenders={{Kind::Cannon,1,{4.5,10.5}}}; scenario.army={{Kind::SuperDragon,13,1}};

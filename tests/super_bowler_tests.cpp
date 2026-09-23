@@ -23,7 +23,7 @@ bool damaged(const BattleState& battle, EntityId target, double amount) {
 int main() {
   const auto data=GameData::v0();
   const auto* bowler=data.find(Kind::SuperBowler,10);
-  COCSIM_REQUIRE(bowler && bowler->hp==3700 && bowler->damage==682 && bowler->cooldown==2200);
+  COCSIM_REQUIRE(bowler && bowler->hp==3700 && bowler->damage==682 && bowler->cooldown==2208);
   COCSIM_REQUIRE(bowler->bounce_impact_count==3 && bowler->bounce_step==3 && bowler->bounce_splash_radius==.6);
 
   Scenario scenario; scenario.width=20; scenario.height=20; scenario.duration_ms=4000;
@@ -38,7 +38,7 @@ int main() {
   COCSIM_REQUIRE(projectiles.size()==3);
   COCSIM_REQUIRE(projectiles[0].target_position.x==4.5 && projectiles[1].target_position.x==7.5 && projectiles[2].target_position.x==10.5);
   const auto snapshot=battle.snapshot();
-  COCSIM_REQUIRE(snapshot.canonical.starts_with("COCSIM-SNAPSHOT-18\n"));
+  COCSIM_REQUIRE(snapshot.canonical.starts_with("COCSIM-SNAPSHOT-22\n"));
   BattleState restored(data,scenario); COCSIM_REQUIRE(restored.restore(snapshot));
   COCSIM_REQUIRE(restored.state_hash()==battle.state_hash());
   const std::string replay_path="replay-super-bowler-test.json"; std::string error;

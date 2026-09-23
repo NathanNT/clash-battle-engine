@@ -1,8 +1,11 @@
 #include "cocsim/core.hpp"
 #include "detail/json_reader.hpp"
 
+#include <algorithm>
+#include <cmath>
 #include <fstream>
 #include <iomanip>
+#include <limits>
 #include <sstream>
 
 namespace cocsim {
@@ -56,7 +59,7 @@ bool scenario_from_json(const std::string& document, Scenario& output, std::stri
       const auto y = number_field(object, "y");
       const auto kind = name ? parse_kind(*name) : std::nullopt;
       if (!kind || !x || !y) { error = "invalid non-combat obstacle"; return false; }
-      scenario.non_combat_obstacles.push_back({*kind, {*x, *y}});
+      scenario.non_combat_obstacles.push_back({*kind, {*x, *y}, string_field(object, "variant").value_or("normal")});
     }
   }
   for (const auto& object : objects_in(*army)) {
@@ -65,7 +68,8 @@ bool scenario_from_json(const std::string& document, Scenario& output, std::stri
     const auto count = number_field(object, "count");
     const auto kind = name ? parse_kind(*name) : std::nullopt;
     if (!kind || !level || !count || *count < 0) { error = "invalid army slot"; return false; }
-    scenario.army.push_back({*kind, static_cast<int>(*level), static_cast<int>(*count)});
+    scenario.army.push_back({*kind, static_cast<int>(*level), static_cast<int>(*count),
+                            string_field(object, "mode").value_or("normal")});
   }
   // Spells stay optional so version-1 scenarios remain readable.
   if (const auto spells = array_body(document, "spells")) {
@@ -78,11 +82,66 @@ bool scenario_from_json(const std::string& document, Scenario& output, std::stri
       scenario.spells.push_back({*kind, static_cast<int>(*level), static_cast<int>(*count)});
     }
   }
+  if (const auto loadouts = array_body(document, "hero_loadouts")) {
+    for (const auto& object : objects_in(*loadouts)) {
+      const auto name = string_field(object, "hero");
+      const auto hero = name ? parse_kind(*name) : std::nullopt;
+      if (!hero) { error = "invalid Hero loadout"; return false; }
+      HeroLoadout loadout;
+      loadout.hero = *hero;
+      if (object.find("\"pet\"") != std::string::npos) {
+        const auto pet = object_after_key(object, "pet");
+        const auto id = pet ? string_field(*pet, "id") : std::nullopt;
+        const auto level = pet ? number_field(*pet, "level") : std::nullopt;
+        if (!id || !level || !std::isfinite(*level) || *level < 1 ||
+            *level > std::numeric_limits<int>::max() || *level != static_cast<int>(*level)) {
+          error = "invalid Hero Pet choice"; return false;
+        }
+        loadout.pet = HeroSupportChoice{*id, static_cast<int>(*level)};
+      }
+      if (object.find("\"equipment\"") != std::string::npos) {
+        const auto equipment = array_body(object, "equipment");
+        if (!equipment) { error = "invalid Hero Equipment list"; return false; }
+        for (const auto& item : objects_in(*equipment)) {
+          const auto id = string_field(item, "id");
+          const auto level = number_field(item, "level");
+          if (!id || !level || !std::isfinite(*level) || *level < 1 ||
+              *level > std::numeric_limits<int>::max() || *level != static_cast<int>(*level)) {
+            error = "invalid Hero Equipment choice"; return false;
+          }
+          loadout.equipment.push_back({*id, static_cast<int>(*level)});
+        }
+      }
+      scenario.hero_loadouts.push_back(std::move(loadout));
+    }
+  }
   output = std::move(scenario);
   return true;
 }
 
 } // namespace
+
+std::string to_json(const std::vector<HeroLoadout>& loadouts) {
+  std::ostringstream output;
+  output << '[';
+  for (std::size_t index = 0; index < loadouts.size(); ++index) {
+    const auto& loadout = loadouts[index];
+    if (index) output << ',';
+    output << "{\"hero\":\"" << to_string(loadout.hero) << '"';
+    if (loadout.pet)
+      output << ",\"pet\":{\"id\":\"" << detail::escape_json(loadout.pet->id)
+             << "\",\"level\":" << loadout.pet->level << '}';
+    output << ",\"equipment\":[";
+    for (std::size_t item = 0; item < loadout.equipment.size(); ++item) {
+      if (item) output << ',';
+      output << "{\"id\":\"" << detail::escape_json(loadout.equipment[item].id)
+             << "\",\"level\":" << loadout.equipment[item].level << '}';
+    }
+    output << "]}";
+  }
+  output << ']';
+  return output.str();
+}
 
 std::string to_json(const Scenario& scenario) {
   std::ostringstream output;
@@ -103,14 +162,18 @@ std::string to_json(const Scenario& scenario) {
     const auto& placement = scenario.non_combat_obstacles[index];
     if (index) output << ',';
     output << "{\"kind\":\"" << to_string(placement.kind) << "\",\"x\":" << placement.position.x
-           << ",\"y\":" << placement.position.y << '}';
+           << ",\"y\":" << placement.position.y;
+    if (placement.variant != "normal") output << ",\"variant\":\"" << detail::escape_json(placement.variant) << '\"';
+    output << '}';
   }
   output << "],\"army\":[";
   for (std::size_t index = 0; index < scenario.army.size(); ++index) {
     const auto& slot = scenario.army[index];
     if (index) output << ',';
     output << "{\"kind\":\"" << to_string(slot.kind) << "\",\"level\":" << slot.level
-           << ",\"count\":" << slot.count << '}';
+           << ",\"count\":" << slot.count;
+    if (slot.mode != "normal") output << ",\"mode\":\"" << detail::escape_json(slot.mode) << '\"';
+    output << '}';
   }
   output << "],\"spells\":[";
   for (std::size_t index = 0; index < scenario.spells.size(); ++index) {
@@ -119,7 +182,9 @@ std::string to_json(const Scenario& scenario) {
     output << "{\"kind\":\"" << to_string(slot.kind) << "\",\"level\":" << slot.level
            << ",\"count\":" << slot.count << '}';
   }
-  output << "]}";
+  output << ']';
+  if (!scenario.hero_loadouts.empty()) output << ",\"hero_loadouts\":" << to_json(scenario.hero_loadouts);
+  output << '}';
   return output.str();
 }
 
@@ -144,7 +209,8 @@ bool save_replay(const std::string& path, const Scenario& scenario,
                  const std::vector<Command>& commands, std::string& error) {
   std::ofstream output(path);
   if (!output) { error = "cannot write " + path; return false; }
-  output << std::setprecision(17) << "{\"format_version\":4,\"rules_version\":\"v0\",\"scenario\":"
+  output << std::setprecision(17) << "{\"format_version\":5,\"rules_version\":\"v0\",\"tick_ms\":"
+         << kTickMs << ",\"scenario\":"
          << to_json(scenario) << ",\"commands\":[";
   for (std::size_t index = 0; index < commands.size(); ++index) {
     const auto& command = commands[index];
@@ -169,10 +235,15 @@ bool load_replay(const std::string& path, Scenario& scenario,
                  std::vector<Command>& commands, std::string& error) {
   const auto document = read_file(path, error);
   const auto version = number_field(document, "format_version");
+  const auto tick = number_field(document, "tick_ms");
   const auto embedded = object_after_key(document, "scenario");
   const auto list = array_body(document, "commands");
-  if (!version || (*version != 1 && *version != 2 && *version != 3 && *version != 4) || !embedded || !list) {
+  if (!version || *version != 5 || !embedded || !list) {
     error = "unsupported replay format";
+    return false;
+  }
+  if (!tick || *tick != kTickMs) {
+    error = "replay tick duration mismatch (expected 16 ms)";
     return false;
   }
   if (!scenario_from_json(*embedded, scenario, error)) return false;
@@ -215,6 +286,16 @@ bool load_replay(const std::string& path, Scenario& scenario,
       command.type = CommandType::EndBattle;
     } else {
       error = "invalid replay command type";
+      return false;
+    }
+    if (command.requested_ms <= 0 || command.requested_ms % kTickMs != 0) {
+      error = "replay command time must be a future multiple of 16 ms";
+      return false;
+    }
+    if (command.effective_ms != 0 && std::any_of(parsed.begin(), parsed.end(), [&](const Command& existing) {
+          return existing.sequence == command.sequence;
+        })) {
+      error = "duplicate replay command sequence";
       return false;
     }
     parsed.push_back(command);

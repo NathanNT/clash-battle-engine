@@ -21,14 +21,14 @@ def main() -> None:
     catalogue = json.loads(CATALOGUE.read_text(encoding="utf-8"))
     scope = json.loads(SCOPE.read_text(encoding="utf-8"))
     assert scope["reference_id"] == "home-village-th18-2026-09-17"
-    assert scope["active_reference_id"] == "home-village-th18-2026-09-18-super-dragon"
-    assert scope["reference_chain"] == [scope["reference_id"], "home-village-th18-2026-09-18-monolith-l5", "home-village-th18-2026-09-18-super-wall-breaker", "home-village-th18-2026-09-18-super-barbarian", "home-village-th18-2026-09-18-super-giant", "home-village-th18-2026-09-18-super-archer", "home-village-th18-2026-09-18-rocket-balloon", "home-village-th18-2026-09-18-inferno-dragon", "home-village-th18-2026-09-18-super-wizard", "home-village-th18-2026-09-18-super-minion", "home-village-th18-2026-09-18-super-bowler", scope["active_reference_id"]]
+    assert scope["active_reference_id"] == "home-village-th18-2026-09-18-meteor-golem-meteormite-baseline"
+    assert scope["reference_chain"] == [scope["reference_id"], "home-village-th18-2026-09-18-monolith-l5", "home-village-th18-2026-09-18-super-wall-breaker", "home-village-th18-2026-09-18-super-barbarian", "home-village-th18-2026-09-18-super-giant", "home-village-th18-2026-09-18-super-archer", "home-village-th18-2026-09-18-rocket-balloon", "home-village-th18-2026-09-18-inferno-dragon", "home-village-th18-2026-09-18-super-wizard", "home-village-th18-2026-09-18-super-minion", "home-village-th18-2026-09-18-super-bowler", "home-village-th18-2026-09-18-super-dragon", "home-village-th18-2026-09-18-x-bow-footprint", "home-village-th18-2026-09-18-electro-dragon-chain", "home-village-th18-2026-09-18-bowler-bounce", "home-village-th18-2026-09-18-ice-golem-death-freeze", "home-village-th18-2026-09-18-apprentice-warden-life-aura", "home-village-th18-2026-09-18-super-hog-rider-split", "home-village-th18-2026-09-18-super-miner", "home-village-th18-2026-09-18-super-valkyrie", "home-village-th18-2026-09-18-super-yeti-baseline", "home-village-th18-2026-09-18-super-witch-baseline", "home-village-th18-2026-09-18-ice-hound-ice-pup", "home-village-th18-2026-09-18-yeti-yetimite", "home-village-th18-2026-09-18-witch-skeleton-baseline", "home-village-th18-2026-09-18-lava-hound-lava-pup-baseline", "home-village-th18-2026-09-18-headhunter-baseline", "home-village-th18-2026-09-18-druid-bear-baseline", "home-village-th18-2026-09-18-furnace-firemite-baseline", scope["active_reference_id"]]
     assert scope["level_and_variant_inventory"]["source"] == "data/catalogue.normalized.json"
 
     included_groups = scope["included_groups"]
     included = set().union(*(ids(group) for group in included_groups.values()))
     assert sum(len(ids(group)) for group in included_groups.values()) == len(included), "scope groups overlap"
-    assert len(included) == 105, "update the reviewed permanent inventory deliberately"
+    assert len(included) == 111, "update the reviewed permanent inventory deliberately"
 
     contents = {item["id"]: item for item in catalogue["contents"]}
     assert included <= contents.keys(), f"scope ids absent from catalogue: {sorted(included - contents.keys())}"
@@ -66,8 +66,15 @@ def main() -> None:
             if child in scope["unmaterializable_required_spawned_subunits"]:
                 unresolved = scope["unmaterializable_required_spawned_subunits"][child]
                 assert unresolved["parent"] == parent
-                assert child not in contents
                 assert unresolved["evidence_audit"].startswith("data/reference/")
+                # The immutable scope records the state known when it was
+                # frozen. A later hash-pinned delta may legitimately make a
+                # child materializable, as happened for Lava Pup. Keep the
+                # historical uncertainty while requiring the live catalogue
+                # to classify any newly present child normally below.
+                if child in contents:
+                    assert (contents[child].get("support") == "spawned_only"
+                            or contents[child]["category"] == "spawned-unit"), child
                 continue
             assert child in included
             # Existing Core-spawned children are marked `spawned_only`; Ruin
@@ -88,8 +95,10 @@ def main() -> None:
     assert all(contents[content_id]["category"] not in excluded_categories for content_id in included)
 
     unresolved_children = scope["unmaterializable_required_spawned_subunits"]
-    assert set(unresolved_children) == {child for children in required_spawned.values()
-                                       for child in children if child not in contents}
+    assert {child for child in unresolved_children if child not in contents} == {
+        child for children in required_spawned.values()
+        for child in children if child not in contents
+    }
     print(f"TH18 permanent scope validation passed ({len(included)} materializable ids, "
           f"{len(unresolved_children)} required spawned subunits not yet materializable, "
           f"{len(temporary)} temporary crafted defenses excluded)")

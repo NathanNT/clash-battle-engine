@@ -42,7 +42,7 @@ int main() {
     return projectile.owner==4;
   })==3);
   const auto snapshot=battle.snapshot();
-  COCSIM_REQUIRE(snapshot.canonical.starts_with("COCSIM-SNAPSHOT-18\n"));
+  COCSIM_REQUIRE(snapshot.canonical.starts_with("COCSIM-SNAPSHOT-22\n"));
   BattleState restored(data,scenario); COCSIM_REQUIRE(restored.restore(snapshot));
   COCSIM_REQUIRE(restored.state_hash()==battle.state_hash());
   const std::string replay_path="replay-super-wizard-test.json"; std::string error;

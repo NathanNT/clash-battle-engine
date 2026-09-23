@@ -172,6 +172,171 @@ ACTIVE_DELTA_PATHS = (
     REFERENCE_PATH.with_name("th18-2026-09-18-super-minion.json"),
     REFERENCE_PATH.with_name("th18-2026-09-18-super-bowler.json"),
     REFERENCE_PATH.with_name("th18-2026-09-18-super-dragon.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-x-bow-footprint.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-electro-dragon-chain.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-bowler-bounce.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-ice-golem-death-freeze.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-apprentice-warden-life-aura.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-super-hog-rider-split.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-super-miner.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-super-valkyrie.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-super-yeti-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-super-witch-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-ice-hound-ice-pup.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-yeti-yetimite.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-witch-skeleton-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-lava-hound-lava-pup-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-headhunter-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-druid-bear-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-furnace-firemite-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-18-meteor-golem-meteormite-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-ruin-witch-knight-contract.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-baby-dragon-tantrum-contract.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-pekka-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-goblin-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-minion-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-hog-rider-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-valkyrie-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-dragon-rider-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-miner-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-electro-dragon-current-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-ruin-witch-knight-current-evidence.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-dragon-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-balloon-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-golem-golemite-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-wizard-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-giant-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-archer-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-barbarian-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-healer-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-wall-breaker-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-electro-titan-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-thrower-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-root-rider-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-sneaky-goblin-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-air-sweeper-current-evidence.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-spell-tower-current-evidence.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-firespitter-current-evidence.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-builders-hut-current-evidence.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-ricochet-cannon-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-super-wizard-tower-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-revenge-tower-current-evidence.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-multi-archer-tower-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-multi-gear-tower-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-scattershot-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-eagle-artillery-th18-scope.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-town-hall-th18-passive-scope.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-bomb-tower-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-19-x-bow-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-inferno-tower-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-ruin-witch-knight-followup.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-furnace-firemite-followup.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-meteor-golem-meteormite-followup.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-revenge-tower-followup.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-crafting-station-passive-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-electromite-followup.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-big-boy-followup.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-lava-hound-lava-pup-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-ruin-witch-movement-followup.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-air-sweeper-mechanics-recheck.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-builders-hut-multi-builder-followup.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-furnace-firemite-lifecycle-recheck.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-spawned-subunit-assets-recheck.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-barbarian-king-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-archer-queen-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-grand-warden-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-royal-champion-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-minion-prince-baseline.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-dragon-duke-current-evidence.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-dragon-duke-base-attack.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-royal-champion-wall-crossing.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-hero-scope-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-hero-visual-icons.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-hero-banner-defense-recheck.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-flying-hero-defense-targetability.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-grand-warden-air-mode.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-hero-banner-visual-variants.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-hero-banner-assignment-official.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-hero-banner-th18-quantity.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-20-attacking-hero-slots.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-21-hero-battlefield-asset-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-21-hero-asset-rights-policy.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-21-hero-projectile-contract-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-21-dragon-duke-trap-mitigation.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-21-hero-friendly-challenge-modifier-scope.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-21-hero-banner-defense-behavior-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-21-hero-collision-geometry-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-hero-defense-evidence-closure.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-meteor-golem-meteormite-evidence-recheck.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-hero-pet-equipment-scope.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-lassi-combat-contract-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-electro-owl-level-and-behavior-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-mighty-yak-level-and-wall-contract-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-unicorn-healing-and-lifecycle-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-frosty-frostmite-contract-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-diggy-current-level-and-behavior-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-poison-lizard-level-and-effect-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-phoenix-revival-and-interaction-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-spirit-fox-invisibility-contract-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-angry-jelly-brainwash-contract-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-sneezy-booger-contract-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-greedy-raven-resource-target-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-revenge-deck-inventory-and-counter-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-barbarian-puppet-summon-contract-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-rage-vial-effect-order-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-earthquake-boots-ground-target-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-vampstache-heal-event-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-giant-gauntlet-current-effect-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-spiky-ball-bounce-and-count-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-snake-bracelet-spawn-contract-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-stick-horse-deployment-and-wall-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-archer-puppet-summon-contract-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-invisibility-vial-damage-and-target-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-giant-arrow-air-defense-damage-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-healer-puppet-summon-and-healing-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-frozen-arrow-slow-and-impact-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-magic-mirror-clone-and-invisibility-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-action-figure-giant-giant-contract-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-monolith-arrow-housing-and-projectile-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-henchmen-puppet-and-child-contract-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-dark-orb-projectile-and-slow-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-metal-pants-barrier-and-recovery-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-noble-iron-opening-shots-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-dark-crown-defeat-threshold-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-meteor-staff-target-and-cadence-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-eternal-tome-aura-immunity-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-life-gem-balance-and-aura-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-rage-gem-aura-and-stacking-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-healing-tome-aura-and-pulse-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-fireball-target-size-and-splash-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-lavaloon-puppet-and-child-contract-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-heroic-torch-balance-and-wall-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-royal-gem-recovery-and-bonus-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-seeking-shield-target-and-bounce-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-hog-rider-puppet-and-child-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-haste-vial-cadence-and-speed-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-rocket-spear-charged-shots-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-electro-boots-aura-and-balance-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-frost-flake-freeze-and-target-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-fire-heart-balance-and-death-burst-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-flame-blower-direction-and-activation-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-stun-blaster-shockwave-and-target-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-electro-fangs-chain-and-target-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-rocket-backpack-dash-and-balance-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-hero-pet-equipment-attachment-contract-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-electro-fangs-passive-type-override.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-hero-battlefield-art-rights-audit.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-royal-gem-official-level-bonus-table.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-earthquake-boots-official-radius-and-damage-table.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-vampstache-official-dps-table.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-barbarian-puppet-official-bonus-and-spawn-rate.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-archer-puppet-official-bonus-and-invisibility-table.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-electro-boots-official-aura-and-healing-table.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-healing-tome-official-duration-table.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-healing-tome-primary-level-provenance.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-six-equipment-primary-level-provenance.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-royal-gem-active-heal-source-recheck.json"),
+    REFERENCE_PATH.with_name("th18-2026-09-23-monolith-arrow-passive-type-override.json"),
 )
 
 def load_reference() -> dict:
@@ -197,8 +362,15 @@ def load_reference() -> dict:
                 or parent_link["sha256"] != hashlib.sha256(prior_bytes).hexdigest()):
             raise RuntimeError("active TH18 delta does not match its frozen parent")
         for key in ("sources", "official_deltas", "catalogue_extra_levels",
-                    "catalogue_overrides", "catalogue_content_overrides"):
+                    "catalogue_overrides", "catalogue_content_overrides",
+                    "catalogue_supplemental_contents"):
             active.setdefault(key, []).extend(delta.get(key, []))
+        for addition in delta.get("secondary_inventory_additions", []):
+            inventory = next((entry for entry in active["secondary_inventory_indices"]
+                              if entry["family"] == addition["family"]), None)
+            if inventory is None or any(content_id in inventory["ids"] for content_id in addition["ids"]):
+                raise RuntimeError("active TH18 inventory addition is missing its family or duplicates an id")
+            inventory["ids"].extend(addition["ids"])
         active["reference_id"] = delta["reference_id"]
         active["frozen_at"] = delta["frozen_at"]
         active["status"] = "versioned_additive_delta"
@@ -213,21 +385,30 @@ def load_reference() -> dict:
                                  "deltas": links, "ids": chain}
     return active
 
-def load_catalogue_overrides(reference: dict) -> dict[tuple[str, int], dict]:
-    """Load the frozen evidence ledger; current balance fixes must not hide in code."""
-    result: dict[tuple[str, int], dict] = {}
+def load_catalogue_overrides(reference: dict) -> dict[tuple[str, int, str], dict]:
+    """Load variant-aware level corrections from the frozen evidence ledger."""
+    result: dict[tuple[str, int, str], dict] = {}
     for item in reference.get("catalogue_overrides", []):
-        result[(item["content_id"], int(item["level"]))] = {
+        key = (item["content_id"], int(item["level"]), item.get("variant", "normal"))
+        # Deltas may add independent sourced fields to an already-corrected
+        # level. Merge them in chain order rather than discarding an earlier
+        # field when a later contract contributes only one value.
+        result.setdefault(key, {}).update({
             name: metadata["value"] for name, metadata in item["fields"].items()
-        }
+        })
     return result
 
 FROZEN_REFERENCE = load_reference()
 CURRENT_LEVEL_OVERRIDES = load_catalogue_overrides(FROZEN_REFERENCE)
 
 def load_content_overrides(reference: dict) -> dict[str, dict[str, dict]]:
-    return {entry["content_id"]: entry["fields"]
-            for entry in reference.get("catalogue_content_overrides", [])}
+    # Several immutable deltas may correct independent fields on one content.
+    # Merge their field maps in reference-chain order so a newer additive
+    # mechanics contract cannot erase an older, sourced numeric correction.
+    result: dict[str, dict[str, dict]] = {}
+    for entry in reference.get("catalogue_content_overrides", []):
+        result.setdefault(entry["content_id"], {}).update(entry["fields"])
+    return result
 
 CONTENT_OVERRIDES = load_content_overrides(FROZEN_REFERENCE)
 
@@ -270,7 +451,7 @@ def non_combat_content(reference: dict, content_id: str, source_id: str, categor
                  field: {"source": observation["source"], "tier": "secondary"}
                  for field in fields}}
     entry["field_provenance"]["image"] = {"source": observation["image_source"], "tier": "secondary"}
-    return entry
+    return apply_content_overrides(entry, content_id)
 
 def extra_levels(reference: dict) -> dict[str, list[dict]]:
     """Load small secondary supplements only when the exact local artefact hashes.
@@ -287,8 +468,11 @@ def extra_levels(reference: dict) -> dict[str, list[dict]]:
         digest = hashlib.sha256(payload).hexdigest()
         if digest != item["observation_sha256"]:
             raise RuntimeError(f"supplement hash mismatch: {path.name}")
+        variant = item.get("variant", "normal")
         observation = next((entry for entry in json.loads(payload)["observations"]
-                            if entry["content_id"] == item["content_id"] and entry["level"] == item["level"]), None)
+                            if entry["content_id"] == item["content_id"]
+                            and entry["level"] == item["level"]
+                            and entry.get("variant", "normal") == variant), None)
         if observation is None or observation["source_id"] != item["source"]:
             raise RuntimeError(f"supplement entry mismatch: {item['content_id']} L{item['level']}")
         source = sources[item["source"]]
@@ -296,7 +480,7 @@ def extra_levels(reference: dict) -> dict[str, list[dict]]:
                       "version": source.get("version", "unknown"), "raw_sha256": digest,
                       "consulted_at_utc": source["consulted_on"] + "T00:00:00+00:00",
                       "pinned_observation": item["observation_file"]}
-        level = {"level": item["level"], "variant": "normal", "damage_per_shot": None,
+        level = {"level": item["level"], "variant": variant, "damage_per_shot": None,
                  "damage": None, "damage_radius_tiles": None, "dps": None,
                  "healing_per_second": None, "death_damage": None, "spawned_units": None,
                  "spawned_unit_level": None, "image": None,
@@ -311,6 +495,7 @@ def extra_levels(reference: dict) -> dict[str, list[dict]]:
         for field, derivation in observation.get("derived_fields", {}).items():
             imported_fields[field] = derivation["value"]
         level.update(imported_fields)
+        level["core_materializable"] = item.get("core_materializable", True)
         level["provenance"] = {"level": item["level"], "source": provenance,
                                "overridden_fields": sorted(imported_fields)}
         loaded.setdefault(item["content_id"], []).append(level)

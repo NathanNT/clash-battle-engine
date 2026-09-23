@@ -98,7 +98,7 @@ int main() {
   COCSIM_REQUIRE(barbarian && dragon);
   COCSIM_REQUIRE(result.stars == 0 && result.troops_remaining == 2
                  && result.remaining_housing_space == barbarian->housing_space + dragon->housing_space
-                 && result.remaining_time_ms == 980);
+                 && result.remaining_time_ms == 1'000 - 2 * kTickMs);
   const auto terminal_snapshot = metrics.snapshot();
   BattleState restored_metrics(data, metrics_scenario);
   COCSIM_REQUIRE(restored_metrics.restore(terminal_snapshot));

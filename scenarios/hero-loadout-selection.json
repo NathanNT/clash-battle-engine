@@ -1,0 +1,18 @@
+{
+  "format_version": 3,
+  "width": 30,
+  "height": 25,
+  "seed": 230923,
+  "duration_ms": 3000,
+  "defenders": [{"kind": "gold_storage", "level": 1, "x": 25.5, "y": 20.5}],
+  "army": [{"kind": "archer_queen", "level": 110, "count": 1},
+            {"kind": "barbarian_king", "level": 110, "count": 1}],
+  "hero_loadouts": [
+    {"hero": "archer_queen", "pet": {"id": "lassi", "level": 15},
+     "equipment": [{"id": "giant_arrow", "level": 18},
+                   {"id": "monolith_arrow", "level": 27}]},
+    {"hero": "barbarian_king", "pet": {"id": "unicorn", "level": 15},
+     "equipment": [{"id": "vampstache", "level": 18},
+                   {"id": "giant_gauntlet", "level": 27}]}
+  ]
+}

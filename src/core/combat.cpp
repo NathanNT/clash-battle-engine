@@ -17,7 +17,43 @@ namespace cocsim {
 using detail::dist;
 
 void BattleState::update_entities() {
-  constexpr Milliseconds kPathRefreshMs=100;
+  // The old 100-ms refresh is nearest to six 16-ms steps (96 ms).
+  constexpr Milliseconds kPathRefreshMs=6*kTickMs;
+  // A Druid's human form remains active for the sourced logical duration.
+  // The Bear enters through the ordinary stable spawn queue at the exact
+  // fixed-tick deadline. Its complete state is therefore Core state and the
+  // Viewer or replay timer cannot affect either the deadline or entity order.
+  for(auto& druid:entities_) if(alive(druid)&&druid.kind==Kind::Druid
+      &&druid.druid_transform_at>0&&now_ms_>=druid.druid_transform_at) {
+    const auto id=druid.id;
+    const auto level=druid.level;
+    const auto position=druid.pos;
+    const auto side=druid.side;
+    druid.hp=0;
+    queue_spawn(Kind::DruidBear,id,level,position,side);
+    emit(EventType::TargetChanged,id,0,0,"druid transforms after human duration");
+  }
+  // Apprentice Warden's Life Aura is a continuously evaluated attacker-side
+  // HP bonus for nearby ground troops. The official contract fixes the radius,
+  // percentages and non-stacking strongest-aura rule. Recomputing from the
+  // immutable catalogue and logical positions keeps an aura transition fully
+  // deterministic and restores the same result after a snapshot or replay.
+  for(auto& candidate:entities_) {
+    if(!alive(candidate)||candidate.side!=Side::Attacker||candidate.flying) continue;
+    const auto* candidate_stats=data_.find(candidate.kind,candidate.level,candidate.supercharged?"supercharged":"normal");
+    if(!candidate_stats||candidate_stats->category!=EntityCategory::Troop) continue;
+    double best_percent=0.0;
+    for(const auto& warden:entities_) {
+      if(!alive(warden)||warden.id==candidate.id||warden.side!=Side::Attacker||warden.kind!=Kind::ApprenticeWarden) continue;
+      const auto* warden_stats=data_.find(warden.kind,warden.level,warden.supercharged?"supercharged":"normal");
+      if(warden_stats&&warden_stats->life_aura_range>0.0&&warden_stats->life_aura_hp_increase_percent>best_percent&&dist(candidate.pos,warden.pos)<=warden_stats->life_aura_range)
+        best_percent=warden_stats->life_aura_hp_increase_percent;
+    }
+    const double desired_max_hp=candidate_stats->hp*(1.0+best_percent/100.0);
+    if(desired_max_hp>candidate.max_hp) candidate.hp+=desired_max_hp-candidate.max_hp;
+    candidate.max_hp=desired_max_hp;
+    candidate.hp=std::min(candidate.hp,candidate.max_hp);
+  }
   const auto destruction=result().destruction;
   for(auto& hidden:entities_) if(alive(hidden)&&hidden.concealed&&hidden.kind==Kind::HiddenTesla) {
     const auto* stats=data_.find(hidden.kind,hidden.level,hidden.supercharged?"supercharged":"normal");
@@ -57,16 +93,13 @@ void BattleState::update_entities() {
       if(!victims.empty()) emit(EventType::Impact,a.id,0,aura_damage,"electro titan aura");
       a.next_aura_action=now_ms_+own_stats->aura_cooldown;
     }
-    // Home Village Baby Dragon: Tantrum applies while no *other* allied air
-    // troop is within the sourced 4.5-tile radius.  We evaluate it at the
-    // shared action/movement tick so core, Viewer and RL use one deterministic
-    // rule. Positions, side and flying status are all snapshot state, hence no
-    // extra transient flag is needed for replays or restore.
-    if(a.kind==Kind::BabyDragon) if(const auto* stats=data_.find(a.kind,a.level,a.supercharged?"supercharged":"normal");stats&&stats->isolation_radius>0.0) {
-      const bool isolated=std::none_of(entities_.begin(),entities_.end(),[&](const Entity& ally){
-        return ally.id!=a.id&&alive(ally)&&ally.side==a.side&&ally.flying&&dist(a.pos,ally.pos)<=stats->isolation_radius;
-      });
-      if(isolated) { rage_damage*=stats->rage_damage_multiplier; rage_speed*=stats->rage_attack_speed_multiplier; }
+    // Baby Dragon Tantrum and Dragon Duke Royal Rampage apply while no other
+    // allied air unit is within their separately sourced isolation radius.
+    // The predicate uses only serialised logical entity state at the fixed
+    // tick, so adapters and replay restoration share one deterministic path.
+    if(own_stats&&own_stats->isolation_radius>0.0) {
+      const bool isolated=isolated_from_allied_flying(a,*own_stats);
+      if(isolated) { rage_damage*=own_stats->rage_damage_multiplier; rage_speed*=own_stats->rage_attack_speed_multiplier; }
     }
     if(frozen) continue;
     if(a.side==Side::Defender&&a.activation_housing>0&&deployed_housing_<a.activation_housing) continue;
@@ -96,6 +129,7 @@ void BattleState::update_entities() {
     if(d<a.min_range) { a.target.reset(); a.waypoint.reset(); a.next_path=0; if(inferno_ramp){a.inferno_lock_elapsed=0;a.inferno_lock_target=0;} continue; }
     const bool burrows=own_stats&&own_stats->burrows;
     const bool smashes_walls=own_stats&&own_stats->smashes_walls;
+    const bool jumps_walls=own_stats&&own_stats->jumps_walls;
     // Super Minion's opening Long Shots use the sourced 10.25-tile reach.
     // Their unverified bonus multiplier is an explicit immutable catalogue
     // fallback, while this counter is future-affecting serialized state.
@@ -129,12 +163,12 @@ void BattleState::update_entities() {
         else if(a.flying||burrows) waypoint=t->pos;
         else {
           if(!a.waypoint||now_ms_>=a.next_path||dist(a.pos,*a.waypoint)<0.05) {
-            a.waypoint=next_path_waypoint(a,*t); a.next_path=now_ms_+kPathRefreshMs;
+            a.waypoint=next_path_waypoint(a,*t,0,jumps_walls); a.next_path=now_ms_+kPathRefreshMs;
           }
           waypoint=a.waypoint;
         }
         if(!waypoint) {
-          const auto wall=blocking_wall(a,*t);
+          const auto wall=jumps_walls?0:blocking_wall(a,*t);
           if(wall) { a.target=wall; a.waypoint.reset(); a.next_path=0; emit(EventType::TargetChanged,a.id,wall,0,"blocking wall"); }
           continue;
         }
@@ -162,9 +196,10 @@ void BattleState::update_entities() {
     const auto action_cooldown=std::max<Milliseconds>(kTickMs,static_cast<Milliseconds>(std::ceil(static_cast<double>(a.cooldown)/rage_speed/static_cast<double>(kTickMs)))*kTickMs);
     a.next_action=now_ms_+action_cooldown;
     if(a.heals) {
-      // No source in the frozen reference establishes an immediate Healer
-      // impact. Keep it in the shared deterministic projectile pipeline until
-      // a versioned direct-heal or flight contract exists.
+      // The current version-pinned Healer source establishes its 0.7 s
+      // cadence, friendly ground-only eligibility and healing rate, but not
+      // launch/impact timing. Keep that unresolved timing in the shared
+      // deterministic projectile pipeline rather than inventing a direct hit.
       const auto amount=a.healing*(static_cast<double>(a.cooldown)/1000.0);
       const auto projectile_id=next_projectile_id_++;
       projectiles_.push_back({projectile_id,a.id,t->id,amount,0.0,a.pos,a.pos,0.0,now_ms_,now_ms_+kTickMs,false});
@@ -192,10 +227,41 @@ void BattleState::update_entities() {
     // does not publish a measured radius, so the frozen delta explicitly uses
     // the three-tile base range as a replaceable proxy. Victims are selected
     // once at launch, nearest to the primary then entity ID, and the normal
-    // serialised T+10-ms projectile path carries their future damage.
+    // serialised next-tick projectile path carries their future damage.
     const bool chain_magic=own_stats&&own_stats->chain_damage_multiplier>0.0
       &&own_stats->chain_target_count>1&&own_stats->chain_radius>0.0;
-    if(chain_magic) {
+    const bool electro_dragon_chain=a.kind==Kind::ElectroDragon&&chain_magic;
+    if(electro_dragon_chain) {
+      // Electro Dragon lightning hops from each victim to the next rather
+      // than branching around the primary target.  The primary source caps
+      // the full chain at five victims and forbids repeats.  The secondary
+      // geometry is expressed as the allowed empty gap between footprints,
+      // then equal candidates resolve by maximum HP and finally entity ID.
+      EntityId previous=t->id;
+      while(targets.size()<static_cast<std::size_t>(own_stats->chain_target_count)) {
+        const auto* previous_entity=entity(previous);
+        if(!previous_entity) break;
+        const Entity* chosen=nullptr;
+        double chosen_distance{};
+        for(const auto& candidate:entities_) {
+          if(!alive(candidate)||candidate.side==a.side||candidate.concealed||candidate.underground
+              ||std::find(targets.begin(),targets.end(),candidate.id)!=targets.end()
+              ||(a.target_type==TargetType::Air&&!candidate.flying)
+              ||(a.target_type==TargetType::Ground&&candidate.flying)) continue;
+          const auto candidate_distance=dist(previous_entity->pos,candidate.pos);
+          if(candidate_distance>own_stats->chain_radius+previous_entity->radius+candidate.radius) continue;
+          if(!chosen||candidate_distance<chosen_distance
+              ||(candidate_distance==chosen_distance&&(candidate.max_hp>chosen->max_hp
+                  ||(candidate.max_hp==chosen->max_hp&&candidate.id<chosen->id)))) {
+            chosen=&candidate;
+            chosen_distance=candidate_distance;
+          }
+        }
+        if(!chosen) break;
+        targets.push_back(chosen->id);
+        previous=chosen->id;
+      }
+    } else if(chain_magic) {
       for(const auto& candidate:entities_) if(alive(candidate)&&candidate.side!=a.side
           &&!candidate.concealed&&!candidate.underground&&candidate.id!=t->id
           &&(a.target_type==TargetType::Both||(a.target_type==TargetType::Air?candidate.flying:!candidate.flying))
@@ -212,16 +278,24 @@ void BattleState::update_entities() {
       for(const auto& candidate:entities_) if(alive(candidate)&&candidate.side!=a.side&&!candidate.concealed&&!candidate.underground&&!(a.side==Side::Defender&&candidate.invisible_to_defenses_until>now_ms_)&&candidate.id!=t->id&&(a.target_type==TargetType::Both||(a.target_type==TargetType::Air?candidate.flying:!candidate.flying))&&dist(a.pos,candidate.pos)<=a.range+a.radius+candidate.radius) targets.push_back(candidate.id);
       std::stable_sort(targets.begin()+1,targets.end(),[&](EntityId left,EntityId right){const auto* l=entity(left);const auto* r=entity(right);const auto dl=dist(a.pos,l->pos),dr=dist(a.pos,r->pos);return dl==dr?left<right:dl<dr;});
       if(targets.size()>static_cast<std::size_t>(a.multi_target_count)) targets.resize(static_cast<std::size_t>(a.multi_target_count));
+      // Supercell specifies that the Multi-Archer Tower still fires all three
+      // arrows under capacity: three at one target, or one target twice when
+      // only two are available.  The official rule leaves that doubled target
+      // unspecified, so the already captured primary (distance then entity ID)
+      // is repeated deterministically.  Other multi-target weapons retain
+      // their own source-defined distinct-target contracts.
+      if(a.kind==Kind::MultiArcherTower)
+        while(targets.size()<static_cast<std::size_t>(a.multi_target_count)) targets.push_back(targets.front());
     }
-    // Supercell specifies exactly three damaging impacts for Super Bowler.
-    // The public material fixes neither bounce spacing nor flight timing, so
-    // GameData records the source's three-tile initial range as a replaceable
-    // forward-step proxy. Capture the three ground-only splash centers now;
-    // the serialised T+10-ms fixed-impact projectiles are shared by Core,
-    // Viewer and RL and cannot be bent by later entity movement.
-    const bool triple_strike=own_stats&&own_stats->bounce_impact_count>1
-      &&own_stats->bounce_step>0.0&&own_stats->bounce_splash_radius>0.0;
-    if(triple_strike) {
+    // The ordinary Bowler's two impacts and the Super Bowler's three impacts
+    // are emitted as one deterministic launch-time ray. Public sources do
+    // not define their exact bounce geometry or timing, so GameData carries a
+    // versioned forward-step proxy. The ordinary Bowler deliberately keeps a
+    // zero-radius lower bound until a splash radius is sourced.
+    const bool bouncing_boulder=own_stats&&own_stats->bounce_impact_count>1
+      &&own_stats->bounce_step>0.0
+      &&(a.kind==Kind::Bowler||a.kind==Kind::SuperBowler);
+    if(bouncing_boulder) {
       const auto dx=t->pos.x-a.pos.x,dy=t->pos.y-a.pos.y;
       const auto length=std::hypot(dx,dy);
       if(length>0.0) for(int impact_index=0;impact_index<own_stats->bounce_impact_count;++impact_index) {
@@ -229,8 +303,9 @@ void BattleState::update_entities() {
                           t->pos.y+dy/length*own_stats->bounce_step*impact_index};
         const auto projectile_id=next_projectile_id_++;
         projectiles_.push_back({projectile_id,a.id,0,damage_amount,own_stats->bounce_splash_radius,a.pos,a.pos,0.0,now_ms_,now_ms_+kTickMs,false,center,false,true});
-        emit(EventType::Attack,a.id,t->id,scaled_damage(a.id,t->id,damage_amount),"super bowler triple strike");
-        emit(EventType::Projectile,a.id,0,damage_amount,"super bowler fixed bounce",projectile_id);
+        const bool super_bowler=a.kind==Kind::SuperBowler;
+        emit(EventType::Attack,a.id,t->id,scaled_damage(a.id,t->id,damage_amount),super_bowler?"super bowler triple strike":"bowler double strike");
+        emit(EventType::Projectile,a.id,0,damage_amount,super_bowler?"super bowler fixed bounce":"bowler fixed bounce",projectile_id);
       }
       if(a.shots_per_burst>1 && ++a.shots_in_burst>=a.shots_per_burst) { a.shots_in_burst=0; a.next_action=now_ms_+a.time_between_bursts; }
       continue;
@@ -241,19 +316,24 @@ void BattleState::update_entities() {
     // this exception here prevents a fabricated one-tick projectile delay.
     // All other ranged weapons continue through the serialised projectile
     // path until a versioned flight contract says otherwise.
-    const bool inferno_beam=inferno_single || a.kind==Kind::InfernoTower;
-    for(const auto target_id:targets) {
-      const auto target_damage=chain_magic&&target_id!=t->id
-        ? damage_amount*own_stats->chain_damage_multiplier : damage_amount;
+    // Super Miner shares the sourced three-stage damage schedule, but is a
+    // melee drill.  It must retain the normal contact-damage route instead of
+    // being presented or scheduled as an Inferno beam.
+    const bool inferno_beam=a.kind==Kind::InfernoDragon || a.kind==Kind::InfernoTower;
+    for(std::size_t target_index=0;target_index<targets.size();++target_index) {
+      const auto target_id=targets[target_index];
+      const auto target_damage=electro_dragon_chain
+        ? damage_amount*std::pow(own_stats->chain_damage_multiplier,static_cast<double>(target_index))
+        : chain_magic&&target_id!=t->id ? damage_amount*own_stats->chain_damage_multiplier : damage_amount;
       const auto applied_damage=scaled_damage(a.id,target_id,target_damage);
-      emit(EventType::Attack,a.id,target_id,applied_damage,inferno_beam?"inferno beam":opening_long_shot?"super minion long shot":chain_magic&&target_id!=t->id?"super wizard chain":a.multi_target_count>1?"multi-target attack":"attack");
+      emit(EventType::Attack,a.id,target_id,applied_damage,inferno_beam?"inferno beam":a.kind==Kind::SuperMiner?"super miner drill":opening_long_shot?"super minion long shot":electro_dragon_chain&&target_index>0?"electro dragon chain":chain_magic&&target_id!=t->id?"super wizard chain":a.multi_target_count>1?"multi-target attack":"attack");
       if(a.ranged&&!inferno_beam) {
         // The only current flight contract is the Mine's dedicated trap path
         // above. Even if a future catalogue import brings a numeric speed for
         // an ordinary weapon, it must not silently become a homing shot: its
         // launch, endpoint and target-loss rules need their own sourced Core
         // contract first. Until then this remains the explicit logical
-        // T+10-ms projectile used by GUI and RL.
+        // Next-tick projectile used by GUI and RL.
         const auto projectile_id=next_projectile_id_++;
         // Sharp Shot has separately sourced acquisition (6 tiles) and fixed
         // projectile (12 tiles) ranges. Capture the whole ray at launch: a
@@ -271,7 +351,7 @@ void BattleState::update_entities() {
           }
         }
         projectiles_.push_back({projectile_id,a.id,target_id,target_damage,a.splash?a.splash_radius:0.0,a.pos,a.pos,0.0,now_ms_,now_ms_+kTickMs,false,endpoint,sharp_shot});
-        emit(EventType::Projectile,a.id,target_id,applied_damage,sharp_shot?"super archer sharp shot":opening_long_shot?"super minion long shot":chain_magic&&target_id!=t->id?"super wizard chain":"logical projectile",projectile_id);
+        emit(EventType::Projectile,a.id,target_id,applied_damage,sharp_shot?"super archer sharp shot":opening_long_shot?"super minion long shot":electro_dragon_chain&&target_index>0?"electro dragon chain":chain_magic&&target_id!=t->id?"super wizard chain":"logical projectile",projectile_id);
       }
       else { damage(a.id,target_id,target_damage); }
     }

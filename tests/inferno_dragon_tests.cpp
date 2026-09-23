@@ -27,13 +27,13 @@ bool has_beam_damage(const BattleState& battle, double amount) {
 int main() {
   const auto data = GameData::v0();
   const auto* dragon = data.find(Kind::InfernoDragon, 12);
-  COCSIM_REQUIRE(dragon && dragon->hp == 2700 && dragon->cooldown == 130 && dragon->flying);
+  COCSIM_REQUIRE(dragon && dragon->hp == 2700 && dragon->cooldown == 128 && dragon->flying);
   // Damage remains the source DPS multiplied by the source 0.128-second
-  // cadence. Scheduling is separately rounded up to the next 10-ms tick.
+  // cadence. Scheduling is separately rounded up to the next 16-ms tick.
   COCSIM_REQUIRE(std::abs(dragon->inferno_initial_damage - 11.52) < 1e-9);
   COCSIM_REQUIRE(std::abs(dragon->inferno_second_damage - 23.296) < 1e-9);
   COCSIM_REQUIRE(std::abs(dragon->inferno_max_damage - 232.96) < 1e-9);
-  COCSIM_REQUIRE(dragon->inferno_second_stage_at == 1700 && dragon->inferno_max_stage_at == 3200);
+  COCSIM_REQUIRE(dragon->inferno_second_stage_at == 1696 && dragon->inferno_max_stage_at == 3200);
 
   // The secondary stage table becomes immutable GameData. The shared Core
   // quantizes its cadence to 130 ms and records a target lock in entity state;
@@ -55,7 +55,7 @@ int main() {
   }));
 
   const auto snapshot = battle.snapshot();
-  COCSIM_REQUIRE(snapshot.canonical.starts_with("COCSIM-SNAPSHOT-18\n"));
+  COCSIM_REQUIRE(snapshot.canonical.starts_with("COCSIM-SNAPSHOT-22\n"));
   BattleState restored(data, scenario);
   COCSIM_REQUIRE(restored.restore(snapshot));
   COCSIM_REQUIRE(restored.state_hash() == battle.state_hash());

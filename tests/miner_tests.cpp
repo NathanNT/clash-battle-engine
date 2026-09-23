@@ -1,0 +1,9 @@
+#include "cocsim/core.hpp"
+#include "test_support.hpp"
+#include <algorithm>
+#include <cstdio>
+#include <string>
+#include <vector>
+using namespace cocsim;
+namespace { void submit(BattleState& b,const std::vector<Command>& c){for(const auto& x:c)COCSIM_REQUIRE(b.submit(x));} }
+int main(){const auto data=GameData::v0();const auto* miner=data.find(Kind::Miner,12);COCSIM_REQUIRE(miner&&miner->hp==2050&&miner->damage==331.5&&miner->dps==195&&miner->cooldown==1696&&miner->range==.5&&miner->movement_tiles_per_second==4&&miner->housing_space==6&&miner->burrows&&miner->deployable);Scenario s;s.width=24;s.height=20;s.duration_ms=6000;s.defenders={{Kind::GoldMine,1,{15.5,10.5}},{Kind::Wall,1,{10.5,10.5}},{Kind::Bomb,1,{11.5,10.5}}};s.army={{Kind::Miner,1,1}};const std::vector<Command> c={{CommandType::Deploy,kTickMs,0,0,Kind::Miner,1,{7.5,10.5}}};BattleState b(data,s);submit(b,c);b.advance_ticks(80);const auto v=b.observe();const auto it=std::find_if(v.begin(),v.end(),[](const EntityView&e){return e.kind==Kind::Miner&&e.side==Side::Attacker;});COCSIM_REQUIRE(it!=v.end()&&it->underground&&it->position.x>10.5);COCSIM_REQUIRE(std::none_of(b.events().begin(),b.events().end(),[](const Event&e){return e.type==EventType::TargetChanged&&e.detail=="trap triggered";}));const auto snap=b.snapshot();BattleState r(data,s);COCSIM_REQUIRE(r.restore(snap)&&r.state_hash()==b.state_hash());for(int i=0;i<100;++i){b.advance_ticks(1);r.advance_ticks(1);COCSIM_REQUIRE(b.state_hash()==r.state_hash());}const std::string p="replay-miner-test.json";std::string e;COCSIM_REQUIRE(save_replay(p,s,c,e));Scenario rs;std::vector<Command> rc;COCSIM_REQUIRE(load_replay(p,rs,rc,e));BattleState replay(data,rs);submit(replay,rc);replay.advance_ticks(180);COCSIM_REQUIRE(replay.state_hash()==b.state_hash());COCSIM_REQUIRE(std::remove(p.c_str())==0);}

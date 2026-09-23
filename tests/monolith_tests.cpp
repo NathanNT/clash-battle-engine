@@ -23,7 +23,7 @@ int main() {
   const auto* level_five = data.find(Kind::Monolith, 5);
   COCSIM_REQUIRE(level_one && level_one->footprint_width == 3 && level_one->footprint_height == 3);
   COCSIM_REQUIRE(level_one->damage == 225 && level_one->max_hp_damage_percent == 11);
-  COCSIM_REQUIRE(level_one->cooldown == 1500 && level_one->range == 11 && level_one->target_type == TargetType::Both);
+  COCSIM_REQUIRE(level_one->cooldown == 1504 && level_one->range == 11 && level_one->target_type == TargetType::Both);
   COCSIM_REQUIRE(level_five && level_five->hp == 5959 && level_five->damage == 337.5
                  && level_five->dps == 225 && level_five->max_hp_damage_percent == 15
                  && level_five->attributes.town_hall_required == 18);

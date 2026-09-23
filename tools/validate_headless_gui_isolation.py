@@ -46,7 +46,8 @@ viewer_paths = [
 viewer = "\n".join(path.read_text(encoding="utf-8") for path in viewer_paths)
 bridge = (ROOT / "src/viewer/simulation_bridge.hpp").read_text(encoding="utf-8")
 assert '#include "simulation_bridge.hpp"' in viewer_main
-assert "viewer::SimulationBridge simulation(data, initial);" in viewer_main
+assert "std::make_unique<viewer::SimulationBridge>(data, initial" in viewer_main
+assert "load_viewer_replay" in viewer_main
 assert "battle.observe_projectiles()" in bridge
 assert "struct ProjectileTrace" in viewer
 assert "ProjectileTraceKind::Healing" in viewer
@@ -99,6 +100,8 @@ assert "else ImGui::Dummy({42, 42});" in viewer
 # or any Core/RL source file.
 assert "kPlaybackSpeeds{1, 2, 4, 10}" in viewer
 assert "presentation_debt_ms" in bridge
-assert "simulation.set_playback_speed(playback_speed);" in viewer
+assert "simulation->set_playback_speed(playback_speed);" in viewer
+assert "replay_commands_" in bridge
+assert "submit_replay_commands" in bridge
 
 print("headless GUI isolation validation passed")

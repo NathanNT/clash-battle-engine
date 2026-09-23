@@ -21,7 +21,7 @@ int main() {
   BattleState battle(GameData::v0(), scenario);
   const std::vector<Command> commands{
     {CommandType::Deploy, kTickMs, 0, 0, Kind::Dragon, 13, {1.5, 10.5}},
-    {CommandType::Deploy, 30, 0, 0, Kind::Dragon, 13, {45.5, 40.5}},
+    {CommandType::Deploy, 3 * kTickMs, 0, 0, Kind::Dragon, 13, {45.5, 40.5}},
   };
 
   // The first Dragon is only in reach of the upper-left defense. The lower
@@ -55,7 +55,7 @@ int main() {
   COCSIM_REQUIRE(load_replay(replay_path, replay_scenario, replay_commands, error));
   BattleState replay(GameData::v0(), replay_scenario);
   for (const auto& command : replay_commands) COCSIM_REQUIRE(replay.submit(command));
-  replay.advance_to(240);
+  replay.advance_to(24 * kTickMs);
   COCSIM_REQUIRE(replay.state_hash() == battle.state_hash());
   COCSIM_REQUIRE(std::remove(replay_path.c_str()) == 0);
 }

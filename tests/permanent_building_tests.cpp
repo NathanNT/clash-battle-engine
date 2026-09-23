@@ -28,9 +28,14 @@ int main() {
   const auto data = GameData::v0();
   const auto* bobs = data.find(Kind::BobsHut, 1);
   const auto* helper = data.find(Kind::HelperHut, 1);
+  const auto* crafting_station = data.find(Kind::CraftingStation, 1);
+  const auto* xbow = data.find(Kind::XBow, 13);
   COCSIM_REQUIRE(bobs && bobs->hp == 250 && bobs->footprint_width == 2 && bobs->footprint_height == 2);
   COCSIM_REQUIRE(helper && helper->hp == 500 && helper->footprint_width == 3 && helper->footprint_height == 3);
+  COCSIM_REQUIRE(crafting_station && crafting_station->hp == 1000 && crafting_station->footprint_width == 3 && crafting_station->footprint_height == 3);
+  COCSIM_REQUIRE(xbow && xbow->footprint_width == 3 && xbow->footprint_height == 3);
   COCSIM_REQUIRE(bobs->category == EntityCategory::Other && helper->category == EntityCategory::Other);
+  COCSIM_REQUIRE(crafting_station->category == EntityCategory::Defense && crafting_station->damage == 0.0 && crafting_station->range == 0.0);
 
   Scenario scenario;
   scenario.width = 24;
@@ -39,6 +44,7 @@ int main() {
   scenario.defenders = {
     {Kind::BobsHut, 1, {10.0, 10.0}},
     {Kind::HelperHut, 1, {15.5, 10.5}},
+    {Kind::CraftingStation, 1, {20.5, 10.5}},
   };
   scenario.army = {{Kind::Barbarian, 1, 1}};
   const std::vector<Command> commands = {
@@ -50,8 +56,10 @@ int main() {
   const auto initial = battle.observe();
   const auto& bobs_view = view_for(initial, Kind::BobsHut);
   const auto& helper_view = view_for(initial, Kind::HelperHut);
+  const auto& crafting_station_view = view_for(initial, Kind::CraftingStation);
   COCSIM_REQUIRE(bobs_view.max_hp == 250 && bobs_view.footprint_width == 2 && bobs_view.footprint_height == 2);
   COCSIM_REQUIRE(helper_view.max_hp == 500 && helper_view.footprint_width == 3 && helper_view.footprint_height == 3);
+  COCSIM_REQUIRE(crafting_station_view.max_hp == 1000 && crafting_station_view.footprint_width == 3 && crafting_station_view.footprint_height == 3);
 
   battle.advance_ticks(150);
   COCSIM_REQUIRE(std::any_of(battle.events().begin(), battle.events().end(), [](const Event& event) {

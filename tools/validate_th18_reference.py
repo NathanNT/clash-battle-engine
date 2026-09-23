@@ -77,8 +77,9 @@ def main() -> None:
     for source_id, source in sources.items():
         assert source["id"] == source_id
         assert source.get("tier") in {
-            "primary", "secondary", "secondary-dated-build",
-            "secondary-version-unknown", "experimental",
+            "primary", "primary-undated", "secondary", "secondary-frozen-payload", "secondary-dated-build", "secondary-build-pinned", "secondary-dated-game-files",
+            "secondary-version-unknown", "secondary-derived-from-pinned-upstream",
+            "secondary-version-unknown-historical", "secondary-search-index-only", "experimental",
         }, source_id
         assert isinstance(source.get("publisher"), str) and source["publisher"], source_id
         assert isinstance(source.get("url"), str) and source["url"].startswith("https://"), source_id
@@ -520,7 +521,9 @@ def main() -> None:
     assert hero_banner_content["levels"] == []
     assert hero_banner_content["targetable"] is False and hero_banner_content["counts_toward_destruction"] is False and hero_banner_content["deployment_margin_tiles"] == 1
     assert hero_banner_content["image"] == "images/home/army-buildings/hero-banner/empty.png"
-    assert set(hero_banner_content["field_provenance"]) == {"targetable", "counts_toward_destruction", "deployment_margin_tiles", "image"}
+    assert set(hero_banner_content["field_provenance"]) == {"targetable", "counts_toward_destruction", "deployment_margin_tiles", "image", "source_images", "max_placements"}
+    assert set(hero_banner_content["source_images"]) == {"normal", "barbarian_king", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke"}
+    assert hero_banner_content["max_placements"] == 4
     barracks_l13 = next(level for level in dark_barracks["levels"] if level["level"] == 13)
     assert barracks_l13["hitpoints"] == 1100
     assert barracks_l13["provenance"]["source"]["source"] == "goblinsfarm-2026-08-26-dark-barracks"

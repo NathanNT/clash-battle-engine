@@ -5,6 +5,11 @@ project(CoCSim VERSION 0.1.0 LANGUAGES CXX)
 # parallel project builds while retaining usable Debug symbols.
 if(MSVC)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<$<CONFIG:Debug,RelWithDebInfo>:Embedded>")
+  # A Visual Studio solution can still schedule compiler invocations from
+  # distinct target projects while CMake is asked for one build job.  /FS
+  # serializes access to a shared PDB and makes the developer test command
+  # reliable without affecting simulation code or timing.
+  add_compile_options(/FS)
 endif()
 
 option(COCSIM_BUILD_VIEWER "Build the SDL3/ImGui viewer (requires packages installed by caller)" OFF)
@@ -58,12 +63,14 @@ if(COCSIM_BUILD_TESTS)
     add_test(NAME ${target} COMMAND ${target})
   endfunction()
   add_cocsim_test(cocsim_tests tests/core_tests.cpp)
+  add_cocsim_test(cocsim_tick_migration_tests tests/tick_migration_tests.cpp)
   add_cocsim_test(cocsim_content_registry_tests tests/content_registry_tests.cpp)
   add_cocsim_test(cocsim_scenario_io_tests tests/scenario_io_tests.cpp)
   add_cocsim_test(cocsim_determinism_tests tests/determinism_tests.cpp)
   add_cocsim_test(cocsim_deployment_replay_tests tests/deployment_replay_tests.cpp)
   add_cocsim_test(cocsim_targeting_tests tests/targeting_tests.cpp)
   add_cocsim_test(cocsim_permanent_building_tests tests/permanent_building_tests.cpp)
+  add_cocsim_test(cocsim_permanent_variant_tests tests/permanent_variant_tests.cpp)
   add_cocsim_test(cocsim_air_defense_tests tests/air_defense_tests.cpp)
   add_cocsim_test(cocsim_monolith_tests tests/monolith_tests.cpp)
   add_cocsim_test(cocsim_super_wall_breaker_tests tests/super_wall_breaker_tests.cpp)
@@ -73,9 +80,62 @@ if(COCSIM_BUILD_TESTS)
   add_cocsim_test(cocsim_rocket_balloon_tests tests/rocket_balloon_tests.cpp)
   add_cocsim_test(cocsim_inferno_dragon_tests tests/inferno_dragon_tests.cpp)
   add_cocsim_test(cocsim_super_wizard_tests tests/super_wizard_tests.cpp)
+  add_cocsim_test(cocsim_ricochet_cannon_tests tests/ricochet_cannon_tests.cpp)
+  add_cocsim_test(cocsim_multi_archer_tower_tests tests/multi_archer_tower_tests.cpp)
+  add_cocsim_test(cocsim_multi_gear_tower_tests tests/multi_gear_tower_tests.cpp)
+  add_cocsim_test(cocsim_scattershot_tests tests/scattershot_tests.cpp)
+  add_cocsim_test(cocsim_bomb_tower_tests tests/bomb_tower_tests.cpp)
+  add_cocsim_test(cocsim_x_bow_tests tests/x_bow_tests.cpp)
+  add_cocsim_test(cocsim_inferno_tower_tests tests/inferno_tower_tests.cpp)
+  add_cocsim_test(cocsim_super_wizard_tower_tests tests/super_wizard_tower_tests.cpp)
   add_cocsim_test(cocsim_super_minion_tests tests/super_minion_tests.cpp)
   add_cocsim_test(cocsim_super_bowler_tests tests/super_bowler_tests.cpp)
   add_cocsim_test(cocsim_super_dragon_tests tests/super_dragon_tests.cpp)
+  add_cocsim_test(cocsim_electro_dragon_tests tests/electro_dragon_tests.cpp)
+  add_cocsim_test(cocsim_bowler_tests tests/bowler_tests.cpp)
+  add_cocsim_test(cocsim_ice_golem_tests tests/ice_golem_tests.cpp)
+  add_cocsim_test(cocsim_apprentice_warden_tests tests/apprentice_warden_tests.cpp)
+  add_cocsim_test(cocsim_super_hog_rider_tests tests/super_hog_rider_tests.cpp)
+  add_cocsim_test(cocsim_super_miner_tests tests/super_miner_tests.cpp)
+  add_cocsim_test(cocsim_super_valkyrie_tests tests/super_valkyrie_tests.cpp)
+  add_cocsim_test(cocsim_super_yeti_tests tests/super_yeti_tests.cpp)
+  add_cocsim_test(cocsim_super_witch_tests tests/super_witch_tests.cpp)
+  add_cocsim_test(cocsim_ice_hound_tests tests/ice_hound_tests.cpp)
+  add_cocsim_test(cocsim_yeti_tests tests/yeti_tests.cpp)
+  add_cocsim_test(cocsim_witch_tests tests/witch_tests.cpp)
+  add_cocsim_test(cocsim_lava_hound_tests tests/lava_hound_tests.cpp)
+  add_cocsim_test(cocsim_headhunter_tests tests/headhunter_tests.cpp)
+  add_cocsim_test(cocsim_druid_tests tests/druid_tests.cpp)
+  add_cocsim_test(cocsim_barbarian_king_tests tests/barbarian_king_tests.cpp)
+  add_cocsim_test(cocsim_archer_queen_tests tests/archer_queen_tests.cpp)
+  add_cocsim_test(cocsim_monolith_arrow_housing_tests tests/monolith_arrow_housing_tests.cpp)
+  add_cocsim_test(cocsim_hero_loadout_tests tests/hero_loadout_tests.cpp)
+  add_cocsim_test(cocsim_grand_warden_tests tests/grand_warden_tests.cpp)
+  add_cocsim_test(cocsim_royal_champion_tests tests/royal_champion_tests.cpp)
+  add_cocsim_test(cocsim_minion_prince_tests tests/minion_prince_tests.cpp)
+  add_cocsim_test(cocsim_dragon_duke_tests tests/dragon_duke_tests.cpp)
+  add_cocsim_test(cocsim_hero_defense_tests tests/hero_defense_tests.cpp)
+  add_cocsim_test(cocsim_baby_dragon_tests tests/baby_dragon_tests.cpp)
+  add_cocsim_test(cocsim_dragon_tests tests/dragon_tests.cpp)
+  add_cocsim_test(cocsim_balloon_tests tests/balloon_tests.cpp)
+  add_cocsim_test(cocsim_golem_tests tests/golem_tests.cpp)
+  add_cocsim_test(cocsim_wizard_tests tests/wizard_tests.cpp)
+  add_cocsim_test(cocsim_giant_tests tests/giant_tests.cpp)
+  add_cocsim_test(cocsim_archer_tests tests/archer_tests.cpp)
+  add_cocsim_test(cocsim_barbarian_tests tests/barbarian_tests.cpp)
+  add_cocsim_test(cocsim_healer_tests tests/healer_tests.cpp)
+  add_cocsim_test(cocsim_wall_breaker_tests tests/wall_breaker_tests.cpp)
+  add_cocsim_test(cocsim_electro_titan_tests tests/electro_titan_tests.cpp)
+  add_cocsim_test(cocsim_thrower_tests tests/thrower_tests.cpp)
+  add_cocsim_test(cocsim_root_rider_tests tests/root_rider_tests.cpp)
+  add_cocsim_test(cocsim_sneaky_goblin_tests tests/sneaky_goblin_tests.cpp)
+  add_cocsim_test(cocsim_pekka_tests tests/pekka_tests.cpp)
+  add_cocsim_test(cocsim_goblin_tests tests/goblin_tests.cpp)
+  add_cocsim_test(cocsim_minion_tests tests/minion_tests.cpp)
+  add_cocsim_test(cocsim_hog_rider_tests tests/hog_rider_tests.cpp)
+  add_cocsim_test(cocsim_valkyrie_tests tests/valkyrie_tests.cpp)
+  add_cocsim_test(cocsim_dragon_rider_tests tests/dragon_rider_tests.cpp)
+  add_cocsim_test(cocsim_miner_tests tests/miner_tests.cpp)
   add_cocsim_test(cocsim_performance_smoke_tests tests/performance_smoke_tests.cpp)
   set_tests_properties(cocsim_performance_smoke_tests PROPERTIES TIMEOUT 10)
   # This target uses the SDL-free simulation bridge directly. It proves that
@@ -143,6 +203,27 @@ if(COCSIM_BUILD_TESTS)
   add_test(NAME super_wizard_headless_cli_validation
     COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/super-wizard-chain.json
             --deploy super_wizard 1.5 10.5)
+  add_test(NAME super_wizard_tower_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/super-wizard-tower-baseline.json
+            --deploy barbarian 7.5 10.5)
+  add_test(NAME multi_archer_tower_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/multi-archer-tower-baseline.json
+            --deploy barbarian 5.5 10.5)
+  add_test(NAME multi_gear_tower_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/multi-gear-tower-baseline.json
+            --deploy dragon 10.5 10.5)
+  add_test(NAME scattershot_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/scattershot-baseline.json
+            --deploy barbarian 10.5 10.5)
+  add_test(NAME bomb_tower_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/bomb-tower-baseline.json
+            --deploy golem 7.99 10.5)
+  add_test(NAME x_bow_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/x-bow-baseline.json
+            --deploy dragon 10.5 10.5)
+  add_test(NAME inferno_tower_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/inferno-tower-baseline.json
+            --deploy barbarian 12.0 10.5)
   add_test(NAME super_minion_headless_cli_validation
     COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/super-minion-long-shot.json
             --deploy super_minion 1.5 10.5)
@@ -152,6 +233,135 @@ if(COCSIM_BUILD_TESTS)
   add_test(NAME super_dragon_headless_cli_validation
     COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/super-dragon-aggregate.json
             --deploy super_dragon 1.5 10.5)
+  add_test(NAME electro_dragon_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/electro-dragon-chain.json
+            --deploy electro_dragon 0.5 10)
+  add_test(NAME bowler_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/bowler-double-strike.json
+            --deploy bowler 1.5 10.5)
+  add_test(NAME ice_golem_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/ice-golem-death-freeze.json
+            --deploy ice_golem 6.5 10.5)
+  add_test(NAME apprentice_warden_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/apprentice-warden-life-aura.json
+            --deploy apprentice_warden 3.5 10.5 --deploy barbarian 6.5 10.5)
+  add_test(NAME super_hog_rider_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/super-hog-rider-split.json
+            --deploy super_hog_rider 5.5 10.5)
+  add_test(NAME super_miner_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/super-miner-ramp.json
+            --deploy super_miner 1.5 10.5)
+  # This fixture makes the source-backed Super Valkyrie baseline available
+  # through the public command parser.  Its unsupported death Rage is not
+  # represented by this test or fixture.
+  add_test(NAME super_valkyrie_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/super-valkyrie-baseline.json
+            --deploy super_valkyrie 1.5 10.5)
+  add_test(NAME valkyrie_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/valkyrie-baseline.json
+            --deploy valkyrie 1.5 10.5)
+  add_test(NAME dragon_rider_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/dragon-rider-baseline.json
+            --deploy dragon_rider 1.5 10.5)
+  add_test(NAME miner_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/miner-baseline.json
+            --deploy miner 1.5 10.5)
+  add_test(NAME super_yeti_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/super-yeti-baseline.json
+            --deploy super_yeti 1.5 10.5)
+  add_test(NAME super_witch_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/super-witch-baseline.json
+            --deploy super_witch 1.5 10.5)
+  add_test(NAME ice_hound_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/ice-hound-ice-pup-baseline.json
+            --deploy ice_hound 1.5 10.5)
+  add_test(NAME yeti_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/yeti-yetimite-baseline.json
+            --deploy yeti 1.5 10.5)
+  add_test(NAME witch_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/witch-skeleton-baseline.json
+            --deploy witch 1.5 10.5)
+  add_test(NAME lava_hound_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/lava-hound-lava-pup-baseline.json
+            --deploy lava_hound 1.5 10.5)
+  add_test(NAME headhunter_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/headhunter-baseline.json
+            --deploy headhunter 1.5 10.5)
+  add_test(NAME druid_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/druid-bear-baseline.json
+            --deploy druid 1.5 10.5)
+  add_test(NAME barbarian_king_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/barbarian-king-baseline.json
+            --deploy barbarian_king 1.5 10.5)
+  add_test(NAME archer_queen_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/archer-queen-baseline.json
+            --deploy archer_queen 1.5 10.5)
+  add_test(NAME grand_warden_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/grand-warden-baseline.json
+            --deploy grand_warden 1.5 10.5)
+  add_test(NAME royal_champion_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/royal-champion-baseline.json
+            --deploy royal_champion 1.5 10.5)
+  add_test(NAME minion_prince_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/minion-prince-baseline.json
+            --deploy minion_prince 1.5 10.5)
+  add_test(NAME dragon_duke_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/dragon-duke-baseline.json
+            --deploy dragon_duke 1.5 10.5)
+  add_test(NAME baby_dragon_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/baby-dragon-tantrum.json
+            --deploy baby_dragon 1.5 10.5)
+  add_test(NAME pekka_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/pekka-baseline.json
+            --deploy pekka 1.5 10.5)
+  add_test(NAME dragon_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/dragon-baseline.json
+            --deploy dragon 1.5 10.5)
+  add_test(NAME balloon_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/balloon-baseline.json
+            --deploy balloon 1.5 10.5)
+  add_test(NAME golem_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/golem-golemite-baseline.json
+            --deploy golem 1.5 10.5)
+  add_test(NAME wizard_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/wizard-baseline.json
+            --deploy wizard 1.5 10.5)
+  add_test(NAME giant_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/giant-baseline.json
+            --deploy giant 1.5 10.5)
+  add_test(NAME archer_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/archer-baseline.json
+            --deploy archer 1.5 10.5)
+  add_test(NAME barbarian_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/barbarian-baseline.json
+            --deploy barbarian 1.5 10.5)
+  add_test(NAME healer_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/healer-baseline.json
+            --deploy barbarian 7.5 10.5 --deploy healer 7.5 11.5)
+  add_test(NAME wall_breaker_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/wall-breaker-baseline.json
+            --deploy wall_breaker 6.5 10.5)
+  add_test(NAME electro_titan_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/electro-titan-baseline.json
+            --deploy electro_titan 1.5 10.5)
+  add_test(NAME thrower_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/thrower-baseline.json
+            --deploy thrower 6.5 10.5)
+  add_test(NAME root_rider_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/root-rider-baseline.json
+            --deploy root_rider 5.5 10.5)
+  add_test(NAME sneaky_goblin_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/sneaky-goblin-baseline.json
+            --deploy sneaky_goblin 6.5 10.5)
+  add_test(NAME goblin_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/goblin-resource-baseline.json
+            --deploy goblin 1.5 10.5)
+  add_test(NAME minion_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/minion-baseline.json
+            --deploy minion 1.5 10.5)
+  add_test(NAME hog_rider_headless_cli_validation
+    COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/hog-rider-baseline.json
+            --deploy hog_rider 1.5 10.5)
   find_package(Python3 COMPONENTS Interpreter QUIET)
   if(Python3_Interpreter_FOUND AND COCSIM_BUILD_INTERNAL_AUDITS)
     add_test(NAME th18_reference_validation
@@ -160,6 +370,11 @@ if(COCSIM_BUILD_TESTS)
       COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/validate_th18_reference_verification.py)
     add_test(NAME th18_active_reference_validation
       COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/validate_th18_active_reference.py)
+    add_test(NAME hero_goal_coverage_validation
+      COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/hero_goal_coverage.py --check)
+    add_test(NAME hero_support_catalogue_headless_validation
+      COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/validate_hero_support_catalogue.py
+              --exe $<TARGET_FILE:cocsim>)
     add_test(NAME th18_mechanics_audit_validation
       COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/validate_th18_mechanics_audit.py)
     add_test(NAME super_wizard_mechanics_audit_validation
@@ -234,6 +449,26 @@ if(COCSIM_BUILD_VIEWER)
     src/viewer/demo_scenario.cpp
     src/viewer/main.cpp)
   target_link_libraries(cocsim_viewer PRIVATE cocsim_core SDL3::SDL3 SDL3_image::SDL3_image cocsim_imgui)
+  if(COCSIM_BUILD_TESTS)
+    add_executable(cocsim_viewer_loadout_editor_tests
+      tests/viewer_loadout_editor_tests.cpp src/viewer/demo_scenario.cpp)
+    target_include_directories(cocsim_viewer_loadout_editor_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/viewer)
+    target_link_libraries(cocsim_viewer_loadout_editor_tests PRIVATE cocsim_core cocsim_imgui)
+    add_test(NAME cocsim_viewer_loadout_editor_tests COMMAND cocsim_viewer_loadout_editor_tests)
+    add_executable(cocsim_viewer_loadout_picker_tests tests/viewer_loadout_picker_tests.cpp)
+    target_include_directories(cocsim_viewer_loadout_picker_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/viewer)
+    target_link_libraries(cocsim_viewer_loadout_picker_tests PRIVATE cocsim_core cocsim_imgui)
+    add_test(NAME cocsim_viewer_loadout_picker_tests COMMAND cocsim_viewer_loadout_picker_tests)
+    add_executable(cocsim_viewer_banner_assignment_tests tests/viewer_banner_assignment_tests.cpp)
+    target_include_directories(cocsim_viewer_banner_assignment_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/viewer)
+    target_link_libraries(cocsim_viewer_banner_assignment_tests PRIVATE cocsim_core cocsim_imgui)
+    add_test(NAME cocsim_viewer_banner_assignment_tests COMMAND cocsim_viewer_banner_assignment_tests)
+    add_executable(cocsim_viewer_banner_art_tests tests/viewer_banner_art_tests.cpp)
+    target_include_directories(cocsim_viewer_banner_art_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/viewer)
+    target_compile_definitions(cocsim_viewer_banner_art_tests PRIVATE COCSIM_PROJECT_ASSET_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/assets")
+    target_link_libraries(cocsim_viewer_banner_art_tests PRIVATE cocsim_core SDL3::SDL3 SDL3_image::SDL3_image)
+    add_test(NAME cocsim_viewer_banner_art_tests COMMAND cocsim_viewer_banner_art_tests)
+  endif()
   # Resolve the bundled assets independently from the process working directory
   # (double-clicking the executable otherwise starts it in build/viewer/Debug).
   target_compile_definitions(cocsim_viewer PRIVATE COCSIM_PROJECT_ASSET_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/assets")
