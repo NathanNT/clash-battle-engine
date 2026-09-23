@@ -24,5 +24,9 @@ int main() {
   assert(bridge.state().events().size()==2);
   bridge.reset(); assert(bridge.state().time_ms()==0 && bridge.replay_loaded());
   bridge.new_empty(); assert(!bridge.replay_loaded());
+  assert(save_replay(replay_path,bridge.state().scenario(),{},error));
+  assert(bridge.load_replay_file(replay_path,error));
+  assert(bridge.replay_loaded());
+  assert(!bridge.wait_next_tick(error));
   return 0;
 }

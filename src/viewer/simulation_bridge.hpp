@@ -15,8 +15,8 @@ class SimulationBridge {
   int speed() const { return speed_; }
   void set_speed(int value) { speed_=std::clamp(value,1,8); }
   void reset() { auto scenario=state_.scenario(); state_=BattleState(scenario); replay_index_=0; accumulated_=0; paused_=true; }
-  void new_empty() { replay_.clear(); state_=BattleState(); replay_index_=0; accumulated_=0; paused_=true; }
-  bool replay_loaded() const { return !replay_.empty(); }
+  void new_empty() { replay_.clear(); replay_mode_=false; state_=BattleState(); replay_index_=0; accumulated_=0; paused_=true; }
+  bool replay_loaded() const { return replay_mode_; }
   const std::vector<Command>& commands_for_save() const { return replay_loaded()?replay_:state_.commands(); }
   void step() { tick_once(); }
   void present_elapsed(std::uint64_t wall_ms) {
@@ -38,7 +38,7 @@ class SimulationBridge {
   bool load_replay_file(const std::string& path,std::string& error) {
     Scenario scenario; std::vector<Command> commands;
     if (!load_replay(path,scenario,commands,error)) return false;
-    state_=BattleState(scenario); replay_=std::move(commands); replay_index_=0;
+    state_=BattleState(scenario); replay_=std::move(commands); replay_mode_=true; replay_index_=0;
     paused_=true; accumulated_=0; error.clear(); return true;
   }
  private:
@@ -47,6 +47,7 @@ class SimulationBridge {
   int speed_{1};
   std::uint64_t accumulated_{};
   std::vector<Command> replay_;
+  bool replay_mode_{};
   std::size_t replay_index_{};
   void tick_once() {
     while (replay_index_<replay_.size() && replay_[replay_index_].requested_at_ms==state_.time_ms()) {
