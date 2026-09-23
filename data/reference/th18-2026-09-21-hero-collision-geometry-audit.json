@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-21-hero-collision-geometry-audit",
+  "scope": "Additive audit of permanent Home Village Hero collision geometry. It does not replace the Core default radius with an unsourced value.",
+  "frozen_at": "2026-09-21T00:00:00+02:00",
+  "game_version": "Current public pages were consulted on 2026-09-21. No source identifies a client build or publishes a per-Hero collision radius, footprint, or world anchor.",
+  "parent_reference": {
+    "file": "th18-2026-09-21-hero-banner-defense-behavior-audit.json",
+    "reference_id": "home-village-th18-2026-09-21-hero-banner-defense-behavior-audit",
+    "sha256": "baf3bdf58c64a36299104685bf090912ec6c52828b663e76f4a274edb34cf182"
+  },
+  "sources": [
+    {
+      "id": "supercell-support-2026-09-heroes-pets-geometry-recheck",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "About Heroes & Pets",
+      "published_on": null,
+      "consulted_on": "2026-09-21",
+      "url": "https://support.supercell.com/clash-of-clans/en/articles/about-heroes-pets-9.html",
+      "confidence": "high",
+      "facts": [
+        "The page identifies the six permanent Home Village Heroes and their Hero Hall unlock rows.",
+        "It publishes no combat footprint, collision radius, world anchor, sprite scale, or hitbox value."
+      ]
+    },
+    {
+      "id": "chiefpansancolt-62b019df-hero-records-geometry-audit",
+      "tier": "secondary",
+      "publisher": "chiefpansancolt/clash-of-clans-data",
+      "title": "Pinned Home Village Hero records",
+      "published_on": null,
+      "consulted_on": "2026-09-21",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/heroes/",
+      "confidence": "medium",
+      "facts": [
+        "The pinned Hero records provide movement, range, cadence, target type, and level values used by the imported catalogue.",
+        "The records have no footprint or collision-radius field for Barbarian King, Archer Queen, Grand Warden, Royal Champion, Minion Prince, or Dragon Duke."
+      ],
+      "limitations": "An absent field cannot establish that all Heroes share the simulator default radius or a particular client hitbox."
+    }
+  ],
+  "rejected_inferences": [
+    {
+      "rule": "Declare the shared 0.45-tile Core unit radius to be the sourced collision geometry of every Hero.",
+      "reason": "The shared radius is an engine default. Neither the primary source nor the pinned secondary records establish it as a Hero measurement."
+    },
+    {
+      "rule": "Derive a Hero hitbox from an icon canvas, Banner image, or apparent sprite size.",
+      "reason": "No public source establishes a world scale, anchor, collision shape, or conversion from presentation pixels to combat geometry."
+    }
+  ],
+  "open_uncertainties": [
+    {
+      "content_ids": ["barbarian_king", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke"],
+      "items": [
+        "collision radius or collision shape",
+        "pathfinding clearance and wall-contact geometry",
+        "world anchor, battlefield sprite scale, and animation bounds"
+      ]
+    }
+  ],
+  "conclusion": "The exact Hero geometry required for client-fidelity collision and presentation remains unavailable in public evidence. Core retains its existing shared unit geometry as a documented fallback, not as a verified Hero-specific value."
+}

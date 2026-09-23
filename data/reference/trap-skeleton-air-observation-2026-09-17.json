@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "reference_id": "th18-trap-skeleton-air-secondary-observation-2026-09-17",
+  "purpose": "Pinned secondary combat table for the air Skeleton spawned by a Skeleton Trap. It is a spawned-only defender and cannot be directly placed by an attacker.",
+  "source_id": "fandom-2026-09-17-skeleton-trap",
+  "content": {
+    "id": "trap_skeleton_air",
+    "source_id": "trap-skeleton-air",
+    "category": "troop",
+    "support": "spawned_only",
+    "spawned_by": "skeleton_trap",
+    "target_focus": "any",
+    "flying": true,
+    "heals": false,
+    "footprint_tiles": "1x1",
+    "housing_space": 1,
+    "activation_housing_space": 0,
+    "range_tiles": 0.4,
+    "trigger_range_tiles": 0,
+    "min_range_tiles": 0,
+    "splash_radius_tiles": 0,
+    "death_splash_radius_tiles": 0,
+    "shots_per_burst": 1,
+    "time_between_bursts_seconds": 0,
+    "attack_speed_seconds": 0.7,
+    "movement_speed": 17.6,
+    "target_type": "air",
+    "damage_type": "single",
+    "modes": [],
+    "field_provenance": {
+      "housing_space": {"source": "supercell-2025-03-24-clash-anytime", "note": "Official balance change: air Skeleton housing space reduced from 2 to 1."}
+    },
+    "levels": [
+      {"level": 1, "variant": "normal", "hitpoints": 30, "damage_per_shot": 17.5, "dps": 25},
+      {"level": 2, "variant": "normal", "hitpoints": 45, "damage_per_shot": 21, "dps": 30}
+    ],
+    "known_missing": ["lifetime", "spawn geometry", "retargeting and distraction rules"]
+  }
+}

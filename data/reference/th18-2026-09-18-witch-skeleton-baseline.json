@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-18-witch-skeleton-baseline",
+  "scope": "Additive TH18 regular Witch direct-baseline integration. The required Witch Skeleton is kept inventory-visible but unmaterialized until a reproducible stat and summoning contract is available.",
+  "frozen_at": "2026-09-18T00:00:00+02:00",
+  "game_version": "The upstream payload is commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba. Supercell identifies regular Witch level 8 as Town Hall 18 content, while the numeric parent table remains the pinned secondary payload.",
+  "parent_reference": {"file": "th18-2026-09-18-yeti-yetimite.json", "reference_id": "home-village-th18-2026-09-18-yeti-yetimite", "sha256": "9b9f2b7be22549cd6c3eabb4cd1d87eb22ddebca4fa74b7cf958c4f53fe875e5"},
+  "sources": [
+    {"id": "supercell-2026-02-23-th18-witch-l8", "tier": "primary", "publisher": "Supercell", "title": "The February Update has escaped!", "published_on": "2026-02-23", "consulted_on": "2026-09-18", "version": "Town Hall 18 update", "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/the-february-update-has-escaped/", "limitations": "The release note establishes Witch level 8 at Town Hall 18, but does not publish numerical parent values or any Witch Skeleton stat, count, lifetime, level mapping, summon interval, first-summon delay, cap, spawn geometry or targeting contract."},
+    {"id": "chiefpansancolt-62b019df-witch", "tier": "secondary-version-unknown", "publisher": "chiefpansancolt/clash-of-clans-data", "title": "Home Village Witch structured troop record", "published_on": null, "consulted_on": "2026-09-18", "version": "commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba", "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/witch.json", "limitations": "The pinned public payload supplies the L1-L8 parent values, level requirements, range, cadence, movement, housing and target type. It gives no standalone Witch Skeleton record or deterministic summoning behavior."},
+    {"id": "fandom-2026-09-18-witch", "tier": "secondary-version-unknown", "publisher": "Clash of Clans Wiki (Fandom)", "title": "Witch", "published_on": null, "consulted_on": "2026-09-18", "version": "not published", "url": "https://clashofclans.fandom.com/wiki/Witch", "limitations": "The current public page was reviewed for the required Skeleton relationship. It does not provide a version-pinned Witch Skeleton table or a complete deterministic summoning lifecycle suitable for GameData."}
+  ],
+  "catalogue_content_overrides": [
+    {"content_id": "witch", "fields": {
+      "support": {"value": "core_supported_primary_secondary_partial", "source": "chiefpansancolt-62b019df-witch", "note": "Core materializes the pinned L1-L8 direct parent baseline. Witch Skeleton summoning stays disabled because no source-backed child values or deterministic lifecycle is available."}
+    }}
+  ],
+  "changed_values": [
+    {"content_id": "witch", "previous_state": "Catalogued-only L1-L8 parent with no Core identifier or adapter route.", "replacement": "The source-backed L1-L8 parent materializes through the shared Core path with its published direct attack, range, cadence, movement, housing and target type.", "justification": "The parent has a complete pinned public level table and Supercell confirms the Town Hall 18 level. Its child behavior remains excluded from the implemented baseline until it can be modeled without guessing."},
+    {"content_id": "witch_skeleton", "previous_state": "Not represented in the permanent spawned-subunit inventory.", "replacement": "Recorded as a required but unmaterializable Witch child in the scope inventory.", "justification": "The parent-child relationship is public, but the consulted sources do not provide enough immutable child data or lifecycle detail to create a deterministic entity."}
+  ],
+  "known_uncertainties": [
+    "No consulted source provides Witch Skeleton hitpoints, damage, cadence, range, speed, target type, altitude, housing, level mapping, count, lifetime, cap, spawn interval, first-summon delay, spawn geometry, target selection, retargeting, trap interaction or asset path for the current TH18 version.",
+    "No public source gives the regular Witch splash radius or projectile speed. Core preserves the classified attack as a direct primary-target baseline and does not claim area or travel fidelity.",
+    "The parent visual tiers are retained from the pinned public payload, but source verification of sprite placement, scaling and animation is incomplete."
+  ],
+  "conclusion": "Regular Witch L1-L8 is executable through the shared Core, Headless CLI, Viewer and RL path as a direct parent baseline. Witch Skeleton summoning, area damage, projectile timing and visual fidelity remain explicitly partial."
+}

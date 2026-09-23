@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-angry-jelly-brainwash-contract-audit",
+  "scope": "Additive Angry Jelly L1-10 attachment, Brainwash and attack-range audit; preserve sourced duration and dated range without inventing target or tick ordering.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Official introduction 2024-04-17; dated game-file observations 2026-09-01 and client 18.600.3 on 2026-09-18; pinned raw commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-spirit-fox-invisibility-contract-audit.json",
+    "reference_id": "home-village-th18-2026-09-23-spirit-fox-invisibility-contract-audit",
+    "sha256": "e33d8b6016b48d82db6378f6510407ff60327c750e47c4786113c249d9f14f58"
+  },
+  "sources": [
+    {
+      "id": "supercell-2024-04-17-angry-jelly-introduction", "tier": "primary", "publisher": "Supercell",
+      "title": "Temperamental Tentacles Update!", "published_on": "2024-04-17", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/temperamental-tentacles-update/",
+      "confidence": "high_for_attachment_and_launch_duration", "content_id": "angry_jelly", "levels": "1-10", "mode": "attached_brainwash_then_detached_combat",
+      "facts": ["Angry Jelly flies and has a long-range attack; while attached it forces its Hero to target Defenses only and cannot be targeted, damaged or trigger traps.", "When the Hero is eliminated or Brainwash ends, Jelly detaches and becomes a targetable, trap-triggering troop.", "Brainwash lasts 25 seconds at L1-4, 30 seconds at L5-9 and 35 seconds at L10 in the launch table."],
+      "limitations": "The publication omits attachment start tick, initial defense selection, pathing, effect expiration order, detached target priority and projectile timing."
+    },
+    {
+      "id": "gibiarena-2026-09-01-angry-jelly-game-files", "tier": "secondary-dated-game-files", "publisher": "GiBiArena via ClashKing game-file data",
+      "title": "Wütende Qualle: Kosten, Zeiten und Stufen — Clash of Clans", "published_on": null, "consulted_on": "2026-09-23",
+      "version": "Game-file data dated 2026-09-01, processed 2026-09-03; exact client build unpublished",
+      "url": "https://www.gibiarena.com/de/clash-of-clans/upgrades/angry-jelly",
+      "confidence": "medium_high_for_dated_level_table_and_range", "content_id": "angry_jelly", "levels": "1-10", "mode": "detached_attack",
+      "facts": ["TH18 maximum L10; L1-10 HP/DPS match the pinned raw payload; attack range is five tiles and cadence is 0.75 seconds."],
+      "limitations": "The page omits Brainwash event order and does not publish its exact client build."
+    },
+    {
+      "id": "goblins-farm-2026-09-18-angry-jelly-client-files", "tier": "secondary-dated-game-files", "publisher": "Goblins Farm",
+      "title": "Angry Jelly — Clash of Clans Wiki", "published_on": "2026-09-18", "consulted_on": "2026-09-23",
+      "version": "Client build 18.600.3 as claimed by source",
+      "url": "https://goblinsfarm.com/wiki/pets/angry-jelly.html",
+      "confidence": "medium_high_for_dated_range_corroboration", "content_id": "angry_jelly", "levels": "1-10", "mode": "detached_attack",
+      "facts": ["The game-file-derived page independently reports five-tile range and the same HP/DPS table."],
+      "limitations": "The site is secondary and does not expose the underlying range record or the full targeting state machine."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-angry-jelly-raw-recheck", "tier": "secondary-frozen-payload", "publisher": "chiefpansancolt/clash-of-clans-data",
+      "title": "Pinned Angry Jelly Home Village Pet record", "published_on": null, "consulted_on": "2026-09-23",
+      "version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/angry-jelly.json",
+      "confidence": "medium_for_level_duration; low_for_current_range", "content_id": "angry_jelly", "levels": "1-10", "mode": "brainwash",
+      "raw_sha256": "7b8c80554a5565b415d4974c98ba38623d39f27667856802e328cfd3e97ee9cd",
+      "facts": ["brainwashDuration matches the primary launch table at every level; the older payload reports range 1.5 tiles, conflicting with two dated 2026 game-file sites reporting five tiles."],
+      "limitations": "The pinned record does not establish a current client version, so its range is not treated as current."
+    }
+  ],
+  "catalogue_content_overrides": [
+    {"content_id": "angry_jelly", "fields": {"range_tiles": {"value": 5, "source": "gibiarena-2026-09-01-angry-jelly-game-files", "note": "Dated 2026-09-01 game-file range corroborated by Goblins Farm client 18.600.3; supersedes the pinned older payload's 1.5 tiles; no Core Pet actor is enabled."}}}
+  ],
+  "derivations": [
+    {"content_id": "angry_jelly", "levels": "1-10", "mode": "brainwash", "result": "Preserve brainwashDuration as per-level brainwash_duration_seconds", "method": "Lossless normalization of pinned raw values cross-checked against Supercell's primary launch table; no attachment tick inferred."},
+    {"content_id": "angry_jelly", "levels": "1-10", "mode": "detached_attack", "result": "Set catalogue range to five tiles", "method": "Two dated 2026 game-file-derived pages agree on five tiles, superseding the pinned older payload's 1.5; retain source ID and conflict in field provenance."}
+  ],
+  "rejected_inferences": [
+    {"rule": "Apply Angry Spell target transitions to Brainwash", "reason": "The later spell has a different recipient and application contract; no source proves identical rules."},
+    {"rule": "Make attached Jelly targetable by defensive splash or traps", "reason": "Supercell explicitly says attached Jelly cannot be damaged, targeted or trigger traps."},
+    {"rule": "Start Brainwash at the Hero deployment command's effective tick", "reason": "The publication does not specify attachment and ability start order."},
+    {"rule": "Leave Jelly attached after Brainwash ends", "reason": "Supercell explicitly says it detaches and becomes a normal troop."}
+  ],
+  "open_uncertainties": [
+    {"content_id": "angry_jelly", "levels": "1-10", "mode": "attached_brainwash_then_detached_combat", "items": ["exact current client build and duration continuity", "Hero-linked deployment, attachment and first Brainwash tick", "defense-only target choice, pathing and target-loss transition", "whether attached Jelly attacks, and its damage/target eligibility", "Hero defeat versus Brainwash expiration ordering", "detached Jelly target priority, attack timing and trap collision", "range discrepancy between pinned old payload and dated 2026 game-file sites", "Equipment and other forced-target interaction order", "collision, visual anchors and battlefield art rights"]}
+  ],
+  "conclusion": "Angry Jelly L1-10 remains partial and catalogue-only. The primary attachment and duration contract, dated five-tile range and provenance are preserved; deterministic paired deployment, target transitions and detach ordering remain unavailable."
+}

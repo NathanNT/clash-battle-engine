@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "inventory_id": "home-village-th18-permanent-scope-2026-09-18",
+  "reference_id": "home-village-th18-2026-09-17",
+  "active_reference_id": "home-village-th18-2026-09-18-meteor-golem-meteormite-baseline",
+  "reference_chain": ["home-village-th18-2026-09-17", "home-village-th18-2026-09-18-monolith-l5", "home-village-th18-2026-09-18-super-wall-breaker", "home-village-th18-2026-09-18-super-barbarian", "home-village-th18-2026-09-18-super-giant", "home-village-th18-2026-09-18-super-archer", "home-village-th18-2026-09-18-rocket-balloon", "home-village-th18-2026-09-18-inferno-dragon", "home-village-th18-2026-09-18-super-wizard", "home-village-th18-2026-09-18-super-minion", "home-village-th18-2026-09-18-super-bowler", "home-village-th18-2026-09-18-super-dragon", "home-village-th18-2026-09-18-x-bow-footprint", "home-village-th18-2026-09-18-electro-dragon-chain", "home-village-th18-2026-09-18-bowler-bounce", "home-village-th18-2026-09-18-ice-golem-death-freeze", "home-village-th18-2026-09-18-apprentice-warden-life-aura", "home-village-th18-2026-09-18-super-hog-rider-split", "home-village-th18-2026-09-18-super-miner", "home-village-th18-2026-09-18-super-valkyrie", "home-village-th18-2026-09-18-super-yeti-baseline", "home-village-th18-2026-09-18-super-witch-baseline", "home-village-th18-2026-09-18-ice-hound-ice-pup", "home-village-th18-2026-09-18-yeti-yetimite", "home-village-th18-2026-09-18-witch-skeleton-baseline", "home-village-th18-2026-09-18-lava-hound-lava-pup-baseline", "home-village-th18-2026-09-18-headhunter-baseline", "home-village-th18-2026-09-18-druid-bear-baseline", "home-village-th18-2026-09-18-furnace-firemite-baseline", "home-village-th18-2026-09-18-meteor-golem-meteormite-baseline"],
+  "verified_at": "2026-09-18T00:00:00+02:00",
+  "level_and_variant_inventory": {
+    "source": "data/catalogue.normalized.json",
+    "rule": "For each included id, every normal and permanent variant level listed by the pinned normalized catalogue is in scope. The catalogue's per-level provenance, modes and fields are the authoritative level inventory; this manifest fixes membership rather than duplicating mutable values."
+  },
+  "included_groups": {
+    "defensive_buildings": ["air_defense", "air_sweeper", "archer_tower", "bomb_tower", "builders_hut", "cannon", "crafting_station", "eagle_artillery", "firespitter", "hidden_tesla", "inferno_tower", "monolith", "mortar", "multi_archer_tower", "multi_gear_tower", "revenge_tower", "ricochet_cannon", "scattershot", "spell_tower", "super_wizard_tower", "wizard_tower", "x_bow"],
+    "resource_and_town_hall_buildings": ["clan_castle", "dark_elixir_drill", "dark_elixir_storage", "elixir_collector", "elixir_storage", "gold_mine", "gold_storage", "town_hall"],
+    "army_and_other_buildings": ["army_camp", "barracks", "blacksmith", "bobs_hut", "dark_barracks", "dark_spell_factory", "helper_hut", "hero_banner", "hero_hall", "laboratory", "pet_house", "spell_factory", "workshop"],
+    "walls": ["wall"],
+    "traps": ["air_bomb", "bomb", "giant_bomb", "giga_bomb", "seeking_air_mine", "skeleton_trap", "spring_trap", "tornado_trap"],
+    "troops_and_required_spawned_subunits": ["apprentice_warden", "archer", "baby_dragon", "balloon", "barbarian", "bowler", "dragon", "dragon_rider", "druid", "druid_bear", "electro_dragon", "electro_titan", "firemite", "furnace", "giant", "goblin", "golem", "golemite", "headhunter", "healer", "hog_rider", "ice_golem", "ice_hound", "ice_pup", "inferno_dragon", "lava_hound", "meteor_golem", "miner", "minion", "pekka", "rocket_balloon", "root_rider", "ruin_knight", "ruin_witch", "sneaky_goblin", "super_archer", "super_barbarian", "super_bowler", "super_dragon", "super_giant", "super_hog", "super_hog_rider", "super_miner", "super_minion", "super_rider", "super_valkyrie", "super_wall_breaker", "super_witch", "super_wizard", "super_yeti", "thrower", "trap_skeleton_air", "trap_skeleton_ground", "valkyrie", "wall_breaker", "witch", "wizard", "yeti", "yetimite"]
+  },
+  "required_spawned_subunits": {
+    "druid": ["druid_bear"],
+    "furnace": ["firemite"],
+    "meteor_golem": ["meteormite"],
+    "golem": ["golemite"],
+    "skeleton_trap": ["trap_skeleton_ground", "trap_skeleton_air"],
+    "ruin_witch": ["ruin_knight"],
+    "super_yeti": ["electromite"],
+    "super_hog_rider": ["super_hog", "super_rider"],
+    "super_witch": ["big_boy"],
+    "ice_hound": ["ice_pup"],
+    "yeti": ["yetimite"]
+    ,"witch": ["witch_skeleton"]
+    ,"lava_hound": ["lava_pup"]
+  },
+  "unmaterializable_required_spawned_subunits": {
+    "electromite": {
+      "parent": "super_yeti",
+      "reason": "Required Home Village spawned subunit identified by the Super Yeti mechanics audit, but absent from the frozen normalized catalogue. It remains inventory-visible without a fabricated GameData, Core, GUI, RL, snapshot or asset entry.",
+      "evidence_audit": "data/reference/super-yeti-mechanics-audit-2026-09-18.json"
+    },
+    "big_boy": {
+      "parent": "super_witch",
+      "reason": "Required Home Village spawned subunit identified by the Super Witch mechanics audit, but absent from the frozen normalized catalogue. It remains inventory-visible without a fabricated GameData, Core, GUI, RL, snapshot or asset entry.",
+      "evidence_audit": "data/reference/super-witch-mechanics-audit-2026-09-18.json"
+    },
+    "witch_skeleton": {
+      "parent": "witch",
+      "reason": "Required Home Village spawned subunit identified by the dated Witch delta, but no reproducible current stat table or deterministic summoning lifecycle is available. It remains inventory-visible without a fabricated GameData, Core, GUI, RL, snapshot or asset entry.",
+      "evidence_audit": "data/reference/th18-2026-09-18-witch-skeleton-baseline.json"
+    },
+    "lava_pup": {
+      "parent": "lava_hound",
+      "reason": "Required Home Village spawned subunit recorded by the dated Lava Hound delta, but no reproducible current stat table or deterministic death-split lifecycle is available.",
+      "evidence_audit": "data/reference/th18-2026-09-18-lava-hound-lava-pup-baseline.json"
+    },
+    "meteormite": {
+      "parent": "meteor_golem",
+      "reason": "Required permanent Home Village child recorded by the dated Meteor Golem delta. Current child values after the official July 2026 buff and a deterministic split and merge lifecycle are unavailable, so no GameData or generic proxy is fabricated.",
+      "evidence_audit": "data/reference/th18-2026-09-18-meteor-golem-meteormite-baseline.json"
+    }
+  },
+  "explicit_exclusions": {
+    "temporary_crafted_defenses": {
+      "ids": ["air_bombs", "bomb_hive", "hero_bell", "lava_launcher", "light_beam", "roaster"],
+      "reason": "Crafted Defenses are temporary, phase-selected defenses. The permanent Crafting Station itself is included above.",
+      "primary_source": "supercell-2025-06-16-lets-get-crafty"
+    },
+    "non_building_troop_trap_combatants": {
+      "ids": ["logger", "longshot", "smasher"],
+      "reason": "Guardians are neither buildings, troops, Super Troops, traps nor required spawned subunits in this goal."
+    },
+    "goal_exclusions": {
+      "categories": ["hero", "hero-equipment", "pet", "siege-machine", "spell"],
+      "reason": "Explicitly outside the persistent goal; Clan Castle contents and reinforcements are excluded even though the targetable Clan Castle building is included."
+    }
+  },
+  "completion_rule": "Membership is not completion. Each included id must independently satisfy sourced data, Core behavior, headless, GUI, RL, documented asset and geometry, snapshot/replay, deterministic regression, and fidelity-evidence axes before it can be reported complete."
+}

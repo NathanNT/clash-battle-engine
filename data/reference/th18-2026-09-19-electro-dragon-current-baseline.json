@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-19-electro-dragon-current-baseline",
+  "scope": "Additive current-source revalidation of the already executable Electro Dragon L1-L9 direct-parent and bounded chain baseline.",
+  "frozen_at": "2026-09-19T00:00:00+02:00",
+  "game_version": "Goblins Farm reports client build 18.600.3. Its current L1-L9 table matches the immutable active catalogue values exactly.",
+  "parent_reference": {
+    "file": "th18-2026-09-19-miner-baseline.json",
+    "reference_id": "home-village-th18-2026-09-19-miner-baseline",
+    "sha256": "138a687214acf527f14723c12b9c77bd22bd3caa8028c978170b97bc0466291d"
+  },
+  "sources": [
+    {
+      "id": "goblinsfarm-2026-09-18-electro-dragon-current",
+      "tier": "secondary-build-pinned",
+      "publisher": "Goblins Farm",
+      "title": "Electro Dragon",
+      "published_on": "2026-09-18",
+      "consulted_on": "2026-09-19",
+      "version": "client build 18.600.3 (as reported by publisher)",
+      "url": "https://goblinsfarm.com/wiki/troops/electro-dragon.html",
+      "limitations": "Confirms the direct-parent L1-L9 HP/DPS table, 30 housing space, 2.5-tile range, 3.5-second cadence, and Ground & Air targeting. It says that lightning chains to nearby buildings but does not publish jump metric, selection order, flight, target-loss, collision, intra-tick ordering, or death-lightning timing."
+    },
+    {
+      "id": "supercell-2018-06-08-electro-dragon-launch-current-consultation",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "Meet The Electro Dragon!",
+      "published_on": "2018-06-08",
+      "consulted_on": "2026-09-19",
+      "version": "not published",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/the-electro-dragon-is-here-to-wreak-devastation/",
+      "limitations": "Establishes a maximum of five different Ground or Air targets with decreasing damage. It describes a final death lightning release but gives no reproducible strike count, random seed, radius, damage, schedule, or deterministic ordering."
+    },
+    {
+      "id": "supercell-2020-03-30-electro-dragon-chain-fix-current-consultation",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "Spring Update Full Release Notes",
+      "published_on": "2020-03-30",
+      "consulted_on": "2026-09-19",
+      "version": "not published",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/the-spring-update-is-here-2/",
+      "limitations": "Confirms that one Electro Dragon lightning chain cannot select the same target twice. It does not specify the selection metric or timing."
+    }
+  ],
+  "verified_values": {
+    "content_id": "electro_dragon",
+    "direct_parent": {
+      "levels": [
+        {"level": 1, "hitpoints": 3400, "dps": 260},
+        {"level": 2, "hitpoints": 3900, "dps": 290},
+        {"level": 3, "hitpoints": 4400, "dps": 320},
+        {"level": 4, "hitpoints": 4700, "dps": 350},
+        {"level": 5, "hitpoints": 5000, "dps": 380},
+        {"level": 6, "hitpoints": 5400, "dps": 410},
+        {"level": 7, "hitpoints": 5700, "dps": 440},
+        {"level": 8, "hitpoints": 6400, "dps": 475},
+        {"level": 9, "hitpoints": 6900, "dps": 510}
+      ],
+      "housing_space": 30,
+      "attack_speed_seconds": 3.5,
+      "range_tiles": 2.5,
+      "target_type": "both"
+    },
+    "implemented_chain": {
+      "maximum_total_victims": 5,
+      "no_repeated_victim": true,
+      "damage_decay": "decreasing; existing 0.8 multiplier remains secondary evidence",
+      "implementation_status": "unchanged shared-Core bounded sequential chain"
+    }
+  },
+  "changed_values": [
+    {
+      "content_id": "electro_dragon",
+      "previous_state": "The executable direct-parent and chain baseline had a dated chain contract but no 2026-09-19 current-build confirmation in the active reference tail.",
+      "replacement": "The existing L1-L9 direct-parent values and bounded chain behavior are revalidated against a current build-pinned secondary source and current consultations of the two primary chain sources; no combat value or Core rule changes.",
+      "justification": "The new table matches every materialized direct-parent value. Public sources still do not license a more detailed chain geometry, projectile, or death-lightning model."
+    }
+  ],
+  "known_uncertainties": [
+    "No consulted source defines a version-pinned inter-target distance metric, exact entity-emprise geometry, victim-selection order, projectile flight, collision, target-loss behavior, or same-tick ordering. The existing one-empty-tile secondary interpretation remains partial.",
+    "The official launch text confirms a final death lightning release but not a deterministic strike count, seed, radius, damage, target set, timing, or ordering. Death lightning remains absent rather than approximated.",
+    "The current build-pinned page supplies parent numeric values but no documented asset tier, animation timing, or evidence that Core's logical chain traces match client visuals."
+  ],
+  "conclusion": "Electro Dragon L1-L9 remains executable through the shared Core path used by Headless, Viewer and RL, with focused chain, snapshot, replay, determinism and CLI coverage. The current direct-parent table is confirmed; detailed chain geometry and death lightning remain explicitly partial."
+}

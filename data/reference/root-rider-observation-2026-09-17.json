@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "reference_id": "th18-root-rider-secondary-observation-2026-09-17",
+  "purpose": "Append-only, hashed secondary supplement for the TH18 Root Rider level missing from the frozen April payload.",
+  "observations": [
+    {
+      "source_id": "goblinsfarm-2026-09-16-root-rider",
+      "url": "https://goblinsfarm.com/wiki/troops/root-rider.html",
+      "published_on": "2026-09-16",
+      "consulted_on": "2026-09-17",
+      "reported_client_build": "18.600.3",
+      "content_id": "root_rider",
+      "level": 4,
+      "fields": {"hitpoints": 6700, "dps": 125, "upgrade_cost": 30000000, "upgrade_cost_resource": "Elixir", "upgrade_time_seconds": 1382400, "town_hall_required": 18},
+      "derived_fields": {"damage_per_shot": {"value": 275, "derivation": "125 DPS multiplied by the unchanged 2.2-second normal attack cadence documented by the secondary Root Rider table."}},
+      "source_note": "The publisher states that values were read from Clash of Clans game files. The page is independent fan content, not an official Supercell table."
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-royal-gem-active-heal-source-recheck",
+  "scope": "Additive source recheck for Royal Gem L1-18 active healing. It changes no frozen level or Core combat rule.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "The official 2023 launch identifies the ability; the post-February-2025 HP/DPS values have primary numeric evidence. The checked heal pages disclose no reliable September 2026 client build or event-order contract.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-six-equipment-primary-level-provenance.json",
+    "reference_id": "home-village-th18-2026-09-23-six-equipment-primary-level-provenance",
+    "sha256": "a22bea5473a84c72efefd8a24d5737bbf0a4145886678ec7213098e9a2790dd0"
+  },
+  "sources": [
+    {
+      "id": "supercell-2023-12-12-royal-gem-launch-recheck",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "Hero Equipment",
+      "published_on": "2023-12-12",
+      "consulted_on": "2026-09-23",
+      "version": "December 2023 Hero Equipment launch",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/introducing-hero-equipment/",
+      "confidence": "high_for_active_self_heal_identity_only",
+      "content_id": "royal_gem",
+      "levels": "1-18",
+      "mode": "royal_champion_active_self_heal",
+      "facts": ["Royal Gem is equipped by Royal Champion and heals her when the ability is used."],
+      "limitations": "The page gives no per-level heal amounts, heal cap, activation phase or simultaneous damage/death order."
+    },
+    {
+      "id": "clashlevels-2026-09-23-royal-gem-empty-heal-column",
+      "tier": "secondary-version-unknown",
+      "publisher": "Clash Levels",
+      "title": "Royal Gem — Hero Equipment",
+      "published_on": null,
+      "consulted_on": "2026-09-23",
+      "version": "Page read on 2026-09-23; source client build and last update date unpublished",
+      "url": "https://clashlevels.com/hero-equipment/royal-gem",
+      "raw_sha256": "8854320464f53e762996187fecec1c4d9350d25fdb5adb6518bcd8458ddb4b50",
+      "confidence": "medium_for_displayed_hp_dps_low_for_current_heal",
+      "content_id": "royal_gem",
+      "levels": "1-18",
+      "mode": "equipment_level_table",
+      "facts": ["The page displays L1-18 HP/DPS bonus values matching the official post-buff table, while every Heal column entry is blank."],
+      "limitations": "Blank display cells cannot establish zero healing or a current per-level heal amount; the page inventory lists 41 Equipment items rather than the independently verified 42."
+    },
+    {
+      "id": "clashtroops-2026-09-23-royal-gem-game-file-mirror",
+      "tier": "secondary-derived-from-pinned-upstream",
+      "publisher": "Clash Troops",
+      "title": "Royal Gem: Clash of Clans Hero Equipment item Stats, Levels & Cost",
+      "published_on": null,
+      "consulted_on": "2026-09-23",
+      "version": "Page read on 2026-09-23; last update date and client build unpublished",
+      "url": "https://clashtroops.com/equipment/royal-gem/",
+      "raw_sha256": "a41827f57fe762c8795f07b4a2d49627c01ba4c5d74eeef27a78fa3238217c0c",
+      "confidence": "low_for_independent_current_heal_confirmation",
+      "content_id": "royal_gem",
+      "levels": "1-18",
+      "mode": "equipment_level_explorer",
+      "facts": ["The page identifies Royal Gem self-healing and L18 HP bonus 570, and says its statistics derive from the same clash-of-clans-data upstream used by the frozen payload."],
+      "limitations": "It does not display a heal-per-level field in the checked page and is not independent current-client corroboration of the pinned heal series."
+    },
+    {
+      "id": "coc-guide-2026-09-23-royal-gem-historical-heal-table",
+      "tier": "secondary-version-unknown-historical",
+      "publisher": "CoC Guide",
+      "title": "Royal Gem - Clash of Clans Guide",
+      "published_on": null,
+      "consulted_on": "2026-09-23",
+      "version": "Page gives no build and warns values may change before update release",
+      "url": "https://coc.guide/equipment/unused14",
+      "raw_sha256": "16c0a2c77a671b29b7063323ecdff3c7f9ec91ee3cdd8bd2a0b48c71fb523fee",
+      "confidence": "low_for_current_heal_values",
+      "content_id": "royal_gem",
+      "levels": "1-18",
+      "mode": "historical_active_heal_table",
+      "facts": ["The page prints an L1-18 heal-on-activation series of 363-2720, which differs from the frozen 1200-2400 healthRecovery series."],
+      "limitations": "The page itself warns values can change before release, gives no client version and cannot resolve current Royal Gem healing."
+    },
+    {
+      "id": "cocmap-2026-09-23-royal-gem-search-index-only",
+      "tier": "secondary-search-index-only",
+      "publisher": "cocmap.com",
+      "title": "Royal Gem (Birlikler) — Clash of Clans",
+      "published_on": null,
+      "consulted_on": "2026-09-23",
+      "version": "No client build or publication date verified",
+      "url": "https://cocmap.com/tr/clash-of-clans/unit/royal-gem-home-village",
+      "confidence": "very_low_search_snippet_only",
+      "content_id": "royal_gem",
+      "levels": "1-18",
+      "mode": "search_lead_only",
+      "facts": ["A search-index snippet shows the frozen 1200-2400 heal series alongside the post-buff HP/DPS values."],
+      "limitations": "Direct retrieval returned HTTP 403; the source build, extraction date and independence from the pinned raw payload could not be checked. No raw SHA-256 is claimed."
+    }
+  ],
+  "derivations": [
+    {
+      "content_id": "royal_gem",
+      "levels": "1-18",
+      "mode": "active_self_heal",
+      "result": "Current per-level active healing remains unverified; retain the frozen 1200-2400 series as data-only and keep the Core effect disabled.",
+      "method": "Compare the accessible current-reference tables, their provenance statements and the historical divergent heal table against the pinned raw series. None supplies a build-pinned current heal value or deterministic event phase."
+    }
+  ],
+  "rejected_inferences": [
+    {"rule": "Use blank Heal cells as zero healing", "reason": "The official launch explicitly identifies active healing; blanks indicate unavailable display data."},
+    {"rule": "Treat the Clash Troops page as independent September 2026 confirmation of 1200-2400", "reason": "It names the same upstream data project and does not show the active heal series."},
+    {"rule": "Replace frozen levels with the CoC Guide 363-2720 series", "reason": "The page is unversioned and explicitly warns its numbers may predate a release."},
+    {"rule": "Treat a search snippet behind HTTP 403 as verified current-client values", "reason": "The page and underlying source file could not be inspected."},
+    {"rule": "Heal immediately on the Hero ability command tick", "reason": "No checked source establishes the heal phase, cap, death interaction or stable ordering with simultaneous damage."}
+  ],
+  "open_uncertainties": [
+    {
+      "content_id": "royal_gem",
+      "levels": "1-18",
+      "mode": "royal_champion_active_self_heal",
+      "items": ["build-pinned current heal amounts at every level", "activation command and first heal tick", "max-HP cap and rounding", "ordering with damage, defeat, Phoenix and a second Equipment effect", "Viewer activation overlay, snapshot, replay and RL future-state contract"]
+    }
+  ],
+  "conclusion": "Royal Gem active healing remains partial. Official ability identity and HP/DPS bonuses are sourced, but these checked sources do not establish a current deterministic heal contract; no Core heal is enabled."
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "reference_id": "projectile-contracts-2026-09-20-heroes",
+  "frozen_on": "2026-09-20",
+  "parent_contract": {"file": "projectile-contracts-2026-09-19-ricochet-super-wizard-tower.json", "sha256": "bc864fc1ac2c63f7d87e9b63df8b57b031962bf7466bf3bdc3787d47be71594c"},
+  "catalogue_audit_override": {"non_healer_long_range_candidates": 63, "currently_executable_weapon_paths": 45, "currently_executable_special_paths": ["healer", "druid", "seeking_air_mine"], "non_executable_long_range_candidates": 18},
+  "contracts": [
+    {"id":"archer_queen","model":"logical_next_tick_unmeasured","core":"BattleState::Projectile","gui":"amber_post_impact_trace","rl":"projectiles","fidelity":"open","provenance":{"status":"sourced_secondary","source_id":"goblinsfarm-2026-09-16-archer-queen","url":"https://goblinsfarm.com/wiki/heroes/archer-queen.html","needed":"versioned projectile launch, speed, collision and impact timing"}},
+    {"id":"grand_warden","model":"logical_next_tick_unmeasured","core":"BattleState::Projectile","gui":"amber_post_impact_trace","rl":"projectiles","fidelity":"open","provenance":{"status":"sourced_secondary","source_id":"goblinsfarm-2026-08-26-grand-warden","url":"https://goblinsfarm.com/wiki/heroes/grand-warden.html","needed":"versioned projectile launch, speed, collision and impact timing"}},
+    {"id":"royal_champion","model":"logical_next_tick_unmeasured","core":"BattleState::Projectile","gui":"amber_post_impact_trace","rl":"projectiles","fidelity":"open","provenance":{"status":"sourced_secondary","source_id":"fandom-2026-07-royal-champion","url":"https://clashofclans.fandom.com/wiki/Royal_Champion","needed":"versioned projectile launch, speed, collision and impact timing"}},
+    {"id":"minion_prince","model":"logical_next_tick_unmeasured","core":"BattleState::Projectile","gui":"amber_post_impact_trace","rl":"projectiles","fidelity":"open","provenance":{"status":"sourced_secondary","source_id":"fandom-2026-07-minion-prince","url":"https://clashofclans.fandom.com/wiki/Minion_Prince","needed":"versioned projectile launch, speed, collision and impact timing"}},
+    {"id":"dragon_duke","model":"logical_next_tick_unmeasured","core":"BattleState::Projectile","gui":"amber_post_impact_trace","rl":"projectiles","fidelity":"open","provenance":{"status":"sourced_secondary","source_id":"chiefpansancolt-62b019df-dragon-duke","url":"https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/heroes/dragon-duke.json","needed":"versioned projectile or direct-contact launch, collision and impact timing"}},
+    {"id":"lava_pup","model":"logical_next_tick_unmeasured","core":"BattleState::Projectile","gui":"amber_post_impact_trace","rl":"projectiles","fidelity":"open","provenance":{"status":"sourced_secondary","source_id":"fandom-2026-09-18-lava-pup","url":"https://clashofclans.fandom.com/wiki/Lava_Pup","needed":"versioned projectile launch, speed, collision and impact timing"}}
+  ],
+  "historical_unavailable_profiles": [
+    {"content_id":"archer_queen","reason":"No reproducible current projectile speed profile is published."},
+    {"content_id":"grand_warden","reason":"No reproducible current projectile speed profile is published."},
+    {"content_id":"royal_champion","reason":"No reproducible current projectile speed profile is published."},
+    {"content_id":"minion_prince","reason":"No reproducible current projectile speed profile is published."},
+    {"content_id":"dragon_duke","reason":"No reproducible current projectile or direct-contact timing profile is published."},
+    {"content_id":"lava_pup","reason":"No reproducible current projectile speed profile is published."}
+  ],
+  "test_evidence": ["Hero base-attack tests exercise the shared Core path and snapshot determinism. Projectile travel remains explicitly unmeasured."]
+}

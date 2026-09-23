@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-healer-puppet-summon-and-healing-audit",
+  "scope": "Additive Healer Puppet L1-18 and spawned Healer audit of Queen self healing, summoned-unit levels and activation timing.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Official 2023-12 launch; claimed client build 18.600.3 in dated 2026 Equipment and troop tables; version unspecified for independent effect table; pinned raw commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-giant-arrow-air-defense-damage-audit.json",
+    "reference_id": "home-village-th18-2026-09-23-giant-arrow-air-defense-damage-audit",
+    "sha256": "39350413651ffc6f6cb068fc95583e3c3dca088203edc004a0a0e0ce1d602843"
+  },
+  "sources": [
+    {
+      "id": "supercell-2023-12-12-healer-puppet-launch", "tier": "primary", "publisher": "Supercell", "title": "Hero Equipment",
+      "published_on": "2023-12-12", "consulted_on": "2026-09-23", "url": "https://supercell.com/en/games/clashofclans/blog/news/introducing-hero-equipment/",
+      "confidence": "high_for_active_queen_summon_and_self_heal", "content_id": "healer_puppet", "levels": "1-18", "mode": "archer_queen_active_equipment",
+      "facts": ["Healer Puppet is Common active Archer Queen Equipment unlocked at Blacksmith level 5.", "The active ability summons Healers, while the Hero self heals and gains HP."],
+      "limitations": "No summon count by level, summoned Healer level, healing pulse order, spawn position or activation tick is given."
+    },
+    {
+      "id": "goblins-farm-2026-09-18-healer-puppet-client-files", "tier": "secondary-dated-game-files", "publisher": "Goblins Farm", "title": "Healer Puppet — Clash of Clans Wiki",
+      "published_on": null, "updated_on": "2026-09-18", "consulted_on": "2026-09-23", "version": "Client build 18.600.3 as claimed by source",
+      "url": "https://goblinsfarm.com/wiki/equipment/healer-puppet.html", "confidence": "medium_high_for_dated_queen_hp_and_cost_table", "content_id": "healer_puppet", "levels": "1-18", "mode": "active_equipment",
+      "facts": ["The public per-level Queen HP and cost table matches the pinned payload, including L18 HP 968."],
+      "limitations": "The public table omits summoned count, summoned level, self heal rate and timing."
+    },
+    {
+      "id": "clash-connection-healer-puppet-effect-table", "tier": "secondary-version-unknown", "publisher": "Clash Connection", "title": "Healer Puppet",
+      "published_on": null, "consulted_on": "2026-09-23", "version": "not stated", "url": "https://clashconnection.com/en/wiki/homebase/equipment/healer-puppet",
+      "confidence": "medium_for_cross_checked_effect_table_not_current_version", "content_id": "healer_puppet", "levels": "1-18", "mode": "summon_and_passive_self_heal",
+      "facts": ["The public L1-18 summoned-Healer count, summoned-Healer level, self-heal-per-second and Queen HP rows match the pinned payload; L18 lists three L8 Healers and 35 self heal per second."],
+      "limitations": "The page gives no publication/update date or client build and no timing, spawn, target-selection or pulse rules."
+    },
+    {
+      "id": "goblins-farm-2026-09-18-healer-troop-client-files", "tier": "secondary-dated-game-files", "publisher": "Goblins Farm", "title": "Healer — Clash of Clans",
+      "published_on": null, "updated_on": "2026-09-18", "consulted_on": "2026-09-23", "version": "Client build 18.600.3 as claimed by source",
+      "url": "https://goblinsfarm.com/wiki/troops/healer.html", "confidence": "medium_high_for_dated_ordinary_healer_levels", "content_id": "healer_puppet_healer", "levels": "4-8 referenced by Equipment", "mode": "spawned_flying_support_unit",
+      "facts": ["The ordinary Healer table publishes L4-8 HP of 1200,1500,1600,1700,1800 and heal rates of 66,72,72,72,76 per second; it describes flying ground-unit healing and no attack."],
+      "limitations": "The source does not establish whether Puppet Healers inherit every ordinary Healer stat, AI and target priority; it omits spawn position and pulse phase."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-healer-puppet-raw-recheck", "tier": "secondary-frozen-payload", "publisher": "chiefpansancolt/clash-of-clans-data", "title": "Pinned Healer Puppet Home Village Hero Equipment record",
+      "published_on": null, "consulted_on": "2026-09-23", "version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/healer-puppet.json",
+      "confidence": "medium_for_historical_effect_fields", "content_id": "healer_puppet", "levels": "1-18", "mode": "active_summon_and_self_heal",
+      "raw_sha256": "d70c28fd8b64df46d64bb94ca7dfdb98a99a5423d1a45414863055cbc6cf90ef",
+      "facts": ["The pinned payload has per-level summonedHealers, healerLevel, selfHealingPerSecond and Queen hitpointIncrease fields."],
+      "limitations": "The payload gives no activation ordering, Healer AI override, regeneration pulse phase or current game version."
+    }
+  ],
+  "observations": [
+    {"content_id": "healer_puppet", "levels": "1-18", "mode": "summon_and_self_heal", "source": "chiefpansancolt-62b019df-healer-puppet-raw-recheck", "summoned_healers_by_level": [1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3], "healer_level_by_equipment_level": [4,4,5,5,5,5,5,5,6,6,6,7,7,7,7,7,7,8], "self_healing_per_second_by_level": [6,8,10,12,14,16,18,20,22,24,26,28,30,31,32,33,34,35], "note": "All effect fields match the independent version-unknown table; current-build continuity remains unverified."},
+    {"content_id": "healer_puppet_healer", "parent_content_id": "healer_puppet", "levels": "4-8", "mode": "spawned_unit", "source": "goblins-farm-2026-09-18-healer-troop-client-files", "ordinary_healer_hitpoints_by_level": {"4": 1200, "5": 1500, "6": 1600, "7": 1700, "8": 1800}, "ordinary_healer_heal_per_second_by_level": {"4": 66, "5": 72, "6": 72, "7": 72, "8": 76}, "note": "Ordinary Healer data only; Puppet child stat inheritance is an unverified relationship."}
+  ],
+  "derivations": [
+    {"content_id": "healer_puppet", "levels": "1-18", "mode": "equipment_effect", "result": "Retain count, Healer-level and self-heal fields as data-only", "method": "Cross-check all 18 pinned raw rows against the independent public table; do not assert its unspecified build is current."},
+    {"content_id": "healer_puppet_healer", "levels": "4-8", "mode": "child_reference", "result": "Record ordinary Healer levels as candidate spawned-unit data without importing an inheritance rule", "method": "Match the Equipment's healerLevel keys to dated ordinary-Healer rows; leave spawn actor and combat AI unmaterialized."}
+  ],
+  "rejected_inferences": [
+    {"rule": "Use the player's researched Healer level for Puppet children", "reason": "The pinned Equipment field and independent table name a separate Healer level by Equipment level; player-Laboratory dependence is not sourced."},
+    {"rule": "Treat Puppet Healers as fully identical to ordinary deployed Healers", "reason": "The checked sources do not establish child AI, follow priority, trap handling or complete stat inheritance."},
+    {"rule": "Make the spawned Healers exclusively follow the Queen", "reason": "No checked primary source gives a post-spawn lock or reassignment rule."},
+    {"rule": "Apply the self-heal rate every 10 ms using fractional accumulation starting at activation", "reason": "The rate is known, but passive start, accumulator rounding, HP cap and pulse order are not documented."},
+    {"rule": "Spawn all Healers on the activation tick at fixed offsets", "reason": "Spawn phase, position, collision and entity-ID order are not published."}
+  ],
+  "open_uncertainties": [
+    {"content_id": "healer_puppet", "levels": "1-18", "mode": "archer_queen_active_equipment", "items": ["current-build count, summoned level and self-heal continuity", "whether self healing is always passive or begins on activation", "self-heal tick accumulation, rounding, HP cap and death phase", "activation, spawn and simultaneous Equipment tick order", "Queen max HP increase and interaction with damage/recovery modifiers", "Viewer, snapshot, replay and RL activation"]},
+    {"content_id": "healer_puppet_healer", "levels": "4-8", "mode": "spawned_flying_support_unit", "items": ["ordinary Healer stat inheritance and current child values", "spawn placement, formation, collision and entity-ID order", "first heal pulse, cadence, target priority and retargeting", "ground-only healing, Hero/Pet/clone eligibility and HP cap", "enemy defenses, traps, aura and post-Queen-death behavior", "battlefield art and redistribution rights"]}
+  ],
+  "conclusion": "Healer Puppet L1-18 and its spawned Healers remain partial and catalogue-only. Active Queen summons, self healing and HP gain are official, while current effect continuity and deterministic child lifecycle, targeting and heal timing are incomplete."
+}

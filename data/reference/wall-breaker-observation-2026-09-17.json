@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "reference_id": "th18-wall-breaker-secondary-observation-2026-09-17",
+  "purpose": "Version-identified secondary corroboration of the current Home Village Wall Breaker table. It validates the pinned raw catalogue but does not define the undisclosed protected-wall topology algorithm.",
+  "source_id": "goblinsfarm-2026-09-16-wall-breaker",
+  "client_build": "18.600.3 (as reported by publisher)",
+  "observed_root": {
+    "housing_space": 2,
+    "target_type": "ground",
+    "attack_speed_seconds": 1,
+    "range_tiles": 1,
+    "movement_speed": 24
+  },
+  "levels": [
+    {"level": 1, "hitpoints": 20, "dps": 10, "town_hall_required": 3},
+    {"level": 2, "hitpoints": 24, "dps": 20, "town_hall_required": 4},
+    {"level": 3, "hitpoints": 29, "dps": 25, "town_hall_required": 6},
+    {"level": 4, "hitpoints": 35, "dps": 30, "town_hall_required": 7},
+    {"level": 5, "hitpoints": 53, "dps": 43, "town_hall_required": 8},
+    {"level": 6, "hitpoints": 72, "dps": 55, "town_hall_required": 10},
+    {"level": 7, "hitpoints": 82, "dps": 66, "town_hall_required": 11},
+    {"level": 8, "hitpoints": 92, "dps": 75, "town_hall_required": 12},
+    {"level": 9, "hitpoints": 112, "dps": 86, "town_hall_required": 13},
+    {"level": 10, "hitpoints": 130, "dps": 94, "town_hall_required": 14},
+    {"level": 11, "hitpoints": 140, "dps": 102, "town_hall_required": 15},
+    {"level": 12, "hitpoints": 150, "dps": 110, "town_hall_required": 16},
+    {"level": 13, "hitpoints": 160, "dps": 118, "town_hall_required": 17},
+    {"level": 14, "hitpoints": 170, "dps": 126, "town_hall_required": 18}
+  ],
+  "known_missing": ["deterministic protected-wall topology", "spawn/deployment-specific target selection measurements"]
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-20-hero-banner-visual-variants",
+  "scope": "Additive Hero Banner visual-assignment metadata. It establishes only public source image variants for the existing non-combat, non-targetable Banner and enables no Hero patrol or defensive combat rule.",
+  "frozen_at": "2026-09-20T00:00:00+02:00",
+  "parent_reference": {"file": "th18-2026-09-20-grand-warden-air-mode.json", "reference_id": "home-village-th18-2026-09-20-grand-warden-air-mode", "sha256": "85e7462ec44268d0d401029a4c6e3980b56fe459f9501d555411a4eceacf65fc"},
+  "sources": [
+    {"id": "chiefpansancolt-62b019df-hero-banner-variants", "tier": "secondary-build-pinned", "publisher": "chiefpansancolt/clash-of-clans-data", "title": "Pinned Hero Banner image map", "published_on": null, "consulted_on": "2026-09-20", "version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba", "url": "https://github.com/chiefpansancolt/clash-of-clans-data/blob/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/army-buildings/hero-banner.json", "limitations": "The image map identifies Banner artwork but supplies no assignment rule, Hero level, patrol, target acquisition, return, respawn or combat timing."}
+  ],
+  "catalogue_content_overrides": [
+    {"content_id": "hero_banner", "fields": {"source_images": {"value": {"normal": "images/home/army-buildings/hero-banner/empty.png", "barbarian_king": "images/home/army-buildings/hero-banner/barbarian-king.png", "archer_queen": "images/home/army-buildings/hero-banner/archer-queen.png", "grand_warden": "images/home/army-buildings/hero-banner/grand-warden.png", "royal_champion": "images/home/army-buildings/hero-banner/royal-champion.png", "minion_prince": "images/home/army-buildings/hero-banner/minion-prince.png", "dragon_duke": "images/home/army-buildings/hero-banner/dragon-duke.png"}, "source": "chiefpansancolt-62b019df-hero-banner-variants", "note": "Scenario variant is visual assignment data only. It cannot instantiate or modify a defending Hero."}}}
+  ],
+  "open_uncertainties": [{"content_ids": ["hero_banner", "barbarian_king", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke"], "items": ["Banner-to-Hero assignment rule", "defensive patrol and target acquisition", "return, respawn and timing", "collision and pathfinding geometry"]}],
+  "conclusion": "The Viewer renders only documented Banner artwork selected by the immutable scenario. The Banner remains non-targetable, non-destructible and non-combat; no defensive Hero behavior is claimed."
+}

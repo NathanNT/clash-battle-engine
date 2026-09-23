@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-magic-mirror-clone-and-invisibility-audit",
+  "scope": "Additive Magic Mirror L1-27 and Queen clone audit of summon, one-second invisibility and Equipment-bonus exclusions.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Official 2024-08 release and 2024-09 clone fixes; claimed client build 18.600.3 for dated 2026 Hero HP table; version unstated for independent clone table; pinned raw commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-frozen-arrow-slow-and-impact-audit.json",
+    "reference_id": "home-village-th18-2026-09-23-frozen-arrow-slow-and-impact-audit",
+    "sha256": "f41ee17430da87bba41192bb6eecca35e4127b897897e17835a6c196eac164c5"
+  },
+  "sources": [
+    {
+      "id": "supercell-2024-08-09-magic-mirror-release", "tier": "primary", "publisher": "Supercell", "title": "Anime Medal Event & New Hero Equipment!",
+      "published_on": "2024-08-09", "consulted_on": "2026-09-23", "url": "https://supercell.com/en/games/clashofclans/blog/news/anime-medal-event-new-hero-equipment/",
+      "confidence": "high_for_permanent_queen_clone_and_invisibility", "content_id": "magic_mirror", "levels": "1-27", "mode": "archer_queen_active_equipment",
+      "facts": ["Magic Mirror is permanent Epic Archer Queen Equipment introduced during the time-limited Anime Medal Event.", "It summons Queen clones with a portion of her HP and damage for a limited duration; the original Queen is initially invisible for one second after use."],
+      "limitations": "The article does not give clone count/HP/DPS by level, spawn position, target AI or invisibility target-loss timing. The event troop is excluded from this goal."
+    },
+    {
+      "id": "supercell-2024-09-09-magic-mirror-clone-fixes", "tier": "primary", "publisher": "Supercell", "title": "September Update: Full Patch Notes",
+      "published_on": "2024-09-09", "consulted_on": "2026-09-23", "url": "https://supercell.com/en/games/clashofclans/blog/game-updates/september-update-full-patch-notes/",
+      "confidence": "high_for_clone_equipment_bonus_and_redeployment_exclusion", "content_id": "magic_mirror_clone", "levels": "all", "mode": "clone_modifier_and_hero_lifecycle",
+      "facts": ["Magic Mirror clones no longer receive damage boosts from Invisibility Vial or any Equipment.", "Clones no longer receive passive Equipment DPS buffs and no longer affect Archer Queen re-deployment time."],
+      "limitations": "The patch does not define cloning base HP/DPS arithmetic, other auras, Pet pairing, clone disappearance phase or combat target order."
+    },
+    {
+      "id": "goblins-farm-2026-09-18-magic-mirror-client-files", "tier": "secondary-dated-game-files", "publisher": "Goblins Farm", "title": "Magic Mirror — Clash of Clans Wiki",
+      "published_on": null, "updated_on": "2026-09-18", "consulted_on": "2026-09-23", "version": "Client build 18.600.3 as claimed by source",
+      "url": "https://goblinsfarm.com/wiki/equipment/magic-mirror.html", "confidence": "medium_high_for_dated_queen_hp_and_cost_table", "content_id": "magic_mirror", "levels": "1-27", "mode": "active_equipment",
+      "facts": ["The public per-level Queen HP and cost table matches the pinned payload, including L27 HP 861."],
+      "limitations": "The public table omits clone count, DPS, HP, duration and Queen recovery."
+    },
+    {
+      "id": "clash-connection-magic-mirror-effect-table", "tier": "secondary-version-unknown", "publisher": "Clash Connection", "title": "Magic Mirror",
+      "published_on": null, "consulted_on": "2026-09-23", "version": "not stated", "url": "https://clashconnection.com/en/wiki/homebase/equipment/magic-mirror",
+      "confidence": "medium_for_cross_checked_effect_table_not_current_version", "content_id": "magic_mirror", "levels": "1-27", "mode": "active_clone",
+      "facts": ["The public per-level clone count, duration, DPS, HP, Queen HP and recovery table matches the pinned raw payload; L27 lists two clones, 30 seconds, 765 DPS and 3216 HP."],
+      "limitations": "The page gives no publication date, client build or clone behavior and tick order."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-magic-mirror-raw-recheck", "tier": "secondary-frozen-payload", "publisher": "chiefpansancolt/clash-of-clans-data", "title": "Pinned Magic Mirror Home Village Hero Equipment record",
+      "published_on": null, "consulted_on": "2026-09-23", "version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/magic-mirror.json",
+      "confidence": "medium_for_historical_effect_fields", "content_id": "magic_mirror", "levels": "1-27", "mode": "clone_summon",
+      "raw_sha256": "72c4b384283b16c9752e45549823fd0b8b301612d94adcd40b736533ca414809",
+      "facts": ["The pinned 27 rows preserve clones, cloneDuration, cloneDps, cloneHealth, Queen HP and recovery; the ability field gives one-second Queen invisibility."],
+      "limitations": "The payload does not define clone stat derivation, attack cadence, spawn placement or current effect continuity."
+    }
+  ],
+  "observations": [
+    {"content_id": "magic_mirror", "levels": "1-27", "mode": "active_clone_summon", "source": "chiefpansancolt-62b019df-magic-mirror-raw-recheck", "pinned_clone_count_by_level": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2], "pinned_clone_duration_seconds_by_level": [20,20,20,20,20,20,20,20,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,30], "pinned_clone_dps_by_level": [136,136,206,206,206,276,276,276,346,346,346,416,416,416,486,486,486,556,556,556,626,626,626,696,696,696,765], "pinned_clone_hp_by_level": [580,580,873,873,873,1166,1166,1166,1459,1459,1459,1752,1752,1752,2045,2045,2045,2338,2338,2338,2631,2631,2631,2924,2924,2924,3216], "note": "All raw effect fields match the independent version-unknown table; current-build continuity remains unverified."},
+    {"content_id": "magic_mirror_clone", "parent_content_id": "magic_mirror", "levels": "derived from Equipment L1-27", "mode": "spawned_queen_clone", "source": "supercell-2024-09-09-magic-mirror-clone-fixes", "equipment_damage_bonus": "excluded", "passive_equipment_dps_bonus": "excluded", "queen_redeployment_time_effect": "excluded", "note": "Only official exclusion constraints are established; no clone actor or attack AI is inferred."}
+  ],
+  "derivations": [
+    {"content_id": "magic_mirror", "levels": "1-27", "mode": "active_clone", "result": "Retain clone count, HP, DPS, duration and Queen recovery as data-only", "method": "Cross-check all 27 pinned raw rows against the independent version-unknown public table; do not assert current-build continuity."},
+    {"content_id": "magic_mirror_clone", "levels": "all", "mode": "equipment_interaction", "result": "Exclude Equipment damage and passive DPS buffs from clones if implemented", "method": "Apply only the official 2024 bug-fix constraints; do not infer other status-effect or aura inheritance."}
+  ],
+  "rejected_inferences": [
+    {"rule": "Give clone actors the original Queen's Equipment bonuses or Invisibility Vial damage", "reason": "Supercell explicitly removed these damage and passive DPS boosts."},
+    {"rule": "Calculate clone HP and DPS as a fixed percentage of Queen values", "reason": "The launch description is qualitative and pinned per-level clone fields are explicit; no current percentage or rounding is published."},
+    {"rule": "Make clones invisible for the original Queen's one-second invisibility interval", "reason": "The release text attributes initial invisibility to the Archer Queen, not expressly to the clones."},
+    {"rule": "Spawn clones at fixed offsets and give them inherited Queen target state", "reason": "Spawn geometry, collision, target selection and entity-ID order are undocumented."},
+    {"rule": "Remove clones exactly 20, 25 or 30 seconds after activation before the final attack", "reason": "Duration is recorded, but spawn tick and expiry phase are not published."}
+  ],
+  "open_uncertainties": [
+    {"content_id": "magic_mirror", "levels": "1-27", "mode": "archer_queen_active_equipment", "items": ["current clone count/HP/DPS/duration and Queen recovery continuity", "activation, clone spawn and Queen invisibility tick order", "Queen target loss and projectile interaction during one-second invisibility", "Queen HP/recovery cap and simultaneous Equipment order", "Viewer clone/invisibility art, snapshot, replay and RL activation"]},
+    {"content_id": "magic_mirror_clone", "levels": "derived from Equipment L1-27", "mode": "spawned_queen_clone", "items": ["clone stat derivation and ordinary Queen level/mode relationship", "spawn location, collision, ID and simultaneous clone order", "attack cadence, projectile speed, targeting and death/expiry phase", "damage immunity, traps, Pets, auras and spell status effects", "Equipment exclusion staging with other modifiers", "battlefield art and redistribution rights"]}
+  ],
+  "conclusion": "Magic Mirror L1-27 and Queen clones remain partial and catalogue-only. Official sources establish the clone summon, one-second original-Queen invisibility and Equipment-bonus exclusions, but current clone effects and deterministic spawn, combat and expiry ordering are incomplete."
+}

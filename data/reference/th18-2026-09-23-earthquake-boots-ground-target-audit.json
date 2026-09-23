@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-earthquake-boots-ground-target-audit",
+  "scope": "Additive Earthquake Boots L1-18 target and geometry audit across the 2025 building nerf and 2026 ground-troop change; preserve level fields without guessing current area damage.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Official 2023-12-12 Equipment release, 2025-02 balance change and 2026-02-23 ground-troop update; game-file table dated 2026-09-01 and claimed client build 18.600.3 on 2026-09-16; pinned raw commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-rage-vial-effect-order-audit.json",
+    "reference_id": "home-village-th18-2026-09-23-rage-vial-effect-order-audit",
+    "sha256": "751019f44ee482098df8222965d00d3872b23ee9b6b3cf97af1fdeb646786986"
+  },
+  "sources": [
+    {
+      "id": "supercell-2023-12-12-earthquake-boots-introduction",
+      "tier": "primary", "publisher": "Supercell", "title": "Hero Equipment",
+      "published_on": "2023-12-12", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/introducing-hero-equipment/",
+      "confidence": "high_for_assignment_and_general_effect", "content_id": "earthquake_boots", "levels": "1-18_common_cap", "mode": "barbarian_king_active_equipment",
+      "facts": ["Earthquake Boots are Common active Barbarian King Equipment. Their activation damages Walls and Buildings, with a Hero damage and HP bonus; Blacksmith level 1 unlocks them."],
+      "limitations": "No radius, damage percentage, Wall destruction formula, target eligibility or activation tick order is supplied."
+    },
+    {
+      "id": "supercell-2025-01-22-earthquake-boots-building-nerf",
+      "tier": "primary", "publisher": "Supercell", "title": "Hero Equipment Balance Changes!",
+      "published_on": "2025-01-22", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/hero-equipment-balance-changes/",
+      "confidence": "high_for_building_nerf_and_skeleton_exclusion_at_announcement", "content_id": "earthquake_boots", "levels": "all", "mode": "area_activation",
+      "facts": ["Supercell announced lower building damage for Earthquake Boots and said the ability would no longer affect Skeleton Trap skeletons."],
+      "limitations": "The article does not give replacement percentages or explain whether the Skeleton Trap exception remains after the later 2026 ground-troop change."
+    },
+    {
+      "id": "supercell-2026-02-23-earthquake-boots-ground-troop-update",
+      "tier": "primary", "publisher": "Supercell", "title": "The February Update has escaped!",
+      "published_on": "2026-02-23", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/the-february-update-has-escaped/",
+      "confidence": "high_for_ground_troop_damage_change", "content_id": "earthquake_boots", "levels": "all", "mode": "area_activation",
+      "facts": ["The Earthquake Spell now damages ground troops in addition to Buildings and Walls, and the release notes explicitly say this affects Earthquake Boots as well."],
+      "limitations": "No per-level ground-troop damage, target exclusion list, radius, damage order or relation to the 2025 Skeleton Trap exclusion is given."
+    },
+    {
+      "id": "gibiarena-2026-09-01-earthquake-boots-game-files",
+      "tier": "secondary-dated-game-files", "publisher": "GiBiArena via ClashKing game-file data",
+      "title": "Earthquake Boots: costs, times and levels — Clash of Clans",
+      "published_on": null, "consulted_on": "2026-09-23",
+      "version": "Game-file data dated 2026-09-01, processed 2026-09-03; exact client build unpublished",
+      "url": "https://www.gibiarena.com/en/clash-of-clans/upgrades/earthquake-boots",
+      "confidence": "medium_high_for_dated_stat_and_cost_table", "content_id": "earthquake_boots", "levels": "1-18", "mode": "active_equipment",
+      "facts": ["The TH18 maximum is L18. Per-level Hero HP, DPS, ore costs and Blacksmith requirements agree with the pinned payload."],
+      "limitations": "The table does not give activation radius or building, Wall or ground-troop damage percentages."
+    },
+    {
+      "id": "goblins-farm-2026-09-16-earthquake-boots-client-files",
+      "tier": "secondary-dated-game-files", "publisher": "Goblins Farm",
+      "title": "Earthquake Boots — Clash of Clans Wiki",
+      "published_on": "2026-09-16", "consulted_on": "2026-09-23",
+      "version": "Client build 18.600.3 as claimed by source",
+      "url": "https://goblinsfarm.com/wiki/equipment/earthquake-boots.html",
+      "confidence": "medium_high_for_dated_hp_and_dps_table", "content_id": "earthquake_boots", "levels": "1-18", "mode": "active_equipment",
+      "facts": ["The page states that activation destroys Walls and damages ground targets; L1-18 Hero HP increases run 209-2500 and DPS increases 13-102."],
+      "limitations": "The page omits per-level area damage and exact Wall formula or target exceptions."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-earthquake-boots-raw-recheck",
+      "tier": "secondary-frozen-payload", "publisher": "chiefpansancolt/clash-of-clans-data",
+      "title": "Pinned Earthquake Boots Home Village Hero Equipment record",
+      "published_on": null, "consulted_on": "2026-09-23",
+      "version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/earthquake-boots.json",
+      "confidence": "medium_for_historical_level_fields", "content_id": "earthquake_boots", "levels": "1-18", "mode": "area_activation",
+      "raw_sha256": "1735c786de0d01487707b23ebd6aaa70fa4761100358d7093ad9ea41b6096c2e",
+      "facts": ["The normalized source_fields preserve top-level abilityRadius 8 and targets Ground; per-level buildingDamagePercent, troopDamagePercent, DPS and Hero HP bonuses remain present."],
+      "limitations": "The radius unit and distance test are unstated. Dated public tables do not corroborate the area-damage percentages or prove whether they reflect the post-2025 and post-2026 rules."
+    }
+  ],
+  "derivations": [
+    {"content_id": "earthquake_boots", "levels": "1-18", "mode": "area_activation", "result": "Preserve pinned level and ability fields as data-only", "method": "SHA-check all frozen raw fields; cross-check dated Hero HP and DPS tables. Official notes establish ground-troop eligibility after 2026-02-23 without supplying complete area-damage calculations."}
+  ],
+  "rejected_inferences": [
+    {"rule": "Use the pinned buildingDamagePercent and troopDamagePercent as current post-2026 damage", "reason": "Neither dated public table exposes those percentages and the 2025 building nerf plus 2026 troop change make historical continuity material."},
+    {"rule": "Treat abilityRadius 8 as eight tile center-to-center distance", "reason": "The raw field does not specify units, footprint treatment, hitbox intersection or geometry rounding."},
+    {"rule": "Affect all ground troops including Skeleton Trap skeletons", "reason": "The 2026 general ground-troop wording does not explicitly revoke the 2025 Skeleton Trap exception."},
+    {"rule": "Destroy all Walls in range with a single activation", "reason": "The descriptions do not define Wall damage formula, level and HP dependence or whether activation can partially damage a Wall."},
+    {"rule": "Apply area damage simultaneously with King attack", "reason": "Activation, target enumeration, death and other Equipment effects have no sourced tick order."}
+  ],
+  "open_uncertainties": [
+    {"content_id": "earthquake_boots", "levels": "1-18", "mode": "barbarian_king_active_equipment", "items": ["current-build per-level building, Wall and ground-troop damage", "radius units, center, hitbox and edge inclusion", "Skeleton Trap skeleton exception after the 2026 ground-troop update", "Wall destruction formula and multi-Wall resolution", "defending Hero and Pet ground-target eligibility", "damage, death, trap and King attack tick order", "Hero HP and DPS bonus timing with a second Equipment item", "Viewer effect art, activation overlay, replay and RL command contract"]}
+  ],
+  "conclusion": "Earthquake Boots L1-18 remains partial and catalogue-only. Official sources confirm Wall and Building damage and the 2026 addition of ground-troop damage, while dated tables verify passive Hero stats. Current area percentages, geometry and target exceptions remain insufficient for a faithful Core implementation."
+}

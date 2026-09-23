@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-vampstache-heal-event-audit",
+  "scope": "Additive Vampstache L1-18 passive heal event and attack-speed audit; retain pinned heal-per-hit data without assuming impact or stacking order.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Official 2023-12-12 introduction and 2025-02 balance notice; game-file table dated 2026-09-01 and claimed client build 18.600.3 on 2026-09-16; pinned raw commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-earthquake-boots-ground-target-audit.json",
+    "reference_id": "home-village-th18-2026-09-23-earthquake-boots-ground-target-audit",
+    "sha256": "47b2529d0eb86cf2c59366a1a8e9977993d05e2da3094d3a1b410c32c055d84a"
+  },
+  "sources": [
+    {
+      "id": "supercell-2023-12-12-vampstache-introduction",
+      "tier": "primary", "publisher": "Supercell", "title": "Hero Equipment",
+      "published_on": "2023-12-12", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/introducing-hero-equipment/",
+      "confidence": "high_for_assignment_and_passive_heal", "content_id": "vampstache", "levels": "1-18_common_cap", "mode": "barbarian_king_passive_equipment",
+      "facts": ["Vampstache is Common passive Barbarian King Equipment unlocked with Blacksmith level 3. The King heals himself with every attack while it is equipped; replacing Barbarian Puppet with Vampstache removes the Puppet summon ability."],
+      "limitations": "No per-level heal amount, whether attacks against Walls or immune targets qualify, heal event phase, attack-speed bonus or stacking rule is specified."
+    },
+    {
+      "id": "supercell-2025-01-22-vampstache-buff",
+      "tier": "primary", "publisher": "Supercell", "title": "Hero Equipment Balance Changes!",
+      "published_on": "2025-01-22", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/hero-equipment-balance-changes/",
+      "confidence": "high_for_change_occurrence_only", "content_id": "vampstache", "levels": "unspecified", "mode": "balance_change",
+      "facts": ["Supercell announced a Vampstache buff for the February 2025 update."],
+      "limitations": "The article gives no exact numeric change, attack-speed formula or rollout build."
+    },
+    {
+      "id": "gibiarena-2026-09-01-vampstache-game-files",
+      "tier": "secondary-dated-game-files", "publisher": "GiBiArena via ClashKing game-file data",
+      "title": "Vampstache: costs, times and levels — Clash of Clans",
+      "published_on": null, "consulted_on": "2026-09-23",
+      "version": "Game-file data dated 2026-09-01, processed 2026-09-03; exact client build unpublished",
+      "url": "https://www.gibiarena.com/en/clash-of-clans/upgrades/vampstache",
+      "confidence": "medium_high_for_dated_dps_and_cost_table", "content_id": "vampstache", "levels": "1-18", "mode": "passive_equipment",
+      "facts": ["The TH18 maximum is L18. Per-level DPS bonuses 10-120, ore costs and Blacksmith requirements agree with the pinned payload."],
+      "limitations": "The page does not publish heal-per-hit or attack-speed values or the heal trigger phase."
+    },
+    {
+      "id": "goblins-farm-2026-09-16-vampstache-client-files",
+      "tier": "secondary-dated-game-files", "publisher": "Goblins Farm",
+      "title": "Vampstache — Clash of Clans Wiki",
+      "published_on": "2026-09-16", "consulted_on": "2026-09-23",
+      "version": "Client build 18.600.3 as claimed by source",
+      "url": "https://goblinsfarm.com/wiki/equipment/vampstache.html",
+      "confidence": "medium_high_for_dated_dps_table", "content_id": "vampstache", "levels": "1-18", "mode": "passive_equipment",
+      "facts": ["The game-file-derived page repeats the each-attack healing description and L1-18 DPS bonuses of 10-120."],
+      "limitations": "The table omits per-level heal-per-hit and attack-speed values."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-vampstache-raw-recheck",
+      "tier": "secondary-frozen-payload", "publisher": "chiefpansancolt/clash-of-clans-data",
+      "title": "Pinned Vampstache Home Village Hero Equipment record",
+      "published_on": null, "consulted_on": "2026-09-23",
+      "version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/vampstache.json",
+      "confidence": "medium_for_historical_level_fields", "content_id": "vampstache", "levels": "1-18", "mode": "passive_heal",
+      "raw_sha256": "d75927edeb22f434c6f8f44a016225eece4fef0470d8d0e7a944a596f63ee395",
+      "facts": ["The normalized per-level source_fields preserve healPerHit 60-300, dpsIncrease 10-120 and attackSpeedIncrease +5% to +22%."],
+      "limitations": "The dated tables verify DPS but not heal-per-hit or attack-speed continuity. The payload does not define attack eligibility, healing phase, cap, rounding or speed-to-cadence conversion."
+    }
+  ],
+  "derivations": [
+    {"content_id": "vampstache", "levels": "1-18", "mode": "passive_heal", "result": "Keep pinned heal-per-hit, DPS and speed fields data-only", "method": "SHA-check the frozen raw per-level stats and cross-check dated DPS tables. No healing event, attack cadence or modifier stacking rule is inferred."}
+  ],
+  "rejected_inferences": [
+    {"rule": "Heal on every successful damage impact", "reason": "The official wording says every attack while the raw field says healPerHit; the checked sources do not resolve attack launch versus hit, zero damage or multi-target impacts."},
+    {"rule": "Heal when striking Walls or an immune target", "reason": "No checked official source specifies target-category eligibility or whether zero-damage hits trigger healing."},
+    {"rule": "Apply +5% to +22% attack speed by dividing King's attack interval by 1 plus the percentage", "reason": "The raw field lacks cadence conversion, rounding, stacking and current-build corroboration."},
+    {"rule": "Use pinned healPerHit 60-300 as current values", "reason": "The dated 2026 tables omit healing values; the 2025 buff makes historical continuity relevant."}
+  ],
+  "open_uncertainties": [
+    {"content_id": "vampstache", "levels": "1-18", "mode": "barbarian_king_passive_equipment", "items": ["current-build heal-per-hit and attack-speed values", "attack launch, hit or damage-impact trigger", "Wall, immune target, miss and multi-target eligibility", "heal before or after target damage, retaliatory damage and death", "max-HP cap, over-heal and rounding", "attack-speed cadence conversion and stacking with Rage Vial or auras", "Pet, Phoenix and King defeat interaction", "Viewer overlay, snapshot, replay and RL loadout contract"]}
+  ],
+  "conclusion": "Vampstache L1-18 remains partial and catalogue-only. Official sources establish passive healing with every King attack, and dated tables verify its DPS progression, but current healing amount and hit-event ordering are insufficient for a faithful deterministic Core implementation."
+}

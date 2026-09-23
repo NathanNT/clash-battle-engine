@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-20-hero-banner-defense-recheck",
+  "scope": "Additive recheck of permanent Home Village Hero Banner defense evidence. It does not enable a defensive Hero proxy.",
+  "frozen_at": "2026-09-20T00:00:00+02:00",
+  "game_version": "Public sources consulted on 2026-09-20. The standard Home Village battle contract remains the target.",
+  "parent_reference": {
+    "file": "th18-2026-09-20-hero-visual-icons.json",
+    "reference_id": "home-village-th18-2026-09-20-hero-visual-icons",
+    "sha256": "f0af05a1597fc806338604fb1290e380bb8ffbfe0b1a26e6443b2c51ec944b33"
+  },
+  "sources": [
+    {
+      "id": "supercell-2025-10-06-ranked-tournament-hero-defense",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "Get Ready for Ranked! - Update",
+      "published_on": "2025-10-06",
+      "consulted_on": "2026-09-20",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/get-ready-for-ranked-update/",
+      "confidence": "high",
+      "facts": [
+        "Tournament Mode gives defending Heroes 20 percent additional DPS.",
+        "Tournament Mode gives defending Heroes 20 percent additional hitpoints.",
+        "The same mode reduces attacking Hero DPS and hitpoints."
+      ],
+      "limitations": "The page scopes all four modifiers to Tournament Mode and supplies no standard-battle Hero Banner patrol, targeting, return, respawn or tick-order contract."
+    },
+    {
+      "id": "fandom-2026-07-hero-banner-secondary",
+      "tier": "secondary",
+      "publisher": "Clash of Clans Wiki | Fandom",
+      "title": "Hero Banner",
+      "published_on": null,
+      "consulted_on": "2026-09-20",
+      "url": "https://clashofclans.fandom.com/wiki/Hero_Banner",
+      "confidence": "low",
+      "facts": [
+        "One Hero is assigned to one Hero Banner.",
+        "Grand Warden defends on the ground while Minion Prince and Dragon Duke defend flying."
+      ],
+      "limitations": "The page could not be opened directly because of robots restrictions. Search excerpts are insufficient to define route, range, collision, targeting or timing."
+    }
+  ],
+  "rejected_inferences": [
+    {
+      "rule": "Apply the 20 percent defending Hero DPS and hitpoint modifiers to ordinary Home Village battles.",
+      "reason": "The primary source explicitly scopes them to Tournament Mode. The current phase does not model that mode."
+    },
+    {
+      "rule": "Create Banner patrol or chase behavior from community descriptions.",
+      "reason": "No reproducible numeric patrol radius, acquisition boundary, return rule or deterministic ordering is available."
+    }
+  ],
+  "open_uncertainties": [
+    {
+      "content_id": "hero_banner",
+      "items": [
+        "standard battle defensive Hero attack and hitpoint modifiers",
+        "banner assignment serialization",
+        "patrol radius, route and idle behavior",
+        "target acquisition, pursuit, return and respawn",
+        "wall interaction, collision and same-tick ordering",
+        "Grand Warden defense-mode target and support rules"
+      ]
+    }
+  ],
+  "conclusion": "The recheck finds no source-supported deterministic standard Home Village Hero Banner contract. Tournament Mode modifiers are preserved as out-of-mode evidence and are not silently applied to the standard simulation."
+}

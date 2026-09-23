@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-20-ruin-witch-movement-followup",
+  "scope": "Additive Ruin Witch movement-value follow-up; no rubble or spawn behaviour is enabled.",
+  "frozen_at": "2026-09-20T00:00:00+02:00",
+  "game_version": "Official June/August 2026 lifecycle evidence plus a secondary page consulted on 2026-09-20.",
+  "parent_reference": {"file": "th18-2026-09-20-lava-hound-lava-pup-baseline.json", "reference_id": "home-village-th18-2026-09-20-lava-hound-lava-pup-baseline", "sha256": "dcf5b844ca8954c04719406ab9799f668ef903fdb61c243784c2b9123dc6748e"},
+  "sources": [
+    {"id": "supercell-2026-06-15-anime-fury-ruin-movement-followup", "tier": "primary", "publisher": "Supercell", "title": "The Anime Fury Update is Here", "published_on": "2026-06-15", "consulted_on": "2026-09-20", "version": "June 2026 update", "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/the-anime-fury-update-is-here/", "limitations": "Confirms the qualitative rubble lifecycle and that the Witch can traverse the map, but publishes no numeric movement speed, coordinates, collision, reach or ordering rule."},
+    {"id": "supercell-2026-08-30-ruin-movement-followup", "tier": "primary", "publisher": "Supercell", "title": "August Update", "published_on": "2026-08-30", "consulted_on": "2026-09-20", "version": "August 2026 update", "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/august-update-3/", "limitations": "Supersedes the cap to ten Knights and removes decay, but supplies no movement or geometry value."},
+    {"id": "cocwarbase-2026-09-20-ruin-witch-movement", "tier": "secondary-version-unknown", "publisher": "CoC War Base", "title": "Ruin Witch CoC 2026 – Max Level 4, Stats & Strategy Guide", "published_on": null, "consulted_on": "2026-09-20", "version": "page says Updated August 2026; client build not published", "url": "https://cocwarbase.com/ruin-witch/", "limitations": "Reports Ruin Witch movement speed 12 and range 0.8. It still reports the obsolete eight-Knight cap and 80 HP/s Knight decay, contrary to the official August update; only the independent speed value is imported."}
+  ],
+  "catalogue_content_overrides": [
+    {"content_id": "ruin_witch", "fields": {"movement_speed": {"value": 12, "source": "cocwarbase-2026-09-20-ruin-witch-movement", "note": "Independent numeric movement value; it does not define rubble routing or authorize Core materialization."}}}
+  ],
+  "known_uncertainties": ["The secondary page remains obsolete for the cap and Knight decay, so official August values continue to prevail.", "No consulted source defines rubble coordinates/footprint/lifetime, reachability, target tie-break, collision, spawn offset/facing, first-acquisition delay, cap despawn ordering, snapshot/replay lifecycle or source asset geometry."],
+  "conclusion": "Ruin Witch now retains the secondary movement-speed value 12 with complete conflict provenance. Ruin Witch and required Ruin Knight remain data-only because the deterministic rubble and child lifecycle contract is still unpublished."
+}

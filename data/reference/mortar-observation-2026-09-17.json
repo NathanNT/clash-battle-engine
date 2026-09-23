@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "reference_id": "th18-mortar-secondary-observation-2026-09-17",
+  "purpose": "Version-identified secondary corroboration of the Home Village Mortar table, footprint and target class without inventing an unpublished numeric minimum range.",
+  "source_id": "goblinsfarm-2026-08-26-mortar",
+  "client_build": "18.400.21 (as reported by publisher)",
+  "observed_root": {"footprint_tiles": "3x3", "target_type": "ground", "range_tiles": 11, "damage_type": "splash"},
+  "documented_behavior": "Cannot target units standing directly beside it; the publisher does not provide a numeric inner-radius value.",
+  "levels": [
+    {"level": 1, "hitpoints": 400, "dps": 4, "town_hall_required": 3},
+    {"level": 2, "hitpoints": 450, "dps": 5, "town_hall_required": 4},
+    {"level": 3, "hitpoints": 500, "dps": 6, "town_hall_required": 5},
+    {"level": 4, "hitpoints": 550, "dps": 7, "town_hall_required": 6},
+    {"level": 5, "hitpoints": 600, "dps": 9, "town_hall_required": 7},
+    {"level": 6, "hitpoints": 650, "dps": 11, "town_hall_required": 8},
+    {"level": 7, "hitpoints": 700, "dps": 15, "town_hall_required": 9},
+    {"level": 8, "hitpoints": 800, "dps": 20, "town_hall_required": 10},
+    {"level": 9, "hitpoints": 950, "dps": 25, "town_hall_required": 11},
+    {"level": 10, "hitpoints": 1100, "dps": 30, "town_hall_required": 11},
+    {"level": 11, "hitpoints": 1300, "dps": 35, "town_hall_required": 12},
+    {"level": 12, "hitpoints": 1500, "dps": 38, "town_hall_required": 12},
+    {"level": 13, "hitpoints": 1700, "dps": 42, "town_hall_required": 13},
+    {"level": 14, "hitpoints": 1950, "dps": 48, "town_hall_required": 14},
+    {"level": 15, "hitpoints": 2150, "dps": 54, "town_hall_required": 15},
+    {"level": 16, "hitpoints": 2300, "dps": 60, "town_hall_required": 16},
+    {"level": 17, "hitpoints": 2450, "dps": 66, "town_hall_required": 17},
+    {"level": 18, "hitpoints": 2550, "dps": 72, "town_hall_required": 18}
+  ],
+  "available_at_town_hall_18": 4,
+  "known_missing": ["numeric minimum-range radius", "newer version-matched full table", "tick-level projectile timing", "target-tie measurements"]
+}

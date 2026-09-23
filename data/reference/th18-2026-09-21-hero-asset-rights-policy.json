@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-21-hero-asset-rights-policy",
+  "scope": "Additive licensing boundary for public Hero visual assets. It changes no Core behavior, data value, geometry or Viewer rendering decision.",
+  "frozen_at": "2026-09-21T00:00:00+02:00",
+  "game_version": "Supercell Fan Content Policy consulted 2026-09-21. The historical TH18 reference remains unchanged.",
+  "parent_reference": {"file": "th18-2026-09-21-hero-battlefield-asset-audit.json", "reference_id": "home-village-th18-2026-09-21-hero-battlefield-asset-audit", "sha256": "8eba8cb2b744e2484d8580b7ee4ade62af427bc99fe5c099b932b555e9a7d053"},
+  "sources": [
+    {"id": "supercell-2023-09-27-fan-content-policy", "tier": "primary", "publisher": "Supercell", "title": "Fan Content Policy", "published_on": "2023-09-27", "consulted_on": "2026-09-21", "url": "https://supercell.com/en/fan-content-policy/", "confidence": "high", "facts": ["The policy governs Supercell assets and fan kits used for fan content.", "The policy limits fan-content asset use to displaying, identifying and discussing Supercell products.", "The policy says that new games based on Supercell game characters must not be created, including free games.", "The policy says Supercell assets must not be modified without express permission."], "limitations": "This policy is not a project-specific license or written authorization. It does not establish whether any existing third-party extracted asset is licensed for this repository."}
+  ],
+  "rights_contract": {"content_ids": ["barbarian_king", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke"], "implemented": "No new Supercell, fan-kit or extracted Hero battlefield art is imported from this audit.", "non_derivations": ["A public URL, repository commit or hash does not prove redistribution rights.", "Existing source-pinned Hero icon byte hashes remain provenance records only, not a license grant.", "No generated substitute is introduced."]},
+  "open_uncertainties": [{"content_ids": ["barbarian_king", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke"], "items": ["written permission or a compatible asset license for public redistribution", "battlefield sprite identity, scale and animation"]}],
+  "conclusion": "Hero image provenance remains recorded, but commercial or open-source redistribution rights are not verified. Future public visual integration requires a compatible license or written authorization and cannot be inferred from availability."
+}

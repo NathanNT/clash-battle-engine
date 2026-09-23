@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "audit_id": "home-village-super-yeti-mechanics-2026-09-18",
+  "content_id": "super_yeti",
+  "consulted_on": "2026-09-18",
+  "scope": "Evidence review for Super Yeti and its required Electromite spawned subunit before either behavior is enabled.",
+  "sources": [
+    {
+      "id": "supercell-2025-05-01-super-yeti-debut",
+      "tier": "primary",
+      "title": "Battle for the High Seas Season!",
+      "published_on": "2025-05-01",
+      "game_version": "not published",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/battle-for-the-high-seas-season/",
+      "finding": "Supercell announces Super Yeti's permanent real debut through the May 12--18 Mini Spotlight Event, establishing it as a Home Village Super Troop rather than temporary event content."
+    },
+    {
+      "id": "supercell-2025-06-16-super-yeti-wall-fix",
+      "tier": "primary",
+      "title": "Welcome to Let's Get Crafty Update!",
+      "published_on": "2025-06-16",
+      "game_version": "not published",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/welcome-to-lets-get-crafty-update/",
+      "finding": "The release notes fix Super Yeti clipping through Walls, but do not specify its collision or spawned-unit mechanics."
+    },
+    {
+      "id": "fandom-2026-09-18-electromite",
+      "tier": "secondary-version-unknown",
+      "title": "Super Yeti/Electromite | Clash of Clans Wiki",
+      "published_on": null,
+      "game_version": "unknown",
+      "url": "https://clashofclans.fandom.com/wiki/Super_Yeti/Electromite",
+      "finding": "The consulted secondary page identifies Electromite as Super Yeti's spawned subunit and describes a 400-damage spawn threshold, building priority, Wall jumping, four-times building damage, self-sacrificing chain attack, up to three chained targets and 20% successive-chain decay; it supplies no version-identified level-stat table or tick contract."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-super-yeti",
+      "tier": "secondary-dated-build",
+      "title": "Pinned normalized Yeti superTroop payload",
+      "published_on": null,
+      "game_version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/yeti.json",
+      "finding": "The pinned payload supplies Super Yeti parent levels, ordinary stats, housing space and image, but has no Electromite object, spawn threshold, child level mapping, child stats, chain geometry or lifecycle fields."
+    }
+  ],
+  "established": [
+    "Super Yeti is a permanent in-scope Home Village Super Troop, and Electromite is a required spawned subunit for the persistent goal.",
+    "The available secondary description identifies Electromites as building-prioritizing, Wall-jumping, self-sacrificing chain attackers rather than ordinary Yetimites.",
+    "Electromite is absent from the frozen normalized catalogue, so it cannot be honestly materialized through the immutable GameData path."
+  ],
+  "unresolved": [
+    "No primary source establishes the Electromite's 400-damage trigger, four-times building multiplier, chain count or decay; the only located source is version-unknown secondary documentation.",
+    "No source publishes Electromite hitpoints, damage, speed, range, attack delay, projectile timing, footprint, level mapping, maximum spawn count, spawn positions, target-retention, chain selection/tie-break or disappearance timing.",
+    "No source specifies how Super Yeti damage thresholds interact with overkill, simultaneous damage, healing, shields, death, or tick ordering.",
+    "No documented public Electromite asset has been added, and the Super Yeti Wall-clipping fix is not a geometry contract."
+  ],
+  "decision": "Do not enable super_yeti or electromite in Core, GUI or RL until a version-identified parent-to-child stat table and deterministic spawn/chain lifecycle contract are available. Do not substitute Yetimite, Golemite or a generic chain attack."
+}

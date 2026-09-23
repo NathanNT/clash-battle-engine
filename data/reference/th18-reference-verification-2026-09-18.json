@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "verification_id": "home-village-th18-reference-verification-2026-09-18",
+  "verified_at": "2026-09-18T00:00:00+02:00",
+  "target_reference": {
+    "file": "th18-2026-09-17.json",
+    "reference_id": "home-village-th18-2026-09-17",
+    "frozen_at": "2026-09-17T00:00:00+02:00",
+    "sha256": "e68eec11e6e535e1e0487052d71cb03868ce8f3e22577aee1d344513e6939f46",
+    "action": "retained_unchanged"
+  },
+  "scope": "Permanent Home Village buildings, troops, Super Troops, walls, traps and required spawned subunits; temporary event content, heroes, pets, hero equipment, siege machines and Clan Castle content are excluded.",
+  "sources": [
+    {
+      "id": "supercell-2026-08-30-august-update",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "August Update",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/august-update-3/",
+      "published_on": "2026-08-30",
+      "consulted_on": "2026-09-18",
+      "game_version": "not published",
+      "finding": "The listed in-scope permanent change is that Ruin Knights no longer lose health over time and Ruin Witch summons up to ten Ruin Knights. The frozen reference already records both values. The listed TH18 pet and supercharge additions are outside this goal or already tracked as explicitly unverified variants."
+    },
+    {
+      "id": "supercell-2026-09-18-clash-of-clans-news-archive",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "Clash of Clans News Archive",
+      "url": "https://supercell.com/en/games/clashofclans/blog/",
+      "consulted_on": "2026-09-18",
+      "game_version": "not published",
+      "finding": "The archive lists the August Update on 2026-08-30, then September posts on 2026-09-01 and 2026-09-09. The September posts describe event/cosmetic content, including temporary troops, rather than a later permanent Home Village balance or catalogue update."
+    },
+    {
+      "id": "supercell-2026-09-09-equipment-blast-medal-event",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "Equipment Blast Medal Event",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/equipment-blast-medal-event/",
+      "published_on": "2026-09-09",
+      "consulted_on": "2026-09-18",
+      "game_version": "not published",
+      "finding": "A dated event notice. It does not establish a permanent Home Village stat or behavior delta in this goal's scope."
+    },
+    {
+      "id": "supercell-support-2026-09-18-crafted-defenses",
+      "tier": "primary-version-uncertain",
+      "publisher": "Supercell",
+      "title": "Crafted Defenses",
+      "url": "https://ingame.support.supercell.com/clash-of-clans/en/articles/crafted-defenses-3.html",
+      "published_on": null,
+      "consulted_on": "2026-09-18",
+      "game_version": "not published",
+      "finding": "The live support page identifies the Crafting Station as the menu used to build Crafted Defenses and inspect a Crafting Phase. It gives no battle target class, target priority, destruction-count, weapon, projectile, collision or replay contract. Because the page is undated and unversioned, it is not used to change the 2026-09-17 frozen reference."
+    }
+  ],
+  "conclusion": "No post-freeze permanent in-scope delta was found in the checked primary sources. The 2026-09-17 TH18 reference remains the target version; this verification is additive and does not overwrite it.",
+  "remaining_uncertainty": "Supercell's public notes are deltas rather than exhaustive client data. This check cannot convert secondary tables or undocumented fixed-tick mechanics into verified values."
+}

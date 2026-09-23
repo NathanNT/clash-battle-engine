@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "source_id": "cocmap-2026-09-17-angry-spell",
+  "observation_scope": "Home Village Angry Spell current-looking public table, captured for the frozen 2026-09-17 TH18 reference.",
+  "spell": {
+    "id": "angry",
+    "source_id": "angry-spell",
+    "category": "dark_spell",
+    "radius_tiles": 6,
+    "effect_type": "area_splash",
+    "target_type": "both",
+    "housing_space": 1,
+    "dark_spell_factory_level_required": 8,
+    "activation_window_seconds": 5,
+    "damage": null,
+    "support": "catalogued_only",
+    "field_provenance": {
+      "radius_tiles": {"source": "cocmap-2026-09-17-angry-spell", "tier": "secondary"},
+      "effect_type": {"source": "cocmap-2026-09-17-angry-spell", "tier": "secondary"},
+      "target_type": {"source": "cocmap-2026-09-17-angry-spell", "tier": "secondary"},
+      "housing_space": {"source": "cocmap-2026-09-17-angry-spell", "tier": "secondary"},
+      "dark_spell_factory_level_required": {"source": "cocmap-2026-09-17-angry-spell", "tier": "secondary"},
+      "activation_window_seconds": {"source": "supercell-2026-06-15-anime-fury", "tier": "primary"},
+      "damage": {"source": "supercell-2026-06-15-anime-fury", "tier": "primary"}
+    },
+    "behavior": {
+      "affects": "friendly_ground_and_air_troops",
+      "affected_target_focus": "nearest_defense",
+      "ignores_normal_targeting_preferences": true,
+      "siege_machines_immune": true,
+      "one_activation_per_troop_per_cast": true,
+      "reapply_during_activation_window": true,
+      "resume_normal_ai_on_effect_end": true,
+      "does_direct_damage": false
+    },
+    "behavior_provenance": {"source": "supercell-2026-06-15-anime-fury", "tier": "primary"},
+    "levels": [
+      {"level": 1, "anger_duration_seconds": 7, "activation_window_seconds": 5, "research_cost": null, "research_time_seconds": null, "laboratory_required": null},
+      {"level": 2, "anger_duration_seconds": 8, "activation_window_seconds": 5, "research_cost": 150000, "research_time_seconds": 806400, "laboratory_required": 14},
+      {"level": 3, "anger_duration_seconds": 10, "activation_window_seconds": 5, "research_cost": 250000, "research_time_seconds": 1036800, "laboratory_required": 15},
+      {"level": 4, "anger_duration_seconds": 12, "activation_window_seconds": 5, "research_cost": 400000, "research_time_seconds": 1296000, "laboratory_required": 16}
+    ]
+  },
+  "known_missing": [
+    "immutable client-build identifier",
+    "tick-aligned ordering of application versus movement, targeting and other spells",
+    "defense tie-break distance metric and deterministic entity tie-break",
+    "stacking, refresh and interaction rules with every existing temporary targeting effect",
+    "precise boundary rule for troops entering the radius at the activation-window end"
+  ]
+}

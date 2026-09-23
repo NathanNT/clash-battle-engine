@@ -1,0 +1,383 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-healing-tome-primary-level-provenance",
+  "scope": "Materialize the already verified official Healing Tome L1-18 duration evidence as immutable level metadata in shared GameData; no combat effect is activated.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Supercell 2024-08-27 announcement for the September 2024 balance update. Current September 2026 executable and later unlisted changes are unverified.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-healing-tome-official-duration-table.json",
+    "reference_id": "home-village-th18-2026-09-23-healing-tome-official-duration-table",
+    "sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128"
+  },
+  "sources": [
+    {
+      "id": "supercell-2024-08-27-zh-healing-tome-duration",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "關於9月平衡性調整即將上線的公告！ (Announcement of Upcoming September Balance Changes!)",
+      "published_on": "2024-08-27",
+      "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/zh/blog/news/%E9%97%9C%E6%96%BC9%E6%9C%88%E5%B9%B3%E8%A1%A1%E6%80%A7%E8%AA%BF%E6%95%B4%E5%8D%B3%E5%B0%87%E4%B8%8A%E7%B7%9A%E7%9A%84%E5%85%AC%E5%91%8A/",
+      "raw_sha256": "3565df5a091cbda2d5424c9cf0e04d41ef6fc0a6a5a5f0a766c54fb2a0105f1b",
+      "confidence": "high_for_announced_post_2024_level_durations",
+      "content_id": "healing_tome",
+      "levels": "1-18",
+      "mode": "grand_warden_active_healing_duration",
+      "facts": [
+        "The official Traditional Chinese September balance table prints before-and-after Healing Tome ability duration for all 18 levels; the post-change durations match every retained normalized row."
+      ],
+      "limitations": "The table does not publish heal rate, pulse cadence, aura radius, target eligibility, start/end tick or Warden recovery order."
+    }
+  ],
+  "catalogue_overrides": [
+    {
+      "content_id": "healing_tome",
+      "level": 1,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 15000,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 2,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 15000,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 3,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 16000,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 4,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 16000,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 5,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 16000,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 6,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 17000,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 7,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 17000,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 8,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 17000,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 9,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 18000,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 10,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 18000,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 11,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 18000,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 12,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 19000,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 13,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 19000,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 14,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 19000,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 15,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 19500,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 16,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 19500,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 17,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 19500,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    },
+    {
+      "content_id": "healing_tome",
+      "level": 18,
+      "variant": "normal",
+      "fields": {
+        "official_duration_evidence": {
+          "value": {
+            "duration_ms": 20000,
+            "source_id": "supercell-2024-08-27-zh-healing-tome-duration",
+            "source_delta_sha256": "cac4a72fbd6353286f21e5ccd78e870dfbbad846071f197db920df6b1eea8128",
+            "evidence_status": "announced_post_2024_not_current_combat_contract"
+          },
+          "source": "supercell-2024-08-27-zh-healing-tome-duration",
+          "note": "Official post-change ability duration, represented in 10 ms units. The historical raw abilityDuration is retained; healing pulses and current continuity are unverified."
+        }
+      }
+    }
+  ],
+  "derivations": [
+    {
+      "content_id": "healing_tome",
+      "levels": "1-18",
+      "mode": "read_only_level_projection",
+      "result": "Each Core level record carries the primary duration value and a hash-pinned source link; raw source_fields remain unchanged.",
+      "method": "Copy each confirmed millisecond value from the parent official table into an additive per-level metadata override. The importer applies it to opaque Equipment rows; GameData projects that row through Headless, Viewer and RL."
+    }
+  ],
+  "rejected_inferences": [
+    {
+      "rule": "Heal once per 10 ms tick for the confirmed duration",
+      "reason": "Ability duration supplies no heal pulse cadence or integer accumulation rule."
+    },
+    {
+      "rule": "Use the retained healingPerSecond field as a current value",
+      "reason": "The official duration table has no healing-rate column and no current executable trace is available."
+    },
+    {
+      "rule": "Apply the effect to every friendly entity in the Warden's generic range",
+      "reason": "Neither the official table nor introduction defines the aura radius, entity filters or entry/exit geometry."
+    },
+    {
+      "rule": "Enable Healing Tome activation in Core",
+      "reason": "Command phase, first pulse, target enumeration, recovery and death order are unresolved."
+    }
+  ],
+  "open_uncertainties": [
+    {
+      "content_id": "healing_tome",
+      "levels": "1-18",
+      "mode": "grand_warden_active_equipment",
+      "items": [
+        "current duration continuity and healing-rate values",
+        "aura center, radius, boundary and eligible in-scope entities",
+        "first pulse, interval, integer accumulation and rounding",
+        "activation, expiry, movement, death and simultaneous heal/damage order",
+        "Warden separate recovery and HP bonus application and stacking",
+        "Viewer control and aura overlay, snapshot, replay and RL activation state"
+      ]
+    }
+  ],
+  "conclusion": "The 18 durations are available as read-only primary evidence through shared GameData. Healing Tome combat, Viewer effect visuals, activation state, and current client continuity remain partial."
+}

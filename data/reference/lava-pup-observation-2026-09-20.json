@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "reference_id": "th18-lava-pup-secondary-observation-2026-09-20",
+  "purpose": "Pinned current public Lava Pup table. Lava Pups are spawned-only and cannot be directly deployed.",
+  "source_id": "fandom-2026-09-20-lava-hound-lava-pup",
+  "content": {
+    "id": "lava_pup",
+    "source_id": "lava-pup",
+    "category": "spawned-unit",
+    "support": "spawned_only",
+    "spawned_by": "lava_hound",
+    "target_focus": "any",
+    "flying": true,
+    "heals": false,
+    "footprint_tiles": "1x1",
+    "housing_space": 1,
+    "activation_housing_space": 0,
+    "range_tiles": 2,
+    "trigger_range_tiles": 0,
+    "min_range_tiles": 0,
+    "splash_radius_tiles": 0,
+    "death_splash_radius_tiles": 0,
+    "shots_per_burst": 1,
+    "time_between_bursts_seconds": 0,
+    "attack_speed_seconds": 1,
+    "movement_speed": 32,
+    "target_type": "both",
+    "damage_type": "single",
+    "modes": [],
+    "levels": [{"level": 1, "variant": "normal", "hitpoints": 50, "damage_per_shot": 35, "dps": 35}],
+    "known_missing": [
+      "version-identified current child table and source-verified visual tier",
+      "exact death-split delay, circular-formation radius, orientation and individual coordinates",
+      "projectile launch, travel and collision timing",
+      "target and retarget ordering involving excluded defenders"
+    ]
+  }
+}

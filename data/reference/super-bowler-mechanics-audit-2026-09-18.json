@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "audit_id": "home-village-super-bowler-mechanics-2026-09-18",
+  "content_id": "super_bowler",
+  "consulted_on": "2026-09-18",
+  "scope": "Historical evidence review retained after the documented partial Super Bowler Triple Strike integration.",
+  "sources": [
+    {
+      "id": "supercell-2021-09-25-super-bowler-launch",
+      "tier": "primary",
+      "title": "A New Super Troop & More!",
+      "published_on": "2021-09-25",
+      "game_version": "not published",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/superbowler-qols/",
+      "finding": "Supercell establishes that the rock bounces one extra time for a total of three damaging impacts; it also publishes levels 4--6 DPS, HP, training cost and housing space."
+    },
+    {
+      "id": "supercell-2023-06-12-super-bowler-l7",
+      "tier": "primary",
+      "title": "June Update Is Around the Corner!",
+      "published_on": "2023-06-12",
+      "game_version": "not published",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/june-update-is-around-the-corner-1/",
+      "finding": "Supercell identifies Super Bowler level 7 as available at Town Hall 15."
+    },
+    {
+      "id": "fandom-2026-09-18-super-bowler",
+      "tier": "secondary-version-unknown",
+      "title": "Super Bowler | Clash of Clans Wiki",
+      "published_on": null,
+      "game_version": "unknown",
+      "url": "https://clashofclans.fandom.com/wiki/Super_Bowler",
+      "finding": "The consulted secondary table reports 0.6-tile ground-only splash, three bounces, 3-tile initial range and current levels, but gives no version-pinned bounce path or tick lifecycle."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-super-bowler",
+      "tier": "secondary-dated-build",
+      "title": "Pinned normalized Bowler superTroop payload",
+      "published_on": null,
+      "game_version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/bowler.json",
+      "finding": "The pinned payload supplies levels 4--10, including TH18 level 10, cadence, ordinary damage and parent-derived attributes, but no bounce impact locations, selection, timing or splash geometry fields."
+    }
+  ],
+  "established": [
+    "Super Bowler is an in-scope permanent Home Village Super Troop with three damage impacts per attack.",
+    "The frozen payload provides level 4--10 statistics, with level 10 applicable at TH18.",
+    "The ordinary Bowler's two-impact behavior is implied by Supercell's statement that Super Bowler has one extra bounce, but its own geometric contract is equally absent."
+  ],
+  "unresolved": [
+    "No primary source defines bounce spacing, whether impacts are fixed along a launch line or retargeted, what happens when an intermediate target dies, or whether the same entity may be hit more than once.",
+    "No source defines impact order, splash radius/version, ground filtering at each impact, Wall interaction, projectile speed, first-impact delay, bounce delay, collision width, target-loss behavior or tie-breaks.",
+    "The secondary splash/range values lack a version-identified build and cannot establish TH18 fidelity alone."
+  ],
+  "decision": "Superseded by th18-2026-09-18-super-bowler.json: Core now exposes exactly three serialized ground splash impacts using explicitly documented secondary geometry proxies. Do not promote that partial route to fidelity, enable shared ordinary Bowler bouncing, or replace its gaps with piercing, chain targeting or undocumented splash behavior."
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-20-big-boy-followup",
+  "scope": "Additive current-source follow-up for required Super Witch Big Boy; records corroborated unversioned child data without enabling an unsourced summoning lifecycle.",
+  "frozen_at": "2026-09-20T00:00:00+02:00",
+  "game_version": "Official January 2026 balance information and public secondary pages consulted on 2026-09-20.",
+  "parent_reference": {"file": "th18-2026-09-20-electromite-followup.json", "reference_id": "home-village-th18-2026-09-20-electromite-followup", "sha256": "9acf4f20841928bca452071502e95c42f6b3b93200623d1f2ade712dd2df90ed"},
+  "sources": [
+    {"id": "supercell-2026-01-12-big-boy-followup", "tier": "primary", "publisher": "Supercell", "title": "January Balance Changes!", "published_on": "2026-01-12", "consulted_on": "2026-09-20", "version": "maintenance update", "url": "https://supercell.com/en/games/clashofclans/blog/news/january-balance-changes-3/", "limitations": "Confirms Big Boy housing space rose from 10 to 20, but gives no hitpoints, damage, target, movement, summon delay, spawn, death, collision or tick-order contract."},
+    {"id": "fandom-2026-09-20-big-boy-followup", "tier": "secondary-version-unknown", "publisher": "Clash of Clans Wiki (Fandom)", "title": "Super Witch/Big Boy", "published_on": null, "consulted_on": "2026-09-20", "version": "not published", "url": "https://clashofclans.fandom.com/wiki/Super_Witch/Big_Boy", "limitations": "Reports 4,100 HP, 700 damage/350 DPS, 12 movement, 2-second cadence, one-tile ground reach, no building preference and 20 housing. It gives no immutable build, child mapping, precise one-child lifecycle, spawn coordinate/delay, target transition, collision or timing trace."},
+    {"id": "gamingonphone-2026-09-20-big-boy-followup", "tier": "secondary-version-unknown", "publisher": "GamingonPhone", "title": "Clash of Clans Super Troops: Complete list, details and tips for using them", "published_on": null, "consulted_on": "2026-09-20", "version": "not published", "url": "https://gamingonphone.com/guides/clash-of-clans-super-troops-list/", "limitations": "Qualitatively corroborates one active Big Boy and later replacement after its destruction, but its parent stat table is stale and it provides no summon/respawn duration, placement, collision, target or same-tick ordering."}
+  ],
+  "known_uncertainties": [
+    "No version-identified Big Boy stat table or source-verified level mapping is available for permanent Super Witch L5-L8.",
+    "No consulted source defines initial summon delay, exact one-child coexistence check, respawn delay, spawn coordinate, target acquisition/transition, death ordering, Spring/Tornado Trap interaction, collision or same-tick ordering.",
+    "No source-verified Big Boy asset path or visual tier is available."
+  ],
+  "conclusion": "The 20 September review corroborates unversioned Big Boy combat observations and official 20-housing status, but leaves the future-affecting Super Witch summoning lifecycle undefined. Big Boy remains required inventory only; no GameData child, spawn queue or generic spawner proxy is enabled."
+}

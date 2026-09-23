@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "evidence_id": "home-village-super-yeti-electromite-2026-09-18",
+  "consulted_on": "2026-09-18",
+  "sources": [
+    {"tier": "secondary-dated-game-files", "title": "Super Yeti - Clash of Clans Wiki", "url": "https://goblinsfarm.com/wiki/troops/super-yeti.html", "version": "client build 18.600.3", "finding": "Parent L1-L8 HP and DPS, housing 35, range 0.8 and cadence 1 second."},
+    {"tier": "secondary-version-unknown", "title": "Super Yeti/Electromite", "url": "https://clashofclans.fandom.com/wiki/Super_Yeti/Electromite", "version": "not published", "finding": "Electromite L1-L8 HP and damage, fourfold building damage, three-target chain with 20 percent decay, spawn threshold and capacity."}
+  ],
+  "remaining_uncertainties": ["No version-identified Electromite client table", "exact spawn tick ordering and target acquisition", "chain geometry and jump collision", "source-verified asset paths"],
+  "decision": "Evidence is sufficient to design a later partial integration, but no actor or spawn rule is enabled by this evidence file alone."
+}

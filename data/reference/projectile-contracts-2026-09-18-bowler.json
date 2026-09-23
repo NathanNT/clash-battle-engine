@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "reference_id": "projectile-contracts-2026-09-18-bowler",
+  "frozen_on": "2026-09-18",
+  "parent_contract": {"file": "projectile-contracts-2026-09-18-electro-dragon.json", "sha256": "8e4b7b132386dc42677fe3b9c9ce10ddfa614668cab2c72145971fdd2965068b"},
+  "catalogue_audit_override": {"currently_executable_weapon_paths": 31, "non_executable_long_range_candidates": 28},
+  "contracts": [{"id": "bowler", "model": "logical_next_tick_two_fixed_impacts_lower_bound", "core": "BattleState::Projectile", "gui": "amber_post_impact_trace", "rl": "projectiles", "fidelity": "partial", "provenance": {"status": "primary_impact_count_secondary_geometry_lower_bound", "source_id": "supercell-2021-09-25-super-bowler-comparison", "url": "https://supercell.com/en/games/clashofclans/blog/news/superbowler-qols/", "consulted_on": "2026-09-18", "statement": "Supercell describes Super Bowler as one extra bounce for three impacts, establishing two for Bowler. A dated secondary build documents the second building behind the target and the three-tile initial range. Core uses that range as a forward-step proxy and keeps a zero-radius lower bound.", "needed": "Measured bounce path and spacing, splash radius, collision, flight, intermediate target loss, walls, target eligibility and tick ordering"}}],
+  "historical_unavailable_profiles": [{"content_id": "bowler", "reason": "No reproducible historical v18.200.9 Bowler bounce-flight profile has been curated. The current two-impact lower bound must not infer exact bounce geometry or timing."}],
+  "test_evidence": ["cocsim_bowler_tests: two fixed impact centres, no third Super Bowler impact, snapshot restoration and replay retain the future hash."]
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-archer-puppet-official-bonus-and-invisibility-table",
+  "scope": "Additive primary-source Archer Puppet L1-18 Queen DPS/recovery, summoned Archer invisibility and historical spawn-rate table; combat and child lifecycle remain partial.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Supercell September 2024 and February 2025 balance announcements; current September 2026 executable, later unlisted changes and child implementation details are unverified.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-barbarian-puppet-official-bonus-and-spawn-rate.json",
+    "reference_id": "home-village-th18-2026-09-23-barbarian-puppet-official-bonus-and-spawn-rate",
+    "sha256": "4e29c7a52581f347a9049fae3c726bebde91593375601f719da6ee58f787df35"
+  },
+  "sources": [
+    {
+      "id": "supercell-2024-08-27-zh-archer-puppet-invisibility-and-rate",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "關於9月平衡性調整即將上線的公告！ (Announcement of Upcoming September Balance Changes!)",
+      "published_on": "2024-08-27",
+      "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/zh/blog/news/%E9%97%9C%E6%96%BC9%E6%9C%88%E5%B9%B3%E8%A1%A1%E6%80%A7%E8%AA%BF%E6%95%B4%E5%8D%B3%E5%B0%87%E4%B8%8A%E7%B7%9A%E7%9A%84%E5%85%AC%E5%91%8A/",
+      "raw_sha256": "3565df5a091cbda2d5424c9cf0e04d41ef6fc0a6a5a5f0a766c54fb2a0105f1b",
+      "confidence": "high_for_announced_invisibility_levels_and_spawn_rate",
+      "content_id": "archer_puppet",
+      "levels": "1-18",
+      "mode": "active_summon_invisible_archers",
+      "facts": ["The September 2024 note introduces five summoned Archers every one second at all Equipment levels and prints post-change invisibility duration for L1-18."],
+      "limitations": "It does not give the first spawn phase, current total count, child level, formation, collision, invisibility start/end tick or target-loss semantics."
+    },
+    {
+      "id": "supercell-2025-01-22-zh-archer-puppet-queen-bonuses",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "英雄裝備平衡性調整！ (Hero Equipment Balance Changes!)",
+      "published_on": "2025-01-22",
+      "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/zh/blog/news/%E8%8B%B1%E9%9B%84-%E8%A3%9D%E5%82%99-%E5%B9%B3%E8%A1%A1%E6%80%A7-%E8%AA%BF%E6%95%B4-2/",
+      "raw_sha256": "a98a19e8b274798fda31b3ca0294ad2fd82584f5aa57e419a6422b1319f35d04",
+      "confidence": "high_for_announced_post_buff_queen_dps_and_recovery",
+      "content_id": "archer_puppet",
+      "levels": "1-18",
+      "mode": "archer_queen_wielder_dps_and_active_recovery",
+      "facts": ["The post-buff table prints Queen DPS increase and HP recovery for each L1-18 Equipment level; every pair matches the retained normalized records."],
+      "limitations": "The table does not define DPS-to-hit arithmetic, deployment/activation phase, recovery cap or same-tick damage/death order."
+    }
+  ],
+  "observations": [
+    {
+      "content_id": "archer_puppet",
+      "levels": "1-18",
+      "mode": "spawned_archer_invisibility",
+      "source": "supercell-2024-08-27-zh-archer-puppet-invisibility-and-rate",
+      "official_post_2024_invisibility_seconds_by_level": [3.5, 3.5, 4.0, 4.0, 4.0, 4.5, 4.5, 4.5, 5.0, 5.0, 5.0, 5.5, 5.5, 5.5, 6.0, 6.0, 6.0, 6.5],
+      "official_post_2024_spawn_units_per_batch": 5,
+      "official_post_2024_spawn_interval_ms": 1000
+    },
+    {
+      "content_id": "archer_puppet",
+      "levels": "1-18",
+      "mode": "archer_queen_wielder_dps_and_active_recovery",
+      "source": "supercell-2025-01-22-zh-archer-puppet-queen-bonuses",
+      "official_post_buff_dps_bonus_by_level": [28, 37, 46, 54, 61, 68, 78, 88, 99, 110, 120, 127, 134, 140, 145, 150, 154, 159],
+      "official_post_buff_hp_recovery_by_level": [176, 193, 209, 226, 242, 259, 275, 292, 308, 323, 341, 358, 374, 396, 418, 440, 462, 484]
+    }
+  ],
+  "derivations": [
+    {
+      "content_id": "archer_puppet",
+      "levels": "1-18",
+      "mode": "active_summon_and_queen_bonuses",
+      "result": "All 18 retained invisibility durations and Queen DPS/recovery pairs have direct primary numeric corroboration; the historical spawn-rate announcement is five units every 1000 ms.",
+      "method": "Compare the official 2024 duration table and 2025 post-buff columns level by level to immutable normalized source_fields; retain batch-rate evidence separately from the unsourced total-count lifecycle."
+    }
+  ],
+  "rejected_inferences": [
+    {"rule": "Spawn every retained Archer at the activation tick", "reason": "The 2024 note states five per second, but initial phase and current total-count continuity are not specified."},
+    {"rule": "Assume the frozen summonedArcher counts define the final partial batch", "reason": "The official rate table gives no total count or rule for ending the summon."},
+    {"rule": "Use the current ordinary Archer troop level for spawned Archers", "reason": "Neither official table defines the Equipment child level or stat mapping."},
+    {"rule": "Apply invisibility to the Queen or make children immune to splash and traps", "reason": "Only spawned Archer invisibility is specified, with no target-loss or splash/trap contract."},
+    {"rule": "Apply Queen recovery before lethal damage or add DPS to each hit", "reason": "The tables provide amounts, not battle phase, damage conversion, healing cap or order."}
+  ],
+  "open_uncertainties": [
+    {"content_id": "archer_puppet", "levels": "1-18", "mode": "archer_queen_active_equipment", "items": ["current total summon count and invisibility continuity", "first and later spawn-group ticks and final batch", "child Archer level, formation, collision and deterministic entity-ID allocation", "invisibility start/end tick, target loss, splash and trap handling", "Queen DPS bonus conversion, recovery cap and activation/death order", "Magic Mirror, Invisibility Vial, Pet and second Equipment interactions", "Viewer summon art and overlay, snapshot, replay and RL activation state"]}
+  ],
+  "conclusion": "Official tables confirm Archer Puppet L1-18 Queen DPS/recovery and spawned Archer invisibility values, plus a historical five-unit-per-second rate. Child lifecycle and effect ordering remain partial, so no combat actor is enabled."
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "reference_id": "th18-balloon-secondary-observation-2026-09-17",
+  "purpose": "Version-identified secondary corroboration of the current Home Village Balloon table and defense preference.",
+  "source_id": "goblinsfarm-2026-09-16-balloon",
+  "client_build": "18.600.3 (as reported by publisher)",
+  "observed_root": {"housing_space": 5, "target_type": "ground", "target_focus": "defenses_only", "attack_speed_seconds": 3, "flying": true},
+  "levels": [
+    {"level": 1, "hitpoints": 150, "dps": 25, "town_hall_required": 4},
+    {"level": 2, "hitpoints": 180, "dps": 32, "town_hall_required": 4},
+    {"level": 3, "hitpoints": 216, "dps": 48, "town_hall_required": 6},
+    {"level": 4, "hitpoints": 280, "dps": 72, "town_hall_required": 7},
+    {"level": 5, "hitpoints": 390, "dps": 108, "town_hall_required": 8},
+    {"level": 6, "hitpoints": 545, "dps": 162, "town_hall_required": 9},
+    {"level": 7, "hitpoints": 690, "dps": 198, "town_hall_required": 11},
+    {"level": 8, "hitpoints": 840, "dps": 236, "town_hall_required": 12},
+    {"level": 9, "hitpoints": 940, "dps": 256, "town_hall_required": 13},
+    {"level": 10, "hitpoints": 1040, "dps": 276, "town_hall_required": 14},
+    {"level": 11, "hitpoints": 1140, "dps": 290, "town_hall_required": 16},
+    {"level": 12, "hitpoints": 1240, "dps": 304, "town_hall_required": 17},
+    {"level": 13, "hitpoints": 1360, "dps": 326, "town_hall_required": 18}
+  ],
+  "behavior": "Prefer defenses and ignore walls while flying; after defenses are gone, normal fallback is not measured here.",
+  "known_missing": ["tick-level target ties", "current death-damage radius corroboration"]
+}

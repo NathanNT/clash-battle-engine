@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "source_id": "goblinsfarm-2026-08-26-monolith-arrow",
+  "observation_scope": "Home Village Monolith Arrow public equipment table, captured for the frozen 2026-09-17 TH18 reference.",
+  "content": {
+    "id": "monolith_arrow",
+    "source_id": "monolith-arrow",
+    "category": "hero-equipment",
+    "support": "catalogued_only",
+    "hero": "archer_queen",
+    "rarity": "epic",
+    "behavior": {
+      "activation": "single_target_arrow",
+      "damage_basis": "target_max_hitpoints",
+      "damage_percent_by_deployed_housing_space": [{"maximum":180,"percent":14},{"minimum":181,"maximum":250,"percent":10},{"minimum":251,"percent":5}],
+      "damage_reduction_cap_percent":10,
+      "unaffected_by": ["troop_spawns","reinforcements"],
+      "housing_space_accounting": {"archer_queen":true,"other_heroes":25,"siege_machine":1,"pets":false,"clan_castle_troops":false,"spawned_units":false,"spells":false}
+    },
+    "field_provenance": {
+      "hero": {"source":"goblinsfarm-2026-08-26-monolith-arrow","tier":"secondary"},
+      "rarity": {"source":"goblinsfarm-2026-08-26-monolith-arrow","tier":"secondary"},
+      "behavior": {"source":"supercell-2026-06-15-anime-fury","tier":"primary"}
+    },
+    "levels": [
+      {"level":1,"hero_hitpoints_bonus":100,"shiny_ore_cost":null,"glowy_ore_cost":null,"starry_ore_cost":null,"blacksmith_required":1},
+      {"level":2,"hero_hitpoints_bonus":140,"shiny_ore_cost":120,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":1},
+      {"level":3,"hero_hitpoints_bonus":180,"shiny_ore_cost":240,"glowy_ore_cost":20,"starry_ore_cost":0,"blacksmith_required":1},
+      {"level":4,"hero_hitpoints_bonus":220,"shiny_ore_cost":400,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":1},
+      {"level":5,"hero_hitpoints_bonus":260,"shiny_ore_cost":600,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":1},
+      {"level":6,"hero_hitpoints_bonus":300,"shiny_ore_cost":840,"glowy_ore_cost":100,"starry_ore_cost":0,"blacksmith_required":1},
+      {"level":7,"hero_hitpoints_bonus":340,"shiny_ore_cost":1120,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":1},
+      {"level":8,"hero_hitpoints_bonus":380,"shiny_ore_cost":1440,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":1},
+      {"level":9,"hero_hitpoints_bonus":420,"shiny_ore_cost":1800,"glowy_ore_cost":200,"starry_ore_cost":10,"blacksmith_required":1},
+      {"level":10,"hero_hitpoints_bonus":460,"shiny_ore_cost":1900,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":1},
+      {"level":11,"hero_hitpoints_bonus":500,"shiny_ore_cost":2000,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":1},
+      {"level":12,"hero_hitpoints_bonus":540,"shiny_ore_cost":2100,"glowy_ore_cost":400,"starry_ore_cost":20,"blacksmith_required":1},
+      {"level":13,"hero_hitpoints_bonus":580,"shiny_ore_cost":2200,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":3},
+      {"level":14,"hero_hitpoints_bonus":620,"shiny_ore_cost":2300,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":3},
+      {"level":15,"hero_hitpoints_bonus":680,"shiny_ore_cost":2400,"glowy_ore_cost":600,"starry_ore_cost":30,"blacksmith_required":3},
+      {"level":16,"hero_hitpoints_bonus":700,"shiny_ore_cost":2500,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":5},
+      {"level":17,"hero_hitpoints_bonus":740,"shiny_ore_cost":2600,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":5},
+      {"level":18,"hero_hitpoints_bonus":780,"shiny_ore_cost":2700,"glowy_ore_cost":600,"starry_ore_cost":50,"blacksmith_required":5},
+      {"level":19,"hero_hitpoints_bonus":820,"shiny_ore_cost":2800,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":7},
+      {"level":20,"hero_hitpoints_bonus":860,"shiny_ore_cost":2900,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":7},
+      {"level":21,"hero_hitpoints_bonus":900,"shiny_ore_cost":3000,"glowy_ore_cost":600,"starry_ore_cost":100,"blacksmith_required":7},
+      {"level":22,"hero_hitpoints_bonus":940,"shiny_ore_cost":3100,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":8},
+      {"level":23,"hero_hitpoints_bonus":980,"shiny_ore_cost":3200,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":8},
+      {"level":24,"hero_hitpoints_bonus":1020,"shiny_ore_cost":3300,"glowy_ore_cost":600,"starry_ore_cost":120,"blacksmith_required":8},
+      {"level":25,"hero_hitpoints_bonus":1080,"shiny_ore_cost":3400,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":9},
+      {"level":26,"hero_hitpoints_bonus":1120,"shiny_ore_cost":3500,"glowy_ore_cost":0,"starry_ore_cost":0,"blacksmith_required":9},
+      {"level":27,"hero_hitpoints_bonus":1160,"shiny_ore_cost":3600,"glowy_ore_cost":600,"starry_ore_cost":150,"blacksmith_required":9}
+    ]
+  },
+  "known_missing": [
+    "activation timing and cooldown",
+    "target eligibility/selection and tie-breaks",
+    "projectile travel and impact ordering",
+    "stacking and interaction with other Queen equipment and effects",
+    "exact numerical visual-tier thresholds beyond the announced damage brackets"
+  ]
+}

@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-19-x-bow-baseline",
+  "scope": "Additive X-Bow normal/air-and-ground targeting baseline and current TH18 Supercharge correction.",
+  "frozen_at": "2026-09-19T00:00:00+02:00",
+  "game_version": "Official August 2021, June 2023, April and June 2026 Home Village notes, with current secondary tables consulted on 2026-09-19.",
+  "parent_reference": {
+    "file": "th18-2026-09-19-bomb-tower-baseline.json",
+    "reference_id": "home-village-th18-2026-09-19-bomb-tower-baseline",
+    "sha256": "f12ee1a075fdf52876e7631e3bf6484e6e583e515773617238fcd39924bace7b"
+  },
+  "sources": [
+    {
+      "id": "supercell-2021-08-11-x-bow-air-ground-range-current-consultation",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "Balance Changes",
+      "published_on": "2021-08-11",
+      "consulted_on": "2026-09-19",
+      "version": "August 2021 maintenance balance",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/balance-changes-august21",
+      "limitations": "Confirms that Home Village Air & Ground mode is 11.5 tiles, after an increase from 11.0. It does not define ground-mode targeting/range, ammunition lifecycle, projectile behavior or deterministic order."
+    },
+    {
+      "id": "supercell-2023-06-12-x-bow-balance-current-consultation",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "June Balance Changes!",
+      "published_on": "2023-06-12",
+      "consulted_on": "2026-09-19",
+      "version": "June 2023 balance",
+      "url": "https://supercell.com/en/games/clashofclans/blog/game-updates/june-balance-changes/",
+      "limitations": "Confirms post-balance damage values for levels 4-9. It is not a complete current table or an attack/ammunition lifecycle contract."
+    },
+    {
+      "id": "supercell-2026-04-27-sound-of-clash",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "THE SOUND OF CLASH UPDATE",
+      "published_on": "2026-04-27",
+      "consulted_on": "2026-09-19",
+      "version": "April 2026 update",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/the-sound-of-clash-update/",
+      "limitations": "Confirms TH18 X-Bow level 13, but has no complete stat or targeting table."
+    },
+    {
+      "id": "supercell-2026-06-15-anime-fury",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "THE ANIME FURY UPDATE IS HERE",
+      "published_on": "2026-06-15",
+      "consulted_on": "2026-09-19",
+      "version": "June 2026 update",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/the-anime-fury-update-is-here/",
+      "limitations": "Confirms two TH18 X-Bow Supercharges exist; their exact values are not published in the note."
+    },
+    {
+      "id": "fandom-2026-09-19-x-bow-home-village-current",
+      "tier": "secondary-version-unknown",
+      "publisher": "Clash of Clans Wiki (Fandom)",
+      "title": "X-Bow/Home Village",
+      "published_on": null,
+      "consulted_on": "2026-09-19",
+      "version": "not published",
+      "url": "https://clashofclans.fandom.com/wiki/X-Bow/Home_Village",
+      "limitations": "Reports normal ground-only 14-tile and air-and-ground 11.5-tile modes at 0.128 seconds, 1,500 rounds, the two current Supercharge tables and free automatic reload after login. It has no immutable client build, projectile/collision trace, mid-battle reload contract or deterministic target/tick order."
+    },
+    {
+      "id": "goblinsfarm-2026-09-19-x-bow-current",
+      "tier": "secondary",
+      "publisher": "Goblins Farm",
+      "title": "X-Bow",
+      "published_on": null,
+      "consulted_on": "2026-09-19",
+      "version": "client build 18.600.3 (as reported by publisher)",
+      "url": "https://goblinsfarm.com/wiki/buildings/x-bow.html",
+      "limitations": "Build-identified secondary table corroborates normal L1-L13 values, modes, 3x3 size and loaded/unloaded role; it does not provide Supercharge values, projectile/collision traces or deterministic targeting order."
+    },
+    {
+      "id": "clashconnection-2026-09-19-x-bow-supercharges",
+      "tier": "secondary-version-unknown",
+      "publisher": "Clash Connection",
+      "title": "X-Bow",
+      "published_on": null,
+      "consulted_on": "2026-09-19",
+      "version": "not published",
+      "url": "https://clashconnection.com/en/wiki/homebase/defenses/x-bow",
+      "limitations": "Independently corroborates the current TH18 Supercharge 1/2 HP, DPS, cost and duration table. It has no published client build, ammunition lifecycle or combat trace."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-x-bow",
+      "tier": "secondary-frozen-payload",
+      "publisher": "chiefpansancolt/clash-of-clans-data",
+      "title": "X-Bow payload",
+      "published_on": null,
+      "consulted_on": "2026-09-19",
+      "version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/x-bow.json",
+      "limitations": "Pins normal level data, modes and cadence but represents superseded Supercharge rows. The dated current secondary Supercharge table below replaces only those rows additively."
+    }
+  ],
+  "catalogue_overrides": [
+    {
+      "content_id": "x_bow",
+      "level": 1,
+      "variant": "supercharged",
+      "fields": {
+        "hitpoints": {
+          "value": 5000,
+          "source": "fandom-2026-09-19-x-bow-home-village-current",
+          "note": "Current TH18 Supercharge 1 table, corroborated by Clash Connection."
+        },
+        "damage_per_shot": {
+          "value": 32.64,
+          "source": "fandom-2026-09-19-x-bow-home-village-current",
+          "derivation": "255 DPS × immutable 0.128-second cadence."
+        },
+        "dps": {
+          "value": 255,
+          "source": "fandom-2026-09-19-x-bow-home-village-current",
+          "note": "Current TH18 Supercharge 1 table, corroborated by Clash Connection."
+        },
+        "upgrade_cost": {
+          "value": 9000000,
+          "source": "fandom-2026-09-19-x-bow-home-village-current"
+        },
+        "upgrade_cost_resource": {
+          "value": "Gold",
+          "source": "fandom-2026-09-19-x-bow-home-village-current"
+        },
+        "upgrade_time_seconds": {
+          "value": 475200,
+          "source": "fandom-2026-09-19-x-bow-home-village-current",
+          "derivation": "5 days 12 hours."
+        },
+        "town_hall_required": {
+          "value": 18,
+          "source": "fandom-2026-09-19-x-bow-home-village-current"
+        },
+        "xp_gained": {
+          "value": 689,
+          "source": "fandom-2026-09-19-x-bow-home-village-current"
+        },
+        "mode_stats": {
+          "value": {
+            "normal": {
+              "damage_per_shot": 32.64,
+              "damage_per_shot_min": null,
+              "splash_damage_max": null,
+              "splash_damage_min": null,
+              "dps": 255,
+              "dps_initial": null,
+              "dps_after_1p5_seconds": null,
+              "number_of_targets": null
+            }
+          },
+          "source": "fandom-2026-09-19-x-bow-home-village-current"
+        }
+      }
+    },
+    {
+      "content_id": "x_bow",
+      "level": 2,
+      "variant": "supercharged",
+      "fields": {
+        "hitpoints": {
+          "value": 5100,
+          "source": "fandom-2026-09-19-x-bow-home-village-current",
+          "note": "Current TH18 Supercharge 2 table, corroborated by Clash Connection."
+        },
+        "damage_per_shot": {
+          "value": 32.64,
+          "source": "fandom-2026-09-19-x-bow-home-village-current",
+          "derivation": "255 DPS × immutable 0.128-second cadence."
+        },
+        "dps": {
+          "value": 255,
+          "source": "fandom-2026-09-19-x-bow-home-village-current",
+          "note": "Current TH18 Supercharge 2 table, corroborated by Clash Connection."
+        },
+        "upgrade_cost": {
+          "value": 7000000,
+          "source": "fandom-2026-09-19-x-bow-home-village-current"
+        },
+        "upgrade_cost_resource": {
+          "value": "Gold",
+          "source": "fandom-2026-09-19-x-bow-home-village-current"
+        },
+        "upgrade_time_seconds": {
+          "value": 604800,
+          "source": "fandom-2026-09-19-x-bow-home-village-current",
+          "derivation": "7 days."
+        },
+        "town_hall_required": {
+          "value": 18,
+          "source": "fandom-2026-09-19-x-bow-home-village-current"
+        },
+        "xp_gained": {
+          "value": 804,
+          "source": "fandom-2026-09-19-x-bow-home-village-current"
+        },
+        "mode_stats": {
+          "value": {
+            "normal": {
+              "damage_per_shot": 32.64,
+              "damage_per_shot_min": null,
+              "splash_damage_max": null,
+              "splash_damage_min": null,
+              "dps": 255,
+              "dps_initial": null,
+              "dps_after_1p5_seconds": null,
+              "number_of_targets": null
+            }
+          },
+          "source": "fandom-2026-09-19-x-bow-home-village-current"
+        }
+      }
+    }
+  ],
+  "catalogue_content_overrides": [
+    {
+      "content_id": "x_bow",
+      "fields": {
+        "support": {
+          "value": "core_supported_primary_secondary_partial",
+          "source": "supercell-2021-08-11-x-bow-air-ground-range-current-consultation",
+          "note": "Core selects the serialised scenario mode before battle: normal is ground-only at 14 tiles, air_and_ground targets both at 11.5. Shared Core projectile state is exposed to Headless, Viewer and RL; flight, collision, target selection, ammunition depletion and exact tick order remain partial."
+        },
+        "partial_mechanics_contract": {
+          "value": {
+            "normal_mode": {
+              "target_type": "ground",
+              "range_tiles": 14
+            },
+            "air_and_ground_mode": {
+              "target_type": "both",
+              "range_tiles": 11.5
+            },
+            "attack_speed_seconds": 0.128,
+            "ammunition_rounds": 1500,
+            "uninterrupted_depletion_seconds": 192,
+            "reload": {
+              "free": true,
+              "automatic_after_login": true
+            },
+            "core_boundary": "Fresh battle scenarios use the sourced armed combat stats but do not model village-persistent loaded/depleted state or reloading. No unsourced mid-battle reload or mode-transition proxy is enabled."
+          },
+          "source": "fandom-2026-09-19-x-bow-home-village-current",
+          "note": "Current secondary mechanic table; only mode selection and attack stats are materialised by the battle Core."
+        }
+      }
+    }
+  ],
+  "known_uncertainties": [
+    "The current exact Supercharge values are secondary, though two independent current tables agree and the official June note confirms the two TH18 charges.",
+    "No consulted public source supplies a reproducible projectile trajectory, speed, collision width, target-loss, retarget or target-tie trace.",
+    "Ammunition capacity and out-of-battle reload are documented, but the serialized village depletion state, mid-battle reload and mode-transition lifecycle are not."
+  ],
+  "conclusion": "X-Bow L1-L13 and TH18 Supercharge L1-L2 have a shared-Core normal/air-and-ground targeting baseline, current additive Supercharge values and snapshot/replay mode persistence; ammunition persistence and client projectile/ordering fidelity remain partial."
+}

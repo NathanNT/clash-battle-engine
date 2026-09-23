@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-18-monolith-l5",
+  "scope": "Additive Home Village TH18 reference delta. It extends the 2026-09-17 ledger without rewriting it.",
+  "frozen_at": "2026-09-18T00:00:00+02:00",
+  "game_version": "client build 18.600.3 for secondary numeric values; official June 2026 update publication confirms level availability",
+  "parent_reference": {
+    "file": "th18-2026-09-17.json",
+    "reference_id": "home-village-th18-2026-09-17",
+    "sha256": "e68eec11e6e535e1e0487052d71cb03868ce8f3e22577aee1d344513e6939f46"
+  },
+  "sources": [
+    {
+      "id": "goblinsfarm-2026-09-16-monolith",
+      "tier": "secondary",
+      "publisher": "Goblins Farm",
+      "updated_on": "2026-09-16",
+      "consulted_on": "2026-09-18",
+      "version": "client build 18.600.3 (as reported by publisher)",
+      "url": "https://goblinsfarm.com/wiki/buildings/monolith.html",
+      "limitations": "Independent fan table reports Monolith L1–5 HP, DPS, cost, duration and TH requirement. It does not publish its percentage bonus, projectile timing, target-tie ordering, cancellation or exact damage-resolution sequence."
+    },
+    {
+      "id": "fandom-2026-09-18-monolith",
+      "tier": "secondary",
+      "publisher": "Clash of Clans Wiki (Fandom)",
+      "consulted_on": "2026-09-18",
+      "url": "https://clashofclans.fandom.com/wiki/Monolith",
+      "limitations": "Community-maintained table supplies L5 base impact damage, 15% bonus damage, cadence, range and target class but has no published date or immutable client build. Its values are used only where the dated client-build table does not expose them."
+    }
+  ],
+  "official_deltas": [
+    {
+      "source": "supercell-2026-06-15-anime-fury",
+      "family": "defense",
+      "id": "monolith",
+      "level": 5,
+      "behavior": "Official June 2026 release notes list Monolith Level 5 among the new building levels; the note does not publish its numerical table."
+    }
+  ],
+  "catalogue_extra_levels": [
+    {
+      "content_id": "monolith",
+      "level": 5,
+      "source": "goblinsfarm-2026-09-16-monolith",
+      "observation_file": "monolith-l5-observation-2026-09-18.json",
+      "observation_sha256": "ebee575446e7203459e3b9a68eddcc98f7626364a311a4f9e45e4a948460daf4"
+    }
+  ],
+  "catalogue_overrides": [
+    {"content_id": "monolith", "level": 1, "fields": {"monolith_bonus_damage_percent": {"value": 11, "source": "fandom-2026-09-18-monolith", "note": "Community table lists the additional damage per hit as 11% of the target's maximum hitpoints."}}},
+    {"content_id": "monolith", "level": 2, "fields": {"monolith_bonus_damage_percent": {"value": 12, "source": "fandom-2026-09-18-monolith", "note": "Community table lists the additional damage per hit as 12% of the target's maximum hitpoints."}}},
+    {"content_id": "monolith", "level": 3, "fields": {"monolith_bonus_damage_percent": {"value": 13, "source": "fandom-2026-09-18-monolith", "note": "Community table lists the additional damage per hit as 13% of the target's maximum hitpoints."}}},
+    {"content_id": "monolith", "level": 4, "fields": {"monolith_bonus_damage_percent": {"value": 14, "source": "fandom-2026-09-18-monolith", "note": "Community table lists the additional damage per hit as 14% of the target's maximum hitpoints."}}},
+    {"content_id": "monolith", "level": 5, "fields": {"monolith_bonus_damage_percent": {"value": 15, "source": "fandom-2026-09-18-monolith", "note": "Community table lists the additional damage per hit as 15% of the target's maximum hitpoints."}}}
+  ],
+  "catalogue_content_overrides": [],
+  "changed_values": [
+    {
+      "content_id": "monolith",
+      "level": 5,
+      "previous_state": "absent from the normalized catalogue generated from the 2026-09-17 frozen upstream snapshot",
+      "replacement": "normal level added from a hash-pinned secondary observation; official source confirms the level exists but not its numbers",
+      "justification": "The official 2026-06-15 release note postdates the upstream snapshot and confirms L5. The 18.600.3 table dated 2026-09-16 supplies the current numeric fields."
+    }
+  ],
+  "known_uncertainties": [
+    "Monolith percentage bonus, projectile timing and target-order behavior remain unimplemented and are not promoted to fidelity evidence.",
+    "No documented public L5 sprite asset has been pinned locally; this data delta does not claim Viewer asset completeness."
+  ],
+  "conclusion": "This is an additive versioned reference. The 2026-09-17 reference remains preserved byte-for-byte and must never regain sole active-reference status without an explicit migration."
+}

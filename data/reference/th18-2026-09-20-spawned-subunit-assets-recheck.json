@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-20-spawned-subunit-assets-recheck",
+  "scope": "Additive public-asset evidence recheck for already materialized required spawned subunits. It records public visual tiers but does not promote a Viewer asset without a stable, accessible and level/variant-verifiable source file.",
+  "frozen_at": "2026-09-20T00:00:00+02:00",
+  "game_version": "Current public wiki pages consulted on 2026-09-20; no client build or asset hash is published.",
+  "parent_reference": {
+    "file": "th18-2026-09-20-furnace-firemite-lifecycle-recheck.json",
+    "reference_id": "home-village-th18-2026-09-20-furnace-firemite-lifecycle-recheck",
+    "sha256": "70a4c632f5d05ee6a30cc5cf63eb2d075a3bda31fbe109805ac7d477a9fad3a9"
+  },
+  "sources": [
+    {"id":"fandom-2026-09-20-druid-bear-assets","tier":"secondary-version-unknown","publisher":"Clash of Clans Wiki (Fandom)","title":"Druid/Bear","published_on":null,"consulted_on":"2026-09-20","version":"not published","url":"https://clashofclans.fandom.com/wiki/Druid/Bear","limitations":"Public page labels Bear visuals as L1-2, L3-4, L5 and L6, but it publishes no stable source-file hash or client build. Direct file-route retrieval was blocked by robots policy."},
+    {"id":"fandom-2026-09-20-lava-pup-assets","tier":"secondary-version-unknown","publisher":"Clash of Clans Wiki (Fandom)","title":"Lava Hound/Lava Pup","published_on":null,"consulted_on":"2026-09-20","version":"not published","url":"https://clashofclans.fandom.com/wiki/Lava_Hound/Lava_Pup","limitations":"Public page identifies one Lava Pup info image, not a versioned or level-specific game asset. Direct file-route retrieval was blocked by robots policy."},
+    {"id":"fandom-2026-09-20-yetimite-assets","tier":"secondary-version-unknown","publisher":"Clash of Clans Wiki (Fandom)","title":"Yeti/Yetimite","published_on":null,"consulted_on":"2026-09-20","version":"not published","url":"https://clashofclans.fandom.com/wiki/Yeti/Yetimite","limitations":"Public text describes visual changes through L8 and identifies gallery renders, but does not provide a stable per-level source file/hash or current client build. Direct file-route retrieval was blocked by robots policy."},
+    {"id":"fandom-2026-09-20-ice-pup-assets","tier":"secondary-version-unknown","publisher":"Clash of Clans Wiki (Fandom)","title":"Ice Hound/Ice Pup","published_on":null,"consulted_on":"2026-09-20","version":"not published","url":"https://clashofclans.fandom.com/wiki/Ice_Hound/Ice_Pup","limitations":"Only concept designs and beta model/pose are publicly identified; this is not evidence for a current production Viewer asset."},
+    {"id":"fandom-2026-09-20-super-hog-assets","tier":"secondary-version-unknown","publisher":"Clash of Clans Wiki (Fandom)","title":"Super Hog Rider/Super Hog","published_on":null,"consulted_on":"2026-09-20","version":"not published","url":"https://clashofclans.fandom.com/wiki/Super_Hog_Rider/Super_Hog","limitations":"Public mechanics and stat table do not expose a stable Super Hog image file, hash, level tier or client version."},
+    {"id":"fandom-2026-09-20-super-rider-assets","tier":"secondary-version-unknown","publisher":"Clash of Clans Wiki (Fandom)","title":"Super Hog Rider/Super Rider","published_on":null,"consulted_on":"2026-09-20","version":"not published","url":"https://clashofclans.fandom.com/wiki/Super_Hog_Rider/Super_Rider","limitations":"Public page labels one Super Rider L10-15 info image and a gallery item, not a stable source file/hash or distinct level asset."},
+    {"id":"fandom-2026-09-20-electromite-assets","tier":"secondary-version-unknown","publisher":"Clash of Clans Wiki (Fandom)","title":"Super Yeti/Electromite","published_on":null,"consulted_on":"2026-09-20","version":"not published","url":"https://clashofclans.fandom.com/wiki/Super_Yeti/Electromite","limitations":"Public mechanics and stat table do not expose a stable Electromite image file, hash, level tier or client version."}
+  ],
+  "asset_evidence": {
+    "public_visual_tiers_only": {"druid_bear":["L1-2","L3-4","L5","L6"],"lava_pup":["single unlevelled info image"],"yetimite":["L1","L2","L3","L6","L7","L8"],"super_rider":["L10-15 single info image"]},
+    "not_current_production_asset_evidence": {"ice_pup":["concept designs","beta model","beta pose"],"super_hog":["no stable public file/tier"],"electromite":["no stable public file/tier"]}
+  },
+  "known_uncertainties": [
+    "A page-level image label, gallery description or visual-color text cannot identify a reproducible Renderer asset or its source bytes.",
+    "Public direct file routes were unavailable to this audit; no app asset is extracted, copied, inferred or substituted.",
+    "No subunit is promoted to asset-conformant status by this evidence."
+  ],
+  "conclusion": "Public pages improve the documented visual inventory but do not supply source-verifiable Viewer assets. Lava Pup, Ice Pup, Yetimite, Druid Bear, Super Hog, Super Rider and Electromite remain non-conformant on the documented-asset axis until a stable public artifact or authorized application measurement is available."
+}

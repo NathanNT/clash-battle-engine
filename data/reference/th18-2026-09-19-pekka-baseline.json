@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-19-pekka-baseline",
+  "scope": "Additive TH18 regular P.E.K.K.A direct-parent baseline. The historically removed Hidden Tesla bonus remains deliberately absent from the shared damage path.",
+  "frozen_at": "2026-09-19T00:00:00+02:00",
+  "game_version": "The pinned public level payload is commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba. No consulted source identifies a newer P.E.K.K.A-specific TH18 balance change or a current client build for all parent values.",
+  "parent_reference": {"file": "th18-2026-09-19-baby-dragon-tantrum-contract.json", "reference_id": "home-village-th18-2026-09-19-baby-dragon-tantrum-contract", "sha256": "6c22908cd7bcbeb1679ba9e143ad8b484edcdf92140e796102f2f5d8d23064f1"},
+  "sources": [
+    {"id": "chiefpansancolt-62b019df-pekka", "tier": "secondary-version-unknown", "publisher": "chiefpansancolt/clash-of-clans-data", "title": "Home Village P.E.K.K.A structured troop record", "published_on": "2026-04-19", "consulted_on": "2026-09-19", "version": "commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba", "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/pekka.json", "limitations": "The pinned public payload supplies L1-L13 hitpoints, direct damage, cadence, range, movement, housing, target type, level requirements and visual paths. It is not a current version-identified combat specification and supplies no projectile, collision, spell, trap or target-tie contract."},
+    {"id": "fandom-2026-09-19-pekka-history", "tier": "secondary-version-unknown", "publisher": "Clash of Clans Wiki (Fandom)", "title": "P.E.K.K.A", "published_on": null, "consulted_on": "2026-09-19", "version": "not published", "url": "https://clashofclans.fandom.com/wiki/P.E.K.K.A", "limitations": "Community history records the former Hidden Tesla x2 interaction and its 12 October 2016 removal. It does not establish a current client build, a complete current rule set, collision geometry, or fixed-tick ordering."},
+    {"id": "goblinsfarm-2026-09-18-troop-targeting", "tier": "secondary-build-pinned", "publisher": "Goblins Farm", "title": "Troop Targeting and AI: Why Your Troops Do That", "published_on": null, "consulted_on": "2026-09-19", "version": "client build 18.600.3 (as reported by publisher)", "url": "https://goblinsfarm.com/wiki/mechanics/troop-targeting-and-ai.html", "limitations": "The general article describes nearest-building behavior for troops without a preferred target, but does not publish P.E.K.K.A-specific reachability, tie-break, retarget, collision or exact action-order data."}
+  ],
+  "catalogue_content_overrides": [
+    {"content_id": "pekka", "fields": {
+      "support": {"value": "core_supported_secondary_partial", "source": "chiefpansancolt-62b019df-pekka", "note": "Core materializes the pinned L1-L13 direct parent baseline through the shared deployment, targeting, movement and damage routes. No P.E.K.K.A-specific Tesla multiplier or retarget priority is enabled; Headless, Viewer and RL consume this same state."}
+    }}
+  ],
+  "changed_values": [
+    {"content_id": "pekka", "previous_state": "Catalogued-only L1-L13 parent despite a generic deployable Core route and a frozen audit excluding the obsolete Tesla interaction.", "replacement": "The existing source-backed direct-parent route is explicitly classified core_supported_secondary_partial and covered by focused snapshot, replay, deterministic hash, Headless CLI and adapter tests.", "justification": "The parent table contains the fields needed for deterministic direct baseline combat. The historical Tesla exception is evidence against adding a special rule, not an authorization for an unverified replacement mechanic."}
+  ],
+  "known_uncertainties": [
+    "No consulted source provides a current version-identified complete P.E.K.K.A. table or a fixed-tick specification for target acquisition, path selection, equal-distance tie-breaks, retargeting, wind-up, impact, collision, spell stacking or trap interaction.",
+    "No consulted source supplies P.E.K.K.A projectile or contact geometry, attack-animation timing, visual scale/animation verification, or a current authoritative confirmation beyond the generic secondary level table.",
+    "The former Hidden Tesla x2 interaction is historically removed according to secondary history. No consulted 2026 official release note reintroduces it; the generic shared damage route is deliberately preserved rather than guessing a special modifier."
+  ],
+  "conclusion": "P.E.K.K.A L1-L13 is executable as a direct primary-target baseline through Core, Headless CLI, Viewer and RL, with snapshots, replays and deterministic hashes. The obsolete Tesla multiplier stays disabled. Current numeric fidelity, targeting/pathing chronology, collision, interactions and visual fidelity remain explicitly partial."
+}

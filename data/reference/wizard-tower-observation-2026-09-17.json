@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "reference_id": "th18-wizard-tower-secondary-observation-2026-09-17",
+  "purpose": "Version-identified secondary corroboration of the Home Village Wizard Tower normal-level table, footprint and both-altitude splash targeting.",
+  "source_id": "goblinsfarm-2026-08-26-wizard-tower",
+  "client_build": "18.400.21 (as reported by publisher)",
+  "observed_root": {"footprint_tiles": "3x3", "target_type": "both", "range_tiles": 7, "damage_type": "splash"},
+  "levels": [
+    {"level":1,"hitpoints":620,"dps":11,"town_hall_required":5},{"level":2,"hitpoints":650,"dps":13,"town_hall_required":5},{"level":3,"hitpoints":680,"dps":16,"town_hall_required":6},{"level":4,"hitpoints":730,"dps":20,"town_hall_required":7},{"level":5,"hitpoints":840,"dps":24,"town_hall_required":8},{"level":6,"hitpoints":960,"dps":32,"town_hall_required":8},{"level":7,"hitpoints":1200,"dps":40,"town_hall_required":9},{"level":8,"hitpoints":1440,"dps":45,"town_hall_required":10},{"level":9,"hitpoints":1600,"dps":50,"town_hall_required":10},{"level":10,"hitpoints":1900,"dps":62,"town_hall_required":11},{"level":11,"hitpoints":2120,"dps":70,"town_hall_required":12},{"level":12,"hitpoints":2240,"dps":78,"town_hall_required":13},{"level":13,"hitpoints":2500,"dps":84,"town_hall_required":13},{"level":14,"hitpoints":2800,"dps":90,"town_hall_required":14},{"level":15,"hitpoints":3000,"dps":95,"town_hall_required":15},{"level":16,"hitpoints":3150,"dps":102,"town_hall_required":16},{"level":17,"hitpoints":3300,"dps":110,"town_hall_required":17}
+  ],
+  "available_at_town_hall_18": 6,
+  "known_missing": ["numeric splash boundary source", "newer version-matched full normal-level table", "tick-level projectile timing", "target-tie measurements"]
+}

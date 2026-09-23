@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "audit_id": "home-village-super-wizard-mechanics-2026-09-18",
+  "content_id": "super_wizard",
+  "consulted_on": "2026-09-18",
+  "scope": "Evidence review and approximation ledger for Home Village Super Wizard Chain Magic.",
+  "sources": [
+    {
+      "id": "supercell-2021-01-20-super-wizard-balance",
+      "tier": "primary",
+      "title": "Balance Changes Now Live",
+      "published_on": "2021-01-20",
+      "game_version": "not published",
+      "url": "https://supercell.com/en/games/clashofclans/blog/game-updates/upcoming-balance-changes/",
+      "finding": "Super Wizard chain damage was reduced from 60% to 40%."
+    },
+    {
+      "id": "supercell-2026-01-28-super-wizard-balance",
+      "tier": "primary",
+      "title": "Changes coming to Ranked Mode & League Modifiers!",
+      "published_on": "2026-01-28",
+      "game_version": "not published",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/balance-changes-4/",
+      "finding": "All Super Wizard levels received a damage buff and levels 9–14 received HP buffs; it does not define Chain Magic geometry or timing."
+    },
+    {
+      "id": "clash-ninja-2020-12-07-super-wizard",
+      "tier": "secondary",
+      "title": "The December 2020 update is live",
+      "published_on": "2020-12-07",
+      "game_version": "not published",
+      "url": "https://www.clash.ninja/blog/december-2020-update-is-live",
+      "finding": "Chain Magic can chain up to 10 times only to buildings within range of the original target."
+    },
+    {
+      "id": "fandom-2026-09-18-super-wizard",
+      "tier": "secondary",
+      "title": "Super Wizard | Clash of Clans Wiki",
+      "published_on": "2020-12-07",
+      "game_version": "not published",
+      "url": "https://clashofclans.fandom.com/wiki/Super_Wizard",
+      "finding": "The branches originate at the primary target and can hit up to nine other nearby targets for 40% damage, described as ten total targets."
+    }
+  ],
+  "established": [
+    "Home Village Super Wizard L9–14 remains in scope and has immutable per-level data in the pinned catalogue.",
+    "Secondary chain impact is 40% of the primary damage, corroborated by the primary 2021 balance change.",
+    "Secondary branches originate from the primary target rather than chaining sequentially from the prior secondary target."
+  ],
+  "unresolved": [
+    "The public descriptions conflict or are ambiguous about whether a maximum of ten means ten total victims or ten secondary bounces.",
+    "No source gives a current versioned chain-radius value; 'within range of the original target' cannot silently be equated to the base attack range.",
+    "No source establishes target eligibility, distance/entity-ID tie break, simultaneous versus serial application, projectile launch/travel, target destruction during selection, or fixed-tick ordering.",
+    "No source verifies sprite alignment, chain overlay geometry or animation timing."
+  ],
+  "decision": "Enabled as core_supported_secondary_partial through the additive Super Wizard reference. Core branches from the primary target with primary 40% secondary damage, ten total victims and a three-tile base-range proxy; cap, radius, eligibility and flight remain explicit replaceable approximations."
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-electro-fangs-passive-type-override",
+  "scope": "Additive primary-source activation-class correction for Electro Fangs; preserve supplemental level values and avoid inferring chain timing.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Supercell 2026-04-27 Sound of Clash release, applicable to TH17+ Dragon Duke Equipment; exact TH18 client build not published.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-hero-pet-equipment-attachment-contract-audit.json",
+    "reference_id": "home-village-th18-2026-09-23-hero-pet-equipment-attachment-contract-audit",
+    "sha256": "c8973dc28fbe7f79ea9dfb09b20baa346296932626a916f067919380bba30ad9"
+  },
+  "sources": [
+    {
+      "id": "supercell-2026-04-27-electro-fangs-passive-type",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "THE SOUND OF CLASH UPDATE",
+      "published_on": "2026-04-27",
+      "consulted_on": "2026-09-23",
+      "version": "April 2026 Home Village update",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/the-sound-of-clash-update/",
+      "confidence": "high_for_passive_equipment_class",
+      "content_id": "electro_fangs",
+      "levels": "1-18",
+      "mode": "dragon_duke_passive_equipment",
+      "facts": ["Supercell labels Electro Fangs a Passive Ability for Dragon Duke and describes its attack chain."],
+      "limitations": "The note does not specify first-link timing, chain range, target selection, rounding, or event order."
+    }
+  ],
+  "catalogue_content_overrides": [
+    {
+      "content_id": "electro_fangs",
+      "fields": {
+        "equipment_activation_type": {
+          "value": "Passive",
+          "source": "supercell-2026-04-27-electro-fangs-passive-type",
+          "note": "Primary release note explicitly labels the ability Passive; supplemental raw level fields remain unchanged."
+        }
+      }
+    }
+  ],
+  "derivations": [
+    {
+      "content_id": "electro_fangs",
+      "levels": "1-18",
+      "mode": "activation_class",
+      "result": "equipment_activation_type = Passive",
+      "method": "Transcribe the primary source's explicit Passive Ability label into a separate provenance-tracked normalized field; do not alter frozen supplemental observations."
+    }
+  ],
+  "rejected_inferences": [
+    {"rule": "Treat Monolith Arrow as Passive based on its continuous-sounding description", "reason": "The checked primary release note does not explicitly classify its activation type; the existing item audit retains this uncertainty."},
+    {"rule": "Apply Electro Fangs chaining on the same tick as a normal Duke attack", "reason": "Passive describes input requirement, not chain impact timing, range, selection or rounding."}
+  ],
+  "open_uncertainties": [
+    {"content_id": "electro_fangs", "levels": "1-18", "mode": "passive_chain_attack", "items": ["chain link range and target ordering", "per-level current damage and chain count from primary sources", "damage decay rounding and first-link tick", "interaction with Royal Rampage, Pets, spells and other Equipment", "Viewer effect, snapshot, replay and RL combat representation"]},
+    {"content_id": "monolith_arrow", "levels": "1-27", "mode": "activation_class", "items": ["primary-source Active versus Passive classification and firing frequency"]}
+  ],
+  "conclusion": "Electro Fangs is source-backed Passive Equipment. Its chain combat remains partial, and Monolith Arrow's activation type remains unverified."
+}

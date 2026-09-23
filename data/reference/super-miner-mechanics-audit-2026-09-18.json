@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "audit_id": "home-village-super-miner-mechanics-2026-09-18",
+  "content_id": "super_miner",
+  "consulted_on": "2026-09-18",
+  "scope": "Evidence review before Super Miner ramping damage or underground behavior is enabled.",
+  "sources": [
+    {
+      "id": "supercell-2022-12-12-super-miner-launch",
+      "tier": "primary",
+      "title": "December Update",
+      "published_on": "2022-12-12",
+      "game_version": "December 2022 update",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/december-update-2022/",
+      "finding": "Supercell establishes that Super Miner attacks increase in damage over time and separately changes above-ground movement of underground units by 30%."
+    },
+    {
+      "id": "supercell-2023-12-11-super-miner-l10",
+      "tier": "primary",
+      "title": "New In Town Hall 16!",
+      "published_on": "2023-12-11",
+      "game_version": "Town Hall 16 update",
+      "url": "https://supercell.com/en/games/clashofclans/blog/game-updates/december-2023-town-hall-16/",
+      "finding": "Supercell publishes Super Miner level 10 as 3,800 HP and 640/2,000 DPS, confirming a damage range but not stage timing or reset conditions."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-super-miner",
+      "tier": "secondary-dated-build",
+      "title": "Pinned normalized Miner superTroop payload",
+      "published_on": null,
+      "game_version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/miner.json",
+      "finding": "The pinned payload supplies parent levels and ordinary values but lacks ramp-stage, timer, reset, underground-targeting and damage-on-death lifecycle fields."
+    }
+  ],
+  "established": [
+    "Super Miner is an in-scope permanent Home Village Super Troop whose attack damage increases over time.",
+    "The published level-10 notation establishes 640 through 2,000 DPS, but not the intermediate progression.",
+    "The global above-ground movement adjustment is not a Super Miner-specific underground timing contract."
+  ],
+  "unresolved": [
+    "No source gives the number of damage stages, exact values, duration per stage, first-hit value, attack cadence, reset on target loss, reset on underground movement, or interaction with Rage and Freeze.",
+    "No source identifies the Super Miner underground transition timing, vulnerability, trap triggering, target retention, pathfinding, collision or reappearance position for the frozen TH18 version.",
+    "No version-identified source establishes damage-on-death behavior, radius, delay, target filtering or its relationship to destruction ordering."
+  ],
+  "decision": "Do not enable super_miner in Core, GUI or RL until a version-identified ramp-stage and underground/death lifecycle contract is available. Do not reuse the ordinary Miner burrow flag, Inferno stages, or a generic death explosion as a substitute."
+}

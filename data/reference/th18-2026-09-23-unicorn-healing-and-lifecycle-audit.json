@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-unicorn-healing-and-lifecycle-audit",
+  "scope": "Additive Unicorn L1-15 healing and paired-Pet lifecycle audit; preserve pinned pulse values without enabling an incomplete combat actor.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Official level availability through 2025-03-24; older primary L4-10 healing changes; pinned raw commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba; current 18.600.3 values and tick behavior unverified.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-mighty-yak-level-and-wall-contract-audit.json",
+    "reference_id": "home-village-th18-2026-09-23-mighty-yak-level-and-wall-contract-audit",
+    "sha256": "4cedf0de51fb336b6e13f5531cd7a3e9ced70d8e67c53ca157058c02fdb826b7"
+  },
+  "sources": [
+    {
+      "id": "supercell-2021-04-10-unicorn-introduction",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "Meet The Hero Pets!",
+      "published_on": "2021-04-10",
+      "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/game-updates/meet-the-hero-pets-1-2/",
+      "confidence": "high_for_general_behavior",
+      "content_id": "unicorn",
+      "levels": "Pet House 4 onward; no numerical level table",
+      "mode": "paired_healing_pet",
+      "facts": ["Unicorn follows and heals its assigned Hero, heals one target, can heal ground and air, and has published movement speed 16."],
+      "limitations": "No pulse start phase, Hero-follow offset, target transition or simultaneous damage/heal order is specified."
+    },
+    {
+      "id": "supercell-2022-05-01-unicorn-l4-l10-heal",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "Home Village Balance Changes",
+      "published_on": "2022-05-01",
+      "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/balancechanges-spring2022-2/",
+      "confidence": "high_for_2022_values",
+      "content_id": "unicorn",
+      "levels": "4-10",
+      "mode": "normal",
+      "facts": ["L4-10 healing changed to 58, 60, 62, 64, 66, 68, 70, matching the pinned raw healing-per-second and per-pulse fields."],
+      "limitations": "The source calls the values heals but does not specify whether they are per hit, per second or subject to a Hero-specific modifier."
+    },
+    {
+      "id": "supercell-2025-03-24-unicorn-l11-l15-unlock",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "Welcome to Clash Anytime Update!",
+      "published_on": "2025-03-24",
+      "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/welcome-to-clash-anytime-update/",
+      "confidence": "high_for_availability",
+      "content_id": "unicorn",
+      "levels": "11-15",
+      "mode": "normal",
+      "facts": ["Unicorn L11-15 and Pet House 11 were released at TH17."],
+      "limitations": "No L11-15 hitpoints, healing values or pulse timing are published."
+    },
+    {
+      "id": "supercell-support-2026-09-23-unicorn",
+      "tier": "primary-undated",
+      "publisher": "Supercell Support",
+      "title": "About Heroes & Pets",
+      "published_on": null,
+      "consulted_on": "2026-09-23",
+      "url": "https://support.supercell.com/clash-of-clans/en/articles/about-heroes-pets-9.html",
+      "confidence": "high_for_general_behavior",
+      "content_id": "unicorn",
+      "levels": "all",
+      "mode": "paired_healing_pet",
+      "facts": ["The current public support list says Unicorn follows and heals its Hero."],
+      "limitations": "The support page does not define pulse cadence or post-Hero-death target selection."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-unicorn-raw-recheck",
+      "tier": "secondary-frozen-payload",
+      "publisher": "chiefpansancolt/clash-of-clans-data",
+      "title": "Pinned Unicorn Home Village Pet record",
+      "published_on": null,
+      "consulted_on": "2026-09-23",
+      "version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/unicorn.json",
+      "confidence": "medium",
+      "content_id": "unicorn",
+      "levels": "1-15",
+      "mode": "normal",
+      "raw_sha256": "606994539710b920ab825017080a0baeb062e638f8331344354cc47adb6f49a7",
+      "facts": ["Each level has healingPerSecond and healingPerPulse; the record declares a one-second attack speed, 2.5-tile range and movement speed 16."],
+      "limitations": "No current client build, first-pulse phase, following position or target-loss ordering is supplied."
+    },
+    {
+      "id": "fandom-2026-09-23-unicorn-target-loss-lead",
+      "tier": "secondary-version-unknown",
+      "publisher": "Clash of Clans Wiki on Fandom",
+      "title": "Unicorn",
+      "published_on": null,
+      "consulted_on": "2026-09-23",
+      "url": "https://clashofclans.fandom.com/wiki/Unicorn",
+      "confidence": "low_for_current_rule",
+      "content_id": "unicorn",
+      "levels": "all",
+      "mode": "paired_healing_pet",
+      "facts": ["Search-index excerpt claims the Unicorn can heal other troops after its Hero is knocked out or recalled."],
+      "limitations": "The page was blocked on direct retrieval; no current-build reproducible transition or target priority is established. Treat only as research lead."
+    }
+  ],
+  "catalogue_overrides": [
+    {"content_id": "unicorn", "level": 4, "fields": {"healing_per_second": {"value": 58, "source": "supercell-2022-05-01-unicorn-l4-l10-heal"}}},
+    {"content_id": "unicorn", "level": 5, "fields": {"healing_per_second": {"value": 60, "source": "supercell-2022-05-01-unicorn-l4-l10-heal"}}},
+    {"content_id": "unicorn", "level": 6, "fields": {"healing_per_second": {"value": 62, "source": "supercell-2022-05-01-unicorn-l4-l10-heal"}}},
+    {"content_id": "unicorn", "level": 7, "fields": {"healing_per_second": {"value": 64, "source": "supercell-2022-05-01-unicorn-l4-l10-heal"}}},
+    {"content_id": "unicorn", "level": 8, "fields": {"healing_per_second": {"value": 66, "source": "supercell-2022-05-01-unicorn-l4-l10-heal"}}},
+    {"content_id": "unicorn", "level": 9, "fields": {"healing_per_second": {"value": 68, "source": "supercell-2022-05-01-unicorn-l4-l10-heal"}}},
+    {"content_id": "unicorn", "level": 10, "fields": {"healing_per_second": {"value": 70, "source": "supercell-2022-05-01-unicorn-l4-l10-heal"}}}
+  ],
+  "derivations": [
+    {"content_id": "unicorn", "levels": "1-15", "mode": "normal", "result": "Retain raw healingPerPulse as catalogue healing_per_pulse", "method": "Lossless normalization of the pinned level field, independent of unsupported Core pulse scheduling."},
+    {"content_id": "unicorn", "levels": "4-10", "mode": "normal", "result": "Pin the numerical healing magnitudes from the official 2022 balance values", "method": "The seven published values match the raw healingPerSecond table; the per-second field meaning is supplied by the raw record, and no pulse-timing inference is made."}
+  ],
+  "rejected_inferences": [
+    {"rule": "Schedule the first heal at deployment plus exactly one second", "reason": "A cadence alone does not define the first pulse phase or simultaneous damage/heal ordering."},
+    {"rule": "Heal the nearest other Hero or troop after assigned Hero loss", "reason": "The secondary claim lacks current-build target priority, range, tie-break and transition tick."},
+    {"rule": "Treat current L11-15 healing and HP as officially verified", "reason": "The 2025 announcement lists levels but omits numeric values; the pinned raw commit has no current client build."}
+  ],
+  "open_uncertainties": [
+    {"content_id": "unicorn", "levels": "1-15", "mode": "paired_healing_pet", "items": ["current-build HP and heal values, especially L11-15", "paired deployment and follow position", "first and repeat healing pulse phase and damage order", "healing eligibility, cap and modifiers", "post-Hero-death or recall target selection and tie-break", "collision geometry, anchors and battlefield art rights"]}
+  ],
+  "conclusion": "Unicorn L1-15 remains partial and catalogue-only. Sourced general healing behavior and older numerical values are retained, but pulse scheduling and target transitions are insufficient for a faithful deterministic Core actor."
+}

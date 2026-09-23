@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "reference_id": "projectile-contracts-2026-09-18-apprentice-warden",
+  "frozen_on": "2026-09-18",
+  "parent_contract": {"file": "projectile-contracts-2026-09-18-bowler.json", "sha256": "cbce14f7e25efc07a6431f04b46efbe312e49866d91cf954d1918564d0ac5e77"},
+  "catalogue_audit_override": {"currently_executable_weapon_paths": 32, "non_executable_long_range_candidates": 27},
+  "contracts": [{"id": "apprentice_warden", "model": "logical_next_tick_unmeasured", "core": "BattleState::Projectile", "gui": "amber_post_impact_trace", "rl": "projectiles", "fidelity": "open", "provenance": {"status": "missing", "needed": "versioned launch, travel and impact timing for the ordinary Apprentice Warden weapon"}}],
+  "historical_unavailable_profiles": [{"content_id": "apprentice_warden", "reason": "No reproducible historical v18.200.9 Apprentice Warden projectile profile has been curated. The ordinary ranged attack must not inherit a speed from the separate Life Aura contract."}],
+  "test_evidence": ["cocsim_apprentice_warden_tests: shared Core Life Aura snapshot and replay test also keeps the ordinary ranged actor inside the generic projectile path."]
+}

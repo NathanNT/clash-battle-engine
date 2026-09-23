@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-giant-gauntlet-current-effect-audit",
+  "scope": "Additive Giant Gauntlet L1-27 area, damage-reduction and duration audit across its 2026 all-level buff; retain historical values without assuming current effect timing.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Official 2023-12-18 introduction and 2026-01-28 all-level buff; game-file table dated 2026-09-01 and claimed client build 18.600.3 on 2026-09-16; pinned raw commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-vampstache-heal-event-audit.json",
+    "reference_id": "home-village-th18-2026-09-23-vampstache-heal-event-audit",
+    "sha256": "37b367fcce3de29f50100c3050cbaa6443e3e50386561dee2a6831ec3df1aa00"
+  },
+  "sources": [
+    {
+      "id": "supercell-2023-12-18-giant-gauntlet-introduction",
+      "tier": "primary", "publisher": "Supercell", "title": "Welcome To Cookie Rumble!",
+      "published_on": "2023-12-18", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/game-updates/welcome-to-cookie-rumble/",
+      "confidence": "high_for_launch_geometry_and_historical_level_table", "content_id": "giant_gauntlet", "levels": "1-27", "mode": "barbarian_king_active_equipment",
+      "facts": ["Giant Gauntlet is Epic active Barbarian King Equipment. It enlarges the King, deals area damage within 2.5 tiles, reduces incoming damage, regenerates Hero HP and increases DPS. The launch post gives L1-27 duration, reduction, regeneration and DPS tables."],
+      "limitations": "Its launch duration and reduction values predate the 2026 all-level buff and must not be used as current combat stats. The post does not define per-target area hit geometry or tick order."
+    },
+    {
+      "id": "supercell-2026-01-28-giant-gauntlet-buff",
+      "tier": "primary", "publisher": "Supercell", "title": "Changes coming to Ranked Mode & League Modifiers!",
+      "published_on": "2026-01-28", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/balance-changes-4/",
+      "confidence": "high_for_all_level_buff_occurrence", "content_id": "giant_gauntlet", "levels": "1-27", "mode": "active_transformation",
+      "facts": ["All Giant Gauntlet levels received increased damage reduction and duration."],
+      "limitations": "The release notes do not give replacement values, per-level change factors or application and expiration ticks."
+    },
+    {
+      "id": "gibiarena-2026-09-01-giant-gauntlet-game-files",
+      "tier": "secondary-dated-game-files", "publisher": "GiBiArena via ClashKing game-file data",
+      "title": "Giant Gauntlet: costs, times and levels — Clash of Clans",
+      "published_on": null, "consulted_on": "2026-09-23",
+      "version": "Game-file data dated 2026-09-01, processed 2026-09-03; exact client build unpublished",
+      "url": "https://www.gibiarena.com/en/clash-of-clans/upgrades/giant-gauntlet",
+      "confidence": "medium_high_for_dated_level_cap_and_ore_costs", "content_id": "giant_gauntlet", "levels": "1-27", "mode": "active_equipment",
+      "facts": ["The maximum is L27 and the page lists per-level ore costs and Blacksmith requirements."],
+      "limitations": "The public table does not publish current duration, damage reduction, regeneration, area damage geometry or DPS timing."
+    },
+    {
+      "id": "goblins-farm-2026-09-16-giant-gauntlet-client-files",
+      "tier": "secondary-dated-game-files", "publisher": "Goblins Farm",
+      "title": "Giant Gauntlet — Clash of Clans Wiki",
+      "published_on": "2026-09-16", "consulted_on": "2026-09-23",
+      "version": "Client build 18.600.3 as claimed by source",
+      "url": "https://goblinsfarm.com/wiki/equipment/giant-gauntlet.html",
+      "confidence": "medium_high_for_dated_dps_and_cost_table", "content_id": "giant_gauntlet", "levels": "1-27", "mode": "active_equipment",
+      "facts": ["The game-file-derived page confirms an area-damage and incoming-reduction effect and L1-27 DPS bonuses running 17-160."],
+      "limitations": "The table omits current per-level duration, damage reduction and regeneration."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-giant-gauntlet-raw-recheck",
+      "tier": "secondary-frozen-payload", "publisher": "chiefpansancolt/clash-of-clans-data",
+      "title": "Pinned Giant Gauntlet Home Village Hero Equipment record",
+      "published_on": null, "consulted_on": "2026-09-23",
+      "version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/giant-gauntlet.json",
+      "confidence": "medium_for_historical_level_fields", "content_id": "giant_gauntlet", "levels": "1-27", "mode": "active_transformation",
+      "raw_sha256": "c377f4567e02d1e056c52e29ba62ba3537a0f05211220e97cce800f3d35e47e5",
+      "facts": ["The normalized source_fields preserve top-level areaDamageRadius 2.5 and per-level abilityDuration, incomingDamageReduction, dpsIncrease and selfHealingPerSecond."],
+      "limitations": "The pinned duration and reduction fields are not validated against the 2026 all-level buff; no current public source checked here exposes their complete new values."
+    }
+  ],
+  "derivations": [
+    {"content_id": "giant_gauntlet", "levels": "1-27", "mode": "active_transformation", "result": "Retain historical area and level fields as data-only", "method": "SHA-check pinned raw fields, compare dated L1-27 DPS and ore tables, and separately note the later official all-level buff. Do not substitute launch or pinned duration and reduction for current values."}
+  ],
+  "rejected_inferences": [
+    {"rule": "Use the launch L1-27 duration and reduction table as current", "reason": "Supercell increased both fields at every level in January 2026."},
+    {"rule": "Assume the pinned 14-19-second duration and 20-60% reduction table contains the 2026 buff", "reason": "The pinned payload's exact game version is not established and dated public pages omit these effect fields."},
+    {"rule": "Hit every target whose center lies within 2.5 tiles of the King", "reason": "The official radius lacks hitbox, footprint, anchor and edge-inclusion details."},
+    {"rule": "Apply damage reduction before trap mitigation and Phoenix revival", "reason": "No checked source gives modifier ordering or defeat interception for those interactions."},
+    {"rule": "Apply regeneration before each 10 ms damage phase", "reason": "The per-second rate does not specify accumulation, rounding or healing versus death order."}
+  ],
+  "open_uncertainties": [
+    {"content_id": "giant_gauntlet", "levels": "1-27", "mode": "barbarian_king_active_equipment", "items": ["current-build per-level duration and incoming reduction after January 2026 buff", "current-build regeneration and DPS continuity", "area radius center, King size change, hitbox and target eligibility", "damage reduction versus traps, Rage Vial, Pets and defensive modifiers", "regeneration accumulation and heal/death tick order", "activation, first and final effective ticks, King defeat", "two-Equipment activation, Viewer controls and replay/RL serialization", "battlefield transformation art and rights"]}
+  ],
+  "conclusion": "Giant Gauntlet L1-27 remains partial and catalogue-only. Official sources establish the 2.5-tile area transformation and 2026 all-level duration/reduction buff, but current effect values and geometry are insufficient for a faithful deterministic Core actor."
+}

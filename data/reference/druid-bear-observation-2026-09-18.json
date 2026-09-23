@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-18-druid-bear-baseline",
+  "purpose": "Hash-pinned secondary Bear form table required by the documented Druid transformation.",
+  "source_id": "fandom-2026-09-18-druid-bear",
+  "content": {
+    "id": "druid_bear",
+    "category": "spawned-unit",
+    "target_focus": "defenses",
+    "flying": false,
+    "heals": false,
+    "footprint_tiles": null,
+    "housing_space": 10,
+    "range_tiles": 0.2,
+    "attack_speed_seconds": 1,
+    "movement_speed": 20,
+    "target_type": "ground",
+    "damage_type": "single",
+    "support": "spawned_only",
+    "levels": [
+      {"level": 1, "variant": "normal", "hitpoints": 1900, "damage_per_shot": 150, "dps": 150},
+      {"level": 2, "variant": "normal", "hitpoints": 2000, "damage_per_shot": 160, "dps": 160},
+      {"level": 3, "variant": "normal", "hitpoints": 2100, "damage_per_shot": 170, "dps": 170},
+      {"level": 4, "variant": "normal", "hitpoints": 2300, "damage_per_shot": 185, "dps": 185},
+      {"level": 5, "variant": "normal", "hitpoints": 2500, "damage_per_shot": 205, "dps": 205},
+      {"level": 6, "variant": "normal", "hitpoints": 2750, "damage_per_shot": 225, "dps": 225}
+    ]
+  }
+}

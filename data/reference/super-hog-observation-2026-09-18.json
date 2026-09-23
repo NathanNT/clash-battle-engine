@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "reference_id": "th18-super-hog-secondary-observation-2026-09-18",
+  "purpose": "Pinned secondary current table for the Super Hog spawned when an attacking Super Hog Rider is destroyed. It is a spawned-only unit and cannot be directly deployed.",
+  "source_id": "fandom-2026-09-18-super-hog-rider-subunits",
+  "content": {
+    "id": "super_hog",
+    "source_id": "super-hog",
+    "category": "troop",
+    "support": "spawned_only",
+    "spawned_by": "super_hog_rider",
+    "target_focus": "defenses",
+    "flying": false,
+    "heals": false,
+    "footprint_tiles": "1x1",
+    "housing_space": 0,
+    "activation_housing_space": 0,
+    "range_tiles": 0.6,
+    "trigger_range_tiles": 0,
+    "min_range_tiles": 0,
+    "splash_radius_tiles": 0,
+    "death_splash_radius_tiles": 0,
+    "shots_per_burst": 1,
+    "time_between_bursts_seconds": 0,
+    "attack_speed_seconds": 1,
+    "movement_speed": 32,
+    "target_type": "ground",
+    "damage_type": "single",
+    "modes": [],
+    "levels": [
+      {"level": 10, "variant": "normal", "hitpoints": 800, "damage_per_shot": 50, "dps": 50},
+      {"level": 11, "variant": "normal", "hitpoints": 900, "damage_per_shot": 55, "dps": 55},
+      {"level": 12, "variant": "normal", "hitpoints": 1000, "damage_per_shot": 60, "dps": 60},
+      {"level": 13, "variant": "normal", "hitpoints": 1050, "damage_per_shot": 65, "dps": 65},
+      {"level": 14, "variant": "normal", "hitpoints": 1100, "damage_per_shot": 70, "dps": 70},
+      {"level": 15, "variant": "normal", "hitpoints": 1200, "damage_per_shot": 80, "dps": 80}
+    ],
+    "known_missing": ["exact wall-jump pathing contract", "spawn delay", "spawn coordinates", "launch direction and distance", "attack target inheritance", "source-verified child sprite"]
+  }
+}

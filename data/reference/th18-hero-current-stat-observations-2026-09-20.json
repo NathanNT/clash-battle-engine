@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-20-hero-current-stat-observations",
+  "consulted_at": "2026-09-20",
+  "purpose": "Current TH18 Hero health and DPS observations retained before separate Core deltas. These are secondary game-file transcriptions and do not establish unpublished cadence, projectile, collision, ability, altar-defense or asset rules.",
+  "sources": [
+    {"id": "goblinsfarm-2026-08-26-grand-warden", "tier": "secondary-dated-game-files", "title": "Grand Warden | Clash of Clans Wiki | Goblins Farm", "url": "https://goblinsfarm.com/wiki/heroes/grand-warden.html", "publication_date": "2026-08-26", "consultation_date": "2026-09-20", "game_version": "client build 18.400.21", "confidence": "medium", "limitation": "The page says its hero table is an extracted game-file snapshot not independently cross-checked against a published reference."},
+    {"id": "goblinsfarm-2026-09-16-royal-champion", "tier": "secondary-game-file-transcription", "title": "Royal Champion | Clash of Clans Wiki | Goblins Farm", "url": "https://goblinsfarm.com/wiki/heroes/royal-champion.html", "publication_date": "2026-09-16", "consultation_date": "2026-09-20", "game_version": "client build 18.600.3", "confidence": "medium", "limitation": "The page says its hero table could not be cross-checked against a published reference."},
+    {"id": "goblinsfarm-2026-09-16-minion-prince", "tier": "secondary-game-file-transcription", "title": "Minion Prince | Clash of Clans Wiki | Goblins Farm", "url": "https://goblinsfarm.com/wiki/heroes/minion-prince.html", "publication_date": "2026-09-16", "consultation_date": "2026-09-20", "game_version": "client build 18.600.3", "confidence": "medium", "limitation": "The page labels its hero figures provisional."},
+    {"id": "goblinsfarm-2026-08-26-dragon-duke", "tier": "secondary-game-file-transcription", "title": "Dragon Duke | Clash of Clans Wiki | Goblins Farm", "url": "https://goblinsfarm.com/wiki/heroes/dragon-duke.html", "publication_date": "2026-08-26", "consultation_date": "2026-09-20", "game_version": "client build 18.400.21", "confidence": "medium", "limitation": "The source documents health and DPS only, and explicitly declines to describe ability and behavior."}
+  ],
+  "observations": [
+    {"content_id":"grand_warden","level":76,"source_id":"goblinsfarm-2026-08-26-grand-warden","fields":{"hitpoints":2516,"dps":327,"town_hall_required":18},"derived_fields":{"damage_per_shot":{"value":588.6,"derivation":"327 DPS multiplied by the inherited 1.8-second cadence."}}},
+    {"content_id":"grand_warden","level":77,"source_id":"goblinsfarm-2026-08-26-grand-warden","fields":{"hitpoints":2533,"dps":330,"town_hall_required":18},"derived_fields":{"damage_per_shot":{"value":594.0,"derivation":"330 DPS multiplied by the inherited 1.8-second cadence."}}},
+    {"content_id":"grand_warden","level":78,"source_id":"goblinsfarm-2026-08-26-grand-warden","fields":{"hitpoints":2550,"dps":333,"town_hall_required":18},"derived_fields":{"damage_per_shot":{"value":599.4,"derivation":"333 DPS multiplied by the inherited 1.8-second cadence."}}},
+    {"content_id":"grand_warden","level":79,"source_id":"goblinsfarm-2026-08-26-grand-warden","fields":{"hitpoints":2567,"dps":336,"town_hall_required":18},"derived_fields":{"damage_per_shot":{"value":604.8,"derivation":"336 DPS multiplied by the inherited 1.8-second cadence."}}},
+    {"content_id":"grand_warden","level":80,"source_id":"goblinsfarm-2026-08-26-grand-warden","fields":{"hitpoints":2584,"dps":339,"town_hall_required":18},"derived_fields":{"damage_per_shot":{"value":610.2,"derivation":"339 DPS multiplied by the inherited 1.8-second cadence."}}},
+    {"content_id":"grand_warden","level":81,"source_id":"goblinsfarm-2026-08-26-grand-warden","fields":{"hitpoints":2601,"dps":342,"town_hall_required":18},"derived_fields":{"damage_per_shot":{"value":615.6,"derivation":"342 DPS multiplied by the inherited 1.8-second cadence."}}},
+    {"content_id":"grand_warden","level":82,"source_id":"goblinsfarm-2026-08-26-grand-warden","fields":{"hitpoints":2618,"dps":345,"town_hall_required":18},"derived_fields":{"damage_per_shot":{"value":621.0,"derivation":"345 DPS multiplied by the inherited 1.8-second cadence."}}},
+    {"content_id":"grand_warden","level":83,"source_id":"goblinsfarm-2026-08-26-grand-warden","fields":{"hitpoints":2635,"dps":348,"town_hall_required":18},"derived_fields":{"damage_per_shot":{"value":626.4,"derivation":"348 DPS multiplied by the inherited 1.8-second cadence."}}},
+    {"content_id":"grand_warden","level":84,"source_id":"goblinsfarm-2026-08-26-grand-warden","fields":{"hitpoints":2652,"dps":351,"town_hall_required":18},"derived_fields":{"damage_per_shot":{"value":631.8,"derivation":"351 DPS multiplied by the inherited 1.8-second cadence."}}},
+    {"content_id":"grand_warden","level":85,"source_id":"goblinsfarm-2026-08-26-grand-warden","fields":{"hitpoints":2669,"dps":354,"town_hall_required":18},"derived_fields":{"damage_per_shot":{"value":637.2,"derivation":"354 DPS multiplied by the inherited 1.8-second cadence."}}},
+    {"content_id":"royal_champion","level":51,"source_id":"goblinsfarm-2026-09-16-royal-champion","fields":{"hitpoints":4194,"dps":563,"town_hall_required":18}},
+    {"content_id":"royal_champion","level":52,"source_id":"goblinsfarm-2026-09-16-royal-champion","fields":{"hitpoints":4220,"dps":566,"town_hall_required":18}},
+    {"content_id":"royal_champion","level":53,"source_id":"goblinsfarm-2026-09-16-royal-champion","fields":{"hitpoints":4246,"dps":569,"town_hall_required":18}},
+    {"content_id":"royal_champion","level":54,"source_id":"goblinsfarm-2026-09-16-royal-champion","fields":{"hitpoints":4272,"dps":572,"town_hall_required":18}},
+    {"content_id":"royal_champion","level":55,"source_id":"goblinsfarm-2026-09-16-royal-champion","fields":{"hitpoints":4298,"dps":575,"town_hall_required":18}},
+    {"content_id":"minion_prince","level":91,"source_id":"goblinsfarm-2026-09-16-minion-prince","fields":{"hitpoints":4390,"dps":753,"town_hall_required":18}},
+    {"content_id":"minion_prince","level":92,"source_id":"goblinsfarm-2026-09-16-minion-prince","fields":{"hitpoints":4420,"dps":756,"town_hall_required":18}},
+    {"content_id":"minion_prince","level":93,"source_id":"goblinsfarm-2026-09-16-minion-prince","fields":{"hitpoints":4450,"dps":759,"town_hall_required":18}},
+    {"content_id":"minion_prince","level":94,"source_id":"goblinsfarm-2026-09-16-minion-prince","fields":{"hitpoints":4480,"dps":762,"town_hall_required":18}},
+    {"content_id":"minion_prince","level":95,"source_id":"goblinsfarm-2026-09-16-minion-prince","fields":{"hitpoints":4510,"dps":765,"town_hall_required":18}},
+    {"content_id":"dragon_duke","level":21,"source_id":"goblinsfarm-2026-08-26-dragon-duke","fields":{"hitpoints":10600,"dps":384,"town_hall_required":18}},
+    {"content_id":"dragon_duke","level":22,"source_id":"goblinsfarm-2026-08-26-dragon-duke","fields":{"hitpoints":10675,"dps":388,"town_hall_required":18}},
+    {"content_id":"dragon_duke","level":23,"source_id":"goblinsfarm-2026-08-26-dragon-duke","fields":{"hitpoints":10750,"dps":392,"town_hall_required":18}},
+    {"content_id":"dragon_duke","level":24,"source_id":"goblinsfarm-2026-08-26-dragon-duke","fields":{"hitpoints":10825,"dps":396,"town_hall_required":18}},
+    {"content_id":"dragon_duke","level":25,"source_id":"goblinsfarm-2026-08-26-dragon-duke","fields":{"hitpoints":10900,"dps":400,"town_hall_required":18}}
+  ],
+  "mechanics_observed": [
+    {"content_id":"grand_warden","facts":["targets ground and air","has selectable ground and air movement modes"],"unknown":["base-attack cadence and impact damage","range","projectile speed","the exact source and parameters of the described aura","whether the described temporary protection is equipment-dependent"]},
+    {"content_id":"royal_champion","facts":["targets ground and air","prefers defences","crosses walls to reach defences"],"unknown":["base-attack cadence and impact damage","range","projectile speed","wall-crossing timing and collision","ability parameters and equipment dependence"]},
+    {"content_id":"minion_prince","facts":["flies","targets ground and air"],"unknown":["base-attack cadence and impact damage","range","projectile speed","ability parameters and equipment dependence"]},
+    {"content_id":"dragon_duke","facts":["targets ground and air"],"unknown":["movement altitude","base-attack cadence and impact damage","range","projectile speed","ability and behavior"]}
+  ]
+}

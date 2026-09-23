@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-greedy-raven-resource-target-audit",
+  "scope": "Additive Greedy Raven L1-10 resource-target and damage audit; preserve pinned per-level resource DPS without inventing target transitions.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Official 2026-02-23 introduction; dated game-file table 2026-09-01 and client 18.600.3 on 2026-09-18; pinned raw commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-sneezy-booger-contract-audit.json",
+    "reference_id": "home-village-th18-2026-09-23-sneezy-booger-contract-audit",
+    "sha256": "13f8894f75f18990e4633f3bd2536462090d1f6e21c488f4620a6edaec211b16"
+  },
+  "sources": [
+    {
+      "id": "supercell-2026-02-23-greedy-raven-introduction", "tier": "primary", "publisher": "Supercell",
+      "title": "The February Update has escaped!", "published_on": "2026-02-23", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/the-february-update-has-escaped/",
+      "confidence": "high_for_general_behavior_and_multiplier", "content_id": "greedy_raven", "levels": "1-10", "mode": "paired_attacking_pet",
+      "facts": ["Greedy Raven unlocks at TH18/Pet House 12, is a long-range flying attacker, prioritizes resource buildings near its Hero and deals five times damage to those buildings."],
+      "limitations": "No exact near-Hero radius, resource-category boundary, target tie-break, fallback target, post-Hero-loss behavior, projectile or impact timing is specified."
+    },
+    {
+      "id": "gibiarena-2026-09-01-greedy-raven-game-files", "tier": "secondary-dated-game-files", "publisher": "GiBiArena via ClashKing game-file data",
+      "title": "Cuervo avaricioso: costes, tiempos y niveles — Clash of Clans", "published_on": null, "consulted_on": "2026-09-23",
+      "version": "Game-file data dated 2026-09-01, processed 2026-09-03; exact client build unpublished",
+      "url": "https://www.gibiarena.com/es/clash-of-clans/upgrades/greedy-raven",
+      "confidence": "medium_high_for_dated_level_table", "content_id": "greedy_raven", "levels": "1-10", "mode": "normal",
+      "facts": ["The TH18 maximum is L10, and L1-10 HP and base DPS match the pinned payload; range is eight tiles and attack cadence 0.42 seconds."],
+      "limitations": "The page gives no resource-DPS table, target acquisition radius or paired-Hero lifecycle."
+    },
+    {
+      "id": "goblins-farm-2026-09-18-greedy-raven-client-files", "tier": "secondary-dated-game-files", "publisher": "Goblins Farm",
+      "title": "Greedy Raven — Clash of Clans Wiki", "published_on": "2026-09-18", "consulted_on": "2026-09-23",
+      "version": "Client build 18.600.3 as claimed by source",
+      "url": "https://goblinsfarm.com/wiki/pets/greedy-raven.html",
+      "confidence": "medium_high_for_dated_level_and_range_corroboration", "content_id": "greedy_raven", "levels": "1-10", "mode": "normal",
+      "facts": ["The game-file-derived page independently reports eight-tile range and matching HP/DPS values."],
+      "limitations": "No complete target selection or bonus-hit damage phase is supplied."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-greedy-raven-raw-recheck", "tier": "secondary-frozen-payload", "publisher": "chiefpansancolt/clash-of-clans-data",
+      "title": "Pinned Greedy Raven Home Village Pet record", "published_on": null, "consulted_on": "2026-09-23",
+      "version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/greedy-raven.json",
+      "confidence": "medium_high_for_cross_checked_level_fields", "content_id": "greedy_raven", "levels": "1-10", "mode": "resource_building_attack",
+      "raw_sha256": "bb13ae4889103d9ded9c7b160487293d7c185aad9a711c6f8d50d8641839b00f",
+      "facts": ["Every level contains dpsOnResourceBuildings equal to exactly five times its base damagePerSecond."],
+      "limitations": "The payload does not define the resource-building set, damage rounding per hit, projectile, exact client build or target transitions."
+    }
+  ],
+  "derivations": [
+    {"content_id": "greedy_raven", "levels": "1-10", "mode": "resource_building_attack", "result": "Preserve dpsOnResourceBuildings as per-level dps_on_resource_buildings", "method": "Lossless normalization of the SHA-pinned raw values; each equals the primary-source five-times base DPS claim. No per-impact damage or combat rule is inferred."},
+    {"content_id": "greedy_raven", "levels": "1-10", "mode": "normal", "result": "Confirm TH18 maximum L10 and dated HP/DPS", "method": "Compare two dated game-file-derived tables with the pinned raw levels."}
+  ],
+  "rejected_inferences": [
+    {"rule": "Treat every building containing loot as a resource target", "reason": "The official description says resource buildings but does not enumerate Storage, Collector, Drill, Town Hall or event objects."},
+    {"rule": "Use an arbitrary four-tile near-Hero resource search radius", "reason": "No checked source supplies an absolute radius."},
+    {"rule": "Multiply damagePerHit by five and round on impact", "reason": "The published five-times damage and raw DPS do not establish per-hit rounding, projectile impact or modifier order."},
+    {"rule": "Deploy Greedy Raven with generic Pet following and retargeting", "reason": "Paired spawn, follow, target loss and post-Hero-defeat ordering remain undocumented."}
+  ],
+  "open_uncertainties": [
+    {"content_id": "greedy_raven", "levels": "1-10", "mode": "paired_attacking_pet", "items": ["exact current client build and per-level resource DPS continuity", "Hero-linked deployment, follow and post-Hero-loss transitions", "near-Hero resource search radius and deterministic tie-break", "resource-building eligibility and fallback target", "per-hit multiplier, rounding and damage-modifier order", "projectile launch, impact and target-loss timing", "collision, visual anchors and battlefield art rights"]}
+  ],
+  "conclusion": "Greedy Raven L1-10 remains partial and catalogue-only. Official five-times resource damage and dated level values corroborate the pinned per-level resource DPS, but paired-Pet targeting and impact timing are not specified well enough for a faithful Core actor."
+}

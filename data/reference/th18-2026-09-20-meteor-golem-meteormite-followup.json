@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-20-meteor-golem-meteormite-followup",
+  "scope": "Additive current-source follow-up for Meteor Golem and required Meteormite; records a post-buff child-data contradiction without activating an incomplete lifecycle.",
+  "frozen_at": "2026-09-20T00:00:00+02:00",
+  "game_version": "Official 2025/2026 notes and public tables consulted on 2026-09-20.",
+  "parent_reference": {"file": "th18-2026-09-20-furnace-firemite-followup.json", "reference_id": "home-village-th18-2026-09-20-furnace-firemite-followup", "sha256": "1c076049a372bb7415e86db9ec50a3bd32599db5312468ca234efeeba96ca139"},
+  "sources": [
+    {"id": "supercell-2025-10-10-meteor-golem-followup", "tier": "primary", "publisher": "Supercell", "title": "Cosmic Rock Medal Event!", "published_on": "2025-10-10", "consulted_on": "2026-09-20", "version": "October 2025 event", "url": "https://supercell.com/en/games/clashofclans/blog/news/cosmic-rock-medal-event/", "limitations": "Confirms closest-target throwing, nearby-target-or-merge child choice and Wall jumping for the temporary precursor; no distances, tick ordering, flight, collision, merge clock or permanent-version guarantee."},
+    {"id": "cocmap-2026-09-20-meteormite-stale", "tier": "secondary-version-unknown", "publisher": "Maps for Clash of Clans", "title": "Meteormite", "published_on": null, "consulted_on": "2026-09-20", "version": "not published", "url": "https://cocmap.com/clash-of-clans/unit/meteormite-home-village", "limitations": "Displays L1-L3 220/240/260 DPS and 7,500/8,500/9,500 HP, plus 1.5-second/0.8-tile metadata. Its parent values are the pre-January 2026 balance values, while Supercell confirms a later July buff; it is stale and none of its child numbers are imported as current."},
+    {"id": "goblinsfarm-2026-09-20-meteor-golem-followup", "tier": "secondary", "publisher": "Goblins Farm", "title": "Meteor Golem", "published_on": "2026-09-18", "consulted_on": "2026-09-20", "version": "client build 18.600.3 (as reported by publisher)", "url": "https://goblinsfarm.com/wiki/troops/meteor-golem.html", "limitations": "Corroborates current parent L1-L3 values, 1-second cadence and five-tile range, but supplies no current Meteormite table or split/merge geometry."}
+  ],
+  "known_uncertainties": ["No current build-pinned Meteormite table is available after the official July 2026 buff.", "No consulted source defines split trigger/health partition, throw trajectory/landing, merge range/priority/delay, invulnerability duration, collision geometry or same-tick ordering."],
+  "conclusion": "Meteor Golem L1-L3 and required Meteormite remain data-only. The 20 September audit confirms the available child table is stale after official balances and leaves the unique split/throw/merge behavior intentionally disabled."
+}

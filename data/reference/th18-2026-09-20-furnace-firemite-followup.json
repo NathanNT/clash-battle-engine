@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-20-furnace-firemite-followup",
+  "scope": "Additive public-evidence follow-up for Furnace and required Firemite. No Core behavior is enabled because the newly located technical export lacks a current client build and does not close the deterministic lifecycle contract.",
+  "frozen_at": "2026-09-20T00:00:00+02:00",
+  "game_version": "Official March 2025 release material, current secondary tables and an unversioned historical game-data export were rechecked on 2026-09-20.",
+  "parent_reference": {"file": "th18-2026-09-20-ruin-witch-knight-followup.json", "reference_id": "home-village-th18-2026-09-20-ruin-witch-knight-followup", "sha256": "748af9815ab65537b1a0be318959b44222292afde9cc0aef801b6c00a125efc9"},
+  "sources": [
+    {"id": "supercell-2025-03-24-furnace-followup", "tier": "primary", "publisher": "Supercell", "title": "Welcome to Clash Anytime Update!", "published_on": "2025-03-24", "consulted_on": "2026-09-20", "version": "March 2025 update", "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/welcome-to-clash-anytime-update/", "limitations": "Reconfirms stationary Furnace and Firemites that target and burn buildings. It has no schedule, self-decay, flame geometry, timing or collision contract."},
+    {"id": "goblinsfarm-2026-09-20-furnace-followup", "tier": "secondary", "publisher": "Goblins Farm", "title": "Furnace", "published_on": "2026-09-18", "consulted_on": "2026-09-20", "version": "client build 18.600.3 (as reported by publisher)", "url": "https://goblinsfarm.com/wiki/troops/furnace.html", "limitations": "Corroborates parent L1-L4 values and card metadata only; no spawned-child schedule, decay, flame or collision lifecycle is published."},
+    {"id": "mathsman5133-cocpy-pr282-firemite-technical-export", "tier": "secondary-version-unknown", "publisher": "mathsman5133/coc.py contributors", "title": "furnace and sneezy addition pull request #282", "published_on": null, "consulted_on": "2026-09-20", "version": "not published", "url": "https://github.com/mathsman5133/coc.py/pull/282/files", "limitations": "Historical technical export with no published source game version: searchable fields report Firemite speed 32, range 2.5, attack speed 1000 ms, SpawnIdle 500 ms and parent SecondarySpawnDist 150. It has no immutable build, extraction time, parent spawn schedule, coordinate unit definition, flame contract or current-version proof; its numeric timing is not imported as current gameplay behavior."}
+  ],
+  "known_uncertainties": [
+    "The only newly found technical timing fields are unversioned historical-export values. They do not establish whether SpawnIdle is the parent schedule, child animation state, or a current battle delay, and are therefore not used for combat.",
+    "No consulted source defines exact Firemite spawn times, parent decay, the effect of healing/freezing at an event boundary, spawn coordinate, jump timing/collision, flame radius/pulse/overlap, target ordering or snapshot/replay lifecycle."
+  ],
+  "conclusion": "Furnace L1-L4 and Firemite L1-L4 remain data-only. The 20 September follow-up preserves the historical technical export as insufficient evidence and confirms that no current source-backed deterministic spawning or persistent-flame behavior can be materialized without inventing rules."
+}

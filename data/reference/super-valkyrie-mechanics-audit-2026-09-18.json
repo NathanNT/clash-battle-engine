@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "audit_id": "home-village-super-valkyrie-mechanics-2026-09-18",
+  "content_id": "super_valkyrie",
+  "consulted_on": "2026-09-18",
+  "scope": "Evidence review before any Home Village Super Valkyrie death Rage behavior is enabled.",
+  "sources": [
+    {"id":"supercell-2020-10-10-super-valkyrie-video","tier":"primary","title":"Super Valkyrie Is All The RAGE!","published_on":"2020-10-10","game_version":"not published","url":"https://www.youtube.com/watch?v=ZpFqZV87ng4","finding":"Official video description establishes that a Rage Spell is dropped on destruction for other friendly units."},
+    {"id":"supercell-2022-06-22-super-valkyrie-balance","tier":"primary","title":"Balance Changes Now Live","published_on":"2022-06-22","game_version":"not published","url":"https://supercell.com/en/games/clashofclans/blog/release-notes/balance-changes-june-22-2/","finding":"Official balance note changes attack speed to 1.1 seconds, movement speed to 3 tiles/second and Rage radius to 4 tiles."},
+    {"id":"fandom-2026-09-18-super-valkyrie","tier":"secondary-version-unknown","title":"Super Valkyrie | Clash of Clans Wiki","published_on":null,"game_version":"not published","url":"https://clashofclans.fandom.com/wiki/Super_Valkyrie","finding":"Community summary characterizes the death effect as Rage-like, smaller and shorter than a normal Rage Spell, but supplies no immutable build or complete effect contract."}
+  ],
+  "established":["The death-triggered friendly Rage effect is primary-confirmed.","Its current radius is primary-confirmed as 4 tiles."],
+  "unresolved":["No official source specifies effect duration, Rage level, damage and attack-speed multipliers, application cadence, or overlap/stacking semantics.","No source specifies exact death-tick ordering versus death damage, target selection, projectile effects, spells, or a unit entering/leaving the radius.","No source verifies collision/overlay geometry, sprite placement or visual timing."],
+  "decision":"Do not enable super_valkyrie in Core, GUI or RL until a version-identified death-Rage duration and multiplier contract is available. A generic normal Rage effect would invent future-affecting values."
+}

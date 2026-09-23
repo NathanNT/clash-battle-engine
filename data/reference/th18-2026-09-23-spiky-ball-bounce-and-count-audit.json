@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-spiky-ball-bounce-and-count-audit",
+  "scope": "Additive Spiky Ball L1-27 bounce targeting and target-count discrepancy audit; preserve launch and pinned observations without guessing the current chain.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Official 2024-05 launch and 2024-06 initial-target adjustment; game-file table dated 2026-09-01 and claimed client build 18.600.3 on 2026-09-16; pinned raw commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-giant-gauntlet-current-effect-audit.json",
+    "reference_id": "home-village-th18-2026-09-23-giant-gauntlet-current-effect-audit",
+    "sha256": "7bc815a2509c8253ebeaf5e092d806804a47d5ad1e9ad35cff1579ec5268394f"
+  },
+  "sources": [
+    {
+      "id": "supercell-2024-05-01-spiky-ball-release",
+      "tier": "primary", "publisher": "Supercell", "title": "Welcome to Clash With Haaland Season!",
+      "published_on": "2024-05-01", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/welcome-to-clash-with-haaland-season/",
+      "confidence": "high_for_basic_target_contract", "content_id": "spiky_ball", "levels": "not_specified", "mode": "barbarian_king_active_equipment",
+      "facts": ["Spiky Ball is Epic Barbarian King Equipment. On activation the King shoots it at the closest Building; it bounces to other Buildings and does not bounce to troops."],
+      "limitations": "The article does not give subsequent-target selection, tie-breaks, bounce radius, travel time, repeated-target eligibility or chain termination order."
+    },
+    {
+      "id": "supercell-2024-05-06-spiky-ball-launch-table",
+      "tier": "primary", "publisher": "Supercell", "title": "Clash With Haaland Medal Event: all you need to know!",
+      "published_on": "2024-05-06", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/find-everything-you-need-to/",
+      "confidence": "high_for_historical_level_table", "content_id": "spiky_ball", "levels": "1-27", "mode": "bounce_projectile",
+      "facts": ["The launch table lists L1-27 Hero DPS, HP, projectile damage, target counts and Blacksmith requirements. The DPS, HP and projectile damage match the pinned payload, but the official launch target counts exceed the pinned counts at every level."],
+      "limitations": "The 2024 target counts cannot be assumed current; no checked source establishes why or when they changed."
+    },
+    {
+      "id": "supercell-2024-06-18-spiky-ball-initial-target-change",
+      "tier": "primary", "publisher": "Supercell", "title": "June Update: Full Patch Notes",
+      "published_on": "2024-06-18", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/june-update-full-patch-notes/",
+      "confidence": "high_for_size_aware_first_target", "content_id": "spiky_ball", "levels": "all", "mode": "first_target",
+      "facts": ["Initial Equipment target selection was changed to account for Building size rather than targeting the Building midpoint; Supercell says Spiky Ball is affected."],
+      "limitations": "The note does not define nearest-point, footprint intersection, line of sight, tie-break or later bounce geometry."
+    },
+    {
+      "id": "gibiarena-2026-09-01-spiky-ball-game-files",
+      "tier": "secondary-dated-game-files", "publisher": "GiBiArena via ClashKing game-file data",
+      "title": "Spiky Ball: costs, times and levels — Clash of Clans",
+      "published_on": null, "consulted_on": "2026-09-23",
+      "version": "Game-file data dated 2026-09-01, processed 2026-09-03; exact client build unpublished",
+      "url": "https://www.gibiarena.com/en/clash-of-clans/upgrades/spiky-ball",
+      "confidence": "medium_high_for_dated_dps_and_cost_table", "content_id": "spiky_ball", "levels": "1-27", "mode": "active_equipment",
+      "facts": ["The TH18 maximum is L27. Per-level DPS bonuses, ore costs and Blacksmith requirements agree with the pinned payload."],
+      "limitations": "The public table omits current projectile damage and target counts."
+    },
+    {
+      "id": "goblins-farm-2026-09-16-spiky-ball-client-files",
+      "tier": "secondary-dated-game-files", "publisher": "Goblins Farm",
+      "title": "Spiky Ball — Clash of Clans Wiki",
+      "published_on": "2026-09-16", "consulted_on": "2026-09-23",
+      "version": "Client build 18.600.3 as claimed by source",
+      "url": "https://goblinsfarm.com/wiki/equipment/spiky-ball.html",
+      "confidence": "medium_high_for_dated_hp_and_dps_table", "content_id": "spiky_ball", "levels": "1-27", "mode": "active_equipment",
+      "facts": ["The page describes a Building-to-Building projectile and corroborates L1-27 Hero HP bonuses of 365-3290 and DPS bonuses of 35-222."],
+      "limitations": "It does not publish current projectile damage, target counts or bounce selection rules."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-spiky-ball-raw-recheck",
+      "tier": "secondary-frozen-payload", "publisher": "chiefpansancolt/clash-of-clans-data",
+      "title": "Pinned Spiky Ball Home Village Hero Equipment record",
+      "published_on": null, "consulted_on": "2026-09-23",
+      "version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/spiky-ball.json",
+      "confidence": "medium_for_historical_level_fields", "content_id": "spiky_ball", "levels": "1-27", "mode": "bounce_projectile",
+      "raw_sha256": "5dc2e353d540e7c85d10c8cf79fdd58c7042b3ad7a54baad05c4c339b0c96528",
+      "facts": ["The normalized source_fields preserve per-level projectileDamagePerTarget, numberOfTargets, Hero HP and DPS bonuses."],
+      "limitations": "The pinned target-count series conflicts with the official launch table and is not established as the current 2026 series."
+    }
+  ],
+  "observations": [
+    {
+      "content_id": "spiky_ball", "levels": "1-27", "mode": "bounce_projectile", "source": "supercell-2024-05-06-spiky-ball-launch-table",
+      "launch_number_of_targets": [3, 3, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9],
+      "pinned_number_of_targets": [2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8],
+      "note": "Every level differs. The official series is historical launch data; the pinned series is retained as historical raw data. Neither is asserted current without a dated current target-count source."
+    }
+  ],
+  "derivations": [
+    {"content_id": "spiky_ball", "levels": "1-27", "mode": "bounce_projectile", "result": "Mark all current target counts unresolved", "method": "Compare the complete official launch series with the SHA-pinned raw series; all 27 values differ. Dated 2026 public game-file tables omit target count, so no current series is derived."},
+    {"content_id": "spiky_ball", "levels": "1-27", "mode": "passive_hero_bonus", "result": "Retain per-level Hero HP and DPS as data-only", "method": "Cross-check both dated 2026 tables against the pinned normalized values; no prebattle stat application order is inferred."}
+  ],
+  "rejected_inferences": [
+    {"rule": "Use the official 2024 launch target counts in current Core", "reason": "All 27 counts conflict with the pinned source and no checked 2026 table publishes current counts."},
+    {"rule": "Use the pinned count series as current", "reason": "The pinned payload has no exact 2026 game version and differs from official launch counts; current continuity is unverified."},
+    {"rule": "Bounce to the nearest unhit Building by center distance", "reason": "The official size-aware initial-target change does not define later bounce selection or geometry."},
+    {"rule": "Let the Ball hit defending Heroes or Pets when no Buildings remain", "reason": "The official release says the Ball bounces between Buildings and does not bounce to troops; no checked primary source confirms a fallback target."},
+    {"rule": "Apply all bounce damage at the activation tick", "reason": "Projectile travel, target destruction, retarget and damage timing are not specified."}
+  ],
+  "open_uncertainties": [
+    {"content_id": "spiky_ball", "levels": "1-27", "mode": "barbarian_king_active_equipment", "items": ["current per-level target counts and projectile damage", "size-aware first-target geometry and deterministic tie-break", "later bounce search radius, geometry and target repeat rule", "Building destruction, no-target and chain termination behavior", "projectile travel, impact and target-loss tick order", "King defeat, simultaneous Equipment and modifier interaction", "Hero HP/DPS stat application and stacking", "Viewer projectile art and rights, snapshot, replay and RL activation contract"]}
+  ],
+  "conclusion": "Spiky Ball L1-27 remains partial and catalogue-only. The official Building-only bounce and size-aware initial targeting are sourced, but all 27 launch target counts conflict with the pinned series and dated 2026 public tables do not resolve the current counts or bounce path."
+}

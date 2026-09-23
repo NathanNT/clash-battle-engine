@@ -1,0 +1,413 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-17",
+  "frozen_at": "2026-09-17T00:00:00+02:00",
+  "purpose": "Append-only register of public-documentation gaps. A record is an open requirement, never an implementation permission or an inferred game rule.",
+  "entries": [
+    {
+      "id": "full-current-per-level-stat-tables",
+      "scope": {"kind": "all_expected_inventory"},
+      "sources_consulted": ["supercell-2025-11-17-th18-launch", "supercell-2026-02-23-th18", "supercell-2026-04-27-sound-of-clash", "supercell-2026-05-22-balance", "supercell-2026-06-15-anime-fury", "supercell-2026-08-30-update", "chiefpansancolt-62b019df"],
+      "missing": "Supercell's public notes publish deltas, not an exhaustive current per-level numerical table. The pinned structured snapshot predates later TH18 balance changes.",
+      "impact": "A secondary-sourced value can be loaded and regression-tested but cannot be marked numerically faithful to the frozen reference without a dated corroboration.",
+      "implementation_status": "open",
+      "validation_needed": "A version-identified official table, or a newly pinned and independently reproducible client-data snapshot cross-checked against the dated official deltas."
+    },
+    {
+      "id": "unimplemented-inventory-data-and-rules",
+      "scope": {"kind": "missing_catalogue_inventory", "families": ["building", "crafted_defense", "defense", "equipment", "guardian", "hero", "merged_defense", "other_building", "pet", "resource", "siege", "spawned_troop_variant", "spell", "supercharge", "super_troop", "troop", "troop_behavior"]},
+      "sources_consulted": ["fandom-2026-09-17-home-troops-index", "fandom-2026-09-17-home-defenses-index", "fandom-2026-09-17-home-resource-index", "fandom-2026-09-17-home-traps-index", "fandom-2026-09-17-home-siege-index", "fandom-2026-09-17-home-heroes-index", "fandom-2026-09-17-home-pets-index", "fandom-2026-09-17-home-spell-equipment-index"],
+      "missing": "For every expected element absent from the catalogue, the dated indices establish roster membership only; they do not supply all levels, exact statistics, assets or deterministic behavior.",
+      "impact": "These elements must remain absent/non-conformant in Core, GUI and RL. They cannot be represented by generic placeholders.",
+      "implementation_status": "open",
+      "validation_needed": "Per element and level: a dated data record with provenance, a core behavior test, runtime coverage through GUI and RL, and a replay/snapshot determinism regression."
+    },
+    {
+      "id": "projectile-and-animation-timing",
+      "scope": {"kind": "implemented_combat_entities"},
+      "sources_consulted": ["chiefpansancolt-62b019df", "enjoyop2-game-data-assets-2026-09-17", "supercell-2026-04-27-sound-of-clash", "supercell-2021-08-11-seeking-air-mine", "supercell-2021-01-20-geared-archer-projectile", "clash-ninja-inferno-beam-2026-09-17"],
+      "missing": "Public sources do not provide a complete tick-level specification for wind-up, projectile launch point, travel, impact ordering, retargeting and cancellation for each weapon. The Seeking Air Mine alone has an official 3.5-tile/s speed value; its launch delay and collision/cancellation contract remain unpublished. A historical secondary CSV exposes internal Speed values and maps its Seeking Air Mine to LargeDarkElixirBalloon Speed 350, which is consistent with 3.5 tiles/s at a 100:1 inferred scale; that calibrates the historical v18.200.9 snapshot only and cannot safely supply current TH18 speeds. Supercell confirms that a Geared-Up Archer Tower initial projectile-coordinate fix existed, but does not publish that coordinate, its damage levels, flight speed or ordering. The April 2026 official note also mentions an improved Troop Launcher projectile-trail visual, but publishes no flight, collision or combat-timing parameter. A dated secondary source identifies the Inferno Tower as a beam, but not its fixed-tick resolution or retargeting order.",
+      "impact": "The common fixed-tick projectile model is deterministic. The Seeking Air Mine is represented as a moving, homing Core projectile at its sourced speed; unmeasured weapons retain a one-tick logical projectile and remain behavioral approximations. The Inferno Tower is represented separately as an immediate deterministic beam, with its remaining tick contract explicitly open.",
+      "implementation_status": "partially_implemented_generic_core_model_with_sourced_seeking_air_mine_speed_and_secondary_inferno_beam_contract",
+      "validation_needed": "Version-matched replay measurements with a documented scenario and tick-aligned expected event sequence, or an official deterministic specification."
+    },
+    {
+      "id": "dated-cannon-and-archer-tower-tables",
+      "scope": {"kind": "item_ids", "ids": ["cannon", "archer_tower"]},
+      "sources_consulted": ["goblinsfarm-2026-08-26-cannon", "goblinsfarm-2026-08-26-archer-tower", "supercell-2026-08-30-update", "supercell-2021-01-20-geared-archer-projectile"],
+      "missing": "The only complete public tables located for these two loaded defenses identify client build 18.400.21, earlier than the frozen TH18 reference. The official 2021 visual-fix note confirms a Geared-Up Archer Tower projectile origin exists but gives no per-level Fast Attack damage or coordinate. Neither table gives tick-level projectile timing or deterministic target ties.",
+      "impact": "The complete per-level values and footprint are corroborated, but neither defense can be marked numerically or behaviorally faithful to the frozen current reference.",
+      "implementation_status": "loaded_and_secondary_corroborated_not_currently_verified",
+      "validation_needed": "A newer version-identified primary table or independently reproducible client-data snapshot, plus tick-aligned replay measurements for projectile timing and target ties."
+    },
+    {
+      "id": "mortar-minimum-range",
+      "scope": {"kind": "item_ids", "ids": ["mortar"]},
+      "sources_consulted": ["goblinsfarm-2026-08-26-mortar", "fandom-2026-09-17-mortar", "chiefpansancolt-62b019df", "supercell-2026-02-23-th18", "supercell-2026-04-27-sound-of-clash"],
+      "missing": "A secondary community source reports the 4-tile inner radius, but it supplies no client-build identifier and no tick-level targeting proof. The dated complete table confirms the qualitative dead zone but not its numeric boundary. The official April 2026 note fixes the 0.5-second first-geared-burst delay, but not shell flight, target loss or later burst/reacquisition ordering.",
+      "impact": "The shared Core, GUI and RL now use the sourced 4-tile minimum range and the official 0.5-second first Geared Up Mortar burst delay through immutable GameData. The pending delay is represented by the serialised next-action timestamp; current-version fidelity of the dead-zone boundary and projectile behavior remains unverified.",
+      "implementation_status": "secondary_sourced_minimum_range_and_official_first_geared_burst_delay_shared_core_gui_rl_snapshot",
+      "validation_needed": "A version-identified numeric minimum-range source or tick-aligned replays that establish the targeting boundary, shell flight, target loss and burst/reacquisition ordering, plus replay/snapshot boundary regressions against that version."
+    },
+    {
+      "id": "air-defense-supercharge",
+      "scope": {"kind": "item_ids", "ids": ["air_defense"]},
+      "sources_consulted": ["goblinsfarm-2026-08-26-air-defense", "chiefpansancolt-62b019df", "supercell-2026-02-23-th18"],
+      "missing": "The dated normal-level table does not document the Air Defense Supercharge variant: applicability, duration, level selection, numerical values and interaction with battle/replay state remain unsourced for the frozen reference.",
+      "impact": "The raw-snapshot Supercharge record can be constructed through Core/GUI/RL, but cannot be considered a verified TH18 variant.",
+      "implementation_status": "raw_snapshot_variant_routed_not_currently_verified",
+      "validation_needed": "A version-identified Supercharge specification or reproducible client-data record, followed by level-selection, battle, replay and snapshot regressions."
+    },
+    {
+      "id": "wizard-tower-splash-boundary",
+      "scope": {"kind": "item_ids", "ids": ["wizard_tower"]},
+      "sources_consulted": ["goblinsfarm-2026-08-26-wizard-tower", "chiefpansancolt-62b019df"],
+      "missing": "The dated level table establishes the Wizard Tower's splash role but not its numeric radius, projectile impact geometry or edge-of-area contract for the frozen build.",
+      "impact": "The shared Core applies the historical 1-tile radius to grouped air and ground targets, but that boundary cannot be marked version-faithful.",
+      "implementation_status": "raw_snapshot_splash_boundary_shared_core_gui_rl_not_currently_verified",
+      "validation_needed": "A version-identified splash-radius source or tick-aligned boundary replays for both air and ground targets, with Core/GUI/RL replay and snapshot regressions."
+    },
+    {
+      "id": "hidden-tesla-reveal-contract",
+      "scope": {"kind": "item_ids", "ids": ["hidden_tesla"]},
+      "sources_consulted": ["goblinsfarm-2026-08-26-hidden-tesla", "fandom-2026-09-17-hidden-tesla", "chiefpansancolt-62b019df"],
+      "missing": "A community behavior page supplies a 51% destruction threshold, but neither consulted secondary source identifies an immutable client build, the Supercell building-weight formula, exact proximity boundary, or ordering when threshold and proximity happen on the same tick.",
+      "impact": "The shared Core reveals each concealed Hidden Tesla at the secondary-sourced 51% threshold using CoCSim's logical destruction percentage; GUI and RL observe that same concealment state and snapshots/replays preserve it. This improves late-battle targeting but is not current-version faithful until the game weighting and ordering are established.",
+      "implementation_status": "secondary_51_percent_destruction_and_proximity_reveal_shared_core_gui_rl_snapshot_replay_weighting_open",
+      "validation_needed": "Obtain a version-identified threshold/weighting specification or tick-aligned replays spanning 50%/51%, proximity-only, destruction-only and simultaneous reveal, including snapshot and replay restoration."
+    },
+    {
+      "id": "ground-wall-route-selection",
+      "scope": {"kind": "item_ids", "ids": ["wall", "wall_breaker"]},
+      "sources_consulted": ["fandom-2026-09-17-wall-breaker"],
+      "missing": "The public description gives the Wall Breaker's multiplier and splash, but not the exact compartment/topology algorithm that decides which blocking wall is selected.",
+      "impact": "The current closest-target selection is not a proof that ground troops destroy only walls that block a route to a target building.",
+      "implementation_status": "partially_implemented_generic_pathfinding",
+      "validation_needed": "Reference replays covering multiple compartments, ties, openings, and target changes; record the chosen wall and path at each simulation tick."
+    },
+    {
+      "id": "tornado-displacement",
+      "scope": {"kind": "item_ids", "ids": ["tornado_trap"]},
+      "sources_consulted": ["supercell-2018-10-23-tornado"],
+      "missing": "The official note specifies a vortex hindering ground and air units, but no deterministic trajectory, force-by-housing-space table, immunity list or retargeting ordering.",
+      "impact": "Duration, damage, range and altitude targeting are data-driven; displacement is deliberately not approximated as game-faithful.",
+      "implementation_status": "partial_no_displacement_model",
+      "validation_needed": "Official specification or reproducible version-matched replay measurements for position and control state over time."
+    },
+    {
+      "id": "inferno-single-target-ramp-and-resource",
+      "scope": {"kind": "item_ids", "ids": ["inferno_tower"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "fandom-2026-09-17-inferno-tower", "supercell-2026-02-23-th18"],
+      "missing": "The community source specifies the three mono-target stages (immediate, 1.5 s and 5.25 s) and lock-loss reset, but it has no immutable client-build identifier and does not define the exact fixed-tick transition, frozen-beam pause/reset rule, projectile ordering, Elixir depletion or reload state.",
+      "impact": "The shared core can apply the three sourced damage stages and reset on target loss; it must still not be presented as a complete current-version Inferno specification, especially for ammunition and Freeze interactions.",
+      "implementation_status": "secondary_three_stage_single_target_ramp_and_lock_reset_pending_tick_freeze_and_ammunition_contract",
+      "validation_needed": "A version-identified official table or tick-aligned replay measurements for transition-boundary ordering, freeze pause/reset, target reacquisition and depletion/reload, followed by snapshot/replay regressions."
+    },
+    {
+      "id": "x-bow-ammunition",
+      "scope": {"kind": "item_ids", "ids": ["x_bow"]},
+      "sources_consulted": ["goblinsfarm-2026-08-26-x-bow", "supercell-2026-04-27-sound-of-clash"],
+      "missing": "The available level table and official delta do not define Elixir reserve, depletion, reload or target-mode transition behavior.",
+      "impact": "Range and target modes are loaded, but a battle cannot model the real depleted state.",
+      "implementation_status": "partial_modes_without_ammunition",
+      "validation_needed": "Version-identified reserve/reload data and replays spanning a depletion transition."
+    },
+    {
+      "id": "bomb-tower-death-radius",
+      "scope": {"kind": "item_ids", "ids": ["bomb_tower"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "goblinsfarm-2026-09-16-bomb-tower", "cocmap-2026-09-17-bomb-tower", "fandom-2026-09-17-bomb-tower"],
+      "missing": "Two community sources agree on per-level destruction damage, the one-second delay, 2.75-tile radius and ground-only contract, but neither identifies an immutable client build or the exact fixed-tick ordering against simultaneous projectiles, spells, Freeze or destruction victory.",
+      "impact": "The shared Core applies the sourced L1–13 damage, one-second delay, radius and ground-only filter; pending explosions are serialized so GUI/RL/replay use the same battle state. RL catalogue rows expose the imported delay and ground-only filter, while its live observation exposes the exact queued T+ms impact. This remains secondary-sourced, not verified current-version fidelity.",
+      "implementation_status": "secondary_l1_to_l13_delayed_ground_only_death_explosion_shared_core_gui_rl_snapshot_replay_pending_tick_order",
+      "validation_needed": "A version-identified client record or replay establishing the tick-boundary order against simultaneous projectiles, spells, Freeze and battle completion, plus boundary measurements at 2.75 tiles."
+    },
+    {
+      "id": "skeleton-trap-spawn-lifecycle-and-assets",
+      "scope": {"kind": "item_ids", "ids": ["skeleton_trap", "trap_skeleton_ground", "trap_skeleton_air"]},
+      "sources_consulted": ["supercell-2025-03-24-clash-anytime", "fandom-2026-09-17-skeleton-trap", "clashwiki-2026-09-17-skeleton-trap-behavior", "1337wiki-2026-09-17-skeleton-trap"],
+      "missing": "Public sources do not define exact spawn geometry, lifetime, distraction/retargeting rules or individual source sprite assets for both spawned variants.",
+      "impact": "Stats and first movement/attack are covered, but Viewer asset compliance fails and lifecycle behavior is not faithful.",
+      "implementation_status": "partial_core_spawn_no_source_variant_asset",
+      "validation_needed": "A versioned public asset/data source plus reproducible replays for spawn positions, expiry and targeting."
+    },
+    {
+      "id": "hero-banner-battle-contract",
+      "scope": {"kind": "item_ids", "ids": ["hero_banner"]},
+      "sources_consulted": ["fandom-2026-09-17-hero-banner"],
+      "missing": "The page establishes 2x2, non-targetability, no hitpoints, no destruction count and a deployment margin, but not an immutable client build nor a battle-state serialization contract.",
+      "impact": "It must not be treated as a normal targetable building. Its sourced deployment margin and source sprite now use the shared Core/GUI/RL scenario path and it is serialized in replays; physical collision/pathfinding remains deliberately disabled because the source does not establish it.",
+      "implementation_status": "partial_noncombat_deployment_obstacle_core_gui_rl_source_asset",
+      "validation_needed": "A versioned source or reproducible scenario establishing physical collision/pathfinding, in addition to the implemented deployment-margin and replay/snapshot cases."
+    },
+    {
+      "id": "spell-element-specific-rules",
+      "scope": {"kind": "item_ids", "ids": ["rage", "heal", "lightning", "freeze", "haste", "jump", "earthquake"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "supercell-2026-02-23-th18", "supercell-2026-04-27-sound-of-clash"],
+      "missing": "The currently loaded spell data does not provide a complete, version-matched interaction specification for every level, target class, overlap, immunity, order of effects and edge-of-radius case.",
+      "impact": "A spell can be cast through Core/GUI/RL, and active duration effects are projected read-only from the same Core state to Viewer and RL with their radius and exact T+ms expiry. RL also reads the immutable GameData rows for every executable spell level (radius, damage/heal, modifiers, duration, pulses and Earthquake percentages), and selects the reserved spell level rather than substituting level 1. Availability is not proof of its exact live-game behavior.",
+      "implementation_status": "partial_shared_spell_effects",
+      "validation_needed": "Per spell/level source evidence and tick-aligned replay cases for overlap, invalid target and radius boundary behavior."
+    },
+    {
+      "id": "viewer-source-asset-completeness",
+      "scope": {"kind": "implemented_combat_entities"},
+      "sources_consulted": ["chiefpansancolt-62b019df", "clashwiki-2026-09-17-skeleton-trap-behavior"],
+      "missing": "The frozen data source does not provide a guaranteed decodable, version-pinned source sprite for every entity and variant; public filenames alone do not establish visual fidelity.",
+      "impact": "A fallback render cannot count as an asset-complete GUI implementation.",
+      "implementation_status": "partial_asset_routing_with_open_variants",
+      "validation_needed": "A pinned asset manifest with hashes, level/variant mapping and Viewer load validation for each source file."
+    },
+    {
+      "id": "dragon-rider-post-july-level-6-values",
+      "scope": {"kind": "item_ids", "ids": ["dragon_rider"]},
+      "sources_consulted": ["supercell-2021-06-13-dragon-rider", "supercell-2026-05-22-balance", "supercell-2026-07-09-balance", "chiefpansancolt-62b019df"],
+      "missing": "Supercell's 9 July 2026 note confirms a further top-level Dragon Rider HP and damage reduction, but publishes neither replacement value. The frozen L6 values (6,000 HP and 510 DPS) are therefore only confirmed through the May balance change, not the frozen September reference.",
+      "impact": "The shared Core, GUI and RL correctly use the independently official Ground & Air target class, but must not label L6 HP, DPS or derived damage-per-shot as current-version faithful. No numerical overwrite is made without a published value.",
+      "implementation_status": "target_class_corrected_shared_core_gui_rl_post_july_numeric_values_open",
+      "validation_needed": "A version-identified official or reproducible client-data record publishing the post-July L6 HP, DPS and cadence; then update the immutable override, correction ledger and deterministic combat regression."
+    },
+    {
+      "id": "air-bomb-launch-range-and-delay",
+      "scope": {"kind": "item_ids", "ids": ["air_bomb"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "supercell-2026-05-22-balance"],
+      "missing": "The official May 2026 table changes Air Bomb Attack Range from 900 to 1100 and gives per-level Attack Speed changes for levels 1–10, while the historical payload only exposes a 4-tile triggerRadius and no attack-speed field. Public documentation consulted does not define whether the table's range is arming detection, launch/acquisition distance, projectile reach, or its conversion to the simulation tile geometry; it also does not define the delay's event ordering.",
+      "impact": "Core currently applies the historically sourced 4-tile arming trigger and immediate one-shot splash. GUI and RL share that exact behavior, but its current TH18 activation distance and timing cannot be presented as faithful. Replacing it with 11 tiles or a guessed delay would conflate distinct mechanics and invent a rule.",
+      "implementation_status": "historical_trigger_radius_shared_core_gui_rl_current_launch_range_and_delay_unresolved",
+      "validation_needed": "A version-identified client record or tick-aligned replay that separately measures arming trigger, launch range, launch delay, projectile impact and consumption; then add boundary and replay/snapshot regressions before changing the core trap state machine."
+    },
+    {
+      "id": "baby-dragon-tantrum-transition-order",
+      "scope": {"kind": "item_ids", "ids": ["baby_dragon"]},
+      "sources_consulted": ["supercell-2026-02-23-th18", "fandom-2026-09-17-baby-dragon", "chiefpansancolt-62b019df"],
+      "missing": "The secondary table records all normal and enraged L1–12 values and describes the 4.5-tile allied-air isolation condition, but does not establish the exact tick at which a nearby ally cancels or restores Tantrum, whether an in-progress wind-up is preserved, or area-damage geometry. The frozen structured snapshot contains normal/enraged damage and DPS but no isolation-radius or state-transition contract.",
+      "impact": "The immutable catalogue now carries the sourced 4.5-tile isolation radius, x2 damage and x1.5 attack-speed multiplier. The shared core evaluates isolation from logical allied-air positions every rule tick; Viewer and RL therefore consume the same behavior. The fixed 10-ms cadence quantizes the nominal 2/3-second enraged attack interval to 670 ms. This deterministic adapter is implemented, but is not claimed faithful for transition/wind-up boundary timing.",
+      "implementation_status": "shared_core_gui_rl_tantrum_action_and_movement_modifier_with_isolated_and_nearby_air_regressions_snapshot_restore_covered",
+      "validation_needed": "Obtain a version-identified client record or tick-aligned replay measuring departure, re-entry, target acquisition and in-progress wind-up. Add those boundary cases before marking transition fidelity verified. The catalogue-resolved Baby Dragon visual tiers are present in the local asset pack and validated for file availability; separately validate animation/silhouette fidelity before making a visual-fidelity claim."
+    },
+    {
+      "id": "miner-underground-transition-and-visibility",
+      "scope": {"kind": "item_ids", "ids": ["miner"]},
+      "sources_consulted": ["supercell-2025-11-17-th18-launch", "supercell-2026-02-23-th18", "fandom-2026-09-17-miner", "chiefpansancolt-62b019df"],
+      "missing": "Public material establishes level 12 and the qualitative tunnel contract, but not the exact submerge/surface frame timing, projectile-in-flight interaction, retarget priority against defending troops, or the collision geometry while below ground. The pinned structured snapshot carries numerical L1–12 values but no underground-state transition fields.",
+      "impact": "The shared core marks a Miner underground while it travels toward a target, gives it a direct wall-bypassing route, suppresses defensive targeting, launched projectile damage and trap triggers, then surfaces when in attack range. GUI receives the explicit state marker and RL receives it through the common observation. This is a deterministic behavior adapter, not verified client-frame fidelity.",
+      "implementation_status": "normal_levels_l1_to_l12_shared_core_gui_rl_with_wall_bypass_trap_and_defense_immunity_snapshot_restore_and_rl_action_regressions",
+      "validation_needed": "Capture or obtain a version-identified replay/client record measuring deployment-to-submerge, surface distance, retargeting against Clan Castle troops and Skeletons, spell/projectile ordering, and re-burrow timing. The catalogue-resolved Miner visual tiers are present in the local asset pack and validated for file availability; obtain a visual state reference for underground/surface animation before making a visual-fidelity claim."
+    },
+    {
+      "id": "electro-dragon-chain-and-death-geometry",
+      "scope": {"kind": "item_ids", "ids": ["electro_dragon"]},
+      "sources_consulted": ["supercell-2026-01-12-balance", "supercell-2026-07-09-balance", "fandom-2026-09-17-electro-dragon", "goblinsfarm-2026-09-16-electro-dragon", "chiefpansancolt-62b019df"],
+      "missing": "Official notes establish the all-level January increase and a further top-two-level July boost. A dated current-build secondary table supplies the corrected L8/L9 HP/DPS values; Fandom supplies a maximum chain of five targets, 20% successive decay and six random ground lightning bolts on death. Neither source publishes an inter-target chain radius, death-target radius, random-seed/selection ordering, per-bolt schedule or a versioned collision rule.",
+      "impact": "The immutable catalogue contains normal L1–9 numbers with L8/L9 corrected from the dated current-build table, plus provenance. Electro Dragon has deliberately not been exposed through cocsim_core, GUI or RL: a generic single-target attack would conceal the defining chain and death effects and would be a false implementation.",
+      "implementation_status": "catalogue_data_only_runtime_behavior_withheld_pending_geometric_contract",
+      "validation_needed": "Obtain a version-identified client record or reproducible tick-aligned replay that measures chain radius, target selection/ties, damage application order, six-bolt radius/selection and timing. Then implement the shared core behavior and add Core, GUI/RL, snapshot and replay regressions."
+    },
+    {
+      "id": "home-hero-and-pet-mechanics-batch-1",
+      "scope": {"kind": "item_ids", "ids": ["barbarian_king", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke", "lassi", "electro_owl", "mighty_yak", "unicorn", "diggy", "poison_lizard", "phoenix", "frosty", "spirit_fox", "angry_jelly", "sneezy", "greedy_raven"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "supercell-2025-11-17-th18-launch", "supercell-2026-02-23-th18", "supercell-2026-06-15-anime-fury", "supercell-2026-08-30-update"],
+      "missing": "The historical payload supplies hero and pet level records but not the TH18-current level caps, ability timing, equipment selection, hero auras, pet attachment/lifetime, target priority, special effects, death/revival or deterministic interaction ordering.",
+      "impact": "Heroes and pets are catalogue data only and unavailable through Core, GUI and RL. Their normal attack values cannot stand in for abilities, equipment and hero-pet interactions.",
+      "implementation_status": "historical_normal_level_data_imported_runtime_behavior_and_current_caps_withheld",
+      "validation_needed": "Obtain version-identified current tables plus reproducible rules/replays for each ability, equipment, pet attachment and state transition. Import post-snapshot levels through explicit overrides, then add shared Core behavior and GUI/RL/snapshot/replay regressions."
+    },
+    {
+      "id": "home-th18-guardian-mechanics-batch-1",
+      "scope": {"kind": "item_ids", "ids": ["smasher", "longshot"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "supercell-2025-11-17-th18-launch"],
+      "missing": "The frozen payload gives five normal levels for each Guardian, but no version-matched deterministic patrol route, deployment selection, target acquisition, Smasher rage trigger/area/lifetime, Longshot death explosion geometry, interaction with the Town Hall destruction event, or timing versus other defenses.",
+      "impact": "Smasher and Longshot are catalogue data only and unavailable through Core, GUI and RL. Modelling either as an ordinary static defense would erase its selected-Guardian and movement/ability rules.",
+      "implementation_status": "historical_normal_level_data_imported_guardian_patrol_and_ability_behavior_withheld",
+      "validation_needed": "Obtain a version-identified Guardian specification or replay measurements covering selection, patrol, engagement, Town Hall destruction, defeat, Rage/explosion boundaries and ordering. Then add one shared Core state machine plus GUI/RL, snapshot and replay regressions."
+    },
+    {
+      "id": "home-hero-equipment-mechanics-batch-1",
+      "scope": {"kind": "item_ids", "ids": ["action_figure", "archer_puppet", "barbarian_puppet", "dark_crown", "dark_orb", "earthquake_boots", "electro_boots", "eternal_tome", "fire_heart", "fireball", "flame_blower", "frost_flake", "frozen_arrow", "giant_arrow", "giant_gauntlet", "haste_vial", "healer_puppet", "healing_tome", "henchmen_puppet", "heroic_torch", "hog_rider_puppet", "invisibility_vial", "lavaloon_puppet", "life_gem", "magic_mirror", "metal_pants", "meteor_staff", "noble_iron", "rage_gem", "rage_vial", "rocket_backpack", "rocket_spear", "royal_gem", "seeking_shield", "snake_bracelet", "spiky_ball", "stick_horse", "stun_blaster", "vampstache"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "fandom-2026-09-17-home-spell-equipment-index", "supercell-2025-11-17-th18-launch", "supercell-2026-02-23-th18", "supercell-2026-04-27-sound-of-clash"],
+      "missing": "The frozen payload provides full equipment-specific level records but does not define a current deterministic contract for selection slots, activation input, charge, cooldown, projectiles, spawned units, auras, immunity, hero death/revival, interaction with pets or ordering with other equipment. Electro Fangs and Monolith Arrow have no payload at this commit.",
+      "impact": "The 39 imported equipments remain exact source data only and unavailable through Core, GUI and RL. Treating their numerical bonuses as standalone troop or defense statistics would invent a combat actor and hide the hero/equipment state required for faithful simulation.",
+      "implementation_status": "opaque_per_level_source_data_imported_runtime_equipment_state_machine_withheld",
+      "validation_needed": "For every equipment, obtain version-identified current slot, activation and interaction rules plus tick-aligned replays. Import the two missing payloads from a pinned source, then implement shared hero/equipment state, GUI/RL commands and snapshot/replay regressions."
+    },
+    {
+      "id": "home-ruin-witch-and-knight-mechanics",
+      "scope": {"kind": "item_ids", "ids": ["ruin_witch", "ruin_knight"]},
+      "sources_consulted": ["goblinsfarm-2026-08-26-ruin-witch", "cocwarbase-2026-09-17-ruin-witch", "supercell-2026-06-15-anime-fury", "supercell-2026-08-30-update"],
+      "missing": "Pinned secondary artifacts provide all four Ruin Witch and Ruin Knight levels. The official launch release establishes rubble targeting, timed summoning phases, wall/invisibility restrictions and post-windup spawn after Witch defeat; the official August update supersedes the cap with ten Knights and removes Knight health decay. Missing are movement speed, rubble representation and tie-breaks, collision/pathing, spawn geometry, exact healing ordering and the meaning of the table's labelled Witch DPS versus the official no-offense-attack contract.",
+      "impact": "Both entries are catalogued but unavailable through Core, GUI and RL. A generic troop, a direct Witch attack, or a spawned Knight without a deterministic rubble lifecycle would be non-faithful.",
+      "implementation_status": "pinned_all_level_data_and_official_qualitative_summoning_contract_imported_runtime_state_machine_withheld",
+      "validation_needed": "Obtain version-identified tick-aligned client/replay evidence for rubble creation/visibility, routing, work/windup/spawn state transitions, Knight initial target and HP-decay ordering. Then implement shared Core entities plus GUI/RL, snapshot and replay regressions."
+    },
+    {
+      "id": "home-sky-wagon-mechanics-and-payload",
+      "scope": {"kind": "item_ids", "ids": ["sky_wagon"]},
+      "sources_consulted": ["goblinsfarm-2026-09-16-sky-wagon", "supercell-2026-04-27-sound-of-clash", "supercell-2026-05-22-balance", "supercell-support-2026-09-17-siege-machines"],
+      "missing": "A hashed secondary observation provides the four current-looking levels, HP, DPS, research values, Town Hall requirements, ground target class, range and attack speed. Official sources establish aerial independent movement, barrel payload types, May's reduced attack/barrel and spawned-unit levels, Siege slot, spell immunity and release on destruction. They do not specify footprint/collision, barrel travel and timing, target selection, Clan Castle payload placement, movement/pathing, or tick-level destruction ordering.",
+      "impact": "Sky Wagon is catalogued with level and payload facts but remains unavailable through Core, GUI and RL. Treating its DPS as an ordinary projectile attack or releasing units without a defined lifecycle would be an approximation.",
+      "implementation_status": "pinned_level_and_post_balance_payload_data_imported_runtime_siege_lifecycle_withheld",
+      "validation_needed": "Obtain version-identified replays or client data for geometry, target/path decisions, barrel scheduling, payload selection and release ordering. Then implement one shared airborne-siege state machine, GUI/RL command access and snapshot/replay regressions."
+    },
+    {
+      "id": "home-logger-guardian-mechanics",
+      "scope": {"kind": "item_ids", "ids": ["logger"]},
+      "sources_consulted": ["supercell-2026-04-27-sound-of-clash"],
+      "missing": "The pinned official observation establishes five levels, 350 DPS, ranges 7/7/7/7/8, air-and-ground targeting, slow piercing projectiles and one-tile impact knockback. It does not publish hitpoints, footprint, Guardian selection/activation/patrol, projectile speed and width, piercing limit, target ties, knockback displacement or Town Hall destruction ordering.",
+      "impact": "Logger is catalogued with only announced statistics and remains unavailable through Core, GUI and RL. An ordinary ranged-defense implementation would invent its Guardian state and piercing/knockback geometry.",
+      "implementation_status": "official_announced_level_range_and_damage_data_imported_runtime_guardian_state_machine_withheld",
+      "validation_needed": "Obtain a version-identified client/replay specification covering placement, activation, patrol, projectile, target and knockback state. Then implement one shared Core Guardian model, GUI/RL access and snapshot/replay regressions."
+    },
+    {
+      "id": "home-electro-fangs-equipment-mechanics",
+      "scope": {"kind": "item_ids", "ids": ["electro_fangs"]},
+      "sources_consulted": ["goblinsfarm-2026-08-26-electro-fangs", "supercell-2026-04-27-sound-of-clash"],
+      "missing": "The pinned secondary table provides all 18 hero-HP bonuses, ore costs and Blacksmith requirement. The official announcement establishes a passive Dragon Duke chain with up to four targets, 20% damage decay per jump and up to 400 damage per strike. Neither source supplies per-level chain damage, target geometry/ties, ordering with the Dragon Duke's attack or interaction with other equipment.",
+      "impact": "Electro Fangs is catalogued as opaque equipment data and unavailable through Core, GUI and RL. Mapping its hero bonus or chain to a standalone troop would invent the required hero/equipment state.",
+      "implementation_status": "pinned_all_level_progression_and_official_qualitative_chain_data_imported_runtime_equipment_state_machine_withheld",
+      "validation_needed": "Obtain version-identified equipment fields and tick-aligned replays for chain selection, distance, damage, animation, co-equipped state and hero death. Then implement shared hero/equipment logic plus GUI/RL commands and snapshot/replay regressions."
+    },
+    {
+      "id": "home-monolith-arrow-equipment-mechanics",
+      "scope": {"kind": "item_ids", "ids": ["monolith_arrow"]},
+      "sources_consulted": ["goblinsfarm-2026-08-26-monolith-arrow", "supercell-2026-06-15-anime-fury"],
+      "missing": "The pinned secondary table provides the complete 27-level hero-HP, ore and Blacksmith progression. The official announcement establishes the max-HP strike brackets, the 10% reduction cap and housing-space accounting. It does not specify activation/cooldown, exact target choice, projectile travel, Queen/equipment ordering or every visual tier threshold.",
+      "impact": "Monolith Arrow is catalogued as opaque equipment data and unavailable through Core, GUI and RL. Implementing a generic direct-damage spell or making the Queen's normal shot use the listed brackets would be invented behavior.",
+      "implementation_status": "pinned_all_level_progression_and_official_scaling_contract_imported_runtime_equipment_state_machine_withheld",
+      "validation_needed": "Obtain version-identified activation and tick-aligned replay evidence for target selection, travel, impact, housing counter updates and co-equipped ordering. Then add shared Queen/equipment state with GUI/RL access and snapshot/replay regressions."
+    },
+    {
+      "id": "home-angry-spell-timing-and-interactions",
+      "scope": {"kind": "item_ids", "ids": ["angry"]},
+      "sources_consulted": ["cocmap-2026-09-17-angry-spell", "supercell-2026-06-15-anime-fury"],
+      "missing": "The pinned secondary table provides levels 1–4, radius, housing space, Dark Spell Factory requirement, level duration, research cost/time and laboratory requirements. The official release note supplies the qualitative targeting contract, 5-second application window, siege immunity and no-direct-damage rule. Neither source supplies an immutable client build nor tick-aligned ordering for radius entry, reapplication, target-distance ties, refresh/stacking or interaction with other temporary targeting effects.",
+      "impact": "Angry Spell is catalogued with field-level provenance but is intentionally unavailable through Core, GUI and RL. A generic duration effect would not implement its target-hijack state and would falsely claim deterministic fidelity.",
+      "implementation_status": "pinned_level_data_and_official_qualitative_behavior_imported_runtime_state_machine_withheld",
+      "validation_needed": "Obtain a version-identified reproducible replay/client observation covering application and expiry ordering, distance/tie metric, reapplication boundary, stacking and interactions. Then add one Core targeting-override effect, GUI/RL command access and snapshot/replay regressions."
+    },
+    {
+      "id": "home-siege-machine-mechanics-batch-1",
+      "scope": {"kind": "item_ids", "ids": ["wall_wrecker", "battle_blimp", "stone_slammer", "siege_barracks", "log_launcher", "flame_flinger", "battle_drill", "troop_launcher"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "supercell-2026-02-23-th18", "supercell-2026-04-27-sound-of-clash"],
+      "missing": "The historical payload identifies normal levels but does not specify a current deterministic contract for siege movement, targeting, wall interactions, projectile geometry, payload selection, release timing, destruction and Clan Castle troop lifecycle. The official April 2026 mention of an improved Troop Launcher projectile trail is a presentation change, not a specification of its flight, collision or payload rules.",
+      "impact": "The eight siege machines are catalogue data only and unavailable through Core, GUI and RL. Treating them as a normal troop would remove their defining transport and payload behavior.",
+      "implementation_status": "normal_level_data_imported_from_historical_pinned_snapshot_runtime_behavior_withheld",
+      "validation_needed": "Obtain version-identified current data/replays for each machine's movement, attack and payload behavior, then add shared Core mechanics and GUI/RL/snapshot/replay regressions."
+    },
+    {
+      "id": "home-defense-special-mechanics-batch-1",
+      "scope": {"kind": "item_ids", "ids": ["air_sweeper", "scattershot", "spell_tower", "monolith", "firespitter", "builders_hut"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "fandom-2026-09-17-scattershot", "supercell-2025-11-17-th18-launch", "supercell-2026-02-23-th18", "supercell-2026-06-15-anime-fury", "supercell-2024-11-25-th17-update", "goblinsfarm-2026-08-26-air-sweeper", "fandom-2026-09-18-air-sweeper", "goblinsfarm-2026-09-16-monolith", "fandom-2026-09-18-monolith"],
+      "missing": "The historical payload supplies normal-level values and footprints, but does not provide a current deterministic contract for Air Sweeper push force, Spell Tower spell choice/cast lifecycle, Monolith maximum-HP damage, Firespitter projectiles or Builder Hut repair. The post-freeze Air Sweeper audit confirms aimed air-only no-damage pushback but has conflicting secondary cone descriptions and no current tick-level displacement, collision, multi-target or retarget contract. The additive Monolith L5 reference imports HP/DPS/cost/time/TH evidence but deliberately leaves the percentage-bonus ordering, projectile timing, target ties and L5 asset open. Scattershot's secondary cone/falloff contract lacks ammunition/reload, projectile flight, target-loss and fixed-tick impact ordering.",
+      "impact": "Scattershot is partially implemented in the shared Core/GUI/RL route with its secondary cone contract and snapshot regression; it is not claimed faithful. The other five defenses remain catalogue data only because a generic weapon would conceal their defining behavior.",
+      "implementation_status": "scattershot_secondary_cone_falloff_shared_core_gui_rl_snapshot_partial_other_batch_members_runtime_behavior_withheld",
+      "validation_needed": "For Scattershot, obtain version-identified ammunition and replay/client timing evidence. For every remaining item, obtain version-identified current stat and replay/client evidence for targeting, range, projectiles, effects, state transitions and spawned/defending units; then implement the shared Core path with GUI/RL and snapshot/replay regressions."
+    },
+    {
+      "id": "home-clan-castle-defending-lifecycle",
+      "scope": {"kind": "item_ids", "ids": ["clan_castle"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "fandom-2026-09-17-home-resource-index", "supercell-support-2026-09-17-clan-castle"],
+      "missing": "The pinned levels establish the static building’s hit points and 3x3 footprint, but do not provide a current deterministic guard/sleep trigger, defensive troop composition, deployment positions, spell payload or return/destruction lifecycle.",
+      "impact": "Clan Castle L1–14 is an attackable, destructible static building in the shared Core/GUI/RL path and survives snapshots. It does not release or control defenders, so attacks involving defensive Clan Castle troops remain non-conformant.",
+      "implementation_status": "static_building_levels_core_gui_rl_snapshot_shared_defensive_garrison_lifecycle_withheld",
+      "validation_needed": "Obtain version-identified current replays or client evidence for alert range, composition, deployment, targeting, death/return state and spell interactions; then add the shared Core lifecycle and GUI/RL/replay regressions."
+    },
+    {
+      "id": "home-defense-special-mechanics-batch-2",
+      "scope": {"kind": "item_ids", "ids": ["ricochet_cannon", "multi_archer_tower", "multi_gear_tower", "super_wizard_tower", "revenge_tower", "crafting_station"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "supercell-2025-11-17-th18-launch", "supercell-2026-01-28-balance"],
+      "missing": "The frozen payload supplies level, footprint and available mode records for these six entries, but no current deterministic contract for Ricochet bounce target/radius ordering, Multi Archer targeting, Multi Gear mode selection, Super Wizard 15-target chain geometry, Revenge Tower destruction-count stages or the Crafting Station's phase/lifecycle. The Revenge Tower payload has no complete normal weapon fields, so it cannot be represented as an ordinary generic defense.",
+      "impact": "These six entries are catalogue data only and unavailable through Core, GUI and RL. The January official balance values and the launch descriptions are retained as evidence, but do not authorize interpolation of missing level values or a generic attack model.",
+      "implementation_status": "historical_level_data_imported_current_special_behavior_and_revenge_weapon_contract_withheld",
+      "validation_needed": "Obtain version-identified current level tables and tick-aligned replays for every mode and state transition. Verify merge input/removal, Supercharge variants, destroyed-building counters, chain and bounce ties, projectile travel and Crafting phase persistence; then add shared Core, GUI/RL and replay/snapshot regressions."
+    },
+    {
+      "id": "home-crafted-defense-and-other-building-batch-1",
+      "scope": {"kind": "item_ids", "ids": ["crafting_station", "roaster", "air_bombs", "lava_launcher", "bomb_hive", "hero_bell", "light_beam", "bobs_hut", "helper_hut"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "supercell-2025-11-17-th18-launch"],
+      "missing": "The frozen payloads provide their historical level records, but not a current deterministic contract for Crafting phases, selection/persistence, Roaster and Lava Launcher projectiles, Air Bombs, Bomb Hive targeting, Hero Bell aura, Light Beam distance falloff, B.O.B/Helper building interaction or any transition between the station and a selected crafted defense.",
+      "impact": "These nine entries are catalogue data only and unavailable through Core, GUI and RL. A generic static defense or generic building would erase the selection, crafting and helper state required by the current Home Village rules.",
+      "implementation_status": "historical_data_imported_crafting_and_other_building_lifecycle_withheld",
+      "validation_needed": "Obtain version-identified current phase/selection data and tick-aligned replays for each weapon, aura and helper state. Then implement the shared Core lifecycle and all GUI/RL, asset, snapshot and replay paths before enabling any entry."
+    },
+    {
+      "id": "home-spell-special-mechanics-batch-1",
+      "scope": {"kind": "item_ids", "ids": ["poison", "invisibility", "clone", "skeleton", "bat", "recall", "overgrowth", "revive", "totem", "ice_block"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "supercell-2025-11-17-th18-launch", "supercell-2026-02-23-th18", "supercell-2026-04-27-sound-of-clash"],
+      "missing": "The historical payload supplies normal spell-level values but no version-matched deterministic contract for damage-over-time pulses, invisibility target exclusion, clone capacity and placement, spawned Skeleton/Bat lifecycle, recall selection, Overgrowth targeting, Revive eligibility, Totem state or Ice Block interaction ordering.",
+      "impact": "These spells are catalogue data only and cannot be selected in Core, GUI or RL. Enabling a generic duration/radius effect would falsely claim support for their defining rules.",
+      "implementation_status": "normal_level_data_imported_from_historical_pinned_snapshot_runtime_behavior_withheld",
+      "validation_needed": "For each spell, obtain a version-identified current rule source or reproducible tick-aligned replay covering target selection, radius boundary, pulses, spawned entities, immunity and end-of-effect ordering. Then add shared Core logic, GUI/RL actions and snapshot/replay regressions."
+    },
+    {
+      "id": "home-troop-special-mechanics-batch-1",
+      "scope": {"kind": "item_ids", "ids": ["witch", "lava_hound", "bowler", "ice_golem", "headhunter", "druid", "furnace", "meteor_golem", "apprentice_warden"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "supercell-2025-11-17-th18-launch", "supercell-2026-02-23-th18", "supercell-2026-04-27-sound-of-clash", "supercell-2026-06-15-anime-fury"],
+      "missing": "The frozen payload provides normal-level numerical records, but not a version-matched deterministic specification for the Witch's Skeleton cadence, Lava Hound/Pup lifecycle, Bowler bounce geometry, Ice Golem freeze, Headhunter hero/poison logic, Druid form switching, Furnace Firemites, Meteor Golem/Meteormite split-remerge, or Apprentice Warden support mechanics.",
+      "impact": "These nine troops are catalogue data only and are deliberately unavailable through Core, GUI and RL. A generic attack loop would erase defining abilities and must not be represented as an implementation.",
+      "implementation_status": "normal_level_data_imported_from_historical_pinned_snapshot_runtime_behavior_withheld",
+      "validation_needed": "For each troop, obtain a version-identified current table and replay/client evidence for every spawned unit, targeting exception, area/chain geometry, timing and state transition. Add immutable catalogue fields, one shared Core implementation, GUI/RL access and snapshot/replay regressions before enabling it."
+    },
+    {
+      "id": "home-electro-titan-aura-contract",
+      "scope": {"kind": "item_ids", "ids": ["electro_titan"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "fandom-2026-09-18-electro-titan"],
+      "missing": "The pinned per-level table specifies normal and aura damage, 0.4-second aura cadence and 3.5-tile aura range. The post-freeze secondary mechanics audit specifies ground/air coverage, Wall exclusion and Rage/Freeze interactions, but not a version-identified first pulse, hidden or underground target rule, target-boundary geometry, whip projectile timing or deterministic tick ordering.",
+      "impact": "Electro Titan L1–5 is executable through the shared Core/GUI/RL route. The Core serializes its next aura pulse in Snapshot V14, applies level-specific periodic damage to visible ground and air enemies, excludes Walls and preserves the sourced Rage/Freeze exceptions. This remains partial and is not fidelity-complete.",
+      "implementation_status": "all_normal_levels_shared_core_gui_rl_periodic_aura_snapshot_v14_regressions_secondary_post_freeze_partial",
+      "validation_needed": "Obtain version-identified client evidence for first-pulse timing, hitbox boundary, hidden/underground treatment, stacking and concurrent action ordering, plus whip projectile launch/travel/impact data. Then add boundary and replay tests before marking the troop conformant."
+    },
+    {
+      "id": "home-thrower-projectile-contract",
+      "scope": {"kind": "item_ids", "ids": ["thrower"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "goblinsfarm-2026-09-16-thrower", "supercell-2026-02-23-th18"],
+      "missing": "The level table and official L4 HP/DPS correction establish its static attributes, but no consulted source specifies the actual projectile launch, travel, target-loss or tick ordering. Hero and defensive reinforcement priorities are outside this goal's current scope.",
+      "impact": "Thrower L1–4 is executable through shared Core/GUI/RL with its immutable normal attack data and a serialised logical next-tick projectile. It remains partial rather than a verified simulation of its projectile.",
+      "implementation_status": "all_normal_levels_shared_core_gui_rl_snapshot_projectile_regressions_partial",
+      "validation_needed": "Obtain a version-identified projectile contract and replay timings; then replace the logical next-tick fallback and add path/timing regressions before marking the troop conformant."
+    },
+    {
+      "id": "home-root-rider-wall-contract-and-level-4",
+      "scope": {"kind": "item_ids", "ids": ["root_rider"]},
+      "sources_consulted": ["supercell-2023-12-09-root-rider", "supercell-2024-06-03-root-rider-balance", "supercell-2026-04-27-sound-of-clash", "chiefpansancolt-62b019df", "goblinsfarm-2026-09-16-root-rider", "clashrecord-2026-09-17-root-rider"],
+      "missing": "Official sources establish L1–3 post-balance HP/DPS, defense preference, ground single-target class, housing, speed and 10,000 wall DPS; the 2026 source confirms L4 exists but supplies no official L4 HP, DPS, cadence, wall DPS or upgrade table. The dated secondary L4 table and wall-contact reports are imported with their tier preserved. No consulted source fixes protected-wall choice under simultaneous contact, collision geometry, retarget boundaries or timing after a wall falls.",
+      "impact": "Root Rider L1–4 is routed through the shared Core/GUI/RL path. L4 is imported from a dated secondary table, explicitly not promoted to official data. The Core follows the defense route and damages a contacted enemy Wall for the documented 4,000 damage every 0.4 s; the same action timestamp is serialized in snapshots. This is still partial and cannot be called TH18 faithful until topology and collision ordering are verified.",
+      "implementation_status": "official_l1_to_l3_stats_secondary_l4_and_wall_contact_shared_core_gui_rl_with_snapshot_regression_topology_fidelity_open",
+      "validation_needed": "Obtain a version-identified official L4 table and replay/client measurements for wall choice, collision, destruction timing and retargeting in multi-compartment layouts; then add topology boundary tests before marking Root Rider conformant."
+    },
+    {
+      "id": "home-super-troop-variants-batch-1",
+      "scope": {"kind": "item_ids", "ids": ["super_barbarian", "super_archer", "super_giant", "super_wall_breaker", "rocket_balloon", "super_wizard", "super_dragon", "inferno_dragon", "super_miner", "super_yeti", "super_minion", "super_hog_rider", "super_valkyrie", "super_witch", "ice_hound", "super_bowler"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "fandom-2026-09-17-home-spell-equipment-index", "supercell-2020-03-30-spring-super-troops", "supercell-2026-02-23-th18", "supercell-2026-04-27-sound-of-clash"],
+      "missing": "The frozen payload embeds these 16 Super Troop variants and their historical normal level records, boost metadata and images under their parent troop, but it does not provide a version-matched TH18 contract for boost eligibility/lifecycle, special ability timing, target exceptions, projectile or area geometry, spawned units, rage, freeze or deterministic state transitions. The official Super Giant launch note confirms increased Wall damage, but omits the multiplier and deterministic protected-Wall selection. Nested records also omit some parent fields; those inherited fields are explicitly marked rather than independently asserted.",
+      "impact": "These 16 variants are traceable catalogue data only and are intentionally unavailable in Core, GUI and RL. Representing any of them as an ordinary parent troop would suppress its defining ability and would be a false completion claim.",
+      "implementation_status": "nested_historical_super_troop_data_imported_with_parent_field_provenance_runtime_behavior_withheld",
+      "validation_needed": "For every variant, obtain version-identified current per-level data plus official rules or reproducible tick-aligned replays for boost and special-ability state, targeting, geometry, spawn/destruction and ordering. Then add a shared Core implementation, GUI/RL access, assets and snapshot/replay regressions before marking it conformant."
+    },
+    {
+      "id": "home-sneaky-goblin-cloak-interactions",
+      "scope": {"kind": "item_ids", "ids": ["sneaky_goblin"]},
+      "sources_consulted": ["supercell-2020-03-30-spring-super-troops", "chiefpansancolt-62b019df", "fandom-2026-09-17-home-spell-equipment-index"],
+      "missing": "Supercell explicitly states only that Cloak makes the Sneaky Goblin invisible to defenses for the first five seconds after deployment. The consulted public material does not establish current per-level values, interaction with armed traps, an already-launched projectile, splash, defensive Clan Castle troops, spell visibility, boost lifecycle, or the exact order at the expiry boundary.",
+      "impact": "The immutable catalogue carries the official five-second duration. The shared Core excludes an active Cloak target from defensive acquisition and multi-target selection, serializes its expiry in Snapshot V11, and exposes the same logical state through GUI and RL. Existing projectiles and trap triggers are deliberately unchanged because the source does not define them; the entry is therefore partial, not faithful.",
+      "implementation_status": "official_duration_shared_core_gui_rl_defensive_target_exclusion_snapshot_v11_and_regressions_partial_interactions_open",
+      "validation_needed": "Obtain a version-identified client replay or official rule covering traps, in-flight and splash projectiles, defensive troops, spells and the 5,000-ms expiry ordering. Add deterministic boundary, snapshot and replay cases before marking any of those interactions conformant."
+    },
+    {
+      "id": "yeti-level-8-and-yetimite-lifecycle",
+      "scope": {"kind": "item_ids", "ids": ["yeti"]},
+      "sources_consulted": ["supercell-2019-12-09-yeti", "supercell-2021-09-24-yeti-level", "supercell-2024-06-18-yeti-spawn", "supercell-2026-04-27-sound-of-clash", "fandom-2026-09-17-yeti", "goblinsfarm-2026-09-16-yeti", "chiefpansancolt-62b019df"],
+      "missing": "The dated current-build secondary table supplies the complete L8 parent HP/DPS/cost/time/TH record, while Fandom's current table supplies parent-level capacity and L8 Laboratory 16. Official notes establish the 600 accumulated-damage cadence, death release and L4's 11 total Yetimites. No consulted source publishes Yetimite level mapping, spawn geometry, threshold ordering, lifetime or retargeting contract.",
+      "impact": "Yeti L1–8 are immutable catalogue data only. The core deliberately does not expose Yeti, Yetimites, GUI sprites or RL actions: a generic melee unit would omit its defining spawned-unit lifecycle and would be a false implementation.",
+      "implementation_status": "catalogue_data_only_l1_to_l8_with_hashed_current_build_supplement_runtime_behavior_withheld_pending_yetimite_contract",
+      "validation_needed": "Obtain a version-identified client table/replay for Yetimites, including their level mapping, spawn count and position, 600-damage accumulation boundary, death remainder and lifetime/target ties. Then import immutable child data and implement one shared Core path with GUI/RL, snapshot and replay regressions."
+    },
+    {
+      "id": "crafting-station-combat-contract",
+      "scope": {"kind": "item_ids", "ids": ["crafting_station"]},
+      "sources_consulted": ["chiefpansancolt-62b019df", "supercell-2025-11-17-th18-launch", "supercell-support-2026-09-18-crafted-defenses"],
+      "missing": "The frozen secondary record gives Crafting Station L1 hitpoints, 3x3 footprint, Town Hall 18 requirement and an asset. The official launch and the current, unversioned Supercell support page establish only Crafting Phase/menu lifecycle. Neither source defines whether the Station is targetable during an attack, its attacker target-priority category, destruction contribution, collision/deployment geometry, weapon state, or a snapshot/replay phase contract for the 2026-09-17 version.",
+      "impact": "Crafting Station remains immutable catalogue data only and is unavailable through Core, GUI and RL. Its normalized `defense` family label and `target_type=both` are source-shape metadata, not permission to create an ordinary defense or passive targetable building. The 2026-09-18 support-page consultation is additive evidence for the open lifecycle gap; it does not overwrite the frozen reference.",
+      "implementation_status": "l1_secondary_static_data_present_official_phase_menu_context_version_matched_combat_contract_withheld",
+      "validation_needed": "Obtain a publication/build-identified TH18 attack recording or client table that establishes targetability, target class, destruction/collision/deployment behavior and phase selection at the frozen date. Then add a named Core materialization and geometry test, shared Viewer/RL route, asset verification, and snapshot/replay determinism tests before enabling the Station."
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-hero-battlefield-art-rights-audit",
+  "scope": "Additive redistribution-rights audit for battlefield art of the six permanent Home Village Heroes. This record grants no asset permission and changes no combat geometry.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "TH18 scope as of 2026-09-23; art policy is independent of client build. Upstream asset source pinned at 62b019df868f9decb49e97a0ff5ae15fb27af9ba.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-electro-fangs-passive-type-override.json",
+    "reference_id": "home-village-th18-2026-09-23-electro-fangs-passive-type-override",
+    "sha256": "cd7dc0659cf8c9225ca0c0768be0d9e06f515d1631f39747374e5a77992fbb74"
+  },
+  "sources": [
+    {
+      "id": "supercell-fan-content-policy-2026-09-23",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "Fan Content Policy",
+      "published_on": null,
+      "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/fan-content-policy/",
+      "raw_sha256": "b8a7de0d993b4ac798c7f40cdf1787b6fea1a5a77181435750cfa6c4db93ce5c",
+      "confidence": "high_for_published_policy_text",
+      "content_ids": ["barbarian_king", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke"],
+      "levels": "all_in_scope_th18_levels",
+      "mode": "battlefield_art_redistribution",
+      "facts": [
+        "The policy limits use of Supercell Assets in fan content to displaying, identifying and discussing Supercell products.",
+        "It says new products or content based on Supercell Assets, including games based on Supercell game characters, are not permitted even if free.",
+        "It says Supercell Assets may not be modified without express permission."
+      ],
+      "limitations": "The page supplies no project-specific permission for this simulator or a separately licensed set of battlefield Hero sprite sheets. Whether a particular simulator distribution qualifies under the policy requires rights-holder clarification."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-repository-license",
+      "tier": "secondary",
+      "publisher": "chiefpansancolt/clash-of-clans-data",
+      "title": "Pinned repository LICENSE",
+      "published_on": null,
+      "consulted_on": "2026-09-23",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/LICENSE",
+      "raw_sha256": "c2e299582ddd6374469f44d154203672c6586aaebf31e21c71f67b9a6423f4a3",
+      "confidence": "high_for_repository_license_text_only",
+      "content_ids": ["barbarian_king", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke"],
+      "levels": "all_in_scope_th18_levels",
+      "mode": "upstream_package_license",
+      "facts": ["The pinned repository has an MIT license by its repository author."],
+      "limitations": "The text does not identify a separate Supercell grant for copyrighted game characters or battlefield art. It cannot by itself verify that the repository author can sublicense those rights."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-asset-readme",
+      "tier": "secondary",
+      "publisher": "chiefpansancolt/clash-of-clans-data",
+      "title": "Pinned repository README",
+      "published_on": null,
+      "consulted_on": "2026-09-23",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/README.md",
+      "raw_sha256": "e036de6881f569dc0d099fc9cb5cb4e880870f218aea9ffac707677d2aaac80e",
+      "confidence": "high_for_package_contents_only",
+      "content_ids": ["barbarian_king", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke"],
+      "levels": "all_in_scope_th18_levels",
+      "mode": "upstream_package_assets",
+      "facts": ["The pinned README says the package includes image assets and identifies Clash of Clans Wiki as its game-data source."],
+      "limitations": "Bundling images and attributing a data source do not establish rights-holder permission for this simulator to redistribute battlefield Hero sprites."
+    }
+  ],
+  "local_context": {
+    "file": "assets/PROVENANCE.md",
+    "sha256": "3e324b721728c725bf94882ce60bb18a5aa514ddda80485193c5e9e849b8c11e",
+    "fact": "The repository already describes fetched upstream images as local-viewer use only and instructs a rights check before redistribution."
+  },
+  "derivations": [
+    {
+      "content_ids": ["barbarian_king", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke"],
+      "levels": "all_in_scope_th18_levels",
+      "mode": "battlefield_sprite_distribution",
+      "result": "Keep battlefield Hero art rights unverified; do not mark upstream game images as freely redistributable.",
+      "method": "Compare the rights-holder policy against the exact pinned repository license, README and the local asset-provenance notice. No project-specific permission was found in these checked documents."
+    }
+  ],
+  "rejected_inferences": [
+    {"rule": "Treat the upstream MIT license as a grant of Supercell character-art rights", "reason": "The checked license identifies the repository author, not a separate rights-holder grant for game art."},
+    {"rule": "Download or redistribute client-extracted battlefield sprite sheets because existing icons are available locally", "reason": "Asset availability does not resolve permission, and the policy explicitly limits uses of Supercell Assets."},
+    {"rule": "Treat original symbolic markers as verified client battlefield sprites", "reason": "Original markers could support a viewer but would not establish the game's sprite artwork, scale, anchor or animations."}
+  ],
+  "open_uncertainties": [
+    {
+      "content_ids": ["barbarian_king", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke"],
+      "levels": "all_in_scope_th18_levels",
+      "mode": "attacking_and_defending_battlefield_art",
+      "items": ["express compatible permission for battlefield Hero sprites, or independently created redistributable art", "per-Hero client sprite scale, world anchor and animation bounds", "rights for modifying, packaging or publishing any current local upstream images"]
+    }
+  ],
+  "conclusion": "The checked policy and pinned repository files do not establish compatible redistribution rights for battlefield Hero sprites in this simulator. The art axis remains partial; no game-derived sprite is newly packaged or claimed as licensed by this audit."
+}

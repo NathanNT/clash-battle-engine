@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-spirit-fox-invisibility-contract-audit",
+  "scope": "Additive Spirit Fox L1-10 level, attack and recurring invisibility audit; preserve sourced durations without inventing paired-Pet tick ordering.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Official changes through 2024-03-26; dated game-file table 2026-09-01, exact client build unpublished; pinned raw commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-phoenix-revival-and-interaction-audit.json",
+    "reference_id": "home-village-th18-2026-09-23-phoenix-revival-and-interaction-audit",
+    "sha256": "b021dae8b1fa4e6fef47b513a67e17b48e8f701d5c00ac0b88f4b4fb56837f79"
+  },
+  "sources": [
+    {
+      "id": "supercell-2023-12-08-spirit-fox-introduction", "tier": "primary", "publisher": "Supercell",
+      "title": "Meet Spirit Fox!", "published_on": "2023-12-08", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/meet-spirit-fox/",
+      "confidence": "high_for_launch_values_and_general_behavior", "content_id": "spirit_fox", "levels": "1-10", "mode": "paired_attacking_pet_and_spirit_walk",
+      "facts": ["Spirit Walk turns both Fox and paired Hero invisible; Spirit Fox targets ground, favors targets within 4.5 tiles of its Hero and has movement speed 24.", "The primary level table gives invisibility durations of 3 seconds at L1-4, 3.5 seconds at L5-9 and 4 seconds at L10, with L1-10 HP and DPS."],
+      "limitations": "Launch values do not establish the 2026 client build, initial trigger phase, visibility effects on existing targets, target selection tie-break or exact recast tick."
+    },
+    {
+      "id": "supercell-2024-02-27-spirit-fox-frost-removal", "tier": "primary", "publisher": "Supercell",
+      "title": "February 2024 Update - Patch Notes", "published_on": "2024-02-27", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/february-2024-update-patch-notes/",
+      "confidence": "high_for_change_only", "content_id": "spirit_fox", "levels": "1-10", "mode": "attack",
+      "facts": ["Frost was removed from Spirit Fox attacks."],
+      "limitations": "No current projectile, impact, retarget or paired-Hero contract is supplied."
+    },
+    {
+      "id": "supercell-2024-03-26-spirit-fox-visible-time", "tier": "primary", "publisher": "Supercell",
+      "title": "New Balance Changes Incoming!", "published_on": "2024-03-26", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/new-balance-changes-incoming/",
+      "confidence": "high_for_change_only", "content_id": "spirit_fox", "levels": "1-10", "mode": "spirit_walk_cycle",
+      "facts": ["Visible time was increased to six seconds at all levels."],
+      "limitations": "The publication does not identify the first visible interval, trigger phase, inclusive expiration tick, or later superseding patches."
+    },
+    {
+      "id": "gibiarena-2026-09-01-spirit-fox-game-files", "tier": "secondary-dated-game-files", "publisher": "GiBiArena via ClashKing game-file data",
+      "title": "Spirit Fox: costs, times and levels — Clash of Clans", "published_on": null, "consulted_on": "2026-09-23",
+      "version": "Game-file data dated 2026-09-01, processed 2026-09-03; exact client build unpublished",
+      "url": "https://www.gibiarena.com/en/clash-of-clans/upgrades/spirit-fox",
+      "confidence": "medium_high_for_dated_level_table", "content_id": "spirit_fox", "levels": "1-10", "mode": "normal",
+      "facts": ["The TH18 maximum is L10; L1-10 HP and DPS match the pinned record. Target type is ground, attack range 2.5 tiles and cadence 1.6 seconds."],
+      "limitations": "The table does not publish invisibility cycle, first activation, collision or paired-Hero behavior."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-spirit-fox-raw-recheck", "tier": "secondary-frozen-payload", "publisher": "chiefpansancolt/clash-of-clans-data",
+      "title": "Pinned Spirit Fox Home Village Pet record", "published_on": null, "consulted_on": "2026-09-23",
+      "version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/spirit-fox.json",
+      "confidence": "medium_for_level_values", "content_id": "spirit_fox", "levels": "1-10", "mode": "spirit_walk",
+      "raw_sha256": "498e774ff4534f08c38a6a343074819acc2dffc1eef6324c9e5d8430b5d8a625",
+      "facts": ["Each level contains invisibilityDuration matching the primary 2023 table."],
+      "limitations": "No visible interval, first trigger, retarget or current client build is identified."
+    }
+  ],
+  "derivations": [
+    {"content_id": "spirit_fox", "levels": "1-10", "mode": "spirit_walk", "result": "Preserve invisibilityDuration as per-level invisibility_duration_seconds", "method": "Lossless normalization of the pinned raw values, cross-checked with Supercell's primary level table; no activation tick or Core effect is inferred."},
+    {"content_id": "spirit_fox", "levels": "1-10", "mode": "normal", "result": "Confirm TH18 maximum L10 and dated HP/DPS", "method": "Compare the 2026-09-01 game-file table with the SHA-pinned raw payload."}
+  ],
+  "rejected_inferences": [
+    {"rule": "Start Spirit Walk exactly six seconds after Pet deployment", "reason": "The 2024 change establishes a visible interval, not the initial activation phase."},
+    {"rule": "Use ordinary Invisibility Spell or Invisibility Vial targeting rules", "reason": "The checked sources do not establish shared acquisition, target loss or effect order."},
+    {"rule": "Apply frost on attack", "reason": "Supercell removed frost from Spirit Fox attacks in February 2024."},
+    {"rule": "Spawn a generic paired Pet and execute cyclic invisibility", "reason": "Hero attachment, separation, death, acquisition and tick transitions are not specified."}
+  ],
+  "open_uncertainties": [
+    {"content_id": "spirit_fox", "levels": "1-10", "mode": "paired_attacking_pet_and_spirit_walk", "items": ["exact current client build and duration continuity", "paired spawn, follow, separation, death and retarget timing", "first Spirit Walk trigger and visible/invisible tick boundaries", "target-loss and reacquisition for both Fox and Hero", "invisibility interaction with existing projectiles, traps, auras and Equipment", "attack impact and target ordering", "collision, visual anchors and battlefield art rights"]}
+  ],
+  "conclusion": "Spirit Fox L1-10 remains partial and catalogue-only. Official per-level invisibility duration and six-second visible interval are preserved as evidence, but the paired-Pet lifecycle and deterministic Spirit Walk state transitions remain unsourced."
+}

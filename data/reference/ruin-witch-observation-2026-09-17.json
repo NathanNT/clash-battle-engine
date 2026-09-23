@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "source_id": "goblinsfarm-2026-08-26-ruin-witch",
+  "observation_scope": "Home Village Ruin Witch current-looking public table, captured for the frozen 2026-09-17 TH18 reference.",
+  "content": {
+    "id": "ruin_witch",
+    "source_id": "ruin-witch",
+    "category": "troop",
+    "support": "catalogued_only",
+    "flying": false,
+    "target_type": "ground",
+    "target_focus": "rubble",
+    "housing_space": 26,
+    "range_tiles": 0.8,
+    "attack_speed_seconds": 2,
+    "movement_speed": null,
+    "damage_type": "none_in_offense",
+    "trained_in": "dark_barracks",
+    "summoned_content_id": "ruin_knight",
+    "field_provenance": {
+      "flying":{"source":"goblinsfarm-2026-08-26-ruin-witch","tier":"secondary"},
+      "target_type":{"source":"goblinsfarm-2026-08-26-ruin-witch","tier":"secondary"},
+      "housing_space":{"source":"goblinsfarm-2026-08-26-ruin-witch","tier":"secondary"},
+      "range_tiles":{"source":"goblinsfarm-2026-08-26-ruin-witch","tier":"secondary"},
+      "attack_speed_seconds":{"source":"goblinsfarm-2026-08-26-ruin-witch","tier":"secondary"},
+      "target_focus":{"source":"supercell-2026-06-15-anime-fury","tier":"primary"},
+      "damage_type":{"source":"supercell-2026-06-15-anime-fury","tier":"primary"}
+    },
+    "behavior": {
+      "ignores_destroyed_wall_rubble":true,
+      "rubble_work_seconds":4,
+      "summoning_windup_seconds":2,
+      "post_spawn_animation_seconds":2,
+      "spawn_after_witch_defeat_during_windup":true,
+      "max_summoned_ruin_knights":8,
+      "despawns_after_max_summons":true,
+      "cannot_jump_or_attack_walls":true,
+      "idles_without_rubble":true,
+      "ignores_invisible_rubble":true,
+      "retargets_closer_new_rubble":true
+    },
+    "behavior_provenance":{"source":"supercell-2026-06-15-anime-fury","tier":"primary"},
+    "levels":[
+      {"level":1,"hitpoints":2300,"reported_dps":25,"research_cost":null,"research_cost_resource":null,"research_time_seconds":null,"town_hall_required":16,"summoned_ruin_knight_level":1},
+      {"level":2,"hitpoints":2550,"reported_dps":26,"research_cost":220000,"research_cost_resource":"Dark Elixir","research_time_seconds":950400,"town_hall_required":16,"summoned_ruin_knight_level":2},
+      {"level":3,"hitpoints":2800,"reported_dps":27,"research_cost":300000,"research_cost_resource":"Dark Elixir","research_time_seconds":1036800,"town_hall_required":17,"summoned_ruin_knight_level":3},
+      {"level":4,"hitpoints":3050,"reported_dps":28,"research_cost":380000,"research_cost_resource":"Dark Elixir","research_time_seconds":1339200,"town_hall_required":18,"summoned_ruin_knight_level":4}
+    ]
+  },
+  "known_missing":["movement speed","precise rubble pathing/collision and target tie-break","rubble visibility representation","summon coordinate and scheduling order","meaning of the secondary table's reported DPS versus the official no-offense-attack contract","snapshot/replay lifecycle"]
+}

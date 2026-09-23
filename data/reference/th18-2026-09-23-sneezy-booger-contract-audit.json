@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-sneezy-booger-contract-audit",
+  "scope": "Additive Sneezy L1-10 and required Booger child audit. Preserve pinned cap and rage fields, document trap and Hero interactions, and leave unsourced spawning disabled.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Official changes through 2026-01-12; dated game-file table 2026-09-01 and client 18.600.3 on 2026-09-18; pinned raw commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-angry-jelly-brainwash-contract-audit.json",
+    "reference_id": "home-village-th18-2026-09-23-angry-jelly-brainwash-contract-audit",
+    "sha256": "9be1f50801e0c193b242a3c6803a50ab3fe192b88324901a69d1d5038ada9cd9"
+  },
+  "sources": [
+    {
+      "id": "supercell-2025-03-24-sneezy-introduction", "tier": "primary", "publisher": "Supercell",
+      "title": "Welcome to Clash Anytime Update!", "published_on": "2025-03-24", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/welcome-to-clash-anytime-update/",
+      "confidence": "high_for_general_behavior", "content_id": "sneezy", "levels": "1-10", "mode": "paired_summoner_then_attack_after_hero_defeat",
+      "facts": ["Sneezy is a permanent Pet unlocked at Pet House 11/TH17; she spawns Boogers that absorb damage and attack Buildings, and attacks Defenses herself after her Hero is defeated."],
+      "limitations": "No Booger current HP/DPS, spawn interval, position, cap, target tie-break, parent death order, rage multiplier or attack tick is published."
+    },
+    {
+      "id": "supercell-2025-10-06-sneezy-warden-follow", "tier": "primary", "publisher": "Supercell",
+      "title": "Get Ready for Ranked! - Update", "published_on": "2025-10-06", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/get-ready-for-ranked-update/",
+      "confidence": "high_for_change_only", "content_id": "sneezy", "levels": "1-10", "mode": "booger_with_grand_warden",
+      "facts": ["Grand Warden became less likely to follow Sneezy's Boogers."],
+      "limitations": "The new Warden weighting and exact group recalculation contract are not published."
+    },
+    {
+      "id": "supercell-2026-01-12-sneezy-booger-trap-change", "tier": "primary", "publisher": "Supercell",
+      "title": "January Balance Changes!", "published_on": "2026-01-12", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/january-balance-changes-3/",
+      "confidence": "high_for_change_only", "content_id": "booger", "levels": "spawned_by_sneezy_L1-10", "mode": "spawned_air_unit",
+      "facts": ["Boogers no longer trigger traps."],
+      "limitations": "Whether non-triggering Boogers can still be hit by already-triggered area effects, and their other collision rules, are not specified."
+    },
+    {
+      "id": "gibiarena-2026-09-01-sneezy-game-files", "tier": "secondary-dated-game-files", "publisher": "GiBiArena via ClashKing game-file data",
+      "title": "Sneezy: Kosten, Zeiten und Stufen — Clash of Clans", "published_on": null, "consulted_on": "2026-09-23",
+      "version": "Game-file data dated 2026-09-01, processed 2026-09-03; exact client build unpublished",
+      "url": "https://www.gibiarena.com/de/clash-of-clans/upgrades/sneezy",
+      "confidence": "medium_high_for_dated_level_table; medium_for_displayed_range", "content_id": "sneezy", "levels": "1-10", "mode": "normal",
+      "facts": ["TH18 maximum L10; L1-10 HP and DPS match the pinned raw record. The page displays range 2.5 tiles and attack cadence 0.8 seconds."],
+      "limitations": "Displayed range conflicts with the older raw 5.5 field; the two may describe different pre- and post-Hero-loss modes. The page does not expose that mapping."
+    },
+    {
+      "id": "goblins-farm-2026-09-18-sneezy-client-files", "tier": "secondary-dated-game-files", "publisher": "Goblins Farm",
+      "title": "Sneezy — Clash of Clans Wiki", "published_on": "2026-09-18", "consulted_on": "2026-09-23",
+      "version": "Client build 18.600.3 as claimed by source",
+      "url": "https://goblinsfarm.com/wiki/pets/sneezy.html",
+      "confidence": "medium_high_for_dated_range_corroboration", "content_id": "sneezy", "levels": "1-10", "mode": "normal",
+      "facts": ["The game-file-derived page also displays 2.5-tile range and the same HP/DPS table."],
+      "limitations": "The source does not distinguish parent follow distance from attacking range or publish child values."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-sneezy-raw-recheck", "tier": "secondary-frozen-payload", "publisher": "chiefpansancolt/clash-of-clans-data",
+      "title": "Pinned Sneezy Home Village Pet record", "published_on": null, "consulted_on": "2026-09-23",
+      "version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/pets/sneezy.json",
+      "confidence": "medium_for_pinned_parent_fields; low_for_current_range", "content_id": "sneezy", "levels": "1-10", "mode": "parent_and_child_cap",
+      "raw_sha256": "f9c009c22a7b8414a04abfb9cdfd44428c7b44bb8f1492a17da031765794c5a6",
+      "facts": ["The parent record has maxBoogersSummoned 2, rageDuration 30, rageDamageIncreasePercent 1 and range 5.5; no Booger child level record exists in the pinned raw cache."],
+      "limitations": "The rage scalar and range semantics are unclear and not sufficient for Core behavior."
+    }
+  ],
+  "catalogue_content_overrides": [
+    {"content_id": "sneezy", "fields": {
+      "max_boogers_summoned": {"value": 2, "source": "chiefpansancolt-62b019df-sneezy-raw-recheck", "note": "Preserved raw parent cap; spawn phase and replenishment are unverified."},
+      "rage_duration_seconds": {"value": 30, "source": "chiefpansancolt-62b019df-sneezy-raw-recheck", "note": "Preserved raw parent field; application and expiry order are unverified."},
+      "rage_damage_increase_percent_raw": {"value": 1, "source": "chiefpansancolt-62b019df-sneezy-raw-recheck", "note": "Preserved raw scalar without converting to a combat multiplier."}
+    }}
+  ],
+  "derivations": [
+    {"content_id": "sneezy", "levels": "1-10", "mode": "normal", "result": "Confirm TH18 L10 maximum and dated HP/DPS", "method": "Compare two dated game-file-derived tables with the SHA-pinned raw parent levels."},
+    {"content_id": "sneezy", "levels": "1-10", "mode": "parent_and_child_cap", "result": "Preserve raw maxBoogersSummoned, rageDuration and rageDamageIncreasePercent as data-only content fields", "method": "Exact field copies with provenance; no multiplier interpretation or event sequence inferred."},
+    {"content_id": "booger", "levels": "spawned_by_sneezy_L1-10", "mode": "spawned_air_unit", "result": "Separate partial spawned-unit coverage row", "method": "Primary-source child identity and current trap non-triggering rule; no invented child stats."}
+  ],
+  "rejected_inferences": [
+    {"rule": "Use 2.5 tiles as the parent's follow distance or 5.5 tiles as its post-Hero-loss attack range", "reason": "The source formats disagree and do not identify which mode each value describes."},
+    {"rule": "Apply the raw rageDamageIncreasePercent of 1 as a one-percent or 100-percent damage bonus", "reason": "The source unit conversion and application conditions are unverified."},
+    {"rule": "Give Boogers trap-triggering behavior", "reason": "Supercell explicitly removed trap triggering in January 2026."},
+    {"rule": "Borrow Baby Dragon or Minion combat stats for Boogers", "reason": "No checked current source gives child HP, DPS, cadence, lifetime or target behavior."},
+    {"rule": "Use generic Pet deployment and child spawn timing", "reason": "The primary sources omit paired offset, first sneeze, replenishment, cap resolution and post-Hero-loss tick order."}
+  ],
+  "open_uncertainties": [
+    {"content_id": "sneezy", "levels": "1-10", "mode": "paired_summoner_then_attack_after_hero_defeat", "items": ["exact current client build", "Hero-linked spawn, follow and range-mode semantics", "first sneeze, repetition, cap and replenishment tick order", "Hero knockout transition, rage scalar and duration", "parent target priority, attack impact and projectile timing", "Grand Warden follow weighting", "collision, visual anchors and battlefield art rights"]},
+    {"content_id": "booger", "levels": "spawned_by_sneezy_L1-10", "mode": "spawned_air_unit", "items": ["current child HP, DPS, cadence, lifetime and targeting", "spawn position, cap and replenishment sequence", "damage and collision eligibility after non-triggering trap change", "Grand Warden group weighting and Hero/Pet interactions", "battlefield art and redistribution rights"]}
+  ],
+  "conclusion": "Sneezy L1-10 and Booger remain partial and catalogue-only. Parent cap and rage fields are preserved as data; the child has no current level contract, and spawn, rage, target and collision ordering cannot be faithfully implemented."
+}

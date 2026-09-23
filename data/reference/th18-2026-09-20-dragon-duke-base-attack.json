@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-20-dragon-duke-base-attack",
+  "scope": "Additive Dragon Duke TH18 L21-L25 base attack and Royal Rampage offensive contract. Equipment, pets, Hero Banner defense and current trap-damage reduction remain excluded.",
+  "frozen_at": "2026-09-20T00:00:00+02:00",
+  "game_version": "The base payload is source commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba. Official July 2026 notes say rage was unchanged and only trap reduction was adjusted.",
+  "parent_reference":{"file":"th18-2026-09-20-dragon-duke-current-evidence.json","reference_id":"home-village-th18-2026-09-20-dragon-duke-current-evidence","sha256":"76f1dac4e006f29bbaf7d73f9aca5a8d92f486df5ace768eeb5e07f2e9411709"},
+  "sources":[
+    {"id":"chiefpansancolt-62b019df-dragon-duke","tier":"secondary-build-pinned","publisher":"chiefpansancolt/clash-of-clans-data","title":"Home Village Dragon Duke structured Hero record","published_on":"2026-04-19","consulted_on":"2026-09-20","version":"commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba","url":"https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/heroes/dragon-duke.json","limitations":"The pinned structured source defines range, cadence, flight, targeting, levels and Royal Rampage values, but predates July balance changes and has no tick-level transition, projectile or collision contract."},
+    {"id":"supercell-2026-07-09-dragon-duke","tier":"primary","publisher":"Supercell","title":"July Balance Update","published_on":"2026-07-09","consulted_on":"2026-09-20","url":"https://supercell.com/en/games/clashofclans/blog/news/july-balance-update/","limitations":"Confirms Royal Rampage was unchanged while trap reduction was reduced again. It does not state the new trap multiplier."}
+  ],
+  "catalogue_overrides":[
+    {"content_id":"dragon_duke","level":21,"fields":{"damage_per_shot":{"value":460.8,"source":"chiefpansancolt-62b019df-dragon-duke"}}},
+    {"content_id":"dragon_duke","level":22,"fields":{"damage_per_shot":{"value":465.6,"source":"chiefpansancolt-62b019df-dragon-duke"}}},
+    {"content_id":"dragon_duke","level":23,"fields":{"damage_per_shot":{"value":470.4,"source":"chiefpansancolt-62b019df-dragon-duke"}}},
+    {"content_id":"dragon_duke","level":24,"fields":{"damage_per_shot":{"value":475.2,"source":"chiefpansancolt-62b019df-dragon-duke"}}},
+    {"content_id":"dragon_duke","level":25,"fields":{"damage_per_shot":{"value":480.0,"source":"chiefpansancolt-62b019df-dragon-duke"}}}
+  ],
+  "catalogue_content_overrides":[
+    {"content_id":"dragon_duke","fields":{"core_minimum_level":{"value":21,"source":"chiefpansancolt-62b019df-dragon-duke","note":"Only TH18 L21-L25 base attack is enabled."},"flying":{"value":true,"source":"chiefpansancolt-62b019df-dragon-duke"},"target_type":{"value":"both","source":"chiefpansancolt-62b019df-dragon-duke"},"movement_speed":{"value":20,"source":"chiefpansancolt-62b019df-dragon-duke"},"range_tiles":{"value":1.25,"source":"chiefpansancolt-62b019df-dragon-duke"},"attack_speed_seconds":{"value":1.2,"source":"chiefpansancolt-62b019df-dragon-duke"},"isolation_radius_tiles":{"value":6,"source":"chiefpansancolt-62b019df-dragon-duke"},"rage_damage_multiplier":{"value":2,"source":"chiefpansancolt-62b019df-dragon-duke"},"rage_attack_speed_multiplier":{"value":1.5,"source":"chiefpansancolt-62b019df-dragon-duke"},"support":{"value":"core_supported_secondary_base_attack_and_rage_partial","source":"chiefpansancolt-62b019df-dragon-duke","note":"Core evaluates the all-flying-unit isolation predicate using serialised logical state at each fixed tick. The July official note confirms the rage values were unchanged. Trap reduction remains unavailable because its current value is unpublished."}}}
+  ],
+  "changed_values":[{"content_id":"dragon_duke","previous_state":"Current levels were source-traced but intentionally not materialized pending a base contract.","replacement":"TH18 L21-L25 use the pinned base attack contract and deterministic Royal Rampage outgoing damage and cadence multipliers.","justification":"The structured source fixes base values and the July official note confirms rage was not altered by the later balance pass."}],
+  "open_uncertainties":[{"content_id":"dragon_duke","items":["projectile or direct-contact launch and collision timing","current trap reduction after the official July further reduction","isolation transition ordering and precise eligible-flying-unit set beyond Core logical units","Hero Banner defensive behavior","source-verified Viewer asset, placement and scale"]}],
+  "conclusion":"Dragon Duke L21-L25 shared base attack and outgoing Royal Rampage are source-traced partial integrations. The current trap mitigation is deliberately not approximated."
+}

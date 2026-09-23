@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-20-attacking-hero-slots",
+  "scope": "Additive Home Village attacking Hero slot constraint. It does not select a Hero, configure equipment or affect defensive Banner behavior.",
+  "frozen_at": "2026-09-20T00:00:00+02:00",
+  "parent_reference": {"file": "th18-2026-09-20-hero-banner-th18-quantity.json", "reference_id": "home-village-th18-2026-09-20-hero-banner-th18-quantity", "sha256": "d38698780edea01ff845a14a14ba966fb347bc1c763b7a2d90b6f5a590c8e63d"},
+  "sources": [
+    {"id": "supercell-support-2026-09-20-attacking-hero-slots", "tier": "primary", "publisher": "Supercell", "title": "About Heroes & Pets", "published_on": null, "consulted_on": "2026-09-20", "url": "https://support.supercell.com/clash-of-clans/en/articles/about-heroes-pets-9.html", "confidence": "high", "facts": ["Players have up to four Hero slots in their attacking army."]}
+  ],
+  "behavior_contract": {"content_ids": ["barbarian_king", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke"], "source": "supercell-support-2026-09-20-attacking-hero-slots", "implemented": "Core rejects an initial army reserve containing more than four in-scope Hero entries. This deterministic scenario validation runs before adapters can submit commands.", "non_derivations": ["The source does not establish a duplicate-Hero selection rule, so only the published total-slot limit is enforced.", "Hero Equipment and pets remain excluded."]},
+  "open_uncertainties": [{"content_ids": ["barbarian_king", "archer_queen", "grand_warden", "royal_champion", "minion_prince", "dragon_duke"], "items": ["duplicate-Hero selection UI contract", "defensive Hero patrol and combat"]}],
+  "conclusion": "The four-slot attacking Hero constraint is materialized without inferring any undisclosed selection or equipment rule."
+}

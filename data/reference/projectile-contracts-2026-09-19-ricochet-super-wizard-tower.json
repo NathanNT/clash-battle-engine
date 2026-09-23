@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "reference_id": "projectile-contracts-2026-09-19-ricochet-super-wizard-tower",
+  "frozen_on": "2026-09-19",
+  "parent_contract": {
+    "file": "projectile-contracts-2026-09-18-headhunter-druid.json",
+    "sha256": "46d034c300df3fad4bb8ba22c01bf422fc9be5eab828b7f03cca1cd67ca49941"
+  },
+  "catalogue_audit_override": {
+    "non_healer_long_range_candidates": 62,
+    "currently_executable_weapon_paths": 39,
+    "currently_executable_special_paths": ["healer", "druid", "seeking_air_mine"],
+    "non_executable_long_range_candidates": 23
+  },
+  "contracts": [
+    {
+      "id": "ricochet_cannon",
+      "model": "logical_next_tick_primary_branching_partial",
+      "core": "BattleState::Projectile",
+      "gui": "amber_post_impact_trace",
+      "rl": "projectiles",
+      "fidelity": "partial",
+      "provenance": {
+        "status": "sourced_primary_secondary_partial",
+        "source_id": "supercell-2026-01-28-ricochet-cannon-balance-current-consultation",
+        "url": "https://supercell.com/en/games/clashofclans/blog/news/balance-changes-4/",
+        "consulted_on": "2026-09-19",
+        "statement": "One official 70% secondary bounce within 3.5 tiles; Core captures one deterministic nearest/ID branch from the primary.",
+        "needed": "versioned target eligibility/order, launch/travel, collision, target loss and same-tick impact contract"
+      }
+    },
+    {
+      "id": "super_wizard_tower",
+      "model": "logical_next_tick_primary_branching_partial",
+      "core": "BattleState::Projectile",
+      "gui": "amber_post_impact_trace",
+      "rl": "projectiles",
+      "fidelity": "partial",
+      "provenance": {
+        "status": "sourced_primary_secondary_partial",
+        "source_id": "supercell-2025-11-17-super-wizard-tower-launch-current-consultation",
+        "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/town-hall-18-crash-lands-update/",
+        "consulted_on": "2026-09-19",
+        "statement": "Officially chains to up to 15 nearby enemies; secondary evidence supplies the 4-tile branch radius and 40% branch damage.",
+        "needed": "versioned eligibility/order, footprint-edge radius, launch/travel, collision, target loss and same-tick impact contract"
+      }
+    }
+  ],
+  "historical_unavailable_profiles": [
+    {
+      "content_id": "ricochet_cannon",
+      "reason": "The historical v18.200.9 archive predates Ricochet Cannon. No archive projectile record is asserted or inferred."
+    },
+    {
+      "content_id": "super_wizard_tower",
+      "reason": "The historical v18.200.9 archive predates the TH18 Super Wizard Tower. No archive projectile record is asserted or inferred."
+    }
+  ],
+  "test_evidence": [
+    "cocsim_ricochet_cannon_tests: the sourced 3.5-tile, 70% one-secondary branch is serialized at launch; snapshot restoration and replay retain its future hash.",
+    "cocsim_super_wizard_tower_tests: one primary plus fifteen source-bounded branches are serialized at launch; snapshot restoration and replay retain the same future hash."
+  ]
+}

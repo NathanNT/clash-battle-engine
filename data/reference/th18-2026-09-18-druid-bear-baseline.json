@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-18-druid-bear-baseline",
+  "scope": "Additive TH18 Druid and required Bear form baseline. The Core models only sourced transform timing and parent to Bear lifecycle, while unsourced healing-chain geometry remains explicitly partial.",
+  "frozen_at": "2026-09-18T00:00:00+02:00",
+  "game_version": "The upstream payload is commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba. Supercell identifies Druid level 6 as Town Hall 18 content. Current human and Bear values are secondary observations without a published client build.",
+  "parent_reference": {"file": "th18-2026-09-18-headhunter-baseline.json", "reference_id": "home-village-th18-2026-09-18-headhunter-baseline", "sha256": "6ab4edf160f6f5cdbdf618141bc63f958fc7fb58ad413d1c0883b8f28d586619"},
+  "sources": [
+    {"id": "supercell-2024-06-18-druid", "tier": "primary", "publisher": "Supercell", "title": "June Update: Full Patch Notes", "published_on": "2024-06-18", "consulted_on": "2026-09-18", "version": "June 2024 update", "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/june-update-full-patch-notes/", "limitations": "The release note establishes ground healing, wall jumping in human form, up to five healing targets at launch, Bear transformation after a few seconds or human-form defeat, Bear defense targeting, and permanent defeat only after Bear defeat. It does not publish the current timer, current level table, health transition, projectile, chain geometry, or current Bear values."},
+    {"id": "supercell-2026-04-27-th18-druid-l6", "tier": "primary", "publisher": "Supercell", "title": "The Sound of Clash Update", "published_on": "2026-04-27", "consulted_on": "2026-09-18", "version": "Sound of Clash update", "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/the-sound-of-clash-update/", "limitations": "The release note establishes Druid level 6 at Town Hall 18 but publishes no current numeric or lifecycle values."},
+    {"id": "fandom-2026-09-18-druid", "tier": "secondary-version-unknown", "publisher": "Clash of Clans Wiki (Fandom)", "title": "Druid", "published_on": null, "consulted_on": "2026-09-18", "version": "not published", "url": "https://clashofclans.fandom.com/wiki/Druid", "limitations": "The current page provides the L1-L6 human table, 30-second transform timer, four healing targets, current movement, range, cadence, and human-form wall jumping. It provides no version pin, chain geometry, projectile contract, or exact transform tick ordering."},
+    {"id": "fandom-2026-09-18-druid-bear", "tier": "secondary-version-unknown", "publisher": "Clash of Clans Wiki (Fandom)", "title": "Druid/Bear", "published_on": null, "consulted_on": "2026-09-18", "version": "not published", "url": "https://clashofclans.fandom.com/wiki/Druid/Bear", "limitations": "The current page provides Bear L1-L6 HP, damage, DPS, housing, defense focus, movement, cadence, range, and 25-second description. It is unversioned and does not establish transform health transfer, same-tick ordering, spawning coordinates, projectile or visual contracts."}
+  ],
+  "catalogue_extra_levels": [
+    {"content_id": "druid", "level": 6, "source": "fandom-2026-09-18-druid", "observation_file": "druid-l6-observation-2026-09-18.json", "observation_sha256": "39559021aa6ec8e0a526c5d2261d35627344320cc528ae3da7cdb2837ecad217"}
+  ],
+  "catalogue_supplemental_contents": [
+    {"content_id": "druid_bear", "source": "fandom-2026-09-18-druid-bear", "observation_file": "druid-bear-observation-2026-09-18.json", "observation_sha256": "96a7cf26ebdee8728a81fbcd2e1d8919946cd578222d8f2c2a80e506a6fbf514"}
+  ],
+  "catalogue_content_overrides": [
+    {"content_id": "druid", "fields": {
+      "heals": {"value": true, "source": "fandom-2026-09-18-druid"},
+      "jumps_walls": {"value": true, "source": "supercell-2024-06-18-druid"},
+      "healing_target_count": {"value": 4, "source": "fandom-2026-09-18-druid", "note": "The current secondary page says four targets while the original official launch note said up to five. Core preserves direct healing only until a current chain geometry contract is available."},
+      "druid_transform_after_seconds": {"value": 30, "source": "fandom-2026-09-18-druid"},
+      "druid_transforms_on_death": {"value": true, "source": "supercell-2024-06-18-druid"},
+      "support": {"value": "core_supported_primary_secondary_partial", "source": "fandom-2026-09-18-druid", "note": "Core materializes human healing, the fixed transform deadline, death transformation except Spring Trap ejection, and the sourced Bear. Healing bounces, exact transform ordering and visual fidelity remain unimplemented."}
+    }}
+  ],
+  "changed_values": [
+    {"content_id": "druid", "previous_state": "Catalogued-only L1-L5 human parent with no Core identifier or TH18 L6 record.", "replacement": "L1-L6 human form materializes through shared Core with sourced healing and fixed logical transformation state.", "justification": "The official release note establishes the two-form lifecycle and the official 2026 release confirms L6. The numeric current table and 30-second timer are explicitly secondary."},
+    {"content_id": "druid_bear", "previous_state": "Required transformed subunit was absent from the permanent scope and GameData.", "replacement": "L1-L6 Bear data materializes only through the deterministic Druid transition queue.", "justification": "The public secondary Bear table supplies the current child values needed to avoid a guessed proxy."}
+  ],
+  "known_uncertainties": [
+    "The original primary description says up to five healing targets, while the current secondary page says four. Core deliberately uses one direct heal target rather than inventing a chain radius, selection order, retarget rule or projectile geometry.",
+    "The exact transform health transition, ordering when the deadline and lethal damage coincide, spawn displacement and target acquisition tick are not published. Core deterministically creates a full-HP Bear at the human position and records this as a replaceable baseline.",
+    "No consulted source provides human healing projectile speed, chain-hop range, healing weight, Hero healing implementation, spell interaction, or source-verified sprite placement, scaling and animation.",
+    "The Spring Trap exception is documented by current secondary material, but Spring capacity and Bear interaction ordering remain partial."
+  ],
+  "conclusion": "Druid L1-L6 and Bear L1-L6 are executable through shared Core, Headless, Viewer and RL paths. Human direct healing and the logical transformation lifecycle are implemented. Healing chains, transform details, Spring interaction fidelity and visual fidelity remain explicitly partial."
+}

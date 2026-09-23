@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-meteor-golem-meteormite-evidence-recheck",
+  "scope": "Additive recheck of the permanent Meteor Golem L1-3 and required Meteormite. No incomplete split, throw or merge lifecycle is enabled.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "The secondary parent table reports client build 18.600.3. The consulted primary pages do not publish a build-pinned post-buff child table or deterministic lifecycle.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-hero-defense-evidence-closure.json",
+    "reference_id": "home-village-th18-2026-09-23-hero-defense-evidence-closure",
+    "sha256": "bf8047f988dc4851c0d58f9db3a33191e9595cc6d9e8ee68ad39aa14f4766354"
+  },
+  "sources": [
+    {
+      "id": "supercell-2025-11-17-meteor-permanent-2026-09-23-recheck",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "TOWN HALL 18 Crash Lands! - Update",
+      "published_on": "2025-11-17",
+      "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/town-hall-18-crash-lands-update/",
+      "confidence": "high",
+      "facts": ["The permanent Meteor Golem throws Meteormites over Walls; Meteormites can remerge to form a Meteor Golem."],
+      "limitations": "No split trigger, throw damage or timing, landing position, merge condition or child level table is published."
+    },
+    {
+      "id": "supercell-2026-07-09-meteor-buff-2026-09-23-recheck",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "July Balance Update",
+      "published_on": "2026-07-09",
+      "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/july-balance-update/",
+      "confidence": "high",
+      "facts": ["Meteor Golem and Meteormites received a post-launch buff affecting their split-and-merge gameplay."],
+      "limitations": "The article explicitly describes the balance intent without a numeric breakdown; it cannot validate the older child table."
+    },
+    {
+      "id": "goblinsfarm-18-600-3-meteor-2026-09-23-recheck",
+      "tier": "secondary-build-pinned",
+      "publisher": "Goblins Farm",
+      "title": "Meteor Golem",
+      "published_on": "2026-09-18",
+      "consulted_on": "2026-09-23",
+      "version": "client build 18.600.3, as reported by publisher",
+      "url": "https://goblinsfarm.com/wiki/troops/meteor-golem.html",
+      "confidence": "medium",
+      "facts": ["The parent L1-3 hitpoints and damage table matches the already imported post-buff values."],
+      "limitations": "The page has no Meteormite level table, split trigger, throw or landing contract, merge rule, collision geometry or animation timing."
+    }
+  ],
+  "rejected_inferences": [
+    {"rule": "Use the pre-buff Meteormite child table as current.", "reason": "The official July update confirms a child buff, while no current build-pinned child values were found."},
+    {"rule": "Represent the parent as a generic ranged damage dealer without a child lifecycle.", "reason": "The permanent troop's defining throw and remerge behavior is source-confirmed but cannot be reproduced by a generic attack."},
+    {"rule": "Infer launch, landing, split, merge or invulnerability timing from descriptive prose.", "reason": "The checked sources omit distances, timings, health partition, collision and deterministic tie ordering."}
+  ],
+  "open_uncertainties": [
+    {"content_ids": ["meteor_golem", "meteormite"], "items": ["current post-buff Meteormite L1-3 hitpoints and damage", "split trigger and health partition", "throw target acquisition, damage, trajectory, landing and collision", "merge range, priority, delay, level selection and health", "invulnerability duration, exact geometry and same-tick ordering", "battlefield assets and rights"]}
+  ],
+  "conclusion": "Meteor Golem L1-3 and Meteormite remain partial and data-only. Current public evidence supports the parent table and child identity but not a deterministic complete lifecycle; no Core, Headless, Viewer, RL, snapshot or replay integration is claimed."
+}

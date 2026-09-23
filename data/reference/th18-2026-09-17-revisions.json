@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "ledger_id": "home-village-th18-2026-09-17-revisions",
+  "parent_reference": "th18-2026-09-17.json",
+  "policy": "Append-only correction ledger. A correction preserves the previously imported value, the evidence that invalidated it, and the replacement observation hash; it never rewrites history silently.",
+  "revisions": [
+    {
+      "revision": 1,
+      "recorded_at": "2026-09-17",
+      "scope": {"content_id": "trap_skeleton_ground", "levels": [1, 2]},
+      "source": "fandom-2026-09-17-skeleton-trap",
+      "evidence_url": "https://clashofclans.fandom.com/wiki/Skeleton_Trap",
+      "reason": "The pinned table was re-read after the original import conflated DPS with damage per hit and omitted the published 0.7-second cadence.",
+      "previous": {
+        "attack_speed_seconds": 1,
+        "levels": [
+          {"level": 1, "damage_per_hit": 25, "dps": 25},
+          {"level": 2, "damage_per_hit": 30, "dps": 30}
+        ],
+        "observation_sha256": "cf6fd22d09a32eee14ee581dfc606f0471787467a4f5274647162aaa9745b7a8"
+      },
+      "replacement": {
+        "attack_speed_seconds": 0.7,
+        "levels": [
+          {"level": 1, "damage_per_hit": 17.5, "dps": 25},
+          {"level": 2, "damage_per_hit": 21, "dps": 30}
+        ],
+        "observation_file": "trap-skeleton-ground-observation-2026-09-17.json",
+        "observation_sha256": "18734427fbacbc4b04213e7394906fe27948685935a3094fb5cc849c5b87e00d"
+      },
+      "verification": ["tools/validate_th18_reference.py", "tests/core_tests.cpp"]
+    },
+    {
+      "revision": 2,
+      "recorded_at": "2026-09-17",
+      "scope": {"content_id": "wall_breaker", "fields": ["attack_speed_seconds"]},
+      "source": "chiefpansancolt-62b019df",
+      "evidence_url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/wall-breaker.json",
+      "reason": "The raw-cache consistency gate found a catalogue cadence that had no reference override or field provenance. The immutable source payload specifies one second.",
+      "previous": {"attack_speed_seconds": 0.7},
+      "replacement": {"attack_speed_seconds": 1, "raw_sha256": "f8bbbe2d5e0eb43ff5bbd9a3734bf490b52d09a1eddc92fd45b7de6bbbafbf81"},
+      "verification": ["tools/validate_raw_catalogue_consistency.py", "tests/core_tests.cpp", "tools/validate_rl_runtime.py"]
+    },
+    {
+      "revision": 3,
+      "recorded_at": "2026-09-17",
+      "scope": {"content_id": "giant", "level": 1, "fields": ["town_hall_required"]},
+      "source": "goblinsfarm-2026-09-16-giant",
+      "evidence_url": "https://goblinsfarm.com/wiki/troops/giant.html",
+      "reason": "The current-build table reports Town Hall 2 while the historical raw snapshot reports 1.",
+      "previous": {"town_hall_required": 1, "source": "chiefpansancolt-62b019df"},
+      "replacement": {"town_hall_required": 2, "observation_file": "giant-observation-2026-09-17.json", "observation_sha256": "df094033d5b1484d8fab526ac324f9baa2e6c9cefa0f8f3707588bd126e1a28a"},
+      "verification": ["tools/validate_th18_reference.py", "tools/validate_raw_catalogue_consistency.py", "tools/validate_rl_runtime.py"]
+    },
+    {
+      "revision": 4,
+      "recorded_at": "2026-09-17",
+      "scope": {"content_id": "cannon", "level": 2, "fields": ["town_hall_required"]},
+      "source": "goblinsfarm-2026-08-26-cannon",
+      "evidence_url": "https://goblinsfarm.com/wiki/buildings/cannon.html",
+      "reason": "The dated Home Village table reports Town Hall 2 while the April raw snapshot reports 1.",
+      "previous": {"town_hall_required": 1, "source": "chiefpansancolt-62b019df"},
+      "replacement": {"town_hall_required": 2, "observation_file": "cannon-observation-2026-09-17.json", "observation_sha256": "fb9f5eafbfbbab277d73e2bef8e308dcebefc98cdede4863a2a9c65d8d9a2cd2"},
+      "verification": ["tools/validate_th18_reference.py", "tools/validate_raw_catalogue_consistency.py", "tests/core_tests.cpp", "tools/validate_rl_runtime.py"]
+    },
+    {
+      "revision": 5,
+      "recorded_at": "2026-09-17",
+      "scope": {"content_id": "archer", "level": 1, "fields": ["town_hall_required"]},
+      "source": "goblinsfarm-2026-08-26-archer",
+      "evidence_url": "https://goblinsfarm.com/wiki/troops/archer.html",
+      "reason": "The dated Home Village table reports Town Hall 2 while the April raw snapshot reports 1.",
+      "previous": {"town_hall_required": 1, "source": "chiefpansancolt-62b019df"},
+      "replacement": {"town_hall_required": 2},
+      "verification": ["tools/validate_th18_reference.py", "tools/validate_raw_catalogue_consistency.py", "tests/core_tests.cpp", "tools/validate_rl_runtime.py"]
+    },
+    {
+      "revision": 6,
+      "recorded_at": "2026-09-17",
+      "scope": {"content_id": "dragon_rider", "fields": ["target_type"]},
+      "source": "supercell-2021-06-13-dragon-rider",
+      "evidence_url": "https://supercell.com/en/games/clashofclans/blog/game-updates/dragon-rider/",
+      "reason": "The immutable April raw snapshot classified Dragon Rider as ground-only, while Supercell's launch specification explicitly states that it targets Ground & Air. No later consulted official delta changes this target class.",
+      "previous": {"target_type": "ground", "source": "chiefpansancolt-62b019df"},
+      "replacement": {"target_type": "both", "source": "supercell-2021-06-13-dragon-rider"},
+      "verification": ["tools/validate_th18_reference.py", "tools/validate_raw_catalogue_consistency.py", "tests/core_tests.cpp", "tools/validate_rl_runtime.py"]
+    },
+    {
+      "revision": 7,
+      "recorded_at": "2026-09-17",
+      "scope": {"content_id": "electro_dragon", "levels": [8, 9], "fields": ["hitpoints", "dps", "damage_per_shot"]},
+      "source": "goblinsfarm-2026-09-16-electro-dragon",
+      "evidence_url": "https://goblinsfarm.com/wiki/troops/electro-dragon.html",
+      "reason": "Supercell's 2026-07-09 note confirms a top-two-level HP and damage boost but omits numbers. The dated client-build 18.600.3 table supplies L8/L9 HP and DPS, superseding the older frozen April raw snapshot values. Damage per shot is derived only from that source's unchanged 3.5-second cadence.",
+      "previous": {"levels": [{"level": 8, "hitpoints": 6200, "dps": 460, "damage_per_shot": 1610}, {"level": 9, "hitpoints": 6700, "dps": 500, "damage_per_shot": 1750}], "source": "chiefpansancolt-62b019df"},
+      "replacement": {"levels": [{"level": 8, "hitpoints": 6400, "dps": 475, "damage_per_shot": 1662.5}, {"level": 9, "hitpoints": 6900, "dps": 510, "damage_per_shot": 1785}], "source": "goblinsfarm-2026-09-16-electro-dragon", "version": "client build 18.600.3 (as reported by publisher)"},
+      "verification": ["tools/validate_th18_reference.py", "tools/validate_raw_catalogue_consistency.py"]
+    },
+    {
+      "revision": 8,
+      "recorded_at": "2026-09-17",
+      "scope": {"content_id": "electro_dragon", "fields": ["range_tiles"]},
+      "source": "goblinsfarm-2026-09-16-electro-dragon",
+      "evidence_url": "https://goblinsfarm.com/wiki/troops/electro-dragon.html",
+      "reason": "The dated client-build 18.600.3 table reports a 2.5-tile range, superseding the historical frozen April payload's 3-tile value. The Supercell launch post establishes the target class and housing but does not publish a range value.",
+      "previous": {"range_tiles": 3, "source": "chiefpansancolt-62b019df"},
+      "replacement": {"range_tiles": 2.5, "source": "goblinsfarm-2026-09-16-electro-dragon", "version": "client build 18.600.3 (as reported by publisher)"},
+      "verification": ["tools/validate_th18_reference.py", "tools/validate_raw_catalogue_consistency.py"]
+    },
+    {
+      "revision": 9,
+      "recorded_at": "2026-09-17",
+      "scope": {"content_ids": ["ruin_witch", "ruin_knight"], "fields": ["max_summoned_ruin_knights", "hitpoint_decay_per_second"]},
+      "source": "supercell-2026-08-30-update",
+      "evidence_url": "https://supercell.com/en/games/clashofclans/blog/release-notes/august-update-3/",
+      "reason": "The frozen secondary Ruin Witch/Ruin Knight observations predate Supercell's August TH18 update. Its published behavior delta raises the Witch cap from eight to ten Ruin Knights and removes the Knight's health decay; retaining the older values would silently model an obsolete current reference.",
+      "previous": {"max_summoned_ruin_knights": 8, "hitpoint_decay_per_second": 80, "sources": ["supercell-2026-06-15-anime-fury", "cocwarbase-2026-09-17-ruin-witch"]},
+      "replacement": {"max_summoned_ruin_knights": 10, "hitpoint_decay_per_second": 0, "source": "supercell-2026-08-30-update"},
+      "verification": ["tools/import_data.py", "tools/validate_th18_reference.py", "tools/validate_raw_catalogue_consistency.py", "tools/validate_th18_documentation_delta.py"]
+    },
+    {
+      "revision": 10,
+      "recorded_at": "2026-09-18",
+      "scope": {"content_id": "electro_titan", "fields": ["aura_excludes_walls", "aura_ignores_freeze", "aura_ignores_rage"]},
+      "source": "fandom-2026-09-18-electro-titan",
+      "evidence_url": "https://clashofclans.fandom.com/wiki/Electro_Titan",
+      "reason": "The frozen raw entry already preserves every level's aura damage, 0.4-second cadence and 3.5-tile radius, but not its target and spell-interaction contract. This post-freeze secondary audit adds only those qualitative fields; it does not alter frozen numeric levels.",
+      "previous": {"behavior": "absent"},
+      "replacement": {"aura_excludes_walls": true, "aura_ignores_freeze": true, "aura_ignores_rage": true},
+      "verification": ["tools/import_data.py", "tools/validate_th18_reference.py", "tests/core_tests.cpp", "tools/validate_rl_runtime.py"]
+    }
+  ]
+}

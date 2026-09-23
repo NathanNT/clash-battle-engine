@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-18-ice-golem-death-freeze",
+  "scope": "Additive Home Village TH18 Ice Golem death-freeze integration. All earlier frozen references remain unmodified.",
+  "frozen_at": "2026-09-18T00:00:00+02:00",
+  "game_version": "The immutable upstream payload is commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba. The most recent independently dated current data consulted is a 2026-09-01 game-file extract processed on 2026-09-03. Supercell's mechanics notes do not identify a current client build.",
+  "parent_reference": {"file": "th18-2026-09-18-bowler-bounce.json", "reference_id": "home-village-th18-2026-09-18-bowler-bounce", "sha256": "90f4398b847f7b782299843d7ee6c985b4ddbe2d8a02632cec0e452b16d1efb0"},
+  "sources": [
+    {"id": "supercell-2019-03-21-ice-golem-offense-freeze", "tier": "primary", "publisher": "Supercell", "title": "Neue Level & Mehr Balanceänderungen!", "published_on": "2019-03-21", "consulted_on": "2026-09-18", "version": "not published", "url": "https://supercell.com/en/games/clashofclans/de/blog/game-updates/neue-level-balance/", "limitations": "The German official note establishes that a lethal Ice Golem triggers a Freeze spell. It publishes offense durations for L1 through L5 and says offensive Ice Golems retain those original durations with a 36 percent larger freeze radius. It does not publish later-level durations, base radius, propagation, exact eligible-unit classes, or current client build."},
+    {"id": "supercell-2023-06-12-ice-golem-l7", "tier": "primary", "publisher": "Supercell", "title": "Full Patch Notes", "published_on": "2023-06-12", "consulted_on": "2026-09-18", "version": "not published", "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/patch-notes-june-2023-2/", "limitations": "The TH15 release table publishes Ice Golem L7 with an 8-second freeze time when destroyed. It does not publish radius, target eligibility, propagation, or a current client build."},
+    {"id": "gibiarena-2026-09-03-ice-golem", "tier": "secondary-dated-game-files", "publisher": "GiBiArena via ClashKing", "title": "Ice Golem: levels, costs and times", "published_on": "2026-09-03", "consulted_on": "2026-09-18", "version": "game files dated 2026-09-01", "url": "https://www.gibiarena.com/en/clash-of-clans/upgrades/ice-golem", "limitations": "The dated extract verifies TH18 maximum L9 and current ordinary troop progression but does not display death-freeze radius or every duration."},
+    {"id": "clash-troops-2026-09-18-ice-golem", "tier": "secondary", "publisher": "Clash Troops", "title": "Ice Golem: Clash of Clans Dark Elixir Troop Stats, Levels & Cost", "published_on": null, "consulted_on": "2026-09-18", "version": "not published", "url": "https://www.clashtroops.com/dark-troops/ice-golem/", "limitations": "Reports L9 offensive death freeze as 9 seconds and says its data comes from game files, but it does not publish a capture date or the freeze radius or complete duration table."},
+    {"id": "fandom-2026-09-18-ice-golem", "tier": "secondary", "publisher": "Clash of Clans Wiki (Fandom)", "title": "Ice Golem", "published_on": null, "consulted_on": "2026-09-18", "version": "not published", "url": "https://clashofclans.fandom.com/wiki/Ice_Golem", "limitations": "Provides the reported offensive L1-L9 duration progression and 7.5-tile offensive radius. It does not identify an immutable build, exact expansion timing, precise target classes, or a deterministic client ordering."}
+  ],
+  "catalogue_overrides": [
+    {"content_id": "ice_golem", "level": 1, "fields": {"death_freeze_duration_seconds": {"value": 4, "source": "supercell-2019-03-21-ice-golem-offense-freeze"}}},
+    {"content_id": "ice_golem", "level": 2, "fields": {"death_freeze_duration_seconds": {"value": 4.75, "source": "supercell-2019-03-21-ice-golem-offense-freeze"}}},
+    {"content_id": "ice_golem", "level": 3, "fields": {"death_freeze_duration_seconds": {"value": 5.5, "source": "supercell-2019-03-21-ice-golem-offense-freeze"}}},
+    {"content_id": "ice_golem", "level": 4, "fields": {"death_freeze_duration_seconds": {"value": 6.25, "source": "supercell-2019-03-21-ice-golem-offense-freeze"}}},
+    {"content_id": "ice_golem", "level": 5, "fields": {"death_freeze_duration_seconds": {"value": 7, "source": "supercell-2019-03-21-ice-golem-offense-freeze"}}},
+    {"content_id": "ice_golem", "level": 6, "fields": {"death_freeze_duration_seconds": {"value": 7.5, "source": "fandom-2026-09-18-ice-golem"}}},
+    {"content_id": "ice_golem", "level": 7, "fields": {"death_freeze_duration_seconds": {"value": 8, "source": "supercell-2023-06-12-ice-golem-l7"}}},
+    {"content_id": "ice_golem", "level": 8, "fields": {"death_freeze_duration_seconds": {"value": 8.5, "source": "fandom-2026-09-18-ice-golem"}}},
+    {"content_id": "ice_golem", "level": 9, "fields": {"death_freeze_duration_seconds": {"value": 9, "source": "clash-troops-2026-09-18-ice-golem"}}}
+  ],
+  "catalogue_content_overrides": [
+    {"content_id": "ice_golem", "fields": {"death_freeze_radius_tiles": {"value": 7.5, "source": "fandom-2026-09-18-ice-golem", "note": "Reported offensive radius. The official 2019 note independently establishes a 36 percent offensive increase, but does not publish the base or resulting radius."}, "support": {"value": "core_supported_primary_secondary_partial", "source": "supercell-2019-03-21-ice-golem-offense-freeze", "note": "Core creates a serializable Freeze effect at the attacker Ice Golem's death location. It freezes defender-side in-scope entities through the existing Freeze path. Defensive Clan Castle Ice Golems are excluded from this goal and receive no modeled effect."}}}
+  ],
+  "changed_values": [
+    {"content_id": "ice_golem", "previous_state": "Catalogued-only ordinary attacks with no death-freeze contract.", "replacement": "L1-L9 offensive death-freeze duration and a reported 7.5-tile offensive radius are imported. An attacker Ice Golem death creates the shared serializable Freeze effect.", "justification": "The official 2019 note establishes the death-triggered Freeze, original offensive duration semantics and increased offensive radius. The official 2023 note independently verifies L7 at eight seconds. Secondary records supply the later-level and radius values that official notes omit."}
+  ],
+  "known_uncertainties": [
+    "Public sources do not publish a versioned current client contract for freeze propagation, expansion delay, target class, air interaction, attack reset semantics, or intra-tick ordering.",
+    "The 7.5-tile radius and L6/L8 duration values are secondary. L9 is corroborated by a secondary game-file-backed page but no dated source exposes its exact field capture.",
+    "This increment intentionally applies only attacker Ice Golem deaths and freezes defender-side in-scope entities through the existing Freeze effect. Clan Castle reinforcements are excluded, and the exact treatment of any excluded defender-side unit types remains open.",
+    "The Viewer uses the existing Freeze-effect visual. No separate Ice Golem death animation or source-verified propagation visual is claimed."
+  ],
+  "conclusion": "Ice Golem is executable through shared Core, CLI, Viewer and RL paths with a sourced death-triggered Freeze. It remains partial until a versioned propagation and target-selection contract is available."
+}

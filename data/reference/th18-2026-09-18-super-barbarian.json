@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-18-super-barbarian",
+  "scope": "Additive Home Village TH18 reference delta for Super Barbarian's deployment Rage; it preserves every preceding reference artifact.",
+  "frozen_at": "2026-09-18T00:00:00+02:00",
+  "game_version": "The immutable level payload is source commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba. Neither the official launch note nor the community modifier table identifies a current game/client build; that version remains explicitly unknown rather than inferred.",
+  "parent_reference": {
+    "file": "th18-2026-09-18-super-wall-breaker.json",
+    "reference_id": "home-village-th18-2026-09-18-super-wall-breaker",
+    "sha256": "54f678ca61a8c25daa050c9aeb41c399b181b0feb97d35e5af9d7624f9859331"
+  },
+  "sources": [
+    {
+      "id": "supercell-2020-03-30-super-barbarian-rage",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "published_on": "2020-03-30",
+      "consulted_on": "2026-09-18",
+      "version": "not published by the official launch note",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/the-spring-update-is-here-2/",
+      "limitations": "Official launch note fixes the first-eight-seconds deployment window and says movement speed and damage increase, but does not publish the two numerical modifiers or current fixed-tick ordering."
+    },
+    {
+      "id": "fandom-2026-09-18-super-barbarian",
+      "tier": "secondary",
+      "publisher": "Clash of Clans Wiki (Fandom)",
+      "consulted_on": "2026-09-18",
+      "version": "not published by the community table",
+      "url": "https://clashofclans.fandom.com/wiki/Super_Barbarian",
+      "limitations": "Community-maintained current table gives Rage Movement Speed Increase 16 and Rage Damage Increase 70%, but has no immutable client build or publication date."
+    }
+  ],
+  "official_deltas": [
+    {
+      "source": "supercell-2020-03-30-super-barbarian-rage",
+      "family": "super_troop",
+      "id": "super_barbarian",
+      "behavior": "Speed and damage are increased for the first 8 seconds after deployment."
+    }
+  ],
+  "catalogue_extra_levels": [],
+  "catalogue_overrides": [],
+  "catalogue_content_overrides": [
+    {
+      "content_id": "super_barbarian",
+      "fields": {
+        "deployment_rage_duration_seconds": {
+          "value": 8,
+          "source": "supercell-2020-03-30-super-barbarian-rage",
+          "note": "Official launch rule: the deployment Rage lasts for the first eight seconds."
+        },
+        "deployment_rage_damage_multiplier": {
+          "value": 1.7,
+          "source": "fandom-2026-09-18-super-barbarian",
+          "note": "Community table's +70% Rage Damage Increase, represented as 1 + 70/100."
+        },
+        "deployment_rage_movement_speed_increase": {
+          "value": 16,
+          "source": "fandom-2026-09-18-super-barbarian",
+          "note": "Community table's additive Rage Movement Speed Increase in the same source speed units as the immutable base movement speed 20."
+        },
+        "support": {
+          "value": "core_supported_secondary_partial",
+          "source": "supercell-2020-03-30-super-barbarian-rage",
+          "note": "Core support applies the eight-second deployment window and sourced modifiers through serialized logical state; numeric modifiers remain secondary evidence."
+        }
+      }
+    }
+  ],
+  "changed_values": [
+    {
+      "content_id": "super_barbarian",
+      "previous_state": "catalogued-only Super Troop with no executable deployment Rage lifecycle",
+      "replacement": "primary-sourced eight-second deployment Rage with separately provenance-marked secondary damage and movement modifiers",
+      "justification": "The special ability is defining behavior and has both a qualitative primary contract and a numerical secondary table; each confidence tier remains visible."
+    }
+  ],
+  "known_uncertainties": [
+    "No official current numerical modifier table or version-identified client build was found for the +70% damage and +16 speed values.",
+    "The public sources do not specify the exact inclusive/exclusive boundary at 8,000 ms, first-attack ordering, target-loss behavior, or interactions with other Rage/Haste effects."
+  ],
+  "conclusion": "This is an additive versioned reference; it does not alter the 2026-09-17 ledger or either preceding 2026-09-18 delta."
+}

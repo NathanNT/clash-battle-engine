@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-20-air-sweeper-mechanics-recheck",
+  "scope": "Additive recheck of Air Sweeper mechanics; records conflicting public geometry without enabling a proxy.",
+  "frozen_at": "2026-09-20T00:00:00+02:00",
+  "game_version": "Official aimed-defense evidence and a version-unknown secondary mechanics page reconsulted on 2026-09-20.",
+  "parent_reference": {"file": "th18-2026-09-20-ruin-witch-movement-followup.json", "reference_id": "home-village-th18-2026-09-20-ruin-witch-movement-followup", "sha256": "857d3ef2ac8404f6cbe4c72a4e6e24e8490c7b23761cae7f58c3015795209510"},
+  "sources": [
+    {"id": "supercell-2024-11-25-air-sweeper-recheck", "tier": "primary", "publisher": "Supercell", "title": "The Town Hall 17 Update Is Here!", "published_on": "2024-11-25", "consulted_on": "2026-09-20", "version": "not published", "url": "https://supercell.com/en/games/clashofclans/blog/game-updates/the-town-hall-17-update-is-here-2/", "limitations": "Still establishes only an aimed direction and coverage cone, not angle, vector, blast path, collision or fixed-tick order."},
+    {"id": "fandom-2026-09-20-air-sweeper-mechanics-recheck", "tier": "secondary-version-unknown", "publisher": "Clash of Clans Wiki (Fandom)", "title": "Air Sweeper", "published_on": null, "consulted_on": "2026-09-20", "version": "not published", "url": "https://clashofclans.fandom.com/wiki/Air_Sweeper?jw_start=%7Bseek_to_second_number%7D&page=1", "limitations": "The same current page reports incompatible 10-, 30-, 60-, 90- and 120-degree descriptions. It also says displacement is normal to an unspecified curved blast, while publishing no origin, curve, hit boundary, collision, target order or version-pinned replay."}
+  ],
+  "known_uncertainties": ["The recheck adds no compatible numerical geometry: its angle and coverage descriptions cannot be mapped to one deterministic effect sector.", "No public source fixes the blast curve/origin, resulting vector, collision clipping, simultaneous-target order, action interruption or snapshot/replay state."],
+  "conclusion": "The 20 September recheck confirms Air Sweeper must remain data-only. Its exact catalogue values are retained, but an aimed pushback model would still invent decisive geometry and ordering rules."
+}

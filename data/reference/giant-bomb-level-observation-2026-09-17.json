@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "reference_id": "th18-giant-bomb-secondary-observation-2026-09-17",
+  "purpose": "Pinned secondary values for the official TH18 Giant Bomb level; the source table also states a ground-only 2-tile trigger and the 4.2-tile damage radius.",
+  "observations": [
+    {"source_id":"goblinsfarm-2026-08-26-giant-bomb","content_id":"giant_bomb","level":12,"url":"https://goblinsfarm.com/wiki/traps/giant-bomb.html","published_on":"2026-08-26","consulted_on":"2026-09-17","reported_client_build":"18.400.21","fields":{"damage":490,"damage_radius_tiles":4.2,"upgrade_cost":17000000,"upgrade_cost_resource":"Gold","upgrade_time_seconds":907200,"town_hall_required":18},"known_missing":[]}
+  ]
+}

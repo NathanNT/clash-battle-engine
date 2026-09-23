@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-18-apprentice-warden-life-aura",
+  "scope": "Additive Home Village TH18 Apprentice Warden Life Aura integration. All earlier frozen references remain unmodified.",
+  "frozen_at": "2026-09-18T00:00:00+02:00",
+  "game_version": "The immutable upstream payload is commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba. Supercell's June 2023 launch table provides all currently applicable Apprentice Warden levels but does not identify a current client build.",
+  "parent_reference": {"file": "th18-2026-09-18-ice-golem-death-freeze.json", "reference_id": "home-village-th18-2026-09-18-ice-golem-death-freeze", "sha256": "be6289b6f0ed6a62bd2ccf3bf3aebf4d2d1840bc9ba0e2a304ac4a1ffa173582"},
+  "sources": [
+    {"id": "supercell-2023-06-12-apprentice-warden-life-aura", "tier": "primary", "publisher": "Supercell", "title": "Full Patch Notes", "published_on": "2023-06-12", "consulted_on": "2026-09-18", "version": "not published", "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/patch-notes-june-2023-2/", "limitations": "The launch note identifies a 7-tile Life Aura affecting nearby ground troops, states that overlapping auras do not stack and that the strongest applies, and publishes L1-L4 HP increase values. It does not specify sub-tile entry timing, removal damage semantics, exact self-targeting, summoned-unit treatment, or a current client build."}
+  ],
+  "catalogue_overrides": [
+    {"content_id": "apprentice_warden", "level": 1, "fields": {"life_aura_hp_increase_percent": {"value": 24, "source": "supercell-2023-06-12-apprentice-warden-life-aura"}}},
+    {"content_id": "apprentice_warden", "level": 2, "fields": {"life_aura_hp_increase_percent": {"value": 26, "source": "supercell-2023-06-12-apprentice-warden-life-aura"}}},
+    {"content_id": "apprentice_warden", "level": 3, "fields": {"life_aura_hp_increase_percent": {"value": 28, "source": "supercell-2023-06-12-apprentice-warden-life-aura"}}},
+    {"content_id": "apprentice_warden", "level": 4, "fields": {"life_aura_hp_increase_percent": {"value": 30, "source": "supercell-2023-06-12-apprentice-warden-life-aura"}}}
+  ],
+  "catalogue_content_overrides": [
+    {"content_id": "apprentice_warden", "fields": {"aura_range_tiles": {"value": 7, "source": "supercell-2023-06-12-apprentice-warden-life-aura", "note": "The official launch note publishes the Life Aura radius."}, "support": {"value": "core_supported_primary_partial", "source": "supercell-2023-06-12-apprentice-warden-life-aura", "note": "Core deterministically applies the strongest nearby attacker Life Aura to eligible ground troops and exposes the resulting HP through existing shared Core, Viewer and RL observations."}}}
+  ],
+  "changed_values": [
+    {"content_id": "apprentice_warden", "previous_state": "Catalogued-only ordinary attack with no Life Aura behavior.", "replacement": "All L1-L4 Life Aura HP increases and 7-tile radius are imported. Core evaluates the strongest nearby attacker aura for each ground troop on every logical tick.", "justification": "The official launch table provides the radius, all four level values and strongest-only overlap contract. The historical payload remains intact and receives only this dated additive behavior record."}
+  ],
+  "known_uncertainties": [
+    "Supercell does not publish sub-tile aura entry timing, removal damage semantics, exact self-targeting, summoned-unit treatment, or client ordering for this mechanic.",
+    "Core applies the published maximum-HP percentage on fixed ticks, grants the newly available HP when a higher aura begins, and caps current HP when it ends. This deterministic health-transition policy is an explicit implementation assumption, not a published client-level timing contract.",
+    "The Viewer exposes the resulting Core HP bar but has no separately source-verified Life Aura ring or animation."
+  ],
+  "conclusion": "Apprentice Warden is executable through shared Core, CLI, Viewer and RL paths with a primary-sourced ground Life Aura. It remains partial until transition timing and visual contracts are documented for a versioned client."
+}

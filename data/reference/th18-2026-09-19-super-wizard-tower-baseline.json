@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-19-super-wizard-tower-baseline",
+  "scope": "Additive Super Wizard Tower L1-L2 and Supercharge Chain Magic baseline.",
+  "frozen_at": "2026-09-19T00:00:00+02:00",
+  "game_version": "Frozen payload 62b019df supplies L1-L2 and Supercharge values; current public mechanics are consulted on 2026-09-19.",
+  "parent_reference": {
+    "file": "th18-2026-09-19-ricochet-cannon-baseline.json",
+    "reference_id": "home-village-th18-2026-09-19-ricochet-cannon-baseline",
+    "sha256": "61d0ad1a0cab1afa60c2fafc90a88b5a53ef20f2becdb22469ff27bdad898312"
+  },
+  "sources": [
+    {
+      "id": "supercell-2025-11-17-super-wizard-tower-launch-current-consultation",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "TOWN HALL 18 Crash Lands! - Update",
+      "published_on": "2025-11-17",
+      "consulted_on": "2026-09-19",
+      "version": "not published",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/town-hall-18-crash-lands-update/",
+      "limitations": "Confirms TH18 merging and chaining to up to 15 nearby enemies, but not target eligibility/order, radius, decay, launch, collision, loss or fixed-tick timing."
+    },
+    {
+      "id": "fandom-2026-09-19-super-wizard-tower-current",
+      "tier": "secondary-version-unknown",
+      "publisher": "Clash of Clans Wiki (Fandom)",
+      "title": "Super Wizard Tower",
+      "published_on": null,
+      "consulted_on": "2026-09-19",
+      "version": "not published",
+      "url": "https://clashofclans.fandom.com/wiki/Super_Wizard_Tower",
+      "limitations": "Reports range 8, 1.3-second attack rate, 4-tile branch radius, 15 other chained targets and 40% secondary damage, but no immutable client build, replay trace or deterministic selection/timing contract."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-super-wizard-tower",
+      "tier": "secondary-frozen-payload",
+      "publisher": "chiefpansancolt/clash-of-clans-data",
+      "title": "Super Wizard Tower payload",
+      "published_on": null,
+      "consulted_on": "2026-09-19",
+      "version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/defenses/super-wizard-tower.json",
+      "limitations": "Pins L1-L2 and Supercharge numeric values, footprint, range, cadence and air/ground target metadata, but not the Chain Magic selection or projectile lifecycle."
+    }
+  ],
+  "catalogue_content_overrides": [
+    {
+      "content_id": "super_wizard_tower",
+      "fields": {
+        "chain_damage_multiplier": {
+          "value": 0.4,
+          "source": "fandom-2026-09-19-super-wizard-tower-current",
+          "note": "Each branch victim takes 40% of the primary strike."
+        },
+        "chain_target_count": {
+          "value": 16,
+          "source": "fandom-2026-09-19-super-wizard-tower-current",
+          "note": "The source describes the primary plus up to 15 other targets; Core's count includes the primary target."
+        },
+        "chain_radius_tiles": {
+          "value": 4,
+          "source": "fandom-2026-09-19-super-wizard-tower-current",
+          "note": "Branches are measured from the primary target."
+        },
+        "support": {
+          "value": "core_supported_primary_secondary_partial",
+          "source": "supercell-2025-11-17-super-wizard-tower-launch-current-consultation",
+          "note": "Shared Core branches from the primary and uses distance/entity-ID ties. Exact eligibility, in-game target ordering and projectile lifecycle remain explicitly partial."
+        }
+      }
+    }
+  ],
+  "known_uncertainties": [
+    "The public sources do not publish target eligibility, branch selection/ties, a footprint-edge measurement, projectile trajectory/speed, collision, retarget/loss behavior or same-tick event ordering.",
+    "Core uses the documented primary-rooted 4-tile radius and a deterministic distance/entity-ID tie-break. This is an explicit reproducibility baseline, not a claim of exact client target selection.",
+    "The public image path is catalogued, but Super Wizard-specific chain visual timing and effect geometry remain unverified."
+  ],
+  "conclusion": "Super Wizard Tower L1-L2 and Supercharge share a deterministic primary-rooted Chain Magic baseline through Core, Headless, Viewer and RL; target selection, collision, trajectory and visual fidelity remain partial."
+}

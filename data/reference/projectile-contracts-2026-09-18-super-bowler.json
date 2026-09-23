@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "reference_id": "projectile-contracts-2026-09-18-super-bowler",
+  "frozen_on": "2026-09-18",
+  "parent_contract": {"file":"projectile-contracts-2026-09-18-super-minion.json","sha256":"76c49fd071fdffb3d6478bf8c3be5abf314b467864582710c3986dc0ccc1254f"},
+  "catalogue_audit_override": {"currently_executable_weapon_paths":28,"non_executable_long_range_candidates":31},
+  "contracts": [{"id":"super_bowler","model":"logical_next_tick_fixed_bounces_partial","core":"BattleState::Projectile","gui":"amber_post_impact_trace","rl":"projectiles","fidelity":"partial","provenance":{"status":"primary_impact_count_secondary_geometry_partial","source_id":"supercell-2021-09-25-super-bowler-launch","url":"https://supercell.com/en/games/clashofclans/blog/news/superbowler-qols/","consulted_on":"2026-09-18","statement":"Primary evidence fixes three damaging impacts. Core records exactly three fixed impact centres on the initial target ray; the 3-tile step and 0.6 splash are documented secondary proxies.","needed":"version-pinned bounce spacing/path, target selection or retargeting, per-impact eligibility, collision, travel and bounce timing"}}],
+  "historical_unavailable_profiles":[{"content_id":"super_bowler","reason":"No reproducible historical v18.200.9 Super Bowler Triple Strike profile has been curated; the current fixed-ray centres must not infer client flight, spacing or target-loss behavior."}],
+  "test_evidence":["cocsim_super_bowler_tests: exactly three owner-tagged fixed splash projectiles hit the documented deterministic centres, and snapshot restoration/replay retain the future hash."]
+}

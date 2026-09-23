@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "scope": "Historical secondary calibration only. This file must not supply current Home Village combat values.",
+  "source": {
+    "source_id": "enjoyop2-game-data-assets-2026-09-17",
+    "version": "v18.200.9",
+    "traps_url": "https://github.com/Enjoyop2/Clash-of-Clans-data-assets/tree/main/v18.200.9/logic/traps.csv",
+    "projectiles_url": "https://github.com/Enjoyop2/Clash-of-Clans-data-assets/tree/main/v18.200.9/logic/projectiles.csv",
+    "buildings_url": "https://github.com/Enjoyop2/Clash-of-Clans-data-assets/tree/main/v18.200.9/logic/buildings.csv",
+    "characters_url": "https://github.com/Enjoyop2/Clash-of-Clans-data-assets/tree/main/v18.200.9/logic/characters.csv"
+  },
+  "calibration": {
+    "content_id": "seeking_air_mine",
+    "trap_record": "Seeking Air Mine",
+    "projectile_record": "LargeDarkElixirBalloon",
+    "historical_internal_speed": 350,
+    "official_tiles_per_second": 3.5,
+    "inferred_internal_units_per_tile": 100,
+    "inference": "350 / 100 = 3.5 matches Supercell's published Seeking Air Mine projectile speed. This establishes an internal-unit scale for this archived build only."
+  },
+  "unapplied_examples": [
+    {
+      "projectile_record": "Cannonball",
+      "historical_internal_speed": 1200,
+      "historical_tiles_per_second_if_calibrated": 12.0,
+      "application": "not_imported",
+      "reason": "The archived speed has no current TH18 build proof, level mapping, launch contract or target-following contract."
+    },
+    {
+      "projectile_record": "Mortar Ammo",
+      "historical_internal_speed": 500,
+      "historical_tiles_per_second_if_calibrated": 5.0,
+      "application": "not_imported",
+      "reason": "The archived speed has no current TH18 build proof, per-level shell mapping or client impact/dispersion contract."
+    },
+    {
+      "projectile_record": "HealerEnergy",
+      "historical_internal_speed": 1200,
+      "historical_tiles_per_second_if_calibrated": 12.0,
+      "application": "not_imported",
+      "reason": "The archived speed has no current TH18 build proof or documented friendly-target/impact rule."
+    }
+  ],
+  "unavailable_runtime_profiles": [
+    {"content_id":"multi_archer_tower","reason":"The historical v18.200.9 archive predates this merged defense. No archive projectile record is asserted or inferred."},
+    {"content_id":"multi_gear_tower","reason":"The historical v18.200.9 archive predates this merged defense. No archive projectile record is asserted or inferred."},
+    {"content_id":"scattershot","reason":"The curated historical v18.200.9 projectile profiles contain no verifiable Scattershot projectile mapping. No archive projectile record is asserted or inferred."},
+    {"content_id":"thrower","reason":"The curated historical v18.200.9 projectile profiles contain no verifiable Thrower projectile mapping. No archive projectile record is asserted or inferred."},
+    {"content_id":"electro_titan","reason":"The curated historical v18.200.9 projectile profiles contain no verifiable Electro Titan whip projectile mapping. No archive projectile record is asserted or inferred."}
+  ],
+  "historical_unapplied_profiles": [
+    {"content_id":"archer","archive_projectiles":["Arrow_small","Arrow_small_fire","Arrow_small_elixirFire","Arrow_small_darkElixirFire","Arrow_small_darkElixirFire2"],"historical_internal_speeds":[1400],"historical_tiles_per_second_if_calibrated":[14.0],"application":"not_imported","reason":"The archive has no current build proof, exact level/variant lineage or deterministic launch and impact contract."},
+    {"content_id":"wizard","archive_projectiles":["ps_chr_WizardAttack_Projectile","ps_chr_WizardAttack_Projectile_lvl2","ps_chr_WizardAttack_Projectile_lvl3","ps_chr_WizardAttack_Projectile_lvl4"],"historical_internal_speeds":[500,900],"historical_tiles_per_second_if_calibrated":[5.0,9.0],"application":"not_imported","reason":"The archive is historical and does not establish current per-level mapping, splash collision or targeting timing."},
+    {"content_id":"healer","archive_projectiles":["HealerEnergy"],"historical_internal_speeds":[1200],"historical_tiles_per_second_if_calibrated":[12.0],"application":"not_imported","reason":"The archive does not establish the current friendly-target, launch or impact rule."},
+    {"content_id":"minion","archive_projectiles":["gargoyle_projectile"],"historical_internal_speeds":[380],"historical_tiles_per_second_if_calibrated":[3.8],"application":"not_imported","reason":"The archive does not establish a current level mapping or target-following contract."},
+    {"content_id":"baby_dragon","archive_projectiles":["babydragon_projectile","babydragon_projectile_lvl2","babydragon_projectile_lvl3","babydragon_projectile_lvl10"],"historical_internal_speeds":[475],"historical_tiles_per_second_if_calibrated":[4.75],"application":"not_imported","reason":"The archive does not establish the current level/ability mapping or a flight contract."},
+    {"content_id":"dragon_rider","archive_projectiles":["DragonRiderProjectile","DragonRiderProjectile 2","DragonRiderProjectile 3"],"historical_internal_speeds":[960],"historical_tiles_per_second_if_calibrated":[9.6],"application":"not_imported","reason":"The archive does not establish the current level mapping, target rule or impact ordering."},
+    {"content_id":"cannon","archive_projectile_prefix":"Cannonball","historical_internal_speeds":[1200],"historical_tiles_per_second_if_calibrated":[12.0],"application":"not_imported","reason":"The archive does not establish a current TH18 level mapping or collision contract."},
+    {"content_id":"archer_tower","archive_projectile_prefix":"Tower Arrow","historical_internal_speeds":[1800,3500],"historical_tiles_per_second_if_calibrated":[18.0,35.0],"application":"not_imported","reason":"The alternate archived projectile cannot be safely assigned to a current mode or level without a version-matched contract."},
+    {"content_id":"mortar","archive_projectile_prefix":"Mortar Ammo","historical_internal_speeds":[500],"historical_tiles_per_second_if_calibrated":[5.0],"application":"not_imported","reason":"The archive does not establish current shell arc, dispersion, collision or per-level mapping."},
+    {"content_id":"wizard_tower","archive_projectile_prefix":"ps_chr_WizardAttack_TowerProjectile","historical_internal_speeds":[500,900],"historical_tiles_per_second_if_calibrated":[5.0,9.0],"application":"not_imported","reason":"The archive does not establish the current level mapping or splash impact contract."},
+    {"content_id":"air_defense","archive_projectile_prefix":"Firework","historical_internal_speeds":[800],"historical_tiles_per_second_if_calibrated":[8.0],"application":"not_imported","reason":"The archive does not establish current homing, target-loss or impact behavior."},
+    {"content_id":"x_bow","archive_projectile_prefix":"Rapidfire arrow","historical_internal_speeds":[2300,2400,2500],"historical_tiles_per_second_if_calibrated":[23.0,24.0,25.0],"application":"not_imported","reason":"The archive does not establish the current mode, level or rapid-fire timing contract."},
+    {"content_id":"bomb_tower","archive_projectile_prefix":"Bomb Tower Ammo","historical_internal_speeds":[800],"historical_tiles_per_second_if_calibrated":[8.0],"application":"not_imported","reason":"The archive does not establish current arc, splash collision or level mapping."},
+    {"content_id":"eagle_artillery","archive_projectile_prefix":"Artillery Ammo","historical_internal_speeds":[500],"historical_tiles_per_second_if_calibrated":[5.0],"application":"not_imported","reason":"The archive does not establish the current dispersion, shell travel or burst impact ordering."},
+    {"content_id":"dragon","archive_projectile_field":"empty","application":"not_imported","reason":"The archived Dragon character record has no Projectile field; that omission is not evidence of an immediate TH18 hit contract."},
+    {"content_id":"hidden_tesla","archive_projectile_field":"empty","application":"not_imported","reason":"The archived Hidden Tesla building record has no Projectile field; that omission is not evidence of an immediate TH18 hit contract."}
+  ],
+  "current_reference_gate": {
+    "application": "not_imported",
+    "reason": "Current TH18 GameData accepts only versioned values with direct current provenance. Historical speed is retained for future comparison, not extrapolated."
+  }
+}

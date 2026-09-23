@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-stick-horse-deployment-and-wall-audit",
+  "scope": "Additive Stick Horse L1-27 permanent King Equipment audit of deployment duration, wall traversal, movement and attack effects.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Official 2026-02 Wise Warriors release; claimed client build 18.600.3 in 2026-09-18 page; pinned raw commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-snake-bracelet-spawn-contract-audit.json",
+    "reference_id": "home-village-th18-2026-09-23-snake-bracelet-spawn-contract-audit",
+    "sha256": "a7a22eeb0f5b7ea52e0bb11c4a9e41f61489e59bee4afed6605c0b9cca320e09"
+  },
+  "sources": [
+    {
+      "id": "supercell-2026-02-09-wise-warriors-stick-horse",
+      "tier": "primary", "publisher": "Supercell", "title": "Wise Warriors Medal Event is here!",
+      "published_on": "2026-02-09", "consulted_on": "2026-09-23",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/wise-warriors-medal-event-is-here/",
+      "confidence": "high_for_release_and_qualitative_ability", "content_id": "stick_horse", "levels": "not_specified", "mode": "barbarian_king_passive_equipment",
+      "facts": ["Stick Horse is a new Epic Barbarian King Equipment released in the Wise Warriors event.", "It lets the King hop over Walls with increased speed and damage for a limited time after deployment."],
+      "limitations": "The article does not give duration by level, movement units, jump path cost, collision, attack cadence or whether Wall hopping lasts as long as the speed and damage increase."
+    },
+    {
+      "id": "supercell-support-2026-09-23-stick-horse-assignment",
+      "tier": "primary", "publisher": "Supercell Support Portal", "title": "About Heroes & Pets",
+      "published_on": null, "consulted_on": "2026-09-23",
+      "url": "https://support.supercell.com/clash-of-clans/en/articles/about-heroes-pets-9.html",
+      "confidence": "high_for_current_hero_assignment", "content_id": "stick_horse", "levels": "not_specified", "mode": "barbarian_king_equipment",
+      "facts": ["The Home Village Hero equipment table assigns Stick Horse to the Barbarian King."],
+      "limitations": "The table does not publish combat timing or pathfinding."
+    },
+    {
+      "id": "goblins-farm-2026-09-18-stick-horse-client-files",
+      "tier": "secondary-dated-game-files", "publisher": "Goblins Farm", "title": "Stick Horse — Clash of Clans Wiki",
+      "published_on": null, "updated_on": "2026-09-18", "consulted_on": "2026-09-23",
+      "version": "Client build 18.600.3 as claimed by source",
+      "url": "https://goblinsfarm.com/wiki/equipment/stick-horse.html",
+      "confidence": "medium_high_for_dated_hero_hp_dps_and_cost_table", "content_id": "stick_horse", "levels": "1-27", "mode": "passive_equipment",
+      "facts": ["The TH18 maximum is L27. Per-level Hero HP and DPS boosts, ore costs and Blacksmith requirements match the pinned payload."],
+      "limitations": "The public table omits current ability duration, movement speed, attack speed and Wall-hop contract."
+    },
+    {
+      "id": "chiefpansancolt-62b019df-stick-horse-raw-recheck",
+      "tier": "secondary-frozen-payload", "publisher": "chiefpansancolt/clash-of-clans-data", "title": "Pinned Stick Horse Home Village Hero Equipment record",
+      "published_on": null, "consulted_on": "2026-09-23",
+      "version": "62b019df868f9decb49e97a0ff5ae15fb27af9ba",
+      "url": "https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/hero-equipment/stick-horse.json",
+      "confidence": "medium_for_historical_level_fields", "content_id": "stick_horse", "levels": "1-27", "mode": "passive_equipment",
+      "raw_sha256": "8c4ed0edd6fa9f8a963f9ecf3c150dbe98df996fff9695af2e25c88d925953be",
+      "facts": ["Each level retains abilityDuration, movementSpeedIncrease, attackSpeedIncrease, dpsIncrease and hitpointIncrease. The recorded duration progresses from 12 to 30 seconds; movement field from 9.5 to 24; attack speed field from +2% to +33%."],
+      "limitations": "The movement number's units and whether it is an additive or absolute speed are unspecified. The payload does not define Wall-hop pathing, collision, buff start/end tick or stat stacking."
+    },
+    {
+      "id": "fandom-2026-09-23-stick-horse-jump-spell-search-excerpt",
+      "tier": "secondary-version-unknown", "publisher": "Clash of Clans Wiki contributors", "title": "Stick Horse",
+      "published_on": null, "consulted_on": "2026-09-23",
+      "url": "https://clashofclans.fandom.com/wiki/Stick_Horse",
+      "confidence": "low_for_current_jump_spell_interaction", "content_id": "stick_horse", "levels": "all", "mode": "wall_hop_with_jump_spell",
+      "facts": ["The indexed history reports a February 23, 2026 fix for Jump Spell suppressing Stick Horse Wall hopping."],
+      "limitations": "The page could not be fetched directly during this audit and no matching primary patch statement was found. The current precedence rule remains unverified."
+    }
+  ],
+  "observations": [
+    {"content_id": "stick_horse", "levels": "1-27", "mode": "passive_equipment", "source": "chiefpansancolt-62b019df-stick-horse-raw-recheck", "level_field_summary": {"duration_seconds": "12 at L1 to 30 at L27", "movementSpeedIncrease": "9.5 at L1 to 24 at L27; units unspecified", "attackSpeedIncrease": "+2% at L1 to +33% at L27", "hero_hitpoints": "311 at L1 to 4606 at L27", "hero_dps": "35 at L1 to 222 at L27"}, "note": "All 27 exact per-level values remain in the SHA-pinned frozen raw payload and normalized catalogue; this audit does not reclassify them as verified current combat values."}
+  ],
+  "derivations": [
+    {"content_id": "stick_horse", "levels": "1-27", "mode": "passive_equipment", "result": "Retain Hero HP, DPS and upgrade data only", "method": "Cross-check the dated claimed-build public table against the SHA-pinned 27-level raw series. No speed or pathing formula is derived."},
+    {"content_id": "stick_horse", "levels": "1-27", "mode": "deployment_buff", "result": "Mark effect timing unresolved", "method": "The primary release says the effect is limited after deployment, but provides no precise start/end event order or Wall-hop duration. Pinned durations are kept as catalogue values only."}
+  ],
+  "rejected_inferences": [
+    {"rule": "Treat movementSpeedIncrease as an additive speed in Core", "reason": "The numeric field has no documented unit or conversion into the fixed-tick movement scale."},
+    {"rule": "Give the King permanent Wall crossing while Stick Horse is equipped", "reason": "The official release describes limited-time post-deployment ability and does not distinguish Wall-hop duration from speed and damage duration."},
+    {"rule": "Use a Jump Spell's Wall pathing and priority for Stick Horse", "reason": "A community history reports a Jump Spell interaction fix, but no checked source defines current combined path cost and precedence."},
+    {"rule": "Compute attack interval as base interval divided by one plus the pinned percent", "reason": "The game-specific cadence rounding and stacking with other Equipment, Rage and auras are not sourced."},
+    {"rule": "Start the duration on the first post-deployment 10 ms tick", "reason": "The release and raw table do not define whether the deployment tick counts or how expiry interacts with movement and attack events."}
+  ],
+  "open_uncertainties": [
+    {"content_id": "stick_horse", "levels": "1-27", "mode": "barbarian_king_passive_equipment", "items": ["current duration, movement and attack-speed continuity by level", "movement units and integer fixed-tick conversion", "Wall-hop path cost, collision clearance and choice against openings", "whether Wall hopping expires with speed and damage effects", "deployment and expiry tick order", "DPS versus attack-speed application and modifier rounding", "Jump Spell, other Equipment, Pet and Phoenix interactions", "Viewer trail and sprite rights, snapshot, replay and RL loadout contract"]}
+  ],
+  "conclusion": "Stick Horse L1-27 remains partial and catalogue-only. Supercell establishes a temporary post-deployment King Wall-hop, speed and damage effect, and a dated 2026 table corroborates Hero HP/DPS. Current speed units, pathing and exact duration/order cannot be applied deterministically from the checked sources."
+}

@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-23-hero-pet-equipment-attachment-contract-audit",
+  "scope": "Additive shared Hero Pet assignment and Hero Equipment slot/activation audit for the six permanent Home Village Heroes; no combat effect or timing rule is inferred.",
+  "frozen_at": "2026-09-23T00:00:00+02:00",
+  "game_version": "Supercell TH14 Pet introduction 2021-04-11 and Hero Equipment introduction 2023-12-12; current Supercell Support consulted 2026-09-23; exact TH18 client build and activation ordering unpublished.",
+  "parent_reference": {
+    "file": "th18-2026-09-23-rocket-backpack-dash-and-balance-audit.json",
+    "reference_id": "home-village-th18-2026-09-23-rocket-backpack-dash-and-balance-audit",
+    "sha256": "ef3dbd845a14a15ef02ef5edd73e05e5e21e18ecc535464064b473ae9f40e652"
+  },
+  "sources": [
+    {
+      "id": "supercell-2021-04-11-hero-pet-introduction",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "Full Patch Notes — Town Hall 14 Update",
+      "published_on": "2021-04-11",
+      "consulted_on": "2026-09-23",
+      "version": "Town Hall 14 Pet introduction; current TH18 continuity not quantified",
+      "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/full-patch-notes-th14-update/",
+      "confidence": "high_for_one_pet_per_hero_and_any_available_pet_at_introduction",
+      "content_id": "all_permanent_hero_pets",
+      "levels": "all_available_at_introduction; current TH18 level values not stated",
+      "mode": "attacking_hero_pet_assignment",
+      "facts": ["Each Hero can take one of any available Hero Pets into battle.", "The Pet House manages Pet upgrades and Hero assignment."],
+      "limitations": "The notice does not define whether one Pet instance may be assigned to multiple Heroes in a scenario, current TH18 availability, spawn tick, follow geometry or defeat lifecycle."
+    },
+    {
+      "id": "supercell-2023-12-12-hero-equipment-introduction",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "title": "Hero Equipment",
+      "published_on": "2023-12-12",
+      "consulted_on": "2026-09-23",
+      "version": "Hero Equipment introduction; later Equipment additions and balances audited per item",
+      "url": "https://supercell.com/en/games/clashofclans/blog/news/introducing-hero-equipment/",
+      "confidence": "high_for_two_slots_and_active_passive_distinction",
+      "content_id": "all_permanent_hero_equipment",
+      "levels": "common_1-18_and_epic_1-27_at_introduction; later item caps per item",
+      "mode": "hero_equipment_loadout_and_activation",
+      "facts": ["Each Hero can equip two Equipment pieces at a time.", "Active effects require manual battle activation; passive effects are permanently active without player input.", "The Blacksmith assigns Equipment to Heroes, and the article names the eligible Hero for the initial Equipment set."],
+      "limitations": "The article does not define simultaneous activation ordering, duplicate item selection, exact command tick, buff start/end tick, stacking, or combat values for later Equipment."
+    },
+    {
+      "id": "supercell-support-2026-09-23-hero-equipment",
+      "tier": "primary",
+      "publisher": "Supercell Support",
+      "title": "The Blacksmith: Hero Equipment & Ore",
+      "published_on": null,
+      "consulted_on": "2026-09-23",
+      "version": "Current support page, client version unspecified",
+      "url": "https://support.supercell.com/clash-of-clans/en/articles/hero-equipment-ore-5.html",
+      "confidence": "high_for_current_two_equipment_slots",
+      "content_id": "all_permanent_hero_equipment",
+      "levels": "all_current; exact caps not stated",
+      "mode": "hero_equipment_assignment",
+      "facts": ["The current support page continues to describe two Equipment pieces for each Hero."],
+      "limitations": "It gives no fixed-tick activation or interaction contract."
+    }
+  ],
+  "derivations": [
+    {
+      "content_id": "all_permanent_hero_pets",
+      "levels": "item_specific",
+      "mode": "loadout_cardinality",
+      "result": "A Hero has at most one assigned Pet in the documented loadout model.",
+      "method": "Read the explicit one-Pet-per-Hero statement in the 2021 primary introduction; retain current-build and duplicate-assignment uncertainty."
+    },
+    {
+      "content_id": "all_permanent_hero_equipment",
+      "levels": "item_specific",
+      "mode": "loadout_cardinality_and_activation_class",
+      "result": "A Hero has two Equipment slots; active and passive are distinct source-backed classes.",
+      "method": "Compare the 2023 primary introduction with the current Supercell Support page; do not derive an activation tick or effect order."
+    }
+  ],
+  "rejected_inferences": [
+    {"rule": "Accept duplicate Pet or Equipment assignments across Heroes or slots", "reason": "The checked sources do not specify ownership or duplicate selection behavior."},
+    {"rule": "Trigger both active Equipment effects in a chosen order on one Hero command", "reason": "The checked sources specify manual activation but not whether both effects share a command or their execution order."},
+    {"rule": "Spawn a Pet at the Hero position on the deployment tick", "reason": "The checked sources do not specify Pet placement, collision, entity-ID assignment or deployment tick phase."},
+    {"rule": "Apply passive effects before Hero creation or at the first simulation tick", "reason": "Permanently active describes the gameplay category, not the exact Core modifier stage or rounding."}
+  ],
+  "open_uncertainties": [
+    {"content_id": "all_permanent_hero_pets", "levels": "item_specific", "mode": "assignment_and_battle", "items": ["current TH18 duplicate Pet assignment and availability rules", "Hero-Pet deploy, follow, target, death and revive tick order", "Pet entity geometry and battlefield art rights"]},
+    {"content_id": "all_permanent_hero_equipment", "levels": "item_specific", "mode": "assignment_and_battle", "items": ["duplicate Equipment selection and slot ordering", "one versus two active commands and simultaneous effect ordering", "passive modifier stage, rounding and stacking", "Viewer selection and activation controls, RL command schema, snapshot, replay and state hash"]}
+  ],
+  "conclusion": "The shared slot counts and active/passive categories are source-backed. Their current combat timing and interactions remain partial, so no Pet or Equipment actor or activation command is enabled from this audit alone."
+}

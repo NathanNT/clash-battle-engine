@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "source_id": "supercell-2026-04-27-sound-of-clash",
+  "observation_scope": "Official Home Village Logger Guardian announcement, captured for the frozen 2026-09-17 TH18 reference.",
+  "content": {
+    "id": "logger",
+    "source_id": "logger",
+    "category": "guardian",
+    "support": "catalogued_only",
+    "town_hall_required": 18,
+    "target_type": "both",
+    "target_focus": "unknown",
+    "damage_type": "piercing_projectile",
+    "knockback_tiles": 1,
+    "field_provenance": {
+      "town_hall_required": {"source": "supercell-2026-04-27-sound-of-clash", "tier": "primary"},
+      "target_type": {"source": "supercell-2026-04-27-sound-of-clash", "tier": "primary"},
+      "damage_type": {"source": "supercell-2026-04-27-sound-of-clash", "tier": "primary"},
+      "knockback_tiles": {"source": "supercell-2026-04-27-sound-of-clash", "tier": "primary"}
+    },
+    "behavior": {
+      "is_town_hall_guardian": true,
+      "projectile_speed": "slow",
+      "projectile_pierces": true,
+      "knockback_on_impact": true
+    },
+    "behavior_provenance": {"source": "supercell-2026-04-27-sound-of-clash", "tier": "primary"},
+    "levels": [
+      {"level": 1, "dps": 350, "damage_per_shot": null, "range_tiles": 7},
+      {"level": 2, "dps": 350, "damage_per_shot": null, "range_tiles": 7},
+      {"level": 3, "dps": 350, "damage_per_shot": null, "range_tiles": 7},
+      {"level": 4, "dps": 350, "damage_per_shot": null, "range_tiles": 7},
+      {"level": 5, "dps": 350, "damage_per_shot": null, "range_tiles": 8}
+    ]
+  },
+  "known_missing": [
+    "hitpoints and footprint/collision geometry",
+    "Guardian selection, activation and patrol state",
+    "projectile speed, width, piercing limit and damage order",
+    "target selection, tie-breaks and sight/range boundary",
+    "knockback timing, direction, displacement and immunity contract",
+    "Town Hall destruction interaction and snapshot/replay state"
+  ]
+}

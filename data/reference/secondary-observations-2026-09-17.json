@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "reference_id": "th18-secondary-observations-2026-09-17",
+  "purpose": "Small, explicit supplements to the pinned April snapshot. These are not Supercell release notes and remain secondary evidence.",
+  "observations": [
+    {
+      "source_id": "goblinsfarm-2026-08-26-dark-barracks",
+      "url": "https://goblinsfarm.com/wiki/buildings/dark-barracks.html",
+      "published_on": "2026-08-26",
+      "consulted_on": "2026-09-17",
+      "reported_client_build": "18.400.21",
+      "content_id": "dark_barracks",
+      "level": 13,
+      "fields": {"hitpoints": 1100, "upgrade_cost": 23000000, "upgrade_cost_resource": "Elixir", "upgrade_time_seconds": 864000, "town_hall_required": 16},
+      "source_note": "The publisher states that values were read from Clash of Clans game files. The page is independent fan content, not an official Supercell table."
+    },
+    {
+      "source_id": "goblinsfarm-2026-08-26-dark-spell-factory",
+      "url": "https://goblinsfarm.com/wiki/buildings/dark-spell-factory.html",
+      "published_on": "2026-08-26",
+      "consulted_on": "2026-09-17",
+      "reported_client_build": "18.400.21",
+      "content_id": "dark_spell_factory",
+      "level": 8,
+      "fields": {"hitpoints": 1070, "upgrade_cost": 18000000, "upgrade_cost_resource": "Elixir", "upgrade_time_seconds": 864000, "town_hall_required": 15},
+      "source_note": "The publisher states that values were read from Clash of Clans game files. The page is independent fan content, not an official Supercell table."
+    }
+  ]
+}

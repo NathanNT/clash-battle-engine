@@ -1,0 +1,15 @@
+{
+  "schema_version":1,
+  "audit_id":"home-village-super-hog-rider-mechanics-2026-09-18",
+  "content_id":"super_hog_rider",
+  "consulted_on":"2026-09-18",
+  "scope":"Evidence review before Home Village Super Hog Rider Divide and Conquer is enabled.",
+  "sources":[
+    {"id":"supercell-2023-06-10-super-hog-rider","tier":"primary","title":"New Super Troop","published_on":"2023-06-10","game_version":"not published","url":"https://supercell.com/en/games/clashofclans/blog/news/new-super-troop-1/","finding":"On destruction Hog and Rider split into independent units; Hog jumps Walls and targets Defenses, Rider targets nearest Building. The launch table publishes both child stats only at Super Hog Rider levels 10–12, including Rider 2× Wall damage."},
+    {"id":"supercell-2026-02-23-th18-super-hog-rider","tier":"primary","title":"The February Update has escaped!","published_on":"2026-02-23","game_version":"not published","url":"https://supercell.com/en/games/clashofclans/blog/release-notes/the-february-update-has-escaped/","finding":"TH18 adds Hog Rider and Super Hog Rider level 15, but publishes no Super Hog or Super Rider level-15 values or spawn timing."},
+    {"id":"chiefpansancolt-62b019df-super-hog-rider","tier":"secondary-dated-build","title":"Pinned normalized Hog Rider superTroop payload","published_on":null,"game_version":"62b019df868f9decb49e97a0ff5ae15fb27af9ba","url":"https://raw.githubusercontent.com/chiefpansancolt/clash-of-clans-data/62b019df868f9decb49e97a0ff5ae15fb27af9ba/data/home/troops/hog-rider.json","finding":"Pinned payload supplies parent L10–15 data but no materializable Super Hog or Super Rider child records."}
+  ],
+  "established":["The destruction split and both child target priorities are primary-confirmed.","The L10–12 child HP/DPS/speeds and Rider 2× Wall damage are primary-confirmed."],
+  "unresolved":["No public source supplies L13–15 child stats, despite L15 being an applicable TH18 parent level.","No source specifies spawn delay, spawn positions/collision, command/target inheritance, death-tick ordering, child attack cadence/range, or whether any parent effects carry over.","No source verifies child sprites, footprints, mouse selection or overlays."],
+  "decision":"Do not enable super_hog_rider in Core, GUI or RL until child records cover all applicable TH18 levels and a spawn lifecycle is source-identified. Scaling the launch children from parent values would be invented data."
+}

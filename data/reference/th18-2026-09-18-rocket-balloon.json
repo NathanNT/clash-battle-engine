@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-18-rocket-balloon",
+  "scope": "Additive Home Village TH18 reference delta for Rocket Balloon deployment boosters; it preserves every preceding reference artifact.",
+  "frozen_at": "2026-09-18T00:00:00+02:00",
+  "game_version": "The immutable level payload is source commit 62b019df868f9decb49e97a0ff5ae15fb27af9ba. The official launch note and secondary boost characterization do not identify a current client build; that version remains explicitly unknown rather than inferred.",
+  "parent_reference": {
+    "file": "th18-2026-09-18-super-archer.json",
+    "reference_id": "home-village-th18-2026-09-18-super-archer",
+    "sha256": "7778a1452c87da39c6936b4d3848d8e937ef03ca0f73551c00d8003c5e6fe8fe"
+  },
+  "sources": [
+    {
+      "id": "supercell-2021-06-12-rocket-balloon",
+      "tier": "primary",
+      "publisher": "Supercell",
+      "published_on": "2021-06-12",
+      "consulted_on": "2026-09-18",
+      "version": "not published by the official launch note",
+      "url": "https://supercell.com/en/games/clashofclans/blog/game-updates/rocket-to-victory-2/",
+      "limitations": "Official launch note fixes defensive targeting, ground-only splash attacks, housing space 8, base movement speed 12 and deployment rocket boosters, but not the numeric boosted speed, current build, boundary ordering or collision/flight geometry. The official Supercell video description separately states the first-four-seconds duration."
+    },
+    {
+      "id": "supercell-2021-06-12-rocket-balloon-video",
+      "tier": "primary",
+      "publisher": "Clash of Clans (verified Supercell channel)",
+      "published_on": "2021-06-12",
+      "consulted_on": "2026-09-18",
+      "version": "not published by the official video description",
+      "url": "https://www.youtube.com/watch?v=QtN4UBVlUF0",
+      "limitations": "The official video description says movement speed is increased for the first 4 seconds; it does not quantify the increase or identify a client build."
+    },
+    {
+      "id": "fandom-2026-09-18-rocket-balloon",
+      "tier": "secondary",
+      "publisher": "Clash of Clans Wiki (Fandom)",
+      "consulted_on": "2026-09-18",
+      "version": "not published by the community table",
+      "url": "https://clashofclans.fandom.com/wiki/Rocket_Balloon",
+      "limitations": "Searchable community summary characterizes the first-four-seconds boost as equivalent to Haste Spell level 5, but does not identify a current client build or exact boundary, stacking, targeting-loss, collision or flight rules."
+    }
+  ],
+  "official_deltas": [
+    {
+      "source": "supercell-2021-06-12-rocket-balloon-video",
+      "family": "super_troop",
+      "id": "rocket_balloon",
+      "behavior": "Movement speed is increased for the first four seconds after deployment."
+    }
+  ],
+  "catalogue_extra_levels": [],
+  "catalogue_overrides": [],
+  "catalogue_content_overrides": [
+    {
+      "content_id": "rocket_balloon",
+      "fields": {
+        "deployment_rage_duration_seconds": {
+          "value": 4,
+          "source": "supercell-2021-06-12-rocket-balloon-video",
+          "note": "Official video description fixes the first-four-seconds deployment window."
+        },
+        "deployment_rage_damage_multiplier": {
+          "value": 1,
+          "source": "supercell-2021-06-12-rocket-balloon",
+          "note": "No damage boost is claimed by the launch contract; the shared deployment-speed state requires an explicit neutral multiplier."
+        },
+        "deployment_rage_movement_speed_increase": {
+          "value": 52,
+          "source": "fandom-2026-09-18-rocket-balloon",
+          "note": "Secondary source equates the boost to Haste Spell level 5. The frozen catalogue's independently sourced level-5 Haste value is +52 in these movement-speed units; this is a documented derivation, not an official numeric Rocket Balloon value."
+        },
+        "support": {
+          "value": "core_supported_secondary_partial",
+          "source": "supercell-2021-06-12-rocket-balloon-video",
+          "note": "Core applies the primary-sourced four-second logical deployment window using serialized state. The numeric +52 conversion remains secondary-derived."
+        }
+      }
+    }
+  ],
+  "changed_values": [
+    {
+      "content_id": "rocket_balloon",
+      "previous_state": "catalogued-only Super Troop with no executable deployment-booster lifecycle",
+      "replacement": "primary-sourced four-second deployment speed window with a separately provenance-marked secondary-derived +52 movement-speed increase",
+      "justification": "The defining launch behavior has a clear primary duration contract and a secondary Haste-level equivalence whose numerical source remains independently preserved."
+    }
+  ],
+  "known_uncertainties": [
+    "No official current numeric boosted-speed value or version-identified client build was found.",
+    "The public sources do not specify the exact inclusive/exclusive boundary at 4,000 ms, first-attack ordering, stacking with Haste/Rage, target loss, splash radius, death-damage radius, projectile/impact timing, altitude boundary, collision geometry or visual fidelity.",
+    "The +52 movement-speed increase is a secondary derivation from a level-5 Haste equivalence and must not be represented as an official Rocket Balloon statistic."
+  ],
+  "conclusion": "This additive versioned reference does not alter the 2026-09-17 ledger or its preceding deltas."
+}

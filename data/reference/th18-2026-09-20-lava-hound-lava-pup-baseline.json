@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-20-lava-hound-lava-pup-baseline",
+  "scope": "Additive TH18 Lava Hound/Lava Pup death-split baseline; parent death explosion remains disabled.",
+  "frozen_at": "2026-09-20T00:00:00+02:00",
+  "game_version": "Official February 2026 TH18 evidence and secondary parent/child pages consulted on 2026-09-20.",
+  "parent_reference": {"file": "th18-2026-09-20-big-boy-followup.json", "reference_id": "home-village-th18-2026-09-20-big-boy-followup", "sha256": "c62137cf3a7c616931057c68df58cbf80ce569415df3df0a6e08fa944b28b3df"},
+  "sources": [
+    {"id": "supercell-2026-02-23-th18-lava-hound-l8-followup", "tier": "primary", "publisher": "Supercell", "title": "The February Update has escaped!", "published_on": "2026-02-23", "consulted_on": "2026-09-20", "version": "Town Hall 18 update", "url": "https://supercell.com/en/games/clashofclans/blog/release-notes/the-february-update-has-escaped/", "limitations": "Confirms Lava Hound L8 at TH18, but not child values, counts, split or explosion lifecycle."},
+    {"id": "supercell-2019-12-09-lava-hound-explosion-followup", "tier": "primary", "publisher": "Supercell", "title": "December Update - Patch Notes", "published_on": "2019-12-09", "consulted_on": "2026-09-20", "version": "Town Hall 13 update", "url": "https://supercell.com/en/games/clashofclans/blog/news/december-update-patch-notes/", "limitations": "Records the 3.5-tile parent explosion radius, but not a complete current damage, target, timing, collision or ordering contract."},
+    {"id": "fandom-2026-09-20-lava-hound-lava-pup", "tier": "secondary-version-unknown", "publisher": "Clash of Clans Wiki (Fandom)", "title": "Lava Hound/Lava Pup", "published_on": null, "consulted_on": "2026-09-20", "version": "not published", "url": "https://clashofclans.fandom.com/wiki/Lava_Hound/Lava_Pup", "limitations": "Reports a fixed L1 Pup table (50 HP, 35 damage, 32 speed, 1-second cadence, 2-tile range, air/ground) and parent offensive counts L1-L8 of 8/9/10/11/12/13/14/15. No immutable build, split timing/coordinates, projectile/collision or target-order trace is published."},
+    {"id": "coc-guide-2026-09-20-lava-hound-cross-check", "tier": "secondary-version-unknown", "publisher": "Clash of Clans Guide", "title": "Lava Hound", "published_on": null, "consulted_on": "2026-09-20", "version": "not published", "url": "https://www.clashofclans.guide/troops/lava-hound", "limitations": "Consulted only as a cross-check. Its Lava Pup presentation conflicts with the selected secondary table on range/priority and supplies no version, count progression, split trace or deterministic lifecycle; it is not used for imported values."}
+  ],
+  "catalogue_supplemental_contents": [{"content_id": "lava_pup", "source": "fandom-2026-09-20-lava-hound-lava-pup", "observation_file": "lava-pup-observation-2026-09-20.json", "observation_sha256": "d583666cf3901fad3034fed2cb03c017de7bc3447c7b9680d545483ad98c055c"}],
+  "catalogue_overrides": [
+    {"content_id":"lava_hound","level":1,"fields":{"spawned_units":{"value":8,"source":"fandom-2026-09-20-lava-hound-lava-pup"}}},
+    {"content_id":"lava_hound","level":2,"fields":{"spawned_units":{"value":9,"source":"fandom-2026-09-20-lava-hound-lava-pup"}}},
+    {"content_id":"lava_hound","level":3,"fields":{"spawned_units":{"value":10,"source":"fandom-2026-09-20-lava-hound-lava-pup"}}},
+    {"content_id":"lava_hound","level":4,"fields":{"spawned_units":{"value":11,"source":"fandom-2026-09-20-lava-hound-lava-pup"}}},
+    {"content_id":"lava_hound","level":5,"fields":{"spawned_units":{"value":12,"source":"fandom-2026-09-20-lava-hound-lava-pup"}}},
+    {"content_id":"lava_hound","level":6,"fields":{"spawned_units":{"value":13,"source":"fandom-2026-09-20-lava-hound-lava-pup"}}},
+    {"content_id":"lava_hound","level":7,"fields":{"spawned_units":{"value":14,"source":"fandom-2026-09-20-lava-hound-lava-pup"}}},
+    {"content_id":"lava_hound","level":8,"fields":{"spawned_units":{"value":15,"source":"fandom-2026-09-20-lava-hound-lava-pup"}}}
+  ],
+  "catalogue_content_overrides": [{"content_id":"lava_hound","fields":{"support":{"value":"core_supported_primary_secondary_partial","source":"fandom-2026-09-20-lava-hound-lava-pup","note":"Core spawns documented Lava Pups through the deterministic queue on attacker death; parent explosion remains disabled."}}}],
+  "known_uncertainties": ["No version-identified current child table or verified asset exists.", "The consulted cross-check conflicts with the selected secondary table on Lava Pup range/priority, so it is recorded but contributes no imported value.", "Split timing, circular radius/orientation, coordinates, launch, projectile/collision and target ordering are unknown; Core queues Pups at parent position in stable order.", "Parent explosion remains disabled because its current target, damage, timing, collision and ordering contract is incomplete."],
+  "conclusion": "Lava Hound L1-L8 and required Lava Pup L1 share Core, Headless, Viewer and RL paths for a source-backed death-split baseline. Parent explosion, split geometry/timing, projectile collision and asset fidelity remain partial."
+}

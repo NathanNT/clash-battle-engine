@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "reference_id": "th18-yetimite-secondary-observation-2026-09-18",
+  "purpose": "Pinned current public Yetimite parent-level table. Yetimites are spawned-only and are never direct army deployments.",
+  "source_id": "fandom-2026-09-18-yeti-yetimite",
+  "content": {
+    "id": "yetimite",
+    "source_id": "yetimite",
+    "category": "spawned-unit",
+    "support": "spawned_only",
+    "spawned_by": "yeti",
+    "target_focus": "defenses",
+    "flying": false,
+    "heals": false,
+    "jumps_walls": true,
+    "self_destruct_on_attack": true,
+    "footprint_tiles": "1x1",
+    "housing_space": 2,
+    "activation_housing_space": 0,
+    "range_tiles": 2,
+    "trigger_range_tiles": 0,
+    "min_range_tiles": 0,
+    "splash_radius_tiles": 0.8,
+    "death_splash_radius_tiles": 0,
+    "shots_per_burst": 1,
+    "time_between_bursts_seconds": 0,
+    "movement_speed": 24,
+    "target_type": "both",
+    "damage_type": "splash",
+    "defense_damage_multiplier": 4,
+    "resource_damage_multiplier": 0.5,
+    "modes": [],
+    "levels": [
+      {"level": 1, "variant": "normal", "hitpoints": 300, "damage_per_shot": 56},
+      {"level": 2, "variant": "normal", "hitpoints": 350, "damage_per_shot": 64},
+      {"level": 3, "variant": "normal", "hitpoints": 400, "damage_per_shot": 72},
+      {"level": 4, "variant": "normal", "hitpoints": 450, "damage_per_shot": 78},
+      {"level": 5, "variant": "normal", "hitpoints": 500, "damage_per_shot": 84},
+      {"level": 6, "variant": "normal", "hitpoints": 550, "damage_per_shot": 88},
+      {"level": 7, "variant": "normal", "hitpoints": 575, "damage_per_shot": 90},
+      {"level": 8, "variant": "normal", "hitpoints": 590, "damage_per_shot": 92}
+    ],
+    "known_missing": [
+      "attack entry delay and cadence are not published in the consulted table",
+      "exact wall-jump trajectory and collision geometry",
+      "spawn delay, circular-formation radius, orientation and individual coordinates",
+      "source-verified child sprite and animation",
+      "target and retarget ordering after all defenses are destroyed",
+      "armed Town Hall defense categorization required to apply the documented combined multiplier"
+    ]
+  }
+}

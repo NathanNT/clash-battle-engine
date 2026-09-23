@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "reference_id": "th18-golem-secondary-observation-2026-09-17",
+  "purpose": "Pinned secondary table for Golem L15. The same source states a 1.5-tile death-damage radius and four Golemites at L15; the latter is deliberately not imported as a fake completed behaviour.",
+  "observations": [
+    {"source_id":"fandom-2026-09-17-golem","content_id":"golem","level":15,"url":"https://clashofclans.fandom.com/wiki/Golem","consulted_on":"2026-09-17","fields":{"hitpoints":10600,"dps":120,"death_damage":1050,"upgrade_cost":350000,"upgrade_cost_resource":"Dark Elixir","upgrade_time_seconds":1260000,"town_hall_required":18,"laboratory_required":16},"derived_fields":{"damage_per_shot":{"value":288,"derivation":"120 DPS × 2.4 s existing attack cadence"}},"known_missing":["golemite_spawn_implementation"]}
+  ]
+}

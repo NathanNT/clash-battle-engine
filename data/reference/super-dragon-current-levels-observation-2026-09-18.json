@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "reference_id": "home-village-th18-2026-09-18-super-dragon-current-levels",
+  "purpose": "Hash-pinned transcription of the dated current Super Dragon table, whose eleven ordinal rows supersede the stale ten-row upstream superTroop payload.",
+  "observations": [
+    {"source_id":"goblinsfarm-2026-08-26-super-dragon","url":"https://goblinsfarm.com/wiki/troops/super-dragon.html","updated_on":"2026-08-26","consulted_on":"2026-09-18","reported_client_build":"18.400.21","content_id":"super_dragon","level":13,"fields":{"hitpoints":8400,"dps":537},"derived_fields":{"damage_per_shot":{"value":966.6,"derivation":"537 DPS × 1.8-second dated table cadence. This is deterministic aggregate damage per attack cycle, not evidence of a one-flame Roast animation or an individual burst impact."}},"level_mapping":"The current table has 11 ordinal rows. Its row 1 matches the lowest upstream Super Dragon level number 3 by ordering, so rows 1–11 map conservatively to imported levels 3–13; TH availability for the missing row is not claimed.","known_missing":["Town Hall requirement for level 13","Roast burst count and allocation","damage radius","flight and target-loss behavior","level-specific source asset"]}
+  ]
+}

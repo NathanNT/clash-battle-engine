@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "observation_id": "home-village-th18-2026-09-23-diggy-l11-l15",
+  "source_id": "gibiarena-2026-09-01-diggy-l11-l15-game-files",
+  "observed_on": "2026-09-23",
+  "game_version": "Game-file data dated 2026-09-01 and processed 2026-09-03 by GiBiArena via ClashKing; exact client build not published.",
+  "observations": [
+    {"content_id": "diggy", "source_id": "gibiarena-2026-09-01-diggy-l11-l15-game-files", "level": 11, "variant": "normal", "fields": {"hitpoints": 5150, "dps": 155, "upgrade_cost": 220000, "upgrade_cost_resource": "Dark Elixir", "upgrade_time_seconds": 604800, "town_hall_required": 18, "pet_house_required": 12}},
+    {"content_id": "diggy", "source_id": "gibiarena-2026-09-01-diggy-l11-l15-game-files", "level": 12, "variant": "normal", "fields": {"hitpoints": 5300, "dps": 160, "upgrade_cost": 250000, "upgrade_cost_resource": "Dark Elixir", "upgrade_time_seconds": 648000, "town_hall_required": 18, "pet_house_required": 12}},
+    {"content_id": "diggy", "source_id": "gibiarena-2026-09-01-diggy-l11-l15-game-files", "level": 13, "variant": "normal", "fields": {"hitpoints": 5450, "dps": 165, "upgrade_cost": 280000, "upgrade_cost_resource": "Dark Elixir", "upgrade_time_seconds": 691200, "town_hall_required": 18, "pet_house_required": 12}},
+    {"content_id": "diggy", "source_id": "gibiarena-2026-09-01-diggy-l11-l15-game-files", "level": 14, "variant": "normal", "fields": {"hitpoints": 5600, "dps": 170, "upgrade_cost": 310000, "upgrade_cost_resource": "Dark Elixir", "upgrade_time_seconds": 691200, "town_hall_required": 18, "pet_house_required": 12}},
+    {"content_id": "diggy", "source_id": "gibiarena-2026-09-01-diggy-l11-l15-game-files", "level": 15, "variant": "normal", "fields": {"hitpoints": 5750, "dps": 175, "upgrade_cost": 350000, "upgrade_cost_resource": "Dark Elixir", "upgrade_time_seconds": 691200, "town_hall_required": 18, "pet_house_required": 12}}
+  ],
+  "limits": "Values are dated secondary game-file observations, not official Supercell numeric tables. The source provides no damage per hit, stun duration or burrow and retarget tick order. The 12-hour half-day is 43,200 seconds; all durations were converted by integer arithmetic."
+}
