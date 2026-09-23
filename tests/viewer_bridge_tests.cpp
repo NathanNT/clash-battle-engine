@@ -1,4 +1,5 @@
 #include "simulation_bridge.hpp"
+#include "board_layout.hpp"
 #include <cassert>
 #include <cstdio>
 #include <cstdlib>
@@ -6,6 +7,13 @@
 #define assert(condition) do { if (!(condition)) { std::fprintf(stderr, "assertion failed: %s at line %d\n", #condition, __LINE__); std::abort(); } } while (false)
 using namespace cocsim;
 int main() {
+  Board board;
+  const auto viewport=viewer::BoardViewport::for_window(1100,850);
+  const GridCell origin_cell{0,0};
+  assert(viewport.side>650.0f);
+  assert(viewport.cell_at(viewport.x+1.0f,viewport.y+1.0f,board)==origin_cell);
+  assert(!viewport.cell_at(viewport.x-1.0f,viewport.y,board));
+  assert(!viewport.cell_at(viewport.x+viewport.side,viewport.y,board));
   viewer::SimulationBridge bridge;
   assert(bridge.state().time_ms()==0);
   bridge.present_elapsed(1000); assert(bridge.state().time_ms()==0);
@@ -23,7 +31,7 @@ int main() {
   bridge.step(); assert(bridge.state().time_ms()==16);
   assert(bridge.state().events().size()==2);
   bridge.reset(); assert(bridge.state().time_ms()==0 && bridge.replay_loaded());
-  bridge.new_empty(); assert(!bridge.replay_loaded());
+  bridge.new_scenario(); assert(!bridge.replay_loaded());
   assert(save_replay(replay_path,bridge.state().scenario(),{},error));
   assert(bridge.load_replay_file(replay_path,error));
   assert(bridge.replay_loaded());

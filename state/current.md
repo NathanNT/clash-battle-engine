@@ -4,4 +4,4 @@ Active ruleset: `empty-16ms-v1`. No populated combat content is loaded. The arch
 
 Core clock, board, commands, observation, events, state hash, snapshot, replay, Headless, Viewer, and optional RL adapter are present. Frozen TH18 reference and old coverage matrix live only on the archive branch.
 
-Verification: full Visual Studio Debug build passed; CTest 6/6 passed; CLI empty replay and snapshot restoration yielded the same terminal hash; optional Python extension built and round-tripped a snapshot; Viewer starts under SDL dummy video. No combat fidelity claim applies to the empty ruleset.
+Verification: full Visual Studio Debug build passed; CTest 6/6 passed; CLI replay and snapshot restoration yielded the same terminal hash; optional Python extension built and round-tripped a snapshot; Viewer starts under SDL dummy video. The board was visually reviewed as the main canvas with a separate controls panel, and viewport hit tests pass. No combat fidelity claim applies to the current ruleset.

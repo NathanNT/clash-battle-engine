@@ -1,5 +1,5 @@
-set(replay "${output}/empty-roundtrip-replay.json")
-set(snapshot "${output}/empty-roundtrip-snapshot.json")
+set(replay "${output}/roundtrip-replay.json")
+set(snapshot "${output}/roundtrip-snapshot.json")
 execute_process(COMMAND "${exe}" simulate "${scenario}" --wait 16 --until 32 --save-replay "${replay}" --save-snapshot "${snapshot}"
   RESULT_VARIABLE first_result OUTPUT_VARIABLE first_output ERROR_VARIABLE first_error)
 if(NOT first_result EQUAL 0)

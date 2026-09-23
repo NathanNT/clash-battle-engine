@@ -1,8 +1,8 @@
-# CoCSim empty engine
+# Clash Battle Engine
 
-CoCSim is a deterministic C++20 Home Village simulation foundation. The active `main` branch contains an intentionally empty ruleset: no buildings, units, spells, traps, equipment, or combat outcomes. The populated pre-rebuild project is preserved at branch `archive/pre-empty-engine-2026-09-23`, commit `db13f52f2c2c59867cd1685770db03d57d101266`.
+A deterministic C++20 Home Village simulation foundation. The active `main` branch currently contains no combat entities or populated catalogue. The pre-rebuild project is preserved at `archive/pre-empty-engine-2026-09-23` (`db13f52f2c2c59867cd1685770db03d57d101266`).
 
-The logical clock advances only in fixed 16 ms ticks. The 50×50 board retains a 44×44 build area and a 3-tile border. Commands are future tick aligned and ordered by sequence. Core owns the board, time, events, snapshots, replays, and state hashes. The CLI, SDL3/ImGui Viewer, and optional Python adapter call the same Core.
+Core advances in fixed 16 ms ticks. Its 50×50 board has a 44×44 build area and a 3-tile border. Commands, observations, events, snapshots, replays, and state hashes are owned by Core. The Headless CLI, Viewer, and optional Python adapter all call that same implementation.
 
 On Windows with Visual Studio 2022:
 
@@ -13,13 +13,13 @@ On Windows with Visual Studio 2022:
 .\tools\dev.ps1 headless
 ```
 
-Create and run an empty scenario:
+Create and run a scenario:
 
 ```powershell
-.\build\empty\Debug\cocsim.exe init-scenario empty.json
-.\build\empty\Debug\cocsim.exe simulate empty.json --until 1600 --save-replay empty-replay.json --save-snapshot empty-snapshot.json
-.\build\empty\Debug\cocsim.exe replay empty-replay.json
-.\build\empty\Debug\cocsim.exe resume empty.json empty-snapshot.json
+.\build\engine\Debug\cocsim.exe init-scenario scenario.json
+.\build\engine\Debug\cocsim.exe simulate scenario.json --until 1600 --save-replay replay.json --save-snapshot snapshot.json
+.\build\engine\Debug\cocsim.exe replay replay.json
+.\build\engine\Debug\cocsim.exe resume scenario.json snapshot.json
 ```
 
-The empty format uses `ruleset: empty-16ms-v1`. Old populated scenarios, replays, snapshots, and content commands are rejected. See [rebuild notes](docs/empty-engine-rebuild.md).
+The saved ruleset identifier remains `empty-16ms-v1` for format compatibility. Populated legacy scenarios and commands are rejected. See [rebuild notes](docs/rebuild-baseline.md).

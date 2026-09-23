@@ -9,7 +9,7 @@ param(
 )
 $ErrorActionPreference = "Stop"
 $ProjectRoot = Split-Path -Parent $PSScriptRoot
-$BuildDir = Join-Path $ProjectRoot "build/empty"
+$BuildDir = Join-Path $ProjectRoot "build/engine"
 & cmake -S $ProjectRoot -B $BuildDir -G "Visual Studio 17 2022" -A x64 -DCOCSIM_BUILD_VIEWER=ON -DCOCSIM_BUILD_TESTS=ON -DCOCSIM_BUILD_PYTHON=OFF
 if ($LASTEXITCODE -ne 0) { throw "Configuration failed." }
 if ($Action -eq "configure") { exit 0 }

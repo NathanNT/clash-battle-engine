@@ -1,35 +1,47 @@
 #pragma once
-#include "cocsim/core.hpp"
-#include "imgui.h"
-#include <algorithm>
+#include "board_layout.hpp"
+#include <SDL3/SDL.h>
 #include <optional>
 namespace cocsim::viewer {
-inline void draw_board(const Board& board, std::optional<GridCell>& selected) {
-  const ImVec2 origin=ImGui::GetCursorScreenPos();
-  const float side=std::min(ImGui::GetContentRegionAvail().x,650.0f);
-  const float cell=side/static_cast<float>(board.width());
-  auto* draw=ImGui::GetWindowDrawList();
-  draw->AddRectFilled(origin,ImVec2(origin.x+side,origin.y+side),IM_COL32(35,54,43,255));
-  const auto border=kHomeVillageDeploymentBorderTiles;
-  draw->AddRectFilled(ImVec2(origin.x+cell*border,origin.y+cell*border),
-    ImVec2(origin.x+cell*(board.width()-border),origin.y+cell*(board.height()-border)),IM_COL32(51,78,55,255));
+inline void draw_board(SDL_Renderer* renderer,const Board& board,const BoardViewport& viewport,
+                       const std::optional<GridCell>& selected) {
+  const float tile=viewport.side/static_cast<float>(board.width());
+  const SDL_FRect ground{viewport.x,viewport.y,viewport.side,viewport.side};
+  SDL_SetRenderDrawBlendMode(renderer,SDL_BLENDMODE_BLEND);
+  SDL_SetRenderDrawColor(renderer,29,45,39,255);
+  SDL_RenderFillRect(renderer,&ground);
+  constexpr float border=static_cast<float>(kHomeVillageDeploymentBorderTiles);
+  const SDL_FRect build_area{
+    viewport.x+tile*border,viewport.y+tile*border,
+    viewport.side-2.0f*tile*border,viewport.side-2.0f*tile*border
+  };
+  SDL_SetRenderDrawColor(renderer,55,81,60,255);
+  SDL_RenderFillRect(renderer,&build_area);
   for (int i=0;i<=board.width();++i) {
-    const float x=origin.x+cell*i;
-    draw->AddLine(ImVec2(x,origin.y),ImVec2(x,origin.y+side),IM_COL32(90,115,90,70));
+    const bool major=i%5==0;
+    SDL_SetRenderDrawColor(renderer,144,174,145,major?75:38);
+    const float x=viewport.x+tile*static_cast<float>(i);
+    SDL_RenderLine(renderer,x,viewport.y,x,viewport.y+viewport.side);
   }
   for (int i=0;i<=board.height();++i) {
-    const float y=origin.y+cell*i;
-    draw->AddLine(ImVec2(origin.x,y),ImVec2(origin.x+side,y),IM_COL32(90,115,90,70));
+    const bool major=i%5==0;
+    SDL_SetRenderDrawColor(renderer,144,174,145,major?75:38);
+    const float y=viewport.y+tile*static_cast<float>(i);
+    SDL_RenderLine(renderer,viewport.x,y,viewport.x+viewport.side,y);
   }
+  SDL_SetRenderDrawColor(renderer,165,199,164,190);
+  SDL_RenderRect(renderer,&ground);
+  SDL_SetRenderDrawColor(renderer,186,214,157,160);
+  SDL_RenderRect(renderer,&build_area);
   if (selected && board.contains(*selected)) {
-    const ImVec2 low(origin.x+cell*selected->x,origin.y+cell*selected->y);
-    draw->AddRect(low,ImVec2(low.x+cell,low.y+cell),IM_COL32(255,215,90,255),0.0f,0,2.0f);
-  }
-  ImGui::InvisibleButton("board",ImVec2(side,side));
-  if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
-    const auto mouse=ImGui::GetIO().MousePos;
-    GridCell cell_at{static_cast<int>((mouse.x-origin.x)/cell),static_cast<int>((mouse.y-origin.y)/cell)};
-    if (board.contains(cell_at)) selected=cell_at;
+    const SDL_FRect cell{
+      viewport.x+tile*static_cast<float>(selected->x),
+      viewport.y+tile*static_cast<float>(selected->y),tile,tile
+    };
+    SDL_SetRenderDrawColor(renderer,255,218,95,90);
+    SDL_RenderFillRect(renderer,&cell);
+    SDL_SetRenderDrawColor(renderer,255,218,95,255);
+    SDL_RenderRect(renderer,&cell);
   }
 }
 } // namespace cocsim::viewer

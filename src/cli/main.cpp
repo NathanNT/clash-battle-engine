@@ -12,7 +12,7 @@ static Milliseconds number(const char* text) {
 }
 static void must(bool success,const std::string& error) { if (!success) throw std::runtime_error(error); }
 static void report(const BattleState& battle) {
-  std::cout << "{\"ruleset\":\"" << kEmptyRuleset << "\",\"time_ms\":" << battle.time_ms()
+  std::cout << "{\"ruleset\":\"" << kRulesetId << "\",\"time_ms\":" << battle.time_ms()
     << ",\"result\":\"" << result_name(battle.result()) << "\",\"entities\":[],\"state_hash\":"
     << battle.state_hash() << "}\n";
 }
@@ -27,7 +27,7 @@ int main(int argc,char** argv) {
     if (mode=="validate") {
       if (argc!=3) throw std::runtime_error("validate needs scenario path");
       Scenario scenario; must(load_scenario(argv[2],scenario,error),error);
-      std::cout << "valid empty scenario: " << scenario.ruleset << "\n"; return 0;
+      std::cout << "valid scenario: " << scenario.ruleset << "\n"; return 0;
     }
     if (mode=="replay") {
       if (argc!=3) throw std::runtime_error("replay needs replay path");

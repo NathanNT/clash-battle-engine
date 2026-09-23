@@ -1,4 +1,4 @@
-# Empty engine rebuild (2026-09-23)
+# Core rebuild baseline (2026-09-23)
 
 Archive branch: `archive/pre-empty-engine-2026-09-23`
 Archive commit: `db13f52f2c2c59867cd1685770db03d57d101266`
@@ -7,7 +7,7 @@ The archive preserves the relevant pre-removal source, tests, reference deltas, 
 
 ## Retained engine
 
-Fixed 16 ms clock; deterministic tick and command progression; 50×50 board, build border, rectangles, and deterministic path search; strict empty scenario/replay codecs; value-only snapshots; event log; state hashes; CLI; SDL3/ImGui empty board and controls; optional Python/Gymnasium adapters; infrastructure tests and build tooling.
+Fixed 16 ms clock; deterministic tick and command progression; 50×50 board, build border, rectangles, and deterministic path search; strict scenario/replay codecs; value-only snapshots; event log; state hashes; CLI; SDL3/ImGui board canvas and controls; optional Python/Gymnasium adapters; infrastructure tests and build tooling.
 
 ## Removed content
 

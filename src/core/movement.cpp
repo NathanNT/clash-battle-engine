@@ -5,7 +5,7 @@
 namespace cocsim {
 Board::Board(int width, int height) : width_(width), height_(height) {
   if (width != kHomeVillageTotalTiles || height != kHomeVillageTotalTiles)
-    throw std::invalid_argument("empty ruleset requires the 50x50 Home Village board");
+    throw std::invalid_argument("current ruleset requires the 50x50 Home Village board");
 }
 bool Board::contains(GridCell c) const { return c.x >= 0 && c.y >= 0 && c.x < width_ && c.y < height_; }
 bool Board::contains(Rect r) const {

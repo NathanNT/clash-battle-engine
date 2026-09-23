@@ -1,4 +1,4 @@
-"""Gymnasium adapter for the empty deterministic Core ruleset."""
+"""Gymnasium adapter for the deterministic Core ruleset."""
 from __future__ import annotations
 import gymnasium as gym
 from gymnasium import spaces

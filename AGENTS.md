@@ -1,4 +1,4 @@
-# CoCSim empty-engine invariants
+# CoCSim engine invariants
 
 - Rules use only fixed `kTickMs = 16` integer logical time. SDL, Python, wall time, and floating delta time may never make simulation decisions.
 - Commands require future tick-aligned effective times and stable sequence ordering. Entity ID must resolve ties if entities are added in a later authorized integration.

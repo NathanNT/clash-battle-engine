@@ -11,7 +11,7 @@ const char* command_name(CommandType t) {
   return "invalid";
 }
 BattleState::BattleState(Scenario scenario, const GameData&) : scenario_(std::move(scenario)), board_(scenario_.width, scenario_.height) {
-  if (scenario_.ruleset != kEmptyRuleset) throw std::invalid_argument("unsupported ruleset: " + scenario_.ruleset);
+  if (scenario_.ruleset != kRulesetId) throw std::invalid_argument("unsupported ruleset: " + scenario_.ruleset);
   if (scenario_.duration_ms <= 0 || scenario_.duration_ms % kTickMs != 0)
     throw std::invalid_argument("duration must be positive and 16 ms tick aligned");
 }

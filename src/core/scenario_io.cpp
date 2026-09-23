@@ -18,9 +18,9 @@ bool load_text(const std::string& path, std::string& value, std::string& error) 
   value = buffer.str(); error.clear(); return true;
 }
 std::string scenario_json(const Scenario& s) {
-  if (s.ruleset!=kEmptyRuleset || s.width!=kHomeVillageTotalTiles || s.height!=kHomeVillageTotalTiles
+  if (s.ruleset!=kRulesetId || s.width!=kHomeVillageTotalTiles || s.height!=kHomeVillageTotalTiles
       || s.duration_ms<=0 || s.duration_ms%kTickMs!=0)
-    throw std::invalid_argument("only the empty-16ms-v1 scenario is supported");
+    throw std::invalid_argument("unsupported scenario ruleset, board size, or duration");
   return "{\"format_version\":1,\"ruleset\":\"empty-16ms-v1\",\"width\":" + std::to_string(s.width)
     + ",\"height\":" + std::to_string(s.height) + ",\"seed\":" + std::to_string(s.seed)
     + ",\"duration_ms\":" + std::to_string(s.duration_ms) + "}";

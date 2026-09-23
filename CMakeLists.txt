@@ -28,10 +28,10 @@ add_executable(cocsim src/cli/main.cpp)
 target_link_libraries(cocsim PRIVATE cocsim_core)
 if(COCSIM_BUILD_TESTS)
   enable_testing()
-  add_executable(cocsim_engine_tests tests/empty_engine_tests.cpp)
+  add_executable(cocsim_engine_tests tests/engine_tests.cpp)
   target_link_libraries(cocsim_engine_tests PRIVATE cocsim_core)
   add_test(NAME cocsim_engine_tests COMMAND cocsim_engine_tests)
-  add_test(NAME cocsim_empty_cli COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/empty.json --until 1600)
+  add_test(NAME cocsim_default_cli COMMAND cocsim simulate ${CMAKE_CURRENT_SOURCE_DIR}/scenarios/default.json --until 1600)
   add_test(NAME cocsim_old_content_rejected COMMAND cocsim validate ${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/old-content.json)
   set_tests_properties(cocsim_old_content_rejected PROPERTIES WILL_FAIL TRUE)
   add_executable(cocsim_viewer_bridge_tests tests/viewer_bridge_tests.cpp)
@@ -40,7 +40,7 @@ if(COCSIM_BUILD_TESTS)
   add_test(NAME cocsim_viewer_bridge_tests COMMAND cocsim_viewer_bridge_tests)
   add_test(NAME cocsim_cli_roundtrip COMMAND ${CMAKE_COMMAND}
     -Dexe=$<TARGET_FILE:cocsim>
-    -Dscenario=${CMAKE_CURRENT_SOURCE_DIR}/scenarios/empty.json
+    -Dscenario=${CMAKE_CURRENT_SOURCE_DIR}/scenarios/default.json
     -Doutput=${CMAKE_CURRENT_BINARY_DIR}
     -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/cli_roundtrip.cmake)
 endif()

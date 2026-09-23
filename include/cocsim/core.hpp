@@ -9,7 +9,8 @@ constexpr Milliseconds kTickMs = 16;
 constexpr int kHomeVillageBuildTiles = 44;
 constexpr int kHomeVillageDeploymentBorderTiles = 3;
 constexpr int kHomeVillageTotalTiles = kHomeVillageBuildTiles + 2 * kHomeVillageDeploymentBorderTiles;
-constexpr const char* kEmptyRuleset = "empty-16ms-v1";
+// Saved format identifier. Retained so previously written scenarios and replays load.
+constexpr const char* kRulesetId = "empty-16ms-v1";
 
 struct GridCell { int x{}; int y{}; friend bool operator==(const GridCell&, const GridCell&) = default; };
 struct Rect { int x{}; int y{}; int width{}; int height{}; };
@@ -28,10 +29,10 @@ class Board {
   int height_;
 };
 
-// This ruleset has no populated catalogue or combat statistics.
+// The baseline contains no combat catalogue.
 class GameData {
  public:
-  static const GameData& empty();
+  static const GameData& baseline();
  private:
   GameData() = default;
 };
@@ -40,7 +41,7 @@ struct Scenario {
   int height{kHomeVillageTotalTiles};
   std::uint64_t seed{1};
   Milliseconds duration_ms{1600};
-  std::string ruleset{kEmptyRuleset};
+  std::string ruleset{kRulesetId};
 };
 enum class CommandType { Wait, EndBattle };
 struct Command {
@@ -68,7 +69,7 @@ struct Observation {
 };
 class BattleState {
  public:
-  explicit BattleState(Scenario scenario = {}, const GameData& data = GameData::empty());
+  explicit BattleState(Scenario scenario = {}, const GameData& data = GameData::baseline());
   const Scenario& scenario() const { return scenario_; }
   const Board& board() const { return board_; }
   Milliseconds time_ms() const { return time_ms_; }
