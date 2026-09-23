@@ -1,8 +1,8 @@
 #pragma once
-#include "cocsim/core.hpp"
+#include "clash_battle_engine/core.hpp"
 #include <algorithm>
 #include <optional>
-namespace cocsim::viewer {
+namespace clash_battle_engine::viewer {
 struct BoardViewport {
   float x{};
   float y{};
@@ -21,4 +21,4 @@ struct BoardViewport {
     return board.contains(result)?std::optional<GridCell>{result}:std::nullopt;
   }
 };
-} // namespace cocsim::viewer
+} // namespace clash_battle_engine::viewer

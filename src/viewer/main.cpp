@@ -10,7 +10,7 @@
 #include <filesystem>
 #include <optional>
 #include <string>
-using namespace cocsim;
+using namespace clash_battle_engine;
 int main(int argc,char** argv) {
   bool smoke=false;
   std::string scenario_path,replay_path,screenshot_path;

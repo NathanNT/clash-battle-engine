@@ -1,4 +1,4 @@
-#include "cocsim/core.hpp"
+#include "clash_battle_engine/core.hpp"
 #include <cassert>
 #include <cstdio>
 #include <cstdlib>
@@ -6,7 +6,7 @@
 #include <string>
 #undef assert
 #define assert(condition) do { if (!(condition)) { std::fprintf(stderr, "assertion failed: %s at line %d\n", #condition, __LINE__); std::abort(); } } while (false)
-using namespace cocsim;
+using namespace clash_battle_engine;
 int main() {
   static_assert(kTickMs==16);
   Board board;
@@ -20,9 +20,10 @@ int main() {
   std::string error;
   Scenario parsed;
   assert(parse_scenario(scenario_json(scenario),parsed,error));
-  assert(!parse_scenario("{\"format_version\":1,\"ruleset\":\"empty-16ms-v1\",\"width\":50,\"height\":50,\"seed\":1,\"duration_ms\":1600,\"defenders\":[]}",parsed,error));
-  assert(!parse_scenario("{\"format_version\":1,\"ruleset\":\"empty-16ms-v1\",\"width\":50,\"height\":50,\"seed\":1,\"duration_ms\":1600,\"seed\":2}",parsed,error));
-  assert(!parse_scenario("{\"format_version\":1,\"ruleset\":\"legacy\",\"width\":50,\"height\":50,\"seed\":1,\"duration_ms\":1600}",parsed,error));
+  const auto valid_json=scenario_json(scenario);
+  assert(!parse_scenario(valid_json.substr(0,valid_json.size()-1)+",\"objects\":[]}",parsed,error));
+  assert(!parse_scenario(valid_json.substr(0,valid_json.size()-1)+",\"seed\":2}",parsed,error));
+  assert(!parse_scenario("{\"format_version\":1,\"ruleset\":\"unsupported\",\"width\":50,\"height\":50,\"seed\":1,\"duration_ms\":1600}",parsed,error));
   BattleState a(scenario),b(scenario);
   assert(!a.submit(CommandType::Wait,0,error));
   assert(!a.submit(CommandType::Wait,15,error));
@@ -50,9 +51,9 @@ int main() {
   assert(played.replay_commands(replay_commands,scenario.duration_ms,error));
   assert(played.state_hash()==a.state_hash());
   assert(!parse_replay(replay.substr(0,replay.size()-1)+",\"unknown\":1}",replay_scenario,replay_commands,error));
-  auto old_tick_replay=replay;
-  old_tick_replay.replace(old_tick_replay.find("\"tick_ms\":16"),12,"\"tick_ms\":10");
-  assert(!parse_replay(old_tick_replay,replay_scenario,replay_commands,error));
+  auto wrong_tick_replay=replay;
+  wrong_tick_replay.replace(wrong_tick_replay.find("\"tick_ms\":16"),12,"\"tick_ms\":10");
+  assert(!parse_replay(wrong_tick_replay,replay_scenario,replay_commands,error));
   assert(!restored.restore("{\"format_version\":0}",error));
   BattleState timeout(scenario); timeout.advance_ticks(100);
   assert(timeout.time_ms()==1600 && timeout.result()==Result::TimedOut);

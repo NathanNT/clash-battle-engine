@@ -1,8 +1,8 @@
 # Clash Battle Engine
 
-A deterministic C++20 Home Village simulation foundation. The active `main` branch currently contains no combat entities or populated catalogue. The pre-rebuild project is preserved at `archive/pre-empty-engine-2026-09-23` (`db13f52f2c2c59867cd1685770db03d57d101266`).
+A deterministic C++20 Home Village simulation foundation. Core advances in fixed 16 ms ticks on a 50×50 board with a 44×44 build area and 3-tile border. Commands, observations, events, snapshots, replays, and state hashes all use the same Core implementation.
 
-Core advances in fixed 16 ms ticks. Its 50×50 board has a 44×44 build area and a 3-tile border. Commands, observations, events, snapshots, replays, and state hashes are owned by Core. The Headless CLI, Viewer, and optional Python adapter all call that same implementation.
+The current ruleset supports board geometry, scheduling, and simulation state. Combat entities and statistics will be integrated only after the version-pinned behavior and conversion catalogue is complete.
 
 On Windows with Visual Studio 2022:
 
@@ -16,10 +16,10 @@ On Windows with Visual Studio 2022:
 Create and run a scenario:
 
 ```powershell
-.\build\engine\Debug\cocsim.exe init-scenario scenario.json
-.\build\engine\Debug\cocsim.exe simulate scenario.json --until 1600 --save-replay replay.json --save-snapshot snapshot.json
-.\build\engine\Debug\cocsim.exe replay replay.json
-.\build\engine\Debug\cocsim.exe resume scenario.json snapshot.json
+.\build\engine\Debug\clash_battle_engine.exe init-scenario scenario.json
+.\build\engine\Debug\clash_battle_engine.exe simulate scenario.json --until 1600 --save-replay replay.json --save-snapshot snapshot.json
+.\build\engine\Debug\clash_battle_engine.exe replay replay.json
+.\build\engine\Debug\clash_battle_engine.exe resume scenario.json snapshot.json
 ```
 
-The saved ruleset identifier remains `empty-16ms-v1` for format compatibility. Populated legacy scenarios and commands are rejected. See [rebuild notes](docs/rebuild-baseline.md).
+See the [format specification](docs/format.md) and [architecture](docs/architecture/overview.md).

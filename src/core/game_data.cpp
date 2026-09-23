@@ -1,4 +1,4 @@
-#include "cocsim/core.hpp"
-namespace cocsim {
+#include "clash_battle_engine/core.hpp"
+namespace clash_battle_engine {
 const GameData& GameData::baseline() { static const GameData data; return data; }
-} // namespace cocsim
+} // namespace clash_battle_engine

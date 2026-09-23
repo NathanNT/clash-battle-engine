@@ -2,10 +2,10 @@
 requires = ["scikit-build-core>=0.9", "pybind11>=2.12"]
 build-backend = "scikit_build_core.build"
 [project]
-name = "cocsim-rl"
+name = "clash-battle-engine-rl"
 version = "0.2.0"
 requires-python = ">=3.10"
 dependencies = ["numpy>=1.24", "gymnasium>=0.29"]
 [tool.scikit-build]
-wheel.packages = ["python/cocsim_rl"]
-cmake.args = ["-DCOCSIM_BUILD_PYTHON=ON", "-DCOCSIM_BUILD_TESTS=OFF"]
+wheel.packages = ["python/clash_battle_engine_rl"]
+cmake.args = ["-DCLASH_BATTLE_ENGINE_BUILD_PYTHON=ON", "-DCLASH_BATTLE_ENGINE_BUILD_TESTS=OFF"]

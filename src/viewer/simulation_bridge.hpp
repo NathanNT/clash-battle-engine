@@ -1,10 +1,10 @@
 #pragma once
-#include "cocsim/core.hpp"
+#include "clash_battle_engine/core.hpp"
 #include <algorithm>
 #include <cstdint>
 #include <stdexcept>
 #include <string>
-namespace cocsim::viewer {
+namespace clash_battle_engine::viewer {
 class SimulationBridge {
  public:
   explicit SimulationBridge(Scenario scenario = {}) : state_(scenario) {}
@@ -59,4 +59,4 @@ class SimulationBridge {
     state_.advance_ticks(1);
   }
 };
-} // namespace cocsim::viewer
+} // namespace clash_battle_engine::viewer

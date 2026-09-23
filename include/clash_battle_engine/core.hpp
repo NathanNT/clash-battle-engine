@@ -3,14 +3,13 @@
 #include <string>
 #include <vector>
 
-namespace cocsim {
+namespace clash_battle_engine {
 using Milliseconds = std::int64_t;
 constexpr Milliseconds kTickMs = 16;
 constexpr int kHomeVillageBuildTiles = 44;
 constexpr int kHomeVillageDeploymentBorderTiles = 3;
 constexpr int kHomeVillageTotalTiles = kHomeVillageBuildTiles + 2 * kHomeVillageDeploymentBorderTiles;
-// Saved format identifier. Retained so previously written scenarios and replays load.
-constexpr const char* kRulesetId = "empty-16ms-v1";
+constexpr const char* kRulesetId = "clash-battle-engine-16ms-v1";
 
 struct GridCell { int x{}; int y{}; friend bool operator==(const GridCell&, const GridCell&) = default; };
 struct Rect { int x{}; int y{}; int width{}; int height{}; };
@@ -105,4 +104,4 @@ bool save_text(const std::string& path, const std::string& text, std::string& er
 bool load_text(const std::string& path, std::string& text, std::string& error);
 const char* result_name(Result result);
 const char* command_name(CommandType type);
-} // namespace cocsim
+} // namespace clash_battle_engine

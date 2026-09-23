@@ -1,7 +1,5 @@
 # Current state — 2026-09-23
 
-Active ruleset: `empty-16ms-v1`. No populated combat content is loaded. The archive baseline is `archive/pre-empty-engine-2026-09-23` at `db13f52f2c2c59867cd1685770db03d57d101266`.
+Active ruleset: `clash-battle-engine-16ms-v1`. Core clock, board, geometry, commands, observations, events, state hashes, snapshots, replay, Headless CLI, Viewer, and optional RL adapter are present. No combat entities or statistics are loaded.
 
-Core clock, board, commands, observation, events, state hash, snapshot, replay, Headless, Viewer, and optional RL adapter are present. Frozen TH18 reference and old coverage matrix live only on the archive branch.
-
-Verification: full Visual Studio Debug build passed; CTest 6/6 passed; CLI replay and snapshot restoration yielded the same terminal hash; optional Python extension built and round-tripped a snapshot; Viewer starts under SDL dummy video. The board was visually reviewed as the main canvas with a separate controls panel, and viewport hit tests pass. No combat fidelity claim applies to the current ruleset.
+The Viewer renders the board on the main canvas with a separate controls panel. The build and CTest suite pass 6/6 tests; CLI replay and snapshot restoration yield the same terminal hash; the optional Python adapter passes an observation and snapshot round trip. No combat fidelity claim applies to the current ruleset.

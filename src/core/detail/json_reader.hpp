@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 #include <vector>
-namespace cocsim::json {
+namespace clash_battle_engine::json {
 struct Value {
   enum class Type { Null, Boolean, Number, String, Array, Object } type{Type::Null};
   std::string scalar;
@@ -18,4 +18,4 @@ struct Value {
 };
 Value parse(const std::string& text);
 std::string stringify(const Value& value);
-} // namespace cocsim::json
+} // namespace clash_battle_engine::json

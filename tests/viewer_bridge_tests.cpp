@@ -5,7 +5,7 @@
 #include <cstdlib>
 #undef assert
 #define assert(condition) do { if (!(condition)) { std::fprintf(stderr, "assertion failed: %s at line %d\n", #condition, __LINE__); std::abort(); } } while (false)
-using namespace cocsim;
+using namespace clash_battle_engine;
 int main() {
   Board board;
   const auto viewport=viewer::BoardViewport::for_window(1100,850);

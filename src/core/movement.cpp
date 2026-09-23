@@ -1,8 +1,8 @@
-#include "cocsim/core.hpp"
+#include "clash_battle_engine/core.hpp"
 #include <algorithm>
 #include <queue>
 #include <stdexcept>
-namespace cocsim {
+namespace clash_battle_engine {
 Board::Board(int width, int height) : width_(width), height_(height) {
   if (width != kHomeVillageTotalTiles || height != kHomeVillageTotalTiles)
     throw std::invalid_argument("current ruleset requires the 50x50 Home Village board");
@@ -53,4 +53,4 @@ std::vector<GridCell> Board::shortest_path(GridCell from, GridCell to, const std
   std::reverse(path.begin(), path.end());
   return path;
 }
-} // namespace cocsim
+} // namespace clash_battle_engine

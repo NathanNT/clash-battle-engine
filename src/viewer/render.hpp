@@ -2,7 +2,7 @@
 #include "board_layout.hpp"
 #include <SDL3/SDL.h>
 #include <optional>
-namespace cocsim::viewer {
+namespace clash_battle_engine::viewer {
 inline void draw_board(SDL_Renderer* renderer,const Board& board,const BoardViewport& viewport,
                        const std::optional<GridCell>& selected) {
   const float tile=viewport.side/static_cast<float>(board.width());
@@ -44,4 +44,4 @@ inline void draw_board(SDL_Renderer* renderer,const Board& board,const BoardView
     SDL_RenderRect(renderer,&cell);
   }
 }
-} // namespace cocsim::viewer
+} // namespace clash_battle_engine::viewer

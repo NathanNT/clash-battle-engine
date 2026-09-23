@@ -1,7 +1,7 @@
 # Backlog
 
-1. Keep the 16 ms engine baseline stable and preserve the archive branch.
-2. Finish the version-pinned combat behavior and conversion catalogue outside the active ruleset.
-3. Begin a separate, explicitly authorized content integration pass only after that catalogue is complete. Add data and behavior in sourced increments with deterministic Core, shared adapters, and focused tests.
+1. Keep the deterministic 16 ms engine stable.
+2. Complete the version-pinned combat behavior and conversion catalogue.
+3. Start a separately authorized data and behavior integration pass after the catalogue is complete. Add each sourced increment through Core with shared adapters and focused tests.
 
-Do not silently restore old content or use the archived normalized catalogue as a fallback.
+Do not add combat values or rules without provenance.

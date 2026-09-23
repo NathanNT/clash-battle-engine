@@ -1,9 +1,9 @@
-#include "cocsim/core.hpp"
+#include "clash_battle_engine/core.hpp"
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <stdexcept>
 namespace py=pybind11;
-using namespace cocsim;
+using namespace clash_battle_engine;
 class NativeBattle {
  public:
   explicit NativeBattle(std::uint64_t seed=1) { Scenario s; s.seed=seed; state_=BattleState(s); }
@@ -18,7 +18,7 @@ class NativeBattle {
   void advance_ticks(std::uint64_t ticks) { state_.advance_ticks(ticks); }
   std::string snapshot() const { return state_.snapshot(); }
   void restore(const std::string& data) { std::string error; if (!state_.restore(data,error)) throw std::invalid_argument(error); }
-  std::string replay_json() const { return cocsim::replay_json(state_.scenario(),state_.commands()); }
+  std::string replay_json() const { return clash_battle_engine::replay_json(state_.scenario(),state_.commands()); }
   py::dict observation() const {
     auto o=state_.observe(); py::dict d;
     d["time_ms"]=o.time_ms; d["width"]=o.width; d["height"]=o.height;
@@ -29,7 +29,7 @@ class NativeBattle {
   BattleState state_;
   void submit(CommandType type,Milliseconds at) { std::string error; if (!state_.submit(type,at,error)) throw std::invalid_argument(error); }
 };
-PYBIND11_MODULE(_cocsim,m) {
+PYBIND11_MODULE(_clash_battle_engine,m) {
   m.attr("tick_ms")=kTickMs;
   py::class_<NativeBattle>(m,"NativeBattle")
     .def(py::init<std::uint64_t>(),py::arg("seed")=1)

@@ -1,10 +1,10 @@
-#include "cocsim/core.hpp"
+#include "clash_battle_engine/core.hpp"
 #include "detail/json_reader.hpp"
 #include <fstream>
 #include <limits>
 #include <sstream>
 #include <stdexcept>
-namespace cocsim {
+namespace clash_battle_engine {
 bool save_text(const std::string& path, const std::string& value, std::string& error) {
   std::ofstream file(path, std::ios::binary | std::ios::trunc);
   if (!file || !(file << value)) { error = "cannot write " + path; return false; }
@@ -21,7 +21,7 @@ std::string scenario_json(const Scenario& s) {
   if (s.ruleset!=kRulesetId || s.width!=kHomeVillageTotalTiles || s.height!=kHomeVillageTotalTiles
       || s.duration_ms<=0 || s.duration_ms%kTickMs!=0)
     throw std::invalid_argument("unsupported scenario ruleset, board size, or duration");
-  return "{\"format_version\":1,\"ruleset\":\"empty-16ms-v1\",\"width\":" + std::to_string(s.width)
+  return "{\"format_version\":1,\"ruleset\":\"" + std::string(kRulesetId) + "\",\"width\":" + std::to_string(s.width)
     + ",\"height\":" + std::to_string(s.height) + ",\"seed\":" + std::to_string(s.seed)
     + ",\"duration_ms\":" + std::to_string(s.duration_ms) + "}";
 }
@@ -96,4 +96,4 @@ bool save_replay(const std::string& path, const Scenario& s, const std::vector<C
     return save_text(path,encoded + "\n",error);
   } catch (const std::exception& e) { error=e.what(); return false; }
 }
-} // namespace cocsim
+} // namespace clash_battle_engine

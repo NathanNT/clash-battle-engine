@@ -1,7 +1,7 @@
-#include "cocsim/core.hpp"
+#include "clash_battle_engine/core.hpp"
 #include "detail/json_reader.hpp"
 #include <stdexcept>
-namespace cocsim {
+namespace clash_battle_engine {
 static void hash_bytes(std::uint64_t& hash, const std::string& text) {
   for (unsigned char byte : text) { hash ^= byte; hash *= 1099511628211ULL; }
 }
@@ -15,7 +15,7 @@ std::uint64_t BattleState::state_hash() const {
   return hash;
 }
 std::string BattleState::snapshot() const {
-  std::string out = "{\"format_version\":1,\"kind\":\"empty-snapshot\",\"time_ms\":"+std::to_string(time_ms_)
+  std::string out = "{\"format_version\":1,\"kind\":\"clash-battle-engine-snapshot-v1\",\"time_ms\":"+std::to_string(time_ms_)
     +",\"replay\":"+replay_json(scenario_,commands_)+",\"events\":[";
   for (std::size_t i=0;i<events_.size();++i) {
     if (i) out+=",";
@@ -30,7 +30,7 @@ bool BattleState::restore(const std::string& bytes,std::string& error) {
   try {
     const auto root=json::parse(bytes);
     root.keys({"format_version","kind","time_ms","replay","events"});
-    if (root.at("format_version").integer()!=1 || root.at("kind").string()!="empty-snapshot")
+    if (root.at("format_version").integer()!=1 || root.at("kind").string()!="clash-battle-engine-snapshot-v1")
       throw std::runtime_error("unsupported snapshot format");
     const auto target=root.at("time_ms").integer();
     // Reuse the strict replay parser, then reconstruct every event and queued command.
@@ -56,4 +56,4 @@ bool BattleState::restore(const std::string& bytes,std::string& error) {
     *this=std::move(candidate); error.clear(); return true;
   } catch(const std::exception& e) { error=e.what(); return false; }
 }
-} // namespace cocsim
+} // namespace clash_battle_engine

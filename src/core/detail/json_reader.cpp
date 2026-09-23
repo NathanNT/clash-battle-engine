@@ -5,7 +5,7 @@
 #include <initializer_list>
 #include <stdexcept>
 #include <string_view>
-namespace cocsim::json {
+namespace clash_battle_engine::json {
 const Value& Value::at(const std::string& key) const {
   if (type != Type::Object) throw std::runtime_error("expected JSON object");
   auto it = object.find(key);
@@ -139,4 +139,4 @@ std::string stringify(const Value& value) {
     default: throw std::runtime_error("unsupported JSON value");
   }
 }
-} // namespace cocsim::json
+} // namespace clash_battle_engine::json

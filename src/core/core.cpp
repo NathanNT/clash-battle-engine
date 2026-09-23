@@ -1,7 +1,7 @@
-#include "cocsim/core.hpp"
+#include "clash_battle_engine/core.hpp"
 #include <limits>
 #include <stdexcept>
-namespace cocsim {
+namespace clash_battle_engine {
 const char* result_name(Result r) {
   switch (r) { case Result::Active: return "active"; case Result::Ended: return "ended"; case Result::TimedOut: return "timed_out"; }
   return "invalid";
@@ -61,4 +61,4 @@ bool BattleState::replay_commands(const std::vector<Command>& commands, Millisec
   return advance_to(target,error);
 }
 Observation BattleState::observe() const { return {time_ms_,board_.width(),board_.height(),result_,state_hash()}; }
-} // namespace cocsim
+} // namespace clash_battle_engine

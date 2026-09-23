@@ -3,9 +3,9 @@ from __future__ import annotations
 import gymnasium as gym
 from gymnasium import spaces
 import numpy as np
-from _cocsim import NativeBattle, tick_ms
+from _clash_battle_engine import NativeBattle, tick_ms
 
-class CoCSimEnv(gym.Env):
+class ClashBattleEngineEnv(gym.Env):
     metadata = {"render_modes": []}
     def __init__(self):
         super().__init__()

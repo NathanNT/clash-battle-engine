@@ -1,9 +1,9 @@
-#include "cocsim/core.hpp"
+#include "clash_battle_engine/core.hpp"
 #include <exception>
 #include <iostream>
 #include <stdexcept>
 #include <string>
-using namespace cocsim;
+using namespace clash_battle_engine;
 static Milliseconds number(const char* text) {
   std::size_t used{};
   auto value=std::stoll(text,&used);
@@ -18,7 +18,7 @@ static void report(const BattleState& battle) {
 }
 int main(int argc,char** argv) {
   try {
-    if (argc<2) throw std::runtime_error("usage: cocsim demo | init-scenario PATH | validate PATH | simulate PATH [--until MS] [--wait MS] [--end MS] [--save-replay PATH] [--save-snapshot PATH] | replay PATH | resume SCENARIO SNAPSHOT");
+    if (argc<2) throw std::runtime_error("usage: clash_battle_engine demo | init-scenario PATH | validate PATH | simulate PATH [--until MS] [--wait MS] [--end MS] [--save-replay PATH] [--save-snapshot PATH] | replay PATH | resume SCENARIO SNAPSHOT");
     const std::string mode=argv[1]; std::string error;
     if (mode=="init-scenario") {
       if (argc!=3) throw std::runtime_error("init-scenario needs output path");
