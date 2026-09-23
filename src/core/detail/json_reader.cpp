@@ -1,167 +1,142 @@
 #include "json_reader.hpp"
-
+#include <charconv>
 #include <cctype>
-#include <cstdlib>
-#include <fstream>
-#include <iterator>
-
-namespace cocsim::detail {
-namespace {
-
-std::optional<std::size_t> field_value_start(const std::string& object,
-                                             const std::string& key,
-                                             std::size_t search_from = 0) {
-  const std::string needle = "\"" + key + "\"";
-  while (search_from < object.size()) {
-    const auto found = object.find(needle, search_from);
-    if (found == std::string::npos) break;
-    auto cursor = found + needle.size();
-    while (cursor < object.size() && std::isspace(static_cast<unsigned char>(object[cursor]))) ++cursor;
-    if (cursor < object.size() && object[cursor] == ':') {
-      ++cursor;
-      while (cursor < object.size() && std::isspace(static_cast<unsigned char>(object[cursor]))) ++cursor;
-      return cursor;
-    }
-    search_from = found + needle.size();
-  }
-  return std::nullopt;
+#include <cstdint>
+#include <initializer_list>
+#include <stdexcept>
+#include <string_view>
+namespace cocsim::json {
+const Value& Value::at(const std::string& key) const {
+  if (type != Type::Object) throw std::runtime_error("expected JSON object");
+  auto it = object.find(key);
+  if (it == object.end()) throw std::runtime_error("missing field: " + key);
+  return it->second;
 }
-
-std::optional<std::size_t> matching_json_delimiter(const std::string& text,
-                                                    std::size_t start,
-                                                    char open,
-                                                    char close) {
-  if (start >= text.size() || text[start] != open) return std::nullopt;
-  int depth = 0;
-  bool in_string = false;
-  bool escaped = false;
-  for (std::size_t index = start; index < text.size(); ++index) {
-    const char value = text[index];
-    if (in_string) {
-      if (escaped) escaped = false;
-      else if (value == '\\') escaped = true;
-      else if (value == '"') in_string = false;
-      continue;
-    }
-    if (value == '"') { in_string = true; continue; }
-    if (value == open) ++depth;
-    else if (value == close && --depth == 0) return index;
-  }
-  return std::nullopt;
+void Value::keys(std::initializer_list<const char*> expected) const {
+  if (type != Type::Object || object.size() != expected.size()) throw std::runtime_error("unexpected JSON fields");
+  for (const char* key : expected) (void)at(key);
 }
-
-} // namespace
-
-std::string escape_json(const std::string& value) {
-  std::string escaped;
-  for (const char character : value) {
-    if (character == '"' || character == '\\') escaped += '\\';
-    escaped += character;
-  }
-  return escaped;
+std::string Value::string() const {
+  if (type != Type::String) throw std::runtime_error("expected JSON string");
+  return scalar;
 }
-
-std::string read_file(const std::string& path, std::string& error) {
-  std::ifstream stream(path);
-  if (!stream) {
-    error = "cannot open " + path;
-    return {};
-  }
-  return {std::istreambuf_iterator<char>(stream), {}};
-}
-
-std::optional<std::string> string_field(const std::string& object, const std::string& key) {
-  std::size_t search_from = 0;
-  for (;;) {
-    const auto start = field_value_start(object, key, search_from);
-    if (!start) break;
-    search_from = *start + 1;
-    if (*start >= object.size() || object[*start] != '"') continue;
-    std::string value;
-    bool escaped = false;
-    for (std::size_t cursor = *start + 1; cursor < object.size(); ++cursor) {
-      const char character = object[cursor];
-      if (escaped) {
-        switch (character) {
-          case 'n': value += '\n'; break;
-          case 'r': value += '\r'; break;
-          case 't': value += '\t'; break;
-          default: value += character; break;
-        }
-        escaped = false;
-      } else if (character == '\\') escaped = true;
-      else if (character == '"') return value;
-      else value += character;
-    }
-  }
-  return std::nullopt;
-}
-
-std::optional<double> number_field(const std::string& object, const std::string& key) {
-  std::size_t search_from = 0;
-  for (;;) {
-    const auto start = field_value_start(object, key, search_from);
-    if (!start) break;
-    search_from = *start + 1;
-    char* end = nullptr;
-    const double value = std::strtod(object.c_str() + *start, &end);
-    if (end != object.c_str() + *start) return value;
-  }
-  return std::nullopt;
-}
-
-std::optional<bool> bool_field(const std::string& object, const std::string& key) {
-  std::size_t search_from = 0;
-  for (;;) {
-    const auto start = field_value_start(object, key, search_from);
-    if (!start) break;
-    search_from = *start + 1;
-    if (object.compare(*start, 4, "true") == 0) return true;
-    if (object.compare(*start, 5, "false") == 0) return false;
-  }
-  return std::nullopt;
-}
-
-std::optional<std::string> array_body(const std::string& document, const std::string& key) {
-  std::size_t search_from = 0;
-  for (;;) {
-    const auto start = field_value_start(document, key, search_from);
-    if (!start) return std::nullopt;
-    search_from = *start + 1;
-    if (*start >= document.size() || document[*start] != '[') continue;
-    const auto end = matching_json_delimiter(document, *start, '[', ']');
-    return end ? std::optional<std::string>(document.substr(*start + 1, *end - *start - 1))
-               : std::nullopt;
-  }
-}
-
-std::vector<std::string> objects_in(const std::string& array) {
-  std::vector<std::string> result;
-  int depth = 0;
-  std::size_t start = 0;
-  bool in_string = false;
-  bool escaped = false;
-  for (std::size_t index = 0; index < array.size(); ++index) {
-    const char value = array[index];
-    if (in_string) {
-      if (escaped) escaped = false;
-      else if (value == '\\') escaped = true;
-      else if (value == '"') in_string = false;
-      continue;
-    }
-    if (value == '"') { in_string = true; continue; }
-    if (value == '{' && depth++ == 0) start = index;
-    else if (value == '}' && depth > 0 && --depth == 0) result.push_back(array.substr(start, index - start + 1));
-  }
+std::int64_t Value::integer() const {
+  if (type != Type::Number || scalar.find_first_of(".eE") != std::string::npos) throw std::runtime_error("expected integer");
+  std::int64_t result{};
+  auto [end, error] = std::from_chars(scalar.data(), scalar.data() + scalar.size(), result);
+  if (error != std::errc{} || end != scalar.data() + scalar.size()) throw std::runtime_error("integer out of range");
   return result;
 }
-
-std::optional<std::string> object_after_key(const std::string& document, const std::string& key) {
-  const auto start = field_value_start(document, key);
-  if (!start || *start >= document.size() || document[*start] != '{') return std::nullopt;
-  const auto end = matching_json_delimiter(document, *start, '{', '}');
-  return end ? std::optional<std::string>(document.substr(*start, *end - *start + 1))
-             : std::nullopt;
+std::uint64_t Value::unsigned_integer() const {
+  if (type != Type::Number || scalar.empty() || scalar[0] == '-' || scalar.find_first_of(".eE") != std::string::npos) throw std::runtime_error("expected unsigned integer");
+  std::uint64_t result{};
+  auto [end, error] = std::from_chars(scalar.data(), scalar.data() + scalar.size(), result);
+  if (error != std::errc{} || end != scalar.data() + scalar.size()) throw std::runtime_error("integer out of range");
+  return result;
 }
-
-} // namespace cocsim::detail
+class Parser {
+ public:
+  explicit Parser(std::string_view text) : text_(text) {}
+  Value run() {
+    auto value = read();
+    space();
+    if (pos_ != text_.size()) fail();
+    return value;
+  }
+ private:
+  std::string_view text_;
+  std::size_t pos_{};
+  [[noreturn]] void fail() const { throw std::runtime_error("invalid JSON at byte " + std::to_string(pos_)); }
+  void space() { while (pos_ < text_.size() && std::isspace(static_cast<unsigned char>(text_[pos_]))) ++pos_; }
+  bool take(char ch) { space(); if (pos_ < text_.size() && text_[pos_] == ch) { ++pos_; return true; } return false; }
+  std::string quoted() {
+    if (!take('"')) fail();
+    std::string out;
+    while (pos_ < text_.size()) {
+      char ch = text_[pos_++];
+      if (ch == '"') return out;
+      if (static_cast<unsigned char>(ch) < 0x20) fail();
+      if (ch == '\\') {
+        if (pos_ == text_.size()) fail();
+        ch = text_[pos_++];
+        switch (ch) {
+          case '"': case '\\': case '/': out += ch; break;
+          case 'b': out += '\b'; break; case 'f': out += '\f'; break;
+          case 'n': out += '\n'; break; case 'r': out += '\r'; break; case 't': out += '\t'; break;
+          default: fail(); // No escaped Unicode is needed for this ASCII schema.
+        }
+      } else out += ch;
+    }
+    fail();
+  }
+  Value read() {
+    space();
+    if (pos_ == text_.size()) fail();
+    Value value;
+    if (text_[pos_] == '{') {
+      ++pos_; value.type = Value::Type::Object;
+      if (take('}')) return value;
+      do {
+        const auto key = quoted();
+        if (!take(':')) fail();
+        if (!value.object.emplace(key, read()).second) fail();
+        if (take('}')) return value;
+      } while (take(','));
+      fail();
+    }
+    if (text_[pos_] == '[') {
+      ++pos_; value.type = Value::Type::Array;
+      if (take(']')) return value;
+      do { value.array.push_back(read()); if (take(']')) return value; } while (take(','));
+      fail();
+    }
+    if (text_[pos_] == '"') { value.type = Value::Type::String; value.scalar = quoted(); return value; }
+    const auto start = pos_;
+    if (text_[pos_] == '-') ++pos_;
+    if (pos_ < text_.size() && std::isdigit(static_cast<unsigned char>(text_[pos_]))) {
+      if (text_[pos_] == '0') ++pos_;
+      else while (pos_ < text_.size() && std::isdigit(static_cast<unsigned char>(text_[pos_]))) ++pos_;
+      if (pos_ < text_.size() && text_[pos_] == '.') { ++pos_; while (pos_ < text_.size() && std::isdigit(static_cast<unsigned char>(text_[pos_]))) ++pos_; }
+      if (pos_ < text_.size() && (text_[pos_] == 'e' || text_[pos_] == 'E')) {
+        ++pos_; if (pos_ < text_.size() && (text_[pos_] == '+' || text_[pos_] == '-')) ++pos_;
+        while (pos_ < text_.size() && std::isdigit(static_cast<unsigned char>(text_[pos_]))) ++pos_;
+      }
+      value.type = Value::Type::Number; value.scalar = std::string(text_.substr(start, pos_ - start));
+      return value;
+    }
+    fail();
+  }
+};
+Value parse(const std::string& text) { return Parser(text).run(); }
+std::string stringify(const Value& value) {
+  switch (value.type) {
+    case Value::Type::Number: return value.scalar;
+    case Value::Type::String: {
+      std::string out="\"";
+      for (char ch:value.scalar) {
+        if (ch=='"' || ch=='\\') { out+='\\'; out+=ch; }
+        else if (ch=='\n') out+="\\n";
+        else if (ch=='\r') out+="\\r";
+        else if (ch=='\t') out+="\\t";
+        else out+=ch;
+      }
+      return out+"\"";
+    }
+    case Value::Type::Array: {
+      std::string out="[";
+      for (const auto& child:value.array) { if(out.size()>1) out+=","; out+=stringify(child); }
+      return out+"]";
+    }
+    case Value::Type::Object: {
+      std::string out="{";
+      for (const auto& [key,child]:value.object) {
+        if(out.size()>1) out+=",";
+        Value name; name.type=Value::Type::String; name.scalar=key;
+        out+=stringify(name)+":"+stringify(child);
+      }
+      return out+"}";
+    }
+    default: throw std::runtime_error("unsupported JSON value");
+  }
+}
+} // namespace cocsim::json

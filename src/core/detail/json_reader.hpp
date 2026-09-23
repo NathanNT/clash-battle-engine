@@ -1,22 +1,21 @@
 #pragma once
-
-#include <cstddef>
-#include <optional>
+#include <cstdint>
+#include <initializer_list>
+#include <map>
 #include <string>
 #include <vector>
-
-namespace cocsim::detail {
-
-// Narrow, dependency-free helpers for the checked-in normalized JSON schema.
-// They are shared by catalogue, scenario and replay codecs; they are not a
-// general-purpose JSON API.
-std::string escape_json(const std::string& value);
-std::string read_file(const std::string& path, std::string& error);
-std::optional<std::string> string_field(const std::string& object, const std::string& key);
-std::optional<double> number_field(const std::string& object, const std::string& key);
-std::optional<bool> bool_field(const std::string& object, const std::string& key);
-std::optional<std::string> array_body(const std::string& document, const std::string& key);
-std::vector<std::string> objects_in(const std::string& array);
-std::optional<std::string> object_after_key(const std::string& document, const std::string& key);
-
-} // namespace cocsim::detail
+namespace cocsim::json {
+struct Value {
+  enum class Type { Null, Boolean, Number, String, Array, Object } type{Type::Null};
+  std::string scalar;
+  std::vector<Value> array;
+  std::map<std::string, Value> object;
+  const Value& at(const std::string& key) const;
+  void keys(std::initializer_list<const char*> expected) const;
+  std::string string() const;
+  std::int64_t integer() const;
+  std::uint64_t unsigned_integer() const;
+};
+Value parse(const std::string& text);
+std::string stringify(const Value& value);
+} // namespace cocsim::json

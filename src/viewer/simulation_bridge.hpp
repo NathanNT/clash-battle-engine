@@ -1,319 +1,61 @@
 #pragma once
-
 #include "cocsim/core.hpp"
-
 #include <algorithm>
-#include <array>
-#include <atomic>
-#include <chrono>
-#include <condition_variable>
-#include <cstddef>
 #include <cstdint>
-#include <memory>
-#include <mutex>
 #include <stdexcept>
-#include <thread>
-#include <utility>
-#include <vector>
-
+#include <string>
 namespace cocsim::viewer {
-
-// A complete, immutable read model for one presented frame.  It contains
-// values only: neither BattleState nor an Entity pointer can cross from the
-// simulation owner to the GUI thread.
-struct PresentationSnapshot {
-  std::uint64_t generation{};
-  Milliseconds now_ms{};
-  // A diagnostic of the serialisable, future-influencing Core state at this
-  // exact tick. It is copied for verification only; GUI code never feeds it
-  // back into the simulation.
-  std::uint64_t state_hash{};
-  BattleResult result{};
-  int deployed_housing{};
-  int monolith_arrow_housing{};
-  int monolith_arrow_tier{};
-  int monolith_arrow_damage_percent{};
-  std::vector<ArmySlot> army;
-  std::vector<HeroLoadout> hero_loadouts;
-  std::vector<SpellSlot> spells;
-  // Exact Core-accepted player commands, including their rule-effective time
-  // and stable sequence. This is copied by value with the frame so the GUI
-  // can save a replay without owning BattleState.
-  std::vector<Command> commands;
-  std::vector<EntityView> entities;
-  std::vector<SpellEffectView> spell_effects;
-  std::vector<DeathExplosionView> death_explosions;
-  std::vector<ProjectileView> projectiles;
-  // Events are a bounded tail, addressed by their original Core index.  A
-  // slow GUI may skip cosmetic traces, but cannot make the simulation retain
-  // or replay a mutable event history.
-  std::size_t first_event_index{};
-  std::size_t event_count{};
-  std::vector<Event> events;
-};
-
-struct QueuedCommand {
-  CommandType type{CommandType::Wait};
-  Kind kind{Kind::Barbarian};
-  int level{1};
-  Vec2 position{};
-  SpellKind spell{SpellKind::Rage};
-  // Assigned while holding the queue mutex. It defines a total order for a
-  // same-tick GUI batch before BattleState assigns its serialised sequence.
-  std::uint64_t sequence{};
-};
-
-// SimulationBridge is the sole BattleState owner.  The presentation thread
-// communicates by message passing only; the Core remains free of SDL, threads
-// and wall-clock decisions.
 class SimulationBridge {
  public:
-  SimulationBridge(const GameData& data, Scenario scenario, std::vector<Command> replay_commands = {})
-      : data_(data), scenario_(std::move(scenario)), replay_commands_(std::move(replay_commands)) {
-    BattleState initial(data_, scenario_);
-    submit_replay_commands(initial, replay_commands_);
-    publish(initial);
-    simulation_thread_ = std::thread([this] { run(); });
+  explicit SimulationBridge(Scenario scenario = {}) : state_(scenario) {}
+  const BattleState& state() const { return state_; }
+  BattleState& state() { return state_; }
+  bool paused() const { return paused_; }
+  void set_paused(bool value) { paused_=value; }
+  int speed() const { return speed_; }
+  void set_speed(int value) { speed_=std::clamp(value,1,8); }
+  void reset() { auto scenario=state_.scenario(); state_=BattleState(scenario); replay_index_=0; accumulated_=0; paused_=true; }
+  void new_empty() { replay_.clear(); state_=BattleState(); replay_index_=0; accumulated_=0; paused_=true; }
+  bool replay_loaded() const { return !replay_.empty(); }
+  const std::vector<Command>& commands_for_save() const { return replay_loaded()?replay_:state_.commands(); }
+  void step() { tick_once(); }
+  void present_elapsed(std::uint64_t wall_ms) {
+    if (paused_ || state_.result()!=Result::Active) return;
+    // Wall time only budgets how many fixed logical ticks to execute.
+    accumulated_ += std::min<std::uint64_t>(wall_ms,250) * static_cast<std::uint64_t>(speed_);
+    const auto ticks=accumulated_/static_cast<std::uint64_t>(kTickMs);
+    accumulated_ %= static_cast<std::uint64_t>(kTickMs);
+    for (std::uint64_t i=0;i<ticks && state_.result()==Result::Active;++i) tick_once();
   }
-
-  ~SimulationBridge() { stop(); }
-  SimulationBridge(const SimulationBridge&) = delete;
-  SimulationBridge& operator=(const SimulationBridge&) = delete;
-
-  void stop() {
-    if (!running_.exchange(false)) return;
-    wake_.notify_all();
-    if (simulation_thread_.joinable()) simulation_thread_.join();
+  bool end_next_tick(std::string& error) {
+    if (replay_loaded()) { error="replay commands are fixed"; return false; }
+    return state_.submit(CommandType::EndBattle,state_.time_ms()+kTickMs,error);
   }
-
-  [[nodiscard]] std::shared_ptr<const PresentationSnapshot> latest() const {
-    const auto index = published_slot_.load(std::memory_order_acquire);
-    return std::atomic_load_explicit(&buffers_[index], std::memory_order_acquire);
+  bool wait_next_tick(std::string& error) {
+    if (replay_loaded()) { error="replay commands are fixed"; return false; }
+    return state_.submit(CommandType::Wait,state_.time_ms()+kTickMs,error);
   }
-
-  void enqueue(QueuedCommand command) {
-    {
-      std::lock_guard lock(command_mutex_);
-      command.sequence = next_command_sequence_++;
-      commands_.push_back(std::move(command));
-    }
-    wake_.notify_one();
+  bool load_replay_file(const std::string& path,std::string& error) {
+    Scenario scenario; std::vector<Command> commands;
+    if (!load_replay(path,scenario,commands,error)) return false;
+    state_=BattleState(scenario); replay_=std::move(commands); replay_index_=0;
+    paused_=true; accumulated_=0; error.clear(); return true;
   }
-
-  void set_paused(bool value) {
-    paused_.store(value, std::memory_order_release);
-    wake_.notify_one();
-  }
-  [[nodiscard]] bool paused() const { return paused_.load(std::memory_order_acquire); }
-
-  void request_step() {
-    step_requests_.fetch_add(1, std::memory_order_release);
-    wake_.notify_one();
-  }
-  void request_reset() {
-    // Establish the reset cut at the same serialisation point as enqueue().
-    // Commands committed before this marker belong to the discarded battle;
-    // commands committed after it are valid input for the fresh battle.
-    {
-      std::lock_guard lock(command_mutex_);
-      reset_through_sequence_.store(next_command_sequence_ - 1, std::memory_order_release);
-    }
-    reset_requested_.store(true, std::memory_order_release);
-    wake_.notify_one();
-  }
-  void set_playback_speed(std::uint32_t value) {
-    playback_speed_.store(std::max(1u, value), std::memory_order_release);
-    wake_.notify_one();
-  }
-  [[nodiscard]] std::uint32_t playback_speed() const {
-    return playback_speed_.load(std::memory_order_acquire);
-  }
-  void set_maximum_playback(bool value) {
-    maximum_playback_.store(value, std::memory_order_release);
-    wake_.notify_one();
-  }
-  [[nodiscard]] bool maximum_playback() const {
-    return maximum_playback_.load(std::memory_order_acquire);
-  }
-
  private:
-  void publish(const BattleState& battle) {
-    auto frame = std::make_shared<PresentationSnapshot>();
-    frame->generation = generation_++;
-    frame->now_ms = battle.now();
-    frame->state_hash = battle.state_hash();
-    frame->result = battle.result();
-    frame->deployed_housing = battle.deployed_housing();
-    frame->monolith_arrow_housing = battle.monolith_arrow_deployed_housing();
-    frame->monolith_arrow_tier = battle.monolith_arrow_housing_tier();
-    frame->monolith_arrow_damage_percent = battle.monolith_arrow_damage_percent();
-    frame->army = battle.scenario().army;
-    frame->hero_loadouts = battle.scenario().hero_loadouts;
-    frame->spells = battle.scenario().spells;
-    frame->commands = battle.commands();
-    frame->entities = battle.observe();
-    frame->spell_effects = battle.observe_spell_effects();
-    frame->death_explosions = battle.observe_death_explosions();
-    frame->projectiles = battle.observe_projectiles();
-    const auto& all_events = battle.events();
-    constexpr std::size_t kEventTail = 512;
-    frame->first_event_index = all_events.size() > kEventTail ? all_events.size() - kEventTail : 0;
-    frame->event_count = all_events.size();
-    frame->events.assign(all_events.begin() + static_cast<std::ptrdiff_t>(frame->first_event_index), all_events.end());
-
-    const auto next = (published_slot_.load(std::memory_order_relaxed) + 1) % buffers_.size();
-    // The published handle deliberately erases mutability before its atomic
-    // hand-off.  MSVC needs this explicit const-qualified shared_ptr rather
-    // than deducing it from a mutable make_shared result.
-    std::shared_ptr<const PresentationSnapshot> published = std::move(frame);
-    std::atomic_store_explicit(&buffers_[next], std::move(published), std::memory_order_release);
-    published_slot_.store(next, std::memory_order_release);
-  }
-
-  std::vector<QueuedCommand> take_commands() {
-    std::lock_guard lock(command_mutex_);
-    std::vector<QueuedCommand> result;
-    result.swap(commands_);
-    return result;
-  }
-
-  static void submit_queued(BattleState& battle, const std::vector<QueuedCommand>& commands) {
-    for (const auto& queued : commands) {
-      Command command;
-      command.type = queued.type;
-      command.kind = queued.kind;
-      command.level = queued.level;
-      command.position = queued.position;
-      command.spell = queued.spell;
-      // The simulation thread assigns the explicit next legal rule boundary.
-      // GUI latency cannot create a stale or wall-clock-timed Core command.
-      // commands is already committed in `QueuedCommand::sequence` order;
-      // BattleState preserves that order in its own serialised sequence.
-      command.requested_ms = battle.now() + kTickMs;
-      battle.submit(command);
-    }
-  }
-
-  static void submit_replay_commands(BattleState& battle, const std::vector<Command>& commands) {
-    for (const auto& command : commands) {
+  BattleState state_;
+  bool paused_{true};
+  int speed_{1};
+  std::uint64_t accumulated_{};
+  std::vector<Command> replay_;
+  std::size_t replay_index_{};
+  void tick_once() {
+    while (replay_index_<replay_.size() && replay_[replay_index_].requested_at_ms==state_.time_ms()) {
       std::string error;
-      if (!battle.submit(command, &error))
-        throw std::invalid_argument("replay command rejected: " + error);
+      if (!state_.submit(replay_[replay_index_].type,replay_[replay_index_].effective_at_ms,error))
+        throw std::runtime_error("validated replay failed: "+error);
+      ++replay_index_;
     }
+    state_.advance_ticks(1);
   }
-
-  void run() {
-    BattleState battle(data_, scenario_);
-    submit_replay_commands(battle, replay_commands_);
-    auto previous = std::chrono::steady_clock::now();
-    auto last_publish = previous;
-    std::uint64_t presentation_debt_ms{};
-    std::chrono::steady_clock::duration presentation_remainder{};
-    while (running_.load(std::memory_order_acquire)) {
-      std::uint64_t discarded_through{};
-      if (reset_requested_.exchange(false, std::memory_order_acq_rel)) {
-        discarded_through = reset_through_sequence_.load(std::memory_order_acquire);
-        battle = BattleState(data_, scenario_);
-        submit_replay_commands(battle, replay_commands_);
-        presentation_debt_ms = 0;
-        presentation_remainder = {};
-        previous = std::chrono::steady_clock::now();
-        publish(battle);
-        last_publish = previous;
-      }
-
-      auto commands = take_commands();
-      if (discarded_through != 0) {
-        commands.erase(std::remove_if(commands.begin(), commands.end(), [discarded_through](const QueuedCommand& command) {
-          return command.sequence <= discarded_through;
-        }), commands.end());
-      }
-      submit_queued(battle, commands);
-      const auto now = std::chrono::steady_clock::now();
-      presentation_remainder += now - previous;
-      previous = now;
-      const auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(presentation_remainder).count();
-      presentation_remainder -= std::chrono::milliseconds{elapsed};
-
-      std::uint32_t ticks{};
-      bool force_publish = false;
-      if (paused_.load(std::memory_order_acquire)) {
-        ticks = step_requests_.exchange(0, std::memory_order_acq_rel);
-        force_publish = ticks != 0;
-      } else if (!battle.result().finished && maximum_playback_.load(std::memory_order_acquire)) {
-        // This mode removes presentation pacing only. Each operation remains a
-        // normal fixed Core tick and commands are still consumed at a future
-        // tick-aligned boundary on the following loop iteration.
-        constexpr std::uint32_t kMaximumTicksPerSlice = 1'000;
-        ticks = kMaximumTicksPerSlice;
-      } else if (!battle.result().finished) {
-        presentation_debt_ms += static_cast<std::uint64_t>(std::max<std::int64_t>(0, elapsed))
-          * playback_speed_.load(std::memory_order_acquire);
-        const auto due = presentation_debt_ms / static_cast<std::uint64_t>(kTickMs);
-        constexpr std::uint32_t kMaxTicksPerSlice = 120;
-        ticks = static_cast<std::uint32_t>(std::min<std::uint64_t>(due, kMaxTicksPerSlice));
-        presentation_debt_ms -= static_cast<std::uint64_t>(ticks) * static_cast<std::uint64_t>(kTickMs);
-      }
-      if (ticks != 0) {
-        battle.advance_ticks(ticks);
-        // Projecting a complete scene allocates and copies presentation
-        // values. It is intentionally capped at the viewer's 30 Hz target;
-        // a high playback speed may skip images, never rule ticks. Manual
-        // stepping and a terminal result still become visible immediately.
-        constexpr auto kPresentationInterval = std::chrono::milliseconds{33};
-        if (force_publish || battle.result().finished || now - last_publish >= kPresentationInterval) {
-          publish(battle);
-          last_publish = now;
-        }
-        continue;
-      }
-      if (!commands.empty()) {
-        publish(battle);
-        last_publish = now;
-      }
-
-      std::unique_lock lock(wake_mutex_);
-      wake_.wait_for(lock, std::chrono::milliseconds{1});
-    }
-  }
-
-  const GameData& data_;
-  Scenario scenario_;
-  std::vector<Command> replay_commands_;
-  std::atomic<bool> running_{true};
-  std::atomic<bool> paused_{false};
-  std::atomic<bool> reset_requested_{false};
-  std::atomic<std::uint64_t> reset_through_sequence_{};
-  std::atomic<std::uint32_t> step_requests_{0};
-  std::atomic<std::uint32_t> playback_speed_{1};
-  std::atomic<bool> maximum_playback_{false};
-  std::mutex command_mutex_;
-  std::vector<QueuedCommand> commands_;
-  std::uint64_t next_command_sequence_{1}; // guarded by command_mutex_
-  std::mutex wake_mutex_;
-  std::condition_variable wake_;
-  std::thread simulation_thread_;
-  std::array<std::shared_ptr<const PresentationSnapshot>, 3> buffers_{};
-  std::atomic<std::size_t> published_slot_{0};
-  std::uint64_t generation_{}; // simulation thread only after construction
 };
-
-// Build the replacement first, so an invalid selection or replay cannot stop
-// the current battle. Both instances call the same Core rules independently.
-inline bool replace_simulation_bridge(std::unique_ptr<SimulationBridge>& active,
-                                      const GameData& data, const Scenario& scenario,
-                                      const std::vector<Command>& replay_commands,
-                                      std::string& error) {
-  try {
-    auto replacement = std::make_unique<SimulationBridge>(data, scenario, replay_commands);
-    active->stop();
-    active = std::move(replacement);
-    error.clear();
-    return true;
-  } catch (const std::exception& exception) {
-    error = exception.what();
-    return false;
-  }
-}
-
 } // namespace cocsim::viewer

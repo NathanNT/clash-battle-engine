@@ -1,28 +1,10 @@
-# CoCSim invariants
+# CoCSim empty-engine invariants
 
-- Rules use only `kTickMs` integer simulation time. Never use SDL, Python, wall
-  clock or a floating `dt` for a combat decision.
-- Commands must have an explicit, future tick-aligned effective time and stable
-  sequence. Keep deterministic tie-breaks by entity id.
-- `GameData` is immutable during a battle. Do not add combat statistics in entity
-  classes; catalogue provenance is mandatory.
-- A graphical speed multiplier may run more ticks per rendered second, but must
-  never change the fixed rule tick.
-- Snapshots/replays serialize values, never pointers or raw STL memory. Hash only
-  future-influencing logical state.
-- Keep GUI/Python adapters as callers of `cocsim_core`, never duplicate rules.
-
-## TH18 integration procedure
-
-- Treat `state/current.md` as the single active increment and
-  `state/backlog.md` as the execution order. Do not begin a later integration
-  before closing or explicitly marking the active item partial.
-- Preserve the frozen 2026-09-17 Home Village reference. New evidence belongs
-  in a dated, hash-pinned additive delta with complete provenance.
-- Implement only source-supported Core behaviour, then exercise that exact path
-  through Headless, Viewer, and RL. Core owns geometry and combat rules.
-- Add focused behaviour, snapshot, replay, determinism, and regression tests.
-  Run the complete suite before updating state.
-- When research leaves a combat-relevant gap, record the sources checked and
-  the missing value in the delta and coverage matrix. Do not guess the rule.
-  Mark the item partial and continue with the next independent item.
+- Rules use only fixed `kTickMs = 16` integer logical time. SDL, Python, wall time, and floating delta time may never make simulation decisions.
+- Commands require future tick-aligned effective times and stable sequence ordering. Entity ID must resolve ties if entities are added in a later authorized integration.
+- `GameData` remains immutable during simulation. The active ruleset contains no combat statistics or entities.
+- Viewer speed may execute more ticks per rendered second but may not change the 16 ms rule tick.
+- Snapshots and replays serialize values, never pointers or raw STL memory. State hashes cover future-influencing logical state.
+- Viewer and Python adapters call `cocsim_core`; they contain no combat rules.
+- Reject populated legacy scenarios and content commands. The old normalized catalogue is archived, not an active fallback.
+- Do not repopulate until the version-pinned behavior/conversion catalogue is complete and the user explicitly starts integration.
